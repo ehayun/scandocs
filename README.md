@@ -1,4 +1,4 @@
-# Scandoc
+# Scandoc 1.0
 
 To start your Phoenix server:
 
