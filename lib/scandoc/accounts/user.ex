@@ -9,10 +9,10 @@ defmodule Scandoc.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
-    field :first_name, :string
-    field :last_name, :string
-    field :role, :string, default: "teacher"
+    field :full_name, :string
+    field :role, :string, default: "030"
     field :is_freezed, :boolean, default: false
+    field :is_admin, :boolean, default: false
 
     timestamps()
   end
@@ -20,8 +20,8 @@ defmodule Scandoc.Accounts.User do
 
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:zehut, :hashed_password, :first_name, :last_name, :role, :is_freezed])
-    |> validate_required([:zehut, :first_name, :last_name, :role])
+    |> cast(attrs, [:zehut, :hashed_password, :full_name,  :role, :is_freezed, :is_admin])
+    |> validate_required([:zehut, :full_name])
     |> validate_zehut()
     |> validate_password()
   end
@@ -37,8 +37,8 @@ defmodule Scandoc.Accounts.User do
   """
   def registration_changeset(user, attrs) do
     user
-    |> cast(attrs, [:zehut, :password, :first_name, :last_name, :role, :is_freezed])
-    |> validate_required([:first_name, :last_name])
+    |> cast(attrs, [:zehut, :password, :full_name, :role, :is_freezed])
+    |> validate_required([:full_name])
     |> validate_zehut()
     |> validate_password()
   end

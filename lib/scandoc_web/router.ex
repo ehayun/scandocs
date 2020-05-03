@@ -67,6 +67,9 @@ defmodule ScandocWeb.Router do
     put "/users/settings/update_password", UserSettingsController, :update_password
     put "/users/settings/update_zehut", UserSettingsController, :update_zehut
     get "/users/settings/confirm_zehut/:token", UserSettingsController, :confirm_zehut
+
+    resources "/schools", SchoolController
+    resources "/managers", ManagerController
   end
 
   scope "/", ScandocWeb do

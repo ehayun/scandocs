@@ -1,0 +1,15 @@
+<%= form_for @changeset, @action, fn f -> %>
+<%= if @changeset.action do %>
+  <div class="alert alert-danger">
+    <p>Oops, something went wrong! Please check the errors below.</p>
+  </div>
+<% end %>
+<%= PBF.text_input f, :code, input: [class: "col-md-1"], label: [text: gettext("School code")] %>
+<%= PBF.text_input f, :school_name, input: [class: "col-md-6"], label: [text: gettext("School name")] %>
+<%= label f, :manager_id %>
+<%= number_input f, :manager_id %>
+<%= error_tag f, :manager_id %>
+<div>
+  <%= submit "Save" %>
+</div>
+<% end %>

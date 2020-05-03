@@ -1,0 +1,23 @@
+<h1>Show School</h1>
+
+<ul>
+
+  <li>
+    <strong>Code:</strong>
+    <%= @school.code %>
+  </li>
+
+  <li>
+    <strong>School name:</strong>
+    <%= @school.school_name %>
+  </li>
+
+  <li>
+    <strong>Manager:</strong>
+    <%= @school.manager_id %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.school_path(@conn, :edit, @school) %></span>
+<span><%= link "Back", to: Routes.school_path(@conn, :index) %></span>

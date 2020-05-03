@@ -16,11 +16,6 @@ msgid "Account confirmed successfully."
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:20
-msgid "Campaigns"
-msgstr ""
-
-#, elixir-format
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:9
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:34
 msgid "Change e-mail"
@@ -33,23 +28,8 @@ msgid "Change password"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:28
-msgid "Chats"
-msgstr ""
-
-#, elixir-format
 #: lib/scandoc_web/templates/layout/translations.html.eex:4
 msgid "Confirmation link is invalid or it has expired."
-msgstr ""
-
-#, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:24
-msgid "Contacts"
-msgstr ""
-
-#, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:12
-msgid "Customers"
 msgstr ""
 
 #, elixir-format
@@ -73,14 +53,13 @@ msgid "Edit Customer"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:11
 #: lib/scandoc_web/live/customer_live/index.html.leex:21
 msgid "First name"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:4
-#: lib/scandoc_web/templates/user_session/new.html.eex:30
+#: lib/scandoc_web/templates/user_session/new.html.eex:27
 msgid "Forgot your password?"
 msgstr ""
 
@@ -90,7 +69,7 @@ msgid "Invalid e-mail or password"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:14
+#: lib/scandoc_web/live/customer_live/form_component.html.leex:12
 msgid "Is Freezed"
 msgstr ""
 
@@ -100,7 +79,6 @@ msgid "Is freezed"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:9
 #: lib/scandoc_web/live/customer_live/index.html.leex:22
 msgid "Last name"
 msgstr ""
@@ -145,8 +123,8 @@ msgid "Oops, something went wrong! Please check the errors below."
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:15
-#: lib/scandoc_web/templates/user_session/new.html.eex:21
+#: lib/scandoc_web/live/customer_live/form_component.html.leex:13
+#: lib/scandoc_web/templates/user_session/new.html.eex:19
 msgid "Password"
 msgstr ""
 
@@ -161,12 +139,7 @@ msgid "Password updated successfully."
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:16
-msgid "Phones"
-msgstr ""
-
-#, elixir-format
-#: lib/scandoc_web/templates/user_session/new.html.eex:25
+#: lib/scandoc_web/templates/user_session/new.html.eex:22
 msgid "Remember me"
 msgstr ""
 
@@ -182,12 +155,12 @@ msgid "Reset password link is invalid or it has expired."
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:18
+#: lib/scandoc_web/live/customer_live/form_component.html.leex:16
 msgid "Save"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:18
+#: lib/scandoc_web/live/customer_live/form_component.html.leex:16
 msgid "Saving..."
 msgstr ""
 
@@ -204,13 +177,8 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/user_session/new.html.eex:5
-#: lib/scandoc_web/templates/user_session/new.html.eex:28
+#: lib/scandoc_web/templates/user_session/new.html.eex:25
 msgid "Sign in"
-msgstr ""
-
-#, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:32
-msgid "Statistics"
 msgstr ""
 
 #, elixir-format
@@ -236,13 +204,80 @@ msgid "You must to be admin to access this page."
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:13
-#: lib/scandoc_web/live/customer_live/index.html.leex:20 lib/scandoc_web/templates/user_reset_password/new.html.eex:9
-#: lib/scandoc_web/templates/user_session/new.html.eex:17
+#: lib/scandoc_web/live/customer_live/form_component.html.leex:11
+#: lib/scandoc_web/live/customer_live/index.html.leex:20 lib/scandoc_web/templates/manager/index.html.eex:6
+#: lib/scandoc_web/templates/user_reset_password/new.html.eex:9 lib/scandoc_web/templates/user_session/new.html.eex:15
 msgid "Zehut"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/layout/translations.html.eex:6
 msgid "Zehut change link is invalid or it has expired."
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:19
+msgid "Classrooms"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:15
+msgid "Managers"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:30
+msgid "Permissions"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:11
+msgid "Schools"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:26
+msgid "Students"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:22
+msgid "Teachers"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/school/index.html.eex:6
+msgid "Code"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/customer_live/form_component.html.leex:9
+#: lib/scandoc_web/templates/manager/index.html.eex:7
+msgid "Full name"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/manager/index.html.eex:1
+msgid "Listing Managers"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/school/index.html.eex:1
+msgid "Listing Schools"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/school/index.html.eex:8
+msgid "Manager"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/school/form.html.eex:7
+msgid "School code"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/school/form.html.eex:8
+#: lib/scandoc_web/templates/school/index.html.eex:7
+msgid "School name"
 msgstr ""

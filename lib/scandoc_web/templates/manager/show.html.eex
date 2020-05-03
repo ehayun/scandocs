@@ -1,0 +1,18 @@
+<h1>Show Manager</h1>
+
+<ul>
+
+  <li>
+    <strong>Zehut:</strong>
+    <%= @manager.zehut %>
+  </li>
+
+  <li>
+    <strong>Full name:</strong>
+    <%= @manager.full_name %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.manager_path(@conn, :edit, @manager) %></span>
+<span><%= link "Back", to: Routes.manager_path(@conn, :index) %></span>

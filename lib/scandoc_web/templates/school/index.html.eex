@@ -1,0 +1,33 @@
+<h1>
+  <i class="fas fa-school"></i>
+  <%= gettext("Listing Schools") %>
+</h1>
+<table class="table"table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th><%= gettext("Code") %></th>
+      <th><%= gettext("School name") %></th>
+      <th><%= gettext("Manager") %></th>
+      <th><%= gettext("Classrooms") %></th>
+      <th><%= gettext("Teachers") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for school <- @schools do %>
+      <tr>
+        <td><%= school.code %></td>
+        <td><%= school.school_name %></td>
+        <td><%= school.manager.full_name%> </td>
+        <td><i class="fas fa-chalkboard"></i></td>
+        <td><i class="fas fa-chalkboard-teacher"></i></td>
+        <td>
+          <span class="hidden"><%= link "Show", to: Routes.school_path(@conn, :show, school) %></span>
+          <span class="hidden"><%= link "Edit", to: Routes.school_path(@conn, :edit, school) %></span>
+          <span class="hidden"><%= link "Delete", to: Routes.school_path(@conn, :delete, school), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<span class="hidden"><%= link "New School", to: Routes.school_path(@conn, :new) %></span>

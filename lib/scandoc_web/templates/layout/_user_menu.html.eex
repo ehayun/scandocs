@@ -8,11 +8,11 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="rtl navbar-nav ml-auto">
       <li class="nav-item <%= active_menu(@conn, :school) %>">
-        <a class="nav-link" href="<%= Routes.customer_index_path(@conn, :index) %>"> <i class="fas fa-school"></i> <%= gettext("Schools") %></a>
+        <a class="nav-link" href="<%= Routes.school_path(@conn, :index) %>"> <i class="fas fa-school"></i> <%= gettext("Schools") %></a>
       </li>
 
       <li class="nav-item <%= active_menu(@conn, :manager) %>">
-        <a class="nav-link" href="<%= Routes.phone_index_path(@conn, :index) %>"><i class="fas fa-user-tie"></i> <%= gettext("Managers") %></a>
+        <a class="nav-link" href="<%= Routes.manager_path(@conn, :index) %>"><i class="fas fa-user-tie"></i> <%= gettext("Managers") %></a>
       </li>
 
       <li class="nav-item <%= active_menu(@conn, :classroom) %>">
@@ -35,7 +35,7 @@
       <%= if @current_user do %>
 
       <li class="nav-item btn-group  ml-4" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-xl" style="font-size: 1.1em;"> <%= @current_user.first_name %> <%= @current_user.last_name %> </button>
+        <button type="button" class="btn btn-xl" style="font-size: 1.1em;"> <%= @current_user.full_name %> </button>
         <div class="btn-group" role="group">
           <button id="btnGroupDrop4" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
           <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">

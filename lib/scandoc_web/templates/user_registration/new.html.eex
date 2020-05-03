@@ -7,13 +7,9 @@
 </div>
 <% end %>
 
-<%= label f, :first_name %>
-<%= text_input f, :first_name, required: true %>
-<%= error_tag f, :first_name %>
-
-<%= label f, :last_name %>
-<%= text_input f, :last_name, required: true %>
-<%= error_tag f, :last_name %>
+<%= label f, :full_name %>
+<%= text_input f, :full_name, required: true %>
+<%= error_tag f, :full_name %>
 
 
 <%= label f, :zehut %>

@@ -6,9 +6,7 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <%=PBF. text_input f, :last_name, label: [text: gettext("Last name")] %>
-
-  <%= PBF.text_input f, :first_name, label: [text: gettext("First name")] %>
+  <%=PBF. text_input f, :full_name, label: [text: gettext("Full name")] %>
 
   <%= PBF.text_input f, :zehut, label: [text: gettext("Zehut")] %>
   <%= PBF.checkbox f, :is_freezed, label: [text: gettext("Is Freezed")] %>

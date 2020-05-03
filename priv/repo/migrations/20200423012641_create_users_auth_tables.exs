@@ -8,10 +8,10 @@ defmodule Scandoc.Repo.Migrations.CreateUsersAuthTables do
       add :zehut, :string, null: false
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
-      add :first_name, :string, null: false
-      add :last_name, :string, null: false
-      add :role, :string, default: "teacher"
+      add :full_name, :string, null: false
+      add :role, :string, default: "020"
       add :is_freezed, :boolean, default: false
+      add :is_admin, :boolean, default: false
       timestamps()
     end
 
