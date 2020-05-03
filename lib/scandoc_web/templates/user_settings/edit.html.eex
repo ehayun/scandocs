@@ -1,0 +1,82 @@
+<div class="row app-border">
+  <div class="col-lg-12">
+    <h2><%= gettext("Settings") %></h2>
+  </div>
+  <div class="mx-auto col-lg-6">
+
+    <div class="card">
+      <div class="card-header">
+        <h3><%= gettext("Change e-mail") %></h3>
+      </div>
+
+      <div class="card-body">
+        <%= form_for @zehut_changeset, Routes.user_settings_path(@conn, :update_zehut), fn f -> %>
+        <%= if @zehut_changeset.action do %>
+        <div class="alert alert-danger">
+          <p><%= gettext("Oops, something went wrong! Please check the errors below.") %></p>
+        </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= label f, :zehut %>
+          <%= text_input f, :zehut, required: true, class: "form-control" %>
+          <%= error_tag f, :zehut %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :current_password, for: "current_password_for_zehut" %>
+          <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_zehut", class: "form-control" %>
+          <%= error_tag f, :current_password %>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <%= submit gettext("Change e-mail"), class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mx-auto col-lg-6">
+
+
+    <div class="card">
+      <div class="card-header">
+        <h3><%= gettext("Change password") %></h3>
+      </div>
+
+      <div class="card-body">
+        <%= form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f -> %>
+        <%= if @password_changeset.action do %>
+        <div class="alert alert-danger">
+          <p><%= gettext("Oops, something went wrong! Please check the errors below.") %></p>
+        </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= label f, :password, "New password" %>
+          <%= password_input f, :password, required: true, class: "form-control" %>
+          <%= error_tag f, :password %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :password_confirmation, "Confirm new password" %>
+          <%= password_input f, :password_confirmation, required: true, class: "form-control" %>
+          <%= error_tag f, :password_confirmation %>
+        </div>
+
+        <div class="form-group">
+          <%= label f, :current_password, for: "current_password_for_password" %>
+          <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password", class: "form-control" %>
+          <%= error_tag f, :current_password %>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <%= submit gettext("Change password"), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<% end %>

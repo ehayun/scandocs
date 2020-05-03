@@ -1,0 +1,34 @@
+defmodule Scandoc.Application do
+  # See https://hexdocs.pm/elixir/Application.html
+  # for more information on OTP Applications
+  @moduledoc false
+
+  use Application
+
+  def start(_type, _args) do
+    children = [
+      # Start the Ecto repository
+      Scandoc.Repo,
+      # Start the Telemetry supervisor
+      ScandocWeb.Telemetry,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Scandoc.PubSub},
+      # Start the Endpoint (http/https)
+      ScandocWeb.Endpoint
+      # Start a worker by calling: Scandoc.Worker.start_link(arg)
+      # {Scandoc.Worker, arg}
+    ]
+
+    # See https://hexdocs.pm/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: Scandoc.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+
+  # Tell Phoenix to update the endpoint configuration
+  # whenever the application is updated.
+  def config_change(changed, _new, removed) do
+    ScandocWeb.Endpoint.config_change(changed, removed)
+    :ok
+  end
+end

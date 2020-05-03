@@ -1,0 +1,24 @@
+<div class="mx-auto col-lg-6 app-border" >
+  <div class="card">
+    <div class="card-header">
+      <h1><%= gettext("Forgot your password?") %></h1>
+    </div>
+
+    <div class="card-body">
+      <%= form_for :user, Routes.user_reset_password_path(@conn, :create), fn f -> %>
+      <label for="zehut"><%= gettext("Zehut") %></label>
+      <%= text_input f, :zehut, required: true, class: "form-control" %>
+    </div>
+
+    <div class="card-footer">
+      <div class="form-group">
+        <%= submit gettext("Send instructions to reset password"), class: "btn btn-primary" %>
+
+        <%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "hidden" %>
+        <%= link gettext("Login"), to: Routes.user_session_path(@conn, :new), class: "p-2" %>
+      </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

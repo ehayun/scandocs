@@ -1,0 +1,30 @@
+<div class="mx-auto col-lg-6 app-border">
+<% gettext("Invalid e-mail or password") %>
+  <div class="card">
+    <div class="card-header">
+      <h1><%= gettext("Sign in") %></h1>
+    </div>
+    <%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user], fn f -> %>
+
+    <%= if @error_message do %>
+    <div class="alert alert-danger">
+      <p><%= Gettext.gettext(ScandocWeb.Gettext, @error_message) %></p>
+    </div>
+    <% end %>
+
+    <div class="card-body">
+      <div class="form-group">
+        <label for="exampleInputZehut1"><%= gettext("Zehut") %></label>
+        <%= text_input f, :zehut, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1"><%= gettext("Password") %></label>
+        <input type="password" name="user[password]" class="form-control" id="exampleInputPassword1">
+      </div>
+
+      <%= PBF.checkbox f, :remember_me, label: [text: gettext("Remember me")] %>
+    </div>
+
+    <% end %>
+
+  </div>

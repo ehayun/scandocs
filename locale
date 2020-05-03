@@ -1,0 +1,4 @@
+mix gettext.extract
+mix gettext.merge priv/gettext
+mix gettext.merge priv/gettext --locale he
+mix gettext.merge priv/gettext --locale en

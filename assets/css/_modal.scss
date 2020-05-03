@@ -1,0 +1,57 @@
+.invalid-feedback {
+  color: #a94442;
+  display: block;
+  margin: -1rem 0 2rem;
+}
+
+.phx-no-feedback.invalid-feedback, .phx-no-feedback .invalid-feedback {
+  display: none;
+}
+
+.phx-click-loading {
+  opacity: 0.5;
+  transition: opacity 1s ease-out;
+}
+
+.phx-disconnected{
+  cursor: wait;
+}
+.phx-disconnected *{
+  pointer-events: none;
+}
+
+.phx-modal {
+  opacity: 1!important;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  // background-color: $body-bg;
+  // background-color: lighten($body-bg, 5);
+}
+
+.phx-modal-content {
+  background-color: $body-bg;
+  margin: 10% auto;
+  padding: 20px;
+  border: 2px solid $app-blue;
+  width: 80%;
+  max-width: 700px;
+}
+
+.phx-modal-close {
+  color: #aaa;
+  float: left;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.phx-modal-close:hover,
+.phx-modal-close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}

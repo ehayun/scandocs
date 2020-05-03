@@ -1,0 +1,79 @@
+/* This file is for your main application css. */
+@import "theme";
+// @import '../node_modules/bootstrap/scss/bootstrap';
+@import "../node_modules/bootstrap-v4-rtl/scss/bootstrap-rtl";
+@import "../node_modules/nprogress/nprogress.css";
+@import "modal";
+
+html {
+  --scrollbarBG: #3c4355;
+  --thumbBG: #797979;
+  --appBlue: #00a2ff;
+}
+
+box-icon {
+  color: white;
+}
+
+main {
+  font-size: 1.2em;
+}
+
+
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+.hidden {
+  display: none;
+}
+
+.nav-link {
+  padding: 0.1rem 0.1rem;
+}
+
+.nav-link img {
+  width: auto;
+  height: 30px;
+}
+
+.alert:empty {
+  display: none;
+}
+
+// .nav-item {
+//   font-size: 1.7em;
+//   font-weight: 700;
+//   background-color: $dark;
+//   margin: 4px;
+// }
+
+// .nav-item.active {
+//   border-bottom: 6px solid $app-blue;
+// }
+
+// .nav-item:hover {
+//   border-bottom: 6px solid $app-blue;
+// }
+
+.bg-dark {
+  background-color: $body-bg !important;
+}
+
+.app-border {
+  border: 5px solid $app-blue;
+  padding-top: 3em;
+  padding-bottom: 3em;
+}
+
+@media (max-width: 997px) {
+  .navbar-brand img {
+    width: 200px;
+  }
+}

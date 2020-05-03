@@ -1,0 +1,58 @@
+<nav class="rtl navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <a class="navbar-brand" href="/"><i class="fas fa-school"></i></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="rtl navbar-nav ml-auto">
+      <li class="nav-item <%= active_menu(@conn, :school) %>">
+        <a class="nav-link" href="<%= Routes.customer_index_path(@conn, :index) %>"> <i class="fas fa-school"></i> <%= gettext("Schools") %></a>
+      </li>
+
+      <li class="nav-item <%= active_menu(@conn, :manager) %>">
+        <a class="nav-link" href="<%= Routes.phone_index_path(@conn, :index) %>"><i class="fas fa-user-tie"></i> <%= gettext("Managers") %></a>
+      </li>
+
+      <li class="nav-item <%= active_menu(@conn, :classroom) %>">
+        <a class="nav-link" href="<%= Routes.phone_index_path(@conn, :index) %>"><i class="fas fa-chalkboard"></i> <%= gettext("Classrooms") %></a>
+      </li>
+      <li class="nav-item  <%= active_menu(@conn, :teacher) %>">
+        <a class="nav-link" href="#"><i class="fas fa-chalkboard-teacher"></i> <%= gettext("Teachers") %></a>
+      </li>
+
+      <li class="nav-item <%= active_menu(@conn, :student) %>">
+        <a class="nav-link" href="#"><i class="fas fa-user-graduate"></i> <%= gettext("Students") %></a>
+      </li>
+
+      <li class="nav-item <%= active_menu(@conn, :permission) %>">
+        <a class="nav-link" href="#"><i class="fas fa-user-lock"></i> <%= gettext("Permissions") %></a>
+      </li>
+
+
+
+      <%= if @current_user do %>
+
+      <li class="nav-item btn-group  ml-4" role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-xl" style="font-size: 1.1em;"> <%= @current_user.first_name %> <%= @current_user.last_name %> </button>
+        <div class="btn-group" role="group">
+          <button id="btnGroupDrop4" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+            <a class="hidden" href="#"><%= @current_user.zehut %></a>
+            <%= link gettext("Settings"), to: Routes.user_settings_path(@conn, :edit), class: "dropdown-item" %>
+            <%= link gettext("Logout"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
+      </li>
+      <% else %>
+      <li class="nav-item mr-4"><%= link gettext("Login"), to: Routes.user_session_path(@conn, :new), class: "nav-link" %></li>
+      <li><%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "hidden" %></li>
+
+      <% end %>
+
+    </ul>
+
+
+  </div>
+</nav>

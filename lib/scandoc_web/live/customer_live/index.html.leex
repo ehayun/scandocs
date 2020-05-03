@@ -1,0 +1,53 @@
+<div class="card">
+  <div class="cart-header p-2">
+    <h1><%= gettext("Listing Users") %>
+      <span class="p-2 float-left"><%= live_patch gettext("New Customer"), to: Routes.customer_index_path(@socket, :new), class: "btn btn-primary" %></span>
+    </h1>
+  </div>
+  <div class="card-body">
+    <%= if @live_action in [:new, :edit] do %>
+    <%= live_modal @socket, ScandocWeb.CustomerLive.FormComponent,
+    id: @customer.id || :new,
+    title: @page_title,
+    action: @live_action,
+    customer: @customer,
+    return_to: Routes.customer_index_path(@socket, :index) %>
+    <% end %>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th><%= gettext("Zehut") %></th>
+          <th><%= gettext("First name") %></th>
+          <th><%= gettext("Last name") %></th>
+          <th><%= gettext("Is freezed") %></th>
+
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="users">
+        <%= for customer <- @users do %>
+        <tr id="customer-<%= customer.id %>">
+          <td><%= customer.zehut %></td>
+          <td><%= customer.first_name %></td>
+          <td><%= customer.last_name %></td>
+          <td><%= customer.is_freezed %></td>
+
+          <td>
+            <span data-toggle='tooltip' data-placement="top" title='<%= gettext("Edit") %>' style="color: white; margin-left: 0.5em;">
+              <%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.customer_index_path(@socket, :edit, customer) %>
+            </span>
+            <span data-toggle='tooltip' data-placement="top" title='<%= gettext("Delete") %>' style="color: white; margin-left: 0.5em;">
+              <%= link raw("<i class='fas fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: customer.id, data: [confirm: "Are you sure?"] %>
+            </span>
+            <span data-toggle='tooltip' data-placement="top" title='<%= gettext("Login as") %>' style="color: white; margin-left: 0.5em;">
+              <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@socket, :loginas, customer) %>
+            </span>
+
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
