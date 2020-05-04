@@ -77,4 +77,61 @@ defmodule Scandoc.DocumentsTest do
       assert %Ecto.Changeset{} = Documents.change_document(document)
     end
   end
+
+  describe "doctypes" do
+    alias Scandoc.Documents.Doctype
+
+    @valid_attrs %{}
+    @update_attrs %{}
+    @invalid_attrs %{}
+
+    def doctype_fixture(attrs \\ %{}) do
+      {:ok, doctype} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Documents.create_doctype()
+
+      doctype
+    end
+
+    test "list_doctypes/0 returns all doctypes" do
+      doctype = doctype_fixture()
+      assert Documents.list_doctypes() == [doctype]
+    end
+
+    test "get_doctype!/1 returns the doctype with given id" do
+      doctype = doctype_fixture()
+      assert Documents.get_doctype!(doctype.id) == doctype
+    end
+
+    test "create_doctype/1 with valid data creates a doctype" do
+      assert {:ok, %Doctype{} = doctype} = Documents.create_doctype(@valid_attrs)
+    end
+
+    test "create_doctype/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Documents.create_doctype(@invalid_attrs)
+    end
+
+    test "update_doctype/2 with valid data updates the doctype" do
+      doctype = doctype_fixture()
+      assert {:ok, %Doctype{} = doctype} = Documents.update_doctype(doctype, @update_attrs)
+    end
+
+    test "update_doctype/2 with invalid data returns error changeset" do
+      doctype = doctype_fixture()
+      assert {:error, %Ecto.Changeset{}} = Documents.update_doctype(doctype, @invalid_attrs)
+      assert doctype == Documents.get_doctype!(doctype.id)
+    end
+
+    test "delete_doctype/1 deletes the doctype" do
+      doctype = doctype_fixture()
+      assert {:ok, %Doctype{}} = Documents.delete_doctype(doctype)
+      assert_raise Ecto.NoResultsError, fn -> Documents.get_doctype!(doctype.id) end
+    end
+
+    test "change_doctype/1 returns a doctype changeset" do
+      doctype = doctype_fixture()
+      assert %Ecto.Changeset{} = Documents.change_doctype(doctype)
+    end
+  end
 end
