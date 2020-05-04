@@ -74,6 +74,7 @@ defmodule ScandocWeb.Router do
     resources "/classrooms", ClassroomController
     resources "/students", StudentController
     resources "/documents", DocumentController
+    get "/docdownload/:id", DocumentController, :doc_download
   end
 
   scope "/", ScandocWeb do

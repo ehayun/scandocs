@@ -3,6 +3,7 @@ defmodule ScandocWeb.DocumentController do
 
   alias Scandoc.Documents
   alias Scandoc.Documents.Document
+  alias Scandoc.Students
 
   def index(conn, _params) do
     documents = Documents.list_documents()
@@ -58,5 +59,44 @@ defmodule ScandocWeb.DocumentController do
     conn
     |> put_flash(:info, "Document deleted successfully.")
     |> redirect(to: Routes.document_path(conn, :index))
+  end
+
+  def doc_download(conn, %{"id" => id}) do
+    # id = Integer.parse(id)
+    document = Documents.get_document!(id)
+
+    student =
+      if document do
+        Students.get_student!(document.ref_id)
+      else
+        nil
+      end
+
+    if document do
+      path = document.doc_path
+      path = String.replace(path, "/home/eli", "./downloads")
+      file = "#{path}/#{document.doc_name}"
+
+      IO.inspect(file, label: "#{document.doc_name}")
+
+      # file = "/home/eli/pCloudDrive/Scan_files/חכמת_ישראל/גנים_חכמת_ישראל/אוחיון_יצחק_342232436/342232436-213-1119.pdf"
+      # file = String.replace(file, "/home/eli", "./downloads")
+      # IO.inspect(file, label: "#{document.doc_name}")
+
+      if File.exists?(path) do
+        conn
+        |> send_download({:file, path})
+      end
+    else
+      if !student do
+        conn
+        |> put_flash(:info, "File Not found")
+        |> redirect(to: Routes.student_path(conn, :index))
+      else
+        conn
+        |> put_flash(:info, "File Not found")
+        |> redirect(to: Routes.student_path(conn, :show, student))
+      end
+    end
   end
 end

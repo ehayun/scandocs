@@ -1,28 +1,27 @@
-<h1>Show Student</h1>
+<h2><i class="fas fa-user-graduate"></i> <%= @student.full_name %></h2>
 
-<ul>
 
-  <li>
-    <strong>Student zehut:</strong>
-    <%= @student.student_zehut %>
-  </li>
+<table class="table table-striped">
 
-  <li>
-    <strong>Full name:</strong>
-    <%= @student.full_name %>
-  </li>
+  <tbody>
+    <%= for document <- @documents do %>
+    <tr>
+      <td><%= document.ref_year %> <%= document.ref_month %></td>
+      <td>
+        <%= if document.doctype do %>
+        <a href="/docdownload/<%= document.id %>"><%=document.doctype.doc_name %></a>
+        <% end %>
+      </td>
+      <td>
+        <%= if document.doctype do %>
+        <%= document.doctype.doc_notes %>
+        <% end %>
+      </td>
 
-  <li>
-    <strong>Has picture:</strong>
-    <%= @student.has_picture %>
-  </li>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
-  <li>
-    <strong>Classroom:</strong>
-    <%= @student.classroom_id %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.student_path(@conn, :edit, @student) %></span>
-<span><%= link "Back", to: Routes.student_path(@conn, :index) %></span>
+<span class="hidden"><%= link "Edit", to: Routes.student_path(@conn, :edit, @student) %></span>
+<span><%= link gettext("Back"), to: Routes.student_path(@conn, :index) %></span>

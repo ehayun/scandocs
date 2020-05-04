@@ -1,13 +1,25 @@
 defmodule ScandocWeb.StudentController do
   use ScandocWeb, :controller
 
+  import Ecto.Query
+  alias Scandoc.Repo
+
   alias Scandoc.Students
   alias Scandoc.Students.Student
+  alias Scandoc.Documents.Document
 
-  def index(conn, _params) do
-    students = Students.list_students()
-    render(conn, "index.html", students: students)
+  def index(conn, %{"page" => current_page}) do
+    students =
+      Student
+      |> order_by(:full_name)
+      |> Repo.paginate(page: current_page, page_size: 17)
+
+    conn
+    |> assign(:students, students)
+    |> render("index.html")
   end
+
+  def index(conn, _params), do: index(conn, %{"page" => "1"})
 
   def new(conn, _params) do
     changeset = Students.change_student(%Student{})
@@ -28,7 +40,15 @@ defmodule ScandocWeb.StudentController do
 
   def show(conn, %{"id" => id}) do
     student = Students.get_student!(id)
-    render(conn, "show.html", student: student)
+
+    documents =
+      Document
+      |> preload(:doctype)
+      |> where(ref_id: ^id)
+      |> order_by(desc: :ref_year, desc: :ref_month)
+      |> Repo.all()
+
+    render(conn, "show.html", student: student, documents: documents)
   end
 
   def edit(conn, %{"id" => id}) do

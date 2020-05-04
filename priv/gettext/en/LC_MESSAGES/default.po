@@ -206,7 +206,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/customer_live/form_component.html.leex:11
-#: lib/scandoc_web/live/customer_live/index.html.leex:20 lib/scandoc_web/templates/manager/index.html.eex:6
+#: lib/scandoc_web/live/customer_live/index.html.leex:20 lib/scandoc_web/templates/manager/index.html.eex:9
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:9 lib/scandoc_web/templates/user_session/new.html.eex:15
 msgid "Zehut"
 msgstr ""
@@ -218,6 +218,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/layout/_user_menu.html.eex:19
+#: lib/scandoc_web/templates/school/index.html.eex:11
 msgid "Classrooms"
 msgstr ""
 
@@ -243,32 +244,33 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/layout/_user_menu.html.eex:22
+#: lib/scandoc_web/templates/school/index.html.eex:12
 msgid "Teachers"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/school/index.html.eex:6
+#: lib/scandoc_web/templates/school/index.html.eex:8
 msgid "Code"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/customer_live/form_component.html.leex:9
-#: lib/scandoc_web/templates/manager/index.html.eex:7
+#: lib/scandoc_web/templates/manager/index.html.eex:10
 msgid "Full name"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/manager/index.html.eex:1
+#: lib/scandoc_web/templates/manager/index.html.eex:3
 msgid "Listing Managers"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/school/index.html.eex:1
+#: lib/scandoc_web/templates/school/index.html.eex:3
 msgid "Listing Schools"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/school/index.html.eex:8
+#: lib/scandoc_web/templates/school/index.html.eex:10
 msgid "Manager"
 msgstr ""
 
@@ -278,7 +280,17 @@ msgid "School code"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/school/form.html.eex:8
-#: lib/scandoc_web/templates/school/index.html.eex:7
+#: lib/scandoc_web/templates/manager/index.html.eex:11
+#: lib/scandoc_web/templates/school/form.html.eex:8 lib/scandoc_web/templates/school/index.html.eex:9
 msgid "School name"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/student/show.html.eex:27
+msgid "Back"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/student/index.html.eex:1
+msgid "Listing Students"
 msgstr ""

@@ -1,4 +1,4 @@
-<nav class="rtl navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="rtl navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
   <a class="navbar-brand" href="/"><i class="fas fa-school"></i></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -23,7 +23,7 @@
       </li>
 
       <li class="nav-item <%= active_menu(@conn, :student) %>">
-        <a class="nav-link" href="#"><i class="fas fa-user-graduate"></i> <%= gettext("Students") %></a>
+        <a class="nav-link" href="<%= Routes.student_path(@conn, :index) %>"><i class="fas fa-user-graduate"></i> <%= gettext("Students") %></a>
       </li>
 
       <li class="nav-item <%= active_menu(@conn, :permission) %>">

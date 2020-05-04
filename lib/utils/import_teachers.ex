@@ -1,6 +1,5 @@
 defmodule Scandoc.Util.ImportTeachers do
   # alias Scandoc.Schools
-  alias Scandoc.Schools.{School, Teacher}
   alias Scandoc.Accounts
 
   # alias Scandoc.Repo
