@@ -4,7 +4,11 @@ defmodule ScandocWeb.SchoolControllerTest do
   alias Scandoc.Schools
 
   @create_attrs %{code: "some code", manager_id: 42, school_name: "some school_name"}
-  @update_attrs %{code: "some updated code", manager_id: 43, school_name: "some updated school_name"}
+  @update_attrs %{
+    code: "some updated code",
+    manager_id: 43,
+    school_name: "some updated school_name"
+  }
   @invalid_attrs %{code: nil, manager_id: nil, school_name: nil}
 
   def fixture(:school) do
@@ -75,6 +79,7 @@ defmodule ScandocWeb.SchoolControllerTest do
     test "deletes chosen school", %{conn: conn, school: school} do
       conn = delete(conn, Routes.school_path(conn, :delete, school))
       assert redirected_to(conn) == Routes.school_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.school_path(conn, :show, school))
       end

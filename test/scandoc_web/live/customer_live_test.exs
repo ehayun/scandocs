@@ -5,9 +5,30 @@ defmodule ScandocWeb.CustomerLiveTest do
 
   alias Scandoc.Customers
 
-  @create_attrs %{email: "some email", first_name: "some first_name", hashed_password: "some hashed_password", is_freezed: true, last_name: "some last_name", role: "some role"}
-  @update_attrs %{email: "some updated email", first_name: "some updated first_name", hashed_password: "some updated hashed_password", is_freezed: false, last_name: "some updated last_name", role: "some updated role"}
-  @invalid_attrs %{email: nil, first_name: nil, hashed_password: nil, is_freezed: nil, last_name: nil, role: nil}
+  @create_attrs %{
+    email: "some email",
+    first_name: "some first_name",
+    hashed_password: "some hashed_password",
+    is_freezed: true,
+    last_name: "some last_name",
+    role: "some role"
+  }
+  @update_attrs %{
+    email: "some updated email",
+    first_name: "some updated first_name",
+    hashed_password: "some updated hashed_password",
+    is_freezed: false,
+    last_name: "some updated last_name",
+    role: "some updated role"
+  }
+  @invalid_attrs %{
+    email: nil,
+    first_name: nil,
+    hashed_password: nil,
+    is_freezed: nil,
+    last_name: nil,
+    role: nil
+  }
 
   defp fixture(:customer) do
     {:ok, customer} = Customers.create_customer(@create_attrs)
@@ -33,7 +54,7 @@ defmodule ScandocWeb.CustomerLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.customer_index_path(conn, :index))
 
       assert index_live |> element("a", "New Customer") |> render_click() =~
-        "New Customer"
+               "New Customer"
 
       assert_patch(index_live, Routes.customer_index_path(conn, :new))
 
@@ -55,7 +76,7 @@ defmodule ScandocWeb.CustomerLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.customer_index_path(conn, :index))
 
       assert index_live |> element("#customer-#{customer.id} a", "Edit") |> render_click() =~
-        "Edit Customer"
+               "Edit Customer"
 
       assert_patch(index_live, Routes.customer_index_path(conn, :edit, customer))
 
@@ -95,7 +116,7 @@ defmodule ScandocWeb.CustomerLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.customer_show_path(conn, :show, customer))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Customer"
+               "Edit Customer"
 
       assert_patch(show_live, Routes.customer_show_path(conn, :edit, customer))
 

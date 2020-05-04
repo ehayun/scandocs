@@ -6,9 +6,45 @@ defmodule Scandoc.CustomersTest do
   describe "phones" do
     alias Scandoc.Customers.Phone
 
-    @valid_attrs %{google_account: "some google_account", google_ref_token: "some google_ref_token", google_token: "some google_token", note: "some note", phonenum: "some phonenum", provider_token: "some provider_token", provider_unique_id: "some provider_unique_id", provider_url: "some provider_url", sendertype: "some sendertype", title: "some title", user_id: "some user_id"}
-    @update_attrs %{google_account: "some updated google_account", google_ref_token: "some updated google_ref_token", google_token: "some updated google_token", note: "some updated note", phonenum: "some updated phonenum", provider_token: "some updated provider_token", provider_unique_id: "some updated provider_unique_id", provider_url: "some updated provider_url", sendertype: "some updated sendertype", title: "some updated title", user_id: "some updated user_id"}
-    @invalid_attrs %{google_account: nil, google_ref_token: nil, google_token: nil, note: nil, phonenum: nil, provider_token: nil, provider_unique_id: nil, provider_url: nil, sendertype: nil, title: nil, user_id: nil}
+    @valid_attrs %{
+      google_account: "some google_account",
+      google_ref_token: "some google_ref_token",
+      google_token: "some google_token",
+      note: "some note",
+      phonenum: "some phonenum",
+      provider_token: "some provider_token",
+      provider_unique_id: "some provider_unique_id",
+      provider_url: "some provider_url",
+      sendertype: "some sendertype",
+      title: "some title",
+      user_id: "some user_id"
+    }
+    @update_attrs %{
+      google_account: "some updated google_account",
+      google_ref_token: "some updated google_ref_token",
+      google_token: "some updated google_token",
+      note: "some updated note",
+      phonenum: "some updated phonenum",
+      provider_token: "some updated provider_token",
+      provider_unique_id: "some updated provider_unique_id",
+      provider_url: "some updated provider_url",
+      sendertype: "some updated sendertype",
+      title: "some updated title",
+      user_id: "some updated user_id"
+    }
+    @invalid_attrs %{
+      google_account: nil,
+      google_ref_token: nil,
+      google_token: nil,
+      note: nil,
+      phonenum: nil,
+      provider_token: nil,
+      provider_unique_id: nil,
+      provider_url: nil,
+      sendertype: nil,
+      title: nil,
+      user_id: nil
+    }
 
     def phone_fixture(attrs \\ %{}) do
       {:ok, phone} =
@@ -85,9 +121,30 @@ defmodule Scandoc.CustomersTest do
   describe "users" do
     alias Scandoc.Customers.Customer
 
-    @valid_attrs %{email: "some email", first_name: "some first_name", hashed_password: "some hashed_password", is_freezed: true, last_name: "some last_name", role: "some role"}
-    @update_attrs %{email: "some updated email", first_name: "some updated first_name", hashed_password: "some updated hashed_password", is_freezed: false, last_name: "some updated last_name", role: "some updated role"}
-    @invalid_attrs %{email: nil, first_name: nil, hashed_password: nil, is_freezed: nil, last_name: nil, role: nil}
+    @valid_attrs %{
+      email: "some email",
+      first_name: "some first_name",
+      hashed_password: "some hashed_password",
+      is_freezed: true,
+      last_name: "some last_name",
+      role: "some role"
+    }
+    @update_attrs %{
+      email: "some updated email",
+      first_name: "some updated first_name",
+      hashed_password: "some updated hashed_password",
+      is_freezed: false,
+      last_name: "some updated last_name",
+      role: "some updated role"
+    }
+    @invalid_attrs %{
+      email: nil,
+      first_name: nil,
+      hashed_password: nil,
+      is_freezed: nil,
+      last_name: nil,
+      role: nil
+    }
 
     def customer_fixture(attrs \\ %{}) do
       {:ok, customer} =

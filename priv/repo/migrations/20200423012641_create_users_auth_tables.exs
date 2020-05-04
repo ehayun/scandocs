@@ -10,6 +10,7 @@ defmodule Scandoc.Repo.Migrations.CreateUsersAuthTables do
       add :confirmed_at, :naive_datetime
       add :full_name, :string, null: false
       add :role, :string, default: "020"
+      add :date_of_birth, :date
       add :is_freezed, :boolean, default: false
       add :is_admin, :boolean, default: false
       timestamps()

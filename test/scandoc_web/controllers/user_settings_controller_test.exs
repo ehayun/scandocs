@@ -48,6 +48,7 @@ defmodule ScandocWeb.UserSettingsControllerTest do
         })
 
       response = html_response(old_password_conn, 200)
+
       # assert response =~ "<h1>"
       # assert response =~ "should be at least 5 character(s)"
       # assert response =~ "does not match password"

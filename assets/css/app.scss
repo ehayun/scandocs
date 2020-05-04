@@ -11,6 +11,9 @@ html {
   --appBlue: #00a2ff;
 }
 
+table {
+  line-height: 0.5em;
+}
 box-icon {
   color: white;
 }
@@ -46,6 +49,18 @@ main {
 .alert:empty {
   display: none;
 }
+
+.blue {
+  color: #c2c2ea;
+}
+
+.page-item.active {
+  background-color: #0f7864;
+  padding: 0.3em;
+	padding-left: 0.6em;
+	padding-right: 0.6em;
+}
+
 
 // .nav-item {
 //   font-size: 1.7em;

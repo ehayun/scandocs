@@ -20,7 +20,7 @@ defmodule Scandoc.MixProject do
   def application do
     [
       mod: {Scandoc.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :scrivener, :scrivener_ecto]
     ]
   end
 
@@ -40,6 +40,7 @@ defmodule Scandoc.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_view, "~> 0.12.0"},
       {:phx_gen_auth, "~> 0.1.0", only: [:dev], runtime: false},
+      {:turbo_ecto, "~> 0.5.1"},
       {:floki, ">= 0.0.0", only: :test},
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
@@ -49,6 +50,10 @@ defmodule Scandoc.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
+      {:csv, "~> 2.3"},
+      {:scrivener, "~> 2.0"},
+      {:scrivener_ecto, "~> 2.0"},
+      {:scrivener_phoenix, "~> 0.1.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
   end

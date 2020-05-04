@@ -1,0 +1,33 @@
+<h1>Show Teacher</h1>
+
+<ul>
+
+  <li>
+    <strong>Zehut:</strong>
+    <%= @teacher.zehut %>
+  </li>
+
+  <li>
+    <strong>Full name:</strong>
+    <%= @teacher.full_name %>
+  </li>
+
+  <li>
+    <strong>Role:</strong>
+    <%= @teacher.role %>
+  </li>
+
+  <li>
+    <strong>Date of birth:</strong>
+    <%= @teacher.date_of_birth %>
+  </li>
+
+  <li>
+    <strong>Hashed password:</strong>
+    <%= @teacher.hashed_password %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.teacher_path(@conn, :edit, @teacher) %></span>
+<span><%= link "Back", to: Routes.teacher_path(@conn, :index) %></span>

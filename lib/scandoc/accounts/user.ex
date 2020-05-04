@@ -11,21 +11,20 @@ defmodule Scandoc.Accounts.User do
     field :confirmed_at, :naive_datetime
     field :full_name, :string
     field :role, :string, default: "030"
+    field :date_of_birth, :date
     field :is_freezed, :boolean, default: false
     field :is_admin, :boolean, default: false
 
     timestamps()
   end
 
-
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:zehut, :hashed_password, :full_name,  :role, :is_freezed, :is_admin])
+    |> cast(attrs, [:zehut, :hashed_password, :full_name, :role, :is_freezed, :is_admin, :date_of_birth])
     |> validate_required([:zehut, :full_name])
     |> validate_zehut()
     |> validate_password()
   end
-
 
   @doc """
   A user changeset for registration.
@@ -37,7 +36,7 @@ defmodule Scandoc.Accounts.User do
   """
   def registration_changeset(user, attrs) do
     user
-    |> cast(attrs, [:zehut, :password, :full_name, :role, :is_freezed])
+    |> cast(attrs, [:zehut, :password, :full_name, :role, :is_freezed, :date_of_birth])
     |> validate_required([:full_name])
     |> validate_zehut()
     |> validate_password()
@@ -54,7 +53,7 @@ defmodule Scandoc.Accounts.User do
   defp validate_password(changeset) do
     changeset
     |> validate_required([:password])
-    |> validate_length(:password, min: 5, max: 80)
+    |> validate_length(:password, min: 4, max: 80)
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")

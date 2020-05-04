@@ -75,6 +75,7 @@ defmodule ScandocWeb.ManagerControllerTest do
     test "deletes chosen manager", %{conn: conn, manager: manager} do
       conn = delete(conn, Routes.manager_path(conn, :delete, manager))
       assert redirected_to(conn) == Routes.manager_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.manager_path(conn, :show, manager))
       end

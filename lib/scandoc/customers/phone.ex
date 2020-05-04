@@ -21,7 +21,31 @@ defmodule Scandoc.Customers.Phone do
   @doc false
   def changeset(phone, attrs) do
     phone
-    |> cast(attrs, [:phonenum, :title, :user_id, :sendertype, :google_account, :google_token, :google_ref_token, :note, :provider_url, :provider_token, :provider_unique_id])
-    |> validate_required([:phonenum, :title, :user_id, :sendertype, :google_account, :google_token, :google_ref_token, :note, :provider_url, :provider_token, :provider_unique_id])
+    |> cast(attrs, [
+      :phonenum,
+      :title,
+      :user_id,
+      :sendertype,
+      :google_account,
+      :google_token,
+      :google_ref_token,
+      :note,
+      :provider_url,
+      :provider_token,
+      :provider_unique_id
+    ])
+    |> validate_required([
+      :phonenum,
+      :title,
+      :user_id,
+      :sendertype,
+      :google_account,
+      :google_token,
+      :google_ref_token,
+      :note,
+      :provider_url,
+      :provider_token,
+      :provider_unique_id
+    ])
   end
 end

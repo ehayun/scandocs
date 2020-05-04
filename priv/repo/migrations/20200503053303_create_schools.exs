@@ -9,6 +9,5 @@ defmodule Scandoc.Repo.Migrations.CreateSchools do
 
       timestamps()
     end
-
   end
 end

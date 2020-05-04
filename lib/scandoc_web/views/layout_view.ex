@@ -8,6 +8,4 @@ defmodule ScandocWeb.LayoutView do
       ""
     end
   end
-
-
 end

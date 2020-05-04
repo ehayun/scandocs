@@ -1,0 +1,33 @@
+<h1>Listing Classrooms</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Classroom name</th>
+      <th>School</th>
+      <th>Teacher</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for classroom <- @classrooms do %>
+    <tr>
+      <td><%= classroom.code %></td>
+      <td><%= classroom.classroom_name %></td>
+      <td><%= classroom.school_id %></td>
+      <td><%= classroom.teacher_id %></td>
+
+      <td>
+        <span class="hidden"><%= link "Show", to: Routes.classroom_path(@conn, :show, classroom) %></span>
+        <span class="hidden"><%= link "Edit", to: Routes.classroom_path(@conn, :edit, classroom) %></span>
+        <span class="hidden"><%= link "Delete", to: Routes.classroom_path(@conn, :delete, classroom), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span class="hidden"><%= link "New Classroom", to: Routes.classroom_path(@conn, :new) %></span>
+<%= paginate @conn, @classrooms, &ScandocWeb.Router.Helpers.classroom_path/3, [:index] %>

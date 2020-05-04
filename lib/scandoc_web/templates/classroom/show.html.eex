@@ -1,0 +1,28 @@
+<h1>Show Classroom</h1>
+
+<ul>
+
+  <li>
+    <strong>Code:</strong>
+    <%= @classroom.code %>
+  </li>
+
+  <li>
+    <strong>Classroom name:</strong>
+    <%= @classroom.classroom_name %>
+  </li>
+
+  <li>
+    <strong>School:</strong>
+    <%= @classroom.school_id %>
+  </li>
+
+  <li>
+    <strong>Teacher:</strong>
+    <%= @classroom.teacher_id %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.classroom_path(@conn, :edit, @classroom) %></span>
+<span><%= link "Back", to: Routes.classroom_path(@conn, :index) %></span>

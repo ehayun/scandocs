@@ -5,9 +5,45 @@ defmodule ScandocWeb.PhoneLiveTest do
 
   alias Scandoc.Customers
 
-  @create_attrs %{google_account: "some google_account", google_ref_token: "some google_ref_token", google_token: "some google_token", note: "some note", phonenum: "some phonenum", provider_token: "some provider_token", provider_unique_id: "some provider_unique_id", provider_url: "some provider_url", sendertype: "some sendertype", title: "some title", user_id: "some user_id"}
-  @update_attrs %{google_account: "some updated google_account", google_ref_token: "some updated google_ref_token", google_token: "some updated google_token", note: "some updated note", phonenum: "some updated phonenum", provider_token: "some updated provider_token", provider_unique_id: "some updated provider_unique_id", provider_url: "some updated provider_url", sendertype: "some updated sendertype", title: "some updated title", user_id: "some updated user_id"}
-  @invalid_attrs %{google_account: nil, google_ref_token: nil, google_token: nil, note: nil, phonenum: nil, provider_token: nil, provider_unique_id: nil, provider_url: nil, sendertype: nil, title: nil, user_id: nil}
+  @create_attrs %{
+    google_account: "some google_account",
+    google_ref_token: "some google_ref_token",
+    google_token: "some google_token",
+    note: "some note",
+    phonenum: "some phonenum",
+    provider_token: "some provider_token",
+    provider_unique_id: "some provider_unique_id",
+    provider_url: "some provider_url",
+    sendertype: "some sendertype",
+    title: "some title",
+    user_id: "some user_id"
+  }
+  @update_attrs %{
+    google_account: "some updated google_account",
+    google_ref_token: "some updated google_ref_token",
+    google_token: "some updated google_token",
+    note: "some updated note",
+    phonenum: "some updated phonenum",
+    provider_token: "some updated provider_token",
+    provider_unique_id: "some updated provider_unique_id",
+    provider_url: "some updated provider_url",
+    sendertype: "some updated sendertype",
+    title: "some updated title",
+    user_id: "some updated user_id"
+  }
+  @invalid_attrs %{
+    google_account: nil,
+    google_ref_token: nil,
+    google_token: nil,
+    note: nil,
+    phonenum: nil,
+    provider_token: nil,
+    provider_unique_id: nil,
+    provider_url: nil,
+    sendertype: nil,
+    title: nil,
+    user_id: nil
+  }
 
   defp fixture(:phone) do
     {:ok, phone} = Customers.create_phone(@create_attrs)
@@ -33,7 +69,7 @@ defmodule ScandocWeb.PhoneLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.phone_index_path(conn, :index))
 
       assert index_live |> element("a", "New Phone") |> render_click() =~
-        "New Phone"
+               "New Phone"
 
       assert_patch(index_live, Routes.phone_index_path(conn, :new))
 
@@ -55,7 +91,7 @@ defmodule ScandocWeb.PhoneLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.phone_index_path(conn, :index))
 
       assert index_live |> element("#phone-#{phone.id} a", "Edit") |> render_click() =~
-        "Edit Phone"
+               "Edit Phone"
 
       assert_patch(index_live, Routes.phone_index_path(conn, :edit, phone))
 
@@ -95,7 +131,7 @@ defmodule ScandocWeb.PhoneLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.phone_show_path(conn, :show, phone))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Phone"
+               "Edit Phone"
 
       assert_patch(show_live, Routes.phone_show_path(conn, :edit, phone))
 

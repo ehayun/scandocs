@@ -70,6 +70,8 @@ defmodule ScandocWeb.Router do
 
     resources "/schools", SchoolController
     resources "/managers", ManagerController
+    resources "/teachers", TeacherController
+    resources "/classrooms", ClassroomController
   end
 
   scope "/", ScandocWeb do
