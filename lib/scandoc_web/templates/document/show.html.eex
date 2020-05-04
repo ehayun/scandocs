@@ -1,0 +1,53 @@
+<h1>Show Document</h1>
+
+<ul>
+
+  <li>
+    <strong>Line code:</strong>
+    <%= @document.line_code %>
+  </li>
+
+  <li>
+    <strong>Doc name:</strong>
+    <%= @document.doc_name %>
+  </li>
+
+  <li>
+    <strong>Doc name len:</strong>
+    <%= @document.doc_name_len %>
+  </li>
+
+  <li>
+    <strong>Doc path:</strong>
+    <%= @document.doc_path %>
+  </li>
+
+  <li>
+    <strong>Ref:</strong>
+    <%= @document.ref_id %>
+  </li>
+
+  <li>
+    <strong>Ref year:</strong>
+    <%= @document.ref_year %>
+  </li>
+
+  <li>
+    <strong>Ref month:</strong>
+    <%= @document.ref_month %>
+  </li>
+
+  <li>
+    <strong>Doctype:</strong>
+    <%= @document.doctype_id %>
+  </li>
+
+  <li>
+    <strong>Has picture:</strong>
+    <%= @document.has_picture %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.document_path(@conn, :edit, @document) %></span>
+<span><%= link "Back", to: Routes.document_path(@conn, :index) %></span>

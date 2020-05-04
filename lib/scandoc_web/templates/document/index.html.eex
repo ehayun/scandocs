@@ -1,0 +1,42 @@
+<h1>Listing Documents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Line code</th>
+      <th>Doc name</th>
+      <th>Doc name len</th>
+      <th>Doc path</th>
+      <th>Ref</th>
+      <th>Ref year</th>
+      <th>Ref month</th>
+      <th>Doctype</th>
+      <th>Has picture</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for document <- @documents do %>
+    <tr>
+      <td><%= document.line_code %></td>
+      <td><%= document.doc_name %></td>
+      <td><%= document.doc_name_len %></td>
+      <td><%= document.doc_path %></td>
+      <td><%= document.ref_id %></td>
+      <td><%= document.ref_year %></td>
+      <td><%= document.ref_month %></td>
+      <td><%= document.doctype_id %></td>
+      <td><%= document.has_picture %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.document_path(@conn, :show, document) %></span>
+        <span><%= link "Edit", to: Routes.document_path(@conn, :edit, document) %></span>
+        <span><%= link "Delete", to: Routes.document_path(@conn, :delete, document), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Document", to: Routes.document_path(@conn, :new) %></span>

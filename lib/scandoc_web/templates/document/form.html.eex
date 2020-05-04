@@ -1,0 +1,47 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :line_code %>
+  <%= text_input f, :line_code %>
+  <%= error_tag f, :line_code %>
+
+  <%= label f, :doc_name %>
+  <%= text_input f, :doc_name %>
+  <%= error_tag f, :doc_name %>
+
+  <%= label f, :doc_name_len %>
+  <%= number_input f, :doc_name_len %>
+  <%= error_tag f, :doc_name_len %>
+
+  <%= label f, :doc_path %>
+  <%= text_input f, :doc_path %>
+  <%= error_tag f, :doc_path %>
+
+  <%= label f, :ref_id %>
+  <%= number_input f, :ref_id %>
+  <%= error_tag f, :ref_id %>
+
+  <%= label f, :ref_year %>
+  <%= text_input f, :ref_year %>
+  <%= error_tag f, :ref_year %>
+
+  <%= label f, :ref_month %>
+  <%= text_input f, :ref_month %>
+  <%= error_tag f, :ref_month %>
+
+  <%= label f, :doctype_id %>
+  <%= number_input f, :doctype_id %>
+  <%= error_tag f, :doctype_id %>
+
+  <%= label f, :has_picture %>
+  <%= checkbox f, :has_picture %>
+  <%= error_tag f, :has_picture %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>
