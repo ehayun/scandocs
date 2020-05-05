@@ -1,6 +1,13 @@
 defmodule ScandocWeb.LiveHelpers do
   import Phoenix.LiveView.Helpers
 
+  import Ecto.Query
+  alias Scandoc.Repo
+
+  alias Scandoc.Schools.School
+  alias Scandoc.Classrooms.Classroom
+  alias Scandoc.Students.Student
+
   @doc """
   Renders a component inside the `ScandocWeb.ModalComponent` component.
 
@@ -28,6 +35,38 @@ defmodule ScandocWeb.LiveHelpers do
       2 -> "הרשאת כיתה"
       3 -> "הרשאת תלמיד"
       _ -> "לא ידוע"
+    end
+  end
+
+  def getPermissionRef(type, ref_id) do
+    case type do
+      0 ->
+        ""
+
+      1 ->
+        case School |> where(id: ^ref_id) |> Repo.one() do
+          nil -> "???"
+          school -> school.school_name
+        end
+
+      2 ->
+        case Classroom |> where(id: ^ref_id) |> Repo.one() do
+          nil ->
+            "???"
+
+          classroom ->
+            school = School |> where(id: ^classroom.school_id) |> Repo.one()
+            "#{school.school_name} / #{classroom.classroom_name} "
+        end
+
+      3 ->
+        case Student |> where(id: ^ref_id) |> Repo.one() do
+          nil -> "???"
+          student -> "#{student.full_name}(#{student.student_zehut})"
+        end
+
+      _ ->
+        "Wait"
     end
   end
 end

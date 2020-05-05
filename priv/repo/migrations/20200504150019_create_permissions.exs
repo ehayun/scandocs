@@ -9,6 +9,5 @@ defmodule Scandoc.Repo.Migrations.CreatePermissions do
 
       timestamps()
     end
-
   end
 end

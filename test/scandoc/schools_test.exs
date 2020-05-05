@@ -134,9 +134,27 @@ defmodule Scandoc.SchoolsTest do
   describe "teachers" do
     alias Scandoc.Schools.Teacher
 
-    @valid_attrs %{date_of_birth: ~D[2010-04-17], full_name: "some full_name", hashed_password: "some hashed_password", role: "some role", zehut: "some zehut"}
-    @update_attrs %{date_of_birth: ~D[2011-05-18], full_name: "some updated full_name", hashed_password: "some updated hashed_password", role: "some updated role", zehut: "some updated zehut"}
-    @invalid_attrs %{date_of_birth: nil, full_name: nil, hashed_password: nil, role: nil, zehut: nil}
+    @valid_attrs %{
+      date_of_birth: ~D[2010-04-17],
+      full_name: "some full_name",
+      hashed_password: "some hashed_password",
+      role: "some role",
+      zehut: "some zehut"
+    }
+    @update_attrs %{
+      date_of_birth: ~D[2011-05-18],
+      full_name: "some updated full_name",
+      hashed_password: "some updated hashed_password",
+      role: "some updated role",
+      zehut: "some updated zehut"
+    }
+    @invalid_attrs %{
+      date_of_birth: nil,
+      full_name: nil,
+      hashed_password: nil,
+      role: nil,
+      zehut: nil
+    }
 
     def teacher_fixture(attrs \\ %{}) do
       {:ok, teacher} =

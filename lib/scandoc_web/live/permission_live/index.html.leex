@@ -29,7 +29,7 @@
       <tr id="permission-<%= permission.id %>">
         <td><%= permission.user.full_name %></td>
         <td><%= getPermissionType(permission.permission_type) %></td>
-        <td><%= permission.ref_id %></td>
+        <td><%= getPermissionRef(permission.permission_type, permission.ref_id) %></td>
 
         <td>
           <span class="hidden"><%= live_redirect "Show", to: Routes.permission_show_path(@socket, :show, permission) %></span>

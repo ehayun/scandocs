@@ -3,8 +3,18 @@ defmodule ScandocWeb.ClassroomControllerTest do
 
   alias Scandoc.Classrooms
 
-  @create_attrs %{classroom_name: "some classroom_name", code: "some code", school_id: 42, teacher_id: 42}
-  @update_attrs %{classroom_name: "some updated classroom_name", code: "some updated code", school_id: 43, teacher_id: 43}
+  @create_attrs %{
+    classroom_name: "some classroom_name",
+    code: "some code",
+    school_id: 42,
+    teacher_id: 42
+  }
+  @update_attrs %{
+    classroom_name: "some updated classroom_name",
+    code: "some updated code",
+    school_id: 43,
+    teacher_id: 43
+  }
   @invalid_attrs %{classroom_name: nil, code: nil, school_id: nil, teacher_id: nil}
 
   def fixture(:classroom) do
@@ -75,6 +85,7 @@ defmodule ScandocWeb.ClassroomControllerTest do
     test "deletes chosen classroom", %{conn: conn, classroom: classroom} do
       conn = delete(conn, Routes.classroom_path(conn, :delete, classroom))
       assert redirected_to(conn) == Routes.classroom_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.classroom_path(conn, :show, classroom))
       end

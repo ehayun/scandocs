@@ -12,7 +12,6 @@ defmodule Scandoc.Util.ImportStudents do
 
   def run() do
     # calling our Hello.say() function from earlier
-    IO.puts("import Students")
 
     sc = School |> Repo.all()
 

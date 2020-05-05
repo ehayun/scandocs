@@ -1,4 +1,4 @@
-<h2><%= @title %></h2>
+<header><%= @title %></header>
 
 <%= f = form_for @changeset, "#",
   id: "permission-form",
@@ -7,36 +7,29 @@
   phx_submit: "save" %>
 
 <div class="d-flex flex-column flex-md-row">
-  <label class="sr-only" for="input-contacts-04">Email</label>
-  <input type="text" name="q" value="xxx" placeholder="Live dependency search" list="results" autocomplete="off"/>
-    <datalist id="results">
-      <%= for {app, _vsn} <- @results do %>
-        <option value="<%= app %>"><%= app %></option>
-      <% end %>
-    </datalist>
-  <select name="permission[perm_type]" class="form-control mb-3">
-    <option disabled selected><%= gettext("Permission type") %></option>
-    <option value="0"> <%= gettext("allowed all") %>  </option>
-    <option value="1"> <%= gettext("allowed school") %>  </option>
-    <option value="2"> <%= gettext("allowed classroom") %>  </option>
-    <option value="3"> <%= gettext("allowed student") %>  </option>
-  </select>
+  <%= Phoenix.HTML.Form.select(f, :user_id, Enum.map(@users, &{&1.full_name, &1.id}), class: "form-control") %>
+
+  <%= Phoenix.HTML.Form.select(f, :permission_type, Enum.map(@p_types, &{&1.type, &1.id}), class: "form-control") %>
+
 </div>
-<label class="sr-only" for="textarea-contacts-04">Write something...</label>
-<textarea class="form-control mb-3" id="textarea-contacts-04" rows="4" placeholder="Write something..."></textarea>
-<button class="btn btn-primary px-5 d-block mx-auto" type="submit" data-config-id="primary-action">Submit</button>
 
-<%= label f, :user_id %>
-<%= number_input f, :user_id %>
-<%= error_tag f, :user_id %>
 
-<%= label f, :permission_type %>
-<%= number_input f, :permission_type %>
-<%= error_tag f, :permission_type %>
+<div class="d-flex flex-column flex-md-row">
 
-<%= label f, :ref_id %>
-<%= number_input f, :ref_id %>
-<%= error_tag f, :ref_id %>
+  <%= if @permission_type && @permission_type in [1] do %>
+  <%= Phoenix.HTML.Form.select(f, :ref_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "form-control") %>
+  <% end %>
+  <%= if @permission_type && @permission_type in [2] do %>
+  <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "form-control") %>
+  <%= Phoenix.HTML.Form.select(f, :ref_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "form-control") %>
+  <% end %>
 
-<%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary" %>
+  <%= if @permission_type && @permission_type in [3] do %>
+  <%= Phoenix.HTML.Form.select(f, :ref_id, Enum.map(@students, &{&1.student_zehut <> " " <> &1.full_name, &1.id}), class: "form-control") %>
+  <% end %>
+</div>
+
+<div class="form-group mt-2">
+  <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary" %>
+</div>
 </form>

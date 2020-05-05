@@ -75,13 +75,13 @@ defmodule ScandocWeb.DocumentController do
     if document do
       path = document.doc_path
       path = String.replace(path, "/home/eli", "./downloads")
-      file = "#{path}/#{document.doc_name}"
 
-      IO.inspect(file, label: "#{document.doc_name}")
+      # file = "#{path}/#{document.doc_name}"
+
+      # IO.inspect(file, label: "#{document.doc_name}")
 
       # file = "/home/eli/pCloudDrive/Scan_files/חכמת_ישראל/גנים_חכמת_ישראל/אוחיון_יצחק_342232436/342232436-213-1119.pdf"
       # file = String.replace(file, "/home/eli", "./downloads")
-      # IO.inspect(file, label: "#{document.doc_name}")
 
       if File.exists?(path) do
         conn

@@ -42,7 +42,10 @@ defmodule Scandoc.PermissionsTest do
 
     test "update_permission/2 with valid data updates the permission" do
       permission = permission_fixture()
-      assert {:ok, %Permission{} = permission} = Permissions.update_permission(permission, @update_attrs)
+
+      assert {:ok, %Permission{} = permission} =
+               Permissions.update_permission(permission, @update_attrs)
+
       assert permission.permission_type == 43
       assert permission.ref_id == 43
       assert permission.user_id == 43
@@ -50,7 +53,10 @@ defmodule Scandoc.PermissionsTest do
 
     test "update_permission/2 with invalid data returns error changeset" do
       permission = permission_fixture()
-      assert {:error, %Ecto.Changeset{}} = Permissions.update_permission(permission, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Permissions.update_permission(permission, @invalid_attrs)
+
       assert permission == Permissions.get_permission!(permission.id)
     end
 

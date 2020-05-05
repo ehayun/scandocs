@@ -20,7 +20,15 @@ defmodule Scandoc.Accounts.User do
 
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:zehut, :hashed_password, :full_name, :role, :is_freezed, :is_admin, :date_of_birth])
+    |> cast(attrs, [
+      :zehut,
+      :hashed_password,
+      :full_name,
+      :role,
+      :is_freezed,
+      :is_admin,
+      :date_of_birth
+    ])
     |> validate_required([:zehut, :full_name])
     |> validate_zehut()
     |> validate_password()

@@ -10,6 +10,5 @@ defmodule Scandoc.Repo.Migrations.CreateDoctypes do
 
       timestamps()
     end
-
   end
 end

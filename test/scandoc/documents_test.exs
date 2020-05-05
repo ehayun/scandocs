@@ -6,9 +6,39 @@ defmodule Scandoc.DocumentsTest do
   describe "documents" do
     alias Scandoc.Documents.Document
 
-    @valid_attrs %{doc_name: "some doc_name", doc_name_len: 42, doc_path: "some doc_path", doctype_id: 42, has_picture: true, line_code: "some line_code", ref_id: 42, ref_month: "some ref_month", ref_year: "some ref_year"}
-    @update_attrs %{doc_name: "some updated doc_name", doc_name_len: 43, doc_path: "some updated doc_path", doctype_id: 43, has_picture: false, line_code: "some updated line_code", ref_id: 43, ref_month: "some updated ref_month", ref_year: "some updated ref_year"}
-    @invalid_attrs %{doc_name: nil, doc_name_len: nil, doc_path: nil, doctype_id: nil, has_picture: nil, line_code: nil, ref_id: nil, ref_month: nil, ref_year: nil}
+    @valid_attrs %{
+      doc_name: "some doc_name",
+      doc_name_len: 42,
+      doc_path: "some doc_path",
+      doctype_id: 42,
+      has_picture: true,
+      line_code: "some line_code",
+      ref_id: 42,
+      ref_month: "some ref_month",
+      ref_year: "some ref_year"
+    }
+    @update_attrs %{
+      doc_name: "some updated doc_name",
+      doc_name_len: 43,
+      doc_path: "some updated doc_path",
+      doctype_id: 43,
+      has_picture: false,
+      line_code: "some updated line_code",
+      ref_id: 43,
+      ref_month: "some updated ref_month",
+      ref_year: "some updated ref_year"
+    }
+    @invalid_attrs %{
+      doc_name: nil,
+      doc_name_len: nil,
+      doc_path: nil,
+      doctype_id: nil,
+      has_picture: nil,
+      line_code: nil,
+      ref_id: nil,
+      ref_month: nil,
+      ref_year: nil
+    }
 
     def document_fixture(attrs \\ %{}) do
       {:ok, document} =

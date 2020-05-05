@@ -6,8 +6,18 @@ defmodule Scandoc.ClassroomsTest do
   describe "classrooms" do
     alias Scandoc.Classrooms.Classroom
 
-    @valid_attrs %{classroom_name: "some classroom_name", code: "some code", school_id: 42, teacher_id: 42}
-    @update_attrs %{classroom_name: "some updated classroom_name", code: "some updated code", school_id: 43, teacher_id: 43}
+    @valid_attrs %{
+      classroom_name: "some classroom_name",
+      code: "some code",
+      school_id: 42,
+      teacher_id: 42
+    }
+    @update_attrs %{
+      classroom_name: "some updated classroom_name",
+      code: "some updated code",
+      school_id: 43,
+      teacher_id: 43
+    }
     @invalid_attrs %{classroom_name: nil, code: nil, school_id: nil, teacher_id: nil}
 
     def classroom_fixture(attrs \\ %{}) do
@@ -43,7 +53,10 @@ defmodule Scandoc.ClassroomsTest do
 
     test "update_classroom/2 with valid data updates the classroom" do
       classroom = classroom_fixture()
-      assert {:ok, %Classroom{} = classroom} = Classrooms.update_classroom(classroom, @update_attrs)
+
+      assert {:ok, %Classroom{} = classroom} =
+               Classrooms.update_classroom(classroom, @update_attrs)
+
       assert classroom.classroom_name == "some updated classroom_name"
       assert classroom.code == "some updated code"
       assert classroom.school_id == 43

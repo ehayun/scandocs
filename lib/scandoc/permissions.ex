@@ -7,6 +7,8 @@ defmodule Scandoc.Permissions do
   alias Scandoc.Repo
 
   alias Scandoc.Permissions.Permission
+  alias Scandoc.Schools.School
+  alias Scandoc.Classrooms.Classroom
 
   @doc """
   Returns the list of permissions.
@@ -35,7 +37,28 @@ defmodule Scandoc.Permissions do
       ** (Ecto.NoResultsError)
 
   """
-  def get_permission!(id), do: Repo.get!(Permission, id)
+  def get_permission!(id) do
+    perm = Repo.get!(Permission, id)
+
+    if perm.permission_type == 2 do
+      # is class, get school id
+      case Classroom |> where(id: ^perm.ref_id) |> Repo.one() do
+        nil ->
+          perm
+
+        classroom ->
+          case School |> where(id: ^classroom.school_id) |> Repo.one() do
+            nil ->
+              perm
+
+            s ->
+              Map.merge(perm, %{school_id: s.id})
+          end
+      end
+    else
+      perm
+    end
+  end
 
   @doc """
   Creates a permission.

@@ -157,13 +157,13 @@ msgstr "קישור זה אינו תקין או פג תוקף"
 
 #, elixir-format
 #: lib/scandoc_web/live/customer_live/form_component.html.leex:16
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:41
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:33
 msgid "Save"
 msgstr "שמירה"
 
 #, elixir-format
 #: lib/scandoc_web/live/customer_live/form_component.html.leex:16
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:41
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:33
 msgid "Saving..."
 msgstr "שומר..."
 
@@ -301,29 +301,29 @@ msgid "Listing Students"
 msgstr "רשימת תלמידים"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:18
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:13
 msgid "Permission type"
 msgstr "הרשאות"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:19
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:14
 msgid "allowed all"
 msgstr "ללא הגבלה"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:21
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:16
 msgid "allowed classroom"
 msgstr "הרשאת כיתה"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:20
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:15
 msgid "allowed school"
 msgstr "הרשאת בית ספר"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:22
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:17
 msgid "allowed student"
-msgstr "הרשאת סטודנט"
+msgstr "הרשאת תלמיד"
 
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:9
@@ -399,3 +399,13 @@ msgstr "רשימת הרשאות"
 #: lib/scandoc_web/live/permission_live/index.ex:31
 msgid "New Permission"
 msgstr "הוספת הרשאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/form_component.ex:86
+msgid "Permission created successfully"
+msgstr " נוצר בהצלחה"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/form_component.ex:73
+msgid "Permission updated successfully"
+msgstr "עודכן  בהצלחה"

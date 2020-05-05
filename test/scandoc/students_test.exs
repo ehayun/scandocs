@@ -6,8 +6,18 @@ defmodule Scandoc.StudentsTest do
   describe "students" do
     alias Scandoc.Students.Student
 
-    @valid_attrs %{classroom_id: 42, full_name: "some full_name", has_picture: true, student_zehut: "some student_zehut"}
-    @update_attrs %{classroom_id: 43, full_name: "some updated full_name", has_picture: false, student_zehut: "some updated student_zehut"}
+    @valid_attrs %{
+      classroom_id: 42,
+      full_name: "some full_name",
+      has_picture: true,
+      student_zehut: "some student_zehut"
+    }
+    @update_attrs %{
+      classroom_id: 43,
+      full_name: "some updated full_name",
+      has_picture: false,
+      student_zehut: "some updated student_zehut"
+    }
     @invalid_attrs %{classroom_id: nil, full_name: nil, has_picture: nil, student_zehut: nil}
 
     def student_fixture(attrs \\ %{}) do

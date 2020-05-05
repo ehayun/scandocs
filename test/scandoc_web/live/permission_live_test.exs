@@ -32,7 +32,7 @@ defmodule ScandocWeb.PermissionLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.permission_index_path(conn, :index))
 
       assert index_live |> element("a", "New Permission") |> render_click() =~
-        "New Permission"
+               "New Permission"
 
       assert_patch(index_live, Routes.permission_index_path(conn, :new))
 
@@ -53,7 +53,7 @@ defmodule ScandocWeb.PermissionLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.permission_index_path(conn, :index))
 
       assert index_live |> element("#permission-#{permission.id} a", "Edit") |> render_click() =~
-        "Edit Permission"
+               "Edit Permission"
 
       assert_patch(index_live, Routes.permission_index_path(conn, :edit, permission))
 
@@ -91,7 +91,7 @@ defmodule ScandocWeb.PermissionLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.permission_show_path(conn, :show, permission))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Permission"
+               "Edit Permission"
 
       assert_patch(show_live, Routes.permission_show_path(conn, :edit, permission))
 

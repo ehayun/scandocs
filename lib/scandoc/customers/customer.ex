@@ -28,8 +28,6 @@ defmodule Scandoc.Customers.Customer do
           {nil, nil}
       end
 
-    IO.inspect(user, label: "[#{password}] [#{hashed_password}]")
-
     cs =
       user
       |> cast(attrs, [

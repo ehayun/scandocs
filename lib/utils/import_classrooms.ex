@@ -4,7 +4,6 @@ defmodule Scandoc.Util.ImportClassrooms do
 
   def run() do
     # calling our Hello.say() function from earlier
-    IO.puts("import classrooms")
 
     code = 400
 

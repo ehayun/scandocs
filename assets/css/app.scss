@@ -40,6 +40,13 @@ main {
 .blueBorder {
   border: 2px solid green;
 }
+
+header {
+	font-size: 1.4em;
+	border-bottom: 3px solid $app-blue;
+	margin-bottom: 0.5em;
+}
+
 .nav-link {
   padding: 0.1rem 0.1rem;
 }

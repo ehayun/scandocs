@@ -3,9 +3,27 @@ defmodule ScandocWeb.TeacherControllerTest do
 
   alias Scandoc.Schools
 
-  @create_attrs %{date_of_birth: ~D[2010-04-17], full_name: "some full_name", hashed_password: "some hashed_password", role: "some role", zehut: "some zehut"}
-  @update_attrs %{date_of_birth: ~D[2011-05-18], full_name: "some updated full_name", hashed_password: "some updated hashed_password", role: "some updated role", zehut: "some updated zehut"}
-  @invalid_attrs %{date_of_birth: nil, full_name: nil, hashed_password: nil, role: nil, zehut: nil}
+  @create_attrs %{
+    date_of_birth: ~D[2010-04-17],
+    full_name: "some full_name",
+    hashed_password: "some hashed_password",
+    role: "some role",
+    zehut: "some zehut"
+  }
+  @update_attrs %{
+    date_of_birth: ~D[2011-05-18],
+    full_name: "some updated full_name",
+    hashed_password: "some updated hashed_password",
+    role: "some updated role",
+    zehut: "some updated zehut"
+  }
+  @invalid_attrs %{
+    date_of_birth: nil,
+    full_name: nil,
+    hashed_password: nil,
+    role: nil,
+    zehut: nil
+  }
 
   def fixture(:teacher) do
     {:ok, teacher} = Schools.create_teacher(@create_attrs)
@@ -75,6 +93,7 @@ defmodule ScandocWeb.TeacherControllerTest do
     test "deletes chosen teacher", %{conn: conn, teacher: teacher} do
       conn = delete(conn, Routes.teacher_path(conn, :delete, teacher))
       assert redirected_to(conn) == Routes.teacher_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.teacher_path(conn, :show, teacher))
       end

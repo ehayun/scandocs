@@ -23,16 +23,18 @@ defmodule ScandocWeb.Permissions.PermissionLiveTest do
     setup [:create_permission]
 
     test "lists all permissions", %{conn: conn, permission: permission} do
-      {:ok, _index_live, html} = live(conn, Routes.permissions_permission_index_path(conn, :index))
+      {:ok, _index_live, html} =
+        live(conn, Routes.permissions_permission_index_path(conn, :index))
 
       assert html =~ "Listing Permissions"
     end
 
     test "saves new permission", %{conn: conn} do
-      {:ok, index_live, _html} = live(conn, Routes.permissions_permission_index_path(conn, :index))
+      {:ok, index_live, _html} =
+        live(conn, Routes.permissions_permission_index_path(conn, :index))
 
       assert index_live |> element("a", "New Permission") |> render_click() =~
-        "New Permission"
+               "New Permission"
 
       assert_patch(index_live, Routes.permissions_permission_index_path(conn, :new))
 
@@ -50,10 +52,11 @@ defmodule ScandocWeb.Permissions.PermissionLiveTest do
     end
 
     test "updates permission in listing", %{conn: conn, permission: permission} do
-      {:ok, index_live, _html} = live(conn, Routes.permissions_permission_index_path(conn, :index))
+      {:ok, index_live, _html} =
+        live(conn, Routes.permissions_permission_index_path(conn, :index))
 
       assert index_live |> element("#permission-#{permission.id} a", "Edit") |> render_click() =~
-        "Edit Permission"
+               "Edit Permission"
 
       assert_patch(index_live, Routes.permissions_permission_index_path(conn, :edit, permission))
 
@@ -71,7 +74,8 @@ defmodule ScandocWeb.Permissions.PermissionLiveTest do
     end
 
     test "deletes permission in listing", %{conn: conn, permission: permission} do
-      {:ok, index_live, _html} = live(conn, Routes.permissions_permission_index_path(conn, :index))
+      {:ok, index_live, _html} =
+        live(conn, Routes.permissions_permission_index_path(conn, :index))
 
       assert index_live |> element("#permission-#{permission.id} a", "Delete") |> render_click()
       refute has_element?(index_live, "#permission-#{permission.id}")
@@ -82,16 +86,18 @@ defmodule ScandocWeb.Permissions.PermissionLiveTest do
     setup [:create_permission]
 
     test "displays permission", %{conn: conn, permission: permission} do
-      {:ok, _show_live, html} = live(conn, Routes.permissions_permission_show_path(conn, :show, permission))
+      {:ok, _show_live, html} =
+        live(conn, Routes.permissions_permission_show_path(conn, :show, permission))
 
       assert html =~ "Show Permission"
     end
 
     test "updates permission within modal", %{conn: conn, permission: permission} do
-      {:ok, show_live, _html} = live(conn, Routes.permissions_permission_show_path(conn, :show, permission))
+      {:ok, show_live, _html} =
+        live(conn, Routes.permissions_permission_show_path(conn, :show, permission))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Permission"
+               "Edit Permission"
 
       assert_patch(show_live, Routes.permissions_permission_show_path(conn, :edit, permission))
 

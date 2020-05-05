@@ -10,6 +10,5 @@ defmodule Scandoc.Repo.Migrations.CreateStudents do
 
       timestamps()
     end
-
   end
 end

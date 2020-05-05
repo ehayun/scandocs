@@ -3,8 +3,18 @@ defmodule ScandocWeb.StudentControllerTest do
 
   alias Scandoc.Students
 
-  @create_attrs %{classroom_id: 42, full_name: "some full_name", has_picture: true, student_zehut: "some student_zehut"}
-  @update_attrs %{classroom_id: 43, full_name: "some updated full_name", has_picture: false, student_zehut: "some updated student_zehut"}
+  @create_attrs %{
+    classroom_id: 42,
+    full_name: "some full_name",
+    has_picture: true,
+    student_zehut: "some student_zehut"
+  }
+  @update_attrs %{
+    classroom_id: 43,
+    full_name: "some updated full_name",
+    has_picture: false,
+    student_zehut: "some updated student_zehut"
+  }
   @invalid_attrs %{classroom_id: nil, full_name: nil, has_picture: nil, student_zehut: nil}
 
   def fixture(:student) do
@@ -75,6 +85,7 @@ defmodule ScandocWeb.StudentControllerTest do
     test "deletes chosen student", %{conn: conn, student: student} do
       conn = delete(conn, Routes.student_path(conn, :delete, student))
       assert redirected_to(conn) == Routes.student_path(conn, :index)
+
       assert_error_sent 404, fn ->
         get(conn, Routes.student_path(conn, :show, student))
       end
