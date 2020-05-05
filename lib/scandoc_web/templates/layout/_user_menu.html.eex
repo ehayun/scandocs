@@ -34,17 +34,18 @@
 
       <%= if @current_user do %>
 
-      <li class="nav-item btn-group  ml-4" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="blue btn btn-xl" style="font-size: 1.1em;"> <%= @current_user.full_name %> </button>
-        <div class="btn-group" role="group">
-          <button id="btnGroupDrop4" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-          <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
-            <a class="hidden" href="#"><%= @current_user.zehut %></a>
-            <%= link gettext("Settings"), to: Routes.user_settings_path(@conn, :edit), class: "hidden dropdown-item" %>
-            <%= link gettext("Logout"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
-          </div>
+      <li class="nav-item dropdown"><a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= @current_user.full_name %>
+          <span class="caret"></span></a>
+        <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+
+          <%= link gettext("Settings"), to: Routes.user_settings_path(@conn, :edit), class: "hidden dropdown-item" %>
+          <%= link gettext("Logout"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
+
         </div>
       </li>
+
+
       <% else %>
       <li class="nav-item mr-4"><%= link gettext("Login"), to: Routes.user_session_path(@conn, :new), class: "nav-link" %></li>
       <li><%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "hidden" %></li>
