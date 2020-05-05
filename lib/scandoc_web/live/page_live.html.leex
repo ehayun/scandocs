@@ -1,8 +1,8 @@
-<section class="jumbotron">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace-of-mind from prototype to production</p>
+<section class="ltr jumbotron">
+  <h1><%= gettext "Welcome to %{name}!", name: "Scandocs" %></h1>
+  <p>Comming soon</p>
 
-  <form phx-change="suggest" phx-submit="search">
+  <form class="hidden" phx-change="suggest" phx-submit="search">
     <input type="text" name="q" value="<%= @query %>" placeholder="Live dependency search" list="results" autocomplete="off"/>
     <datalist id="results">
       <%= for {app, _vsn} <- @results do %>
