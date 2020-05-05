@@ -35,7 +35,7 @@ config :scandoc, ScandocWeb.Endpoint,
 # If you are doing OTP releases, you need to instruct Phoenix
 # to start each relevant endpoint:
 #
-#     config :scandoc, ScandocWeb.Endpoint, server: true
+config :scandoc, ScandocWeb.Endpoint, server: true
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
