@@ -12,7 +12,7 @@ defmodule ScandocWeb.TeacherController do
       Teacher
       |> where(role: "030")
       |> order_by(:full_name)
-      |> Repo.paginate(page: current_page, page_size: 17)
+      |> Repo.paginate(page: current_page, page_size: 15)
 
     conn
     |> assign(:teachers, teachers)

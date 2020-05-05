@@ -75,6 +75,13 @@ defmodule ScandocWeb.Router do
     resources "/students", StudentController
     resources "/documents", DocumentController
     get "/docdownload/:id", DocumentController, :doc_download
+
+    live "/permissions", PermissionLive.Index, :index
+    live "/permissions/new", PermissionLive.Index, :new
+    live "/permissions/:id/edit", PermissionLive.Index, :edit
+
+    live "/permissions/:id", PermissionLive.Show, :show
+    live "/permissions/:id/show/edit", PermissionLive.Show, :edit
   end
 
   scope "/", ScandocWeb do
@@ -88,13 +95,6 @@ defmodule ScandocWeb.Router do
 
     live "/customers/:id", CustomerLive.Show, :show
     live "/customers/:id/show/edit", CustomerLive.Show, :edit
-
-    live "/phones", PhoneLive.Index, :index
-    live "/phones/new", PhoneLive.Index, :new
-    live "/phones/:id/edit", PhoneLive.Index, :edit
-
-    live "/phones/:id", PhoneLive.Show, :show
-    live "/phones/:id/show/edit", PhoneLive.Show, :edit
   end
 
   scope "/", ScandocWeb do

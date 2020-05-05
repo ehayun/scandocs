@@ -1,6 +1,7 @@
 defmodule Scandoc.Schools.Teacher do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Scandoc.Classrooms.Classroom
 
   schema "users" do
     field :date_of_birth, :date
@@ -8,6 +9,7 @@ defmodule Scandoc.Schools.Teacher do
     field :hashed_password, :string
     field :role, :string, default: "030"
     field :zehut, :string
+    has_many :classroom, Classroom, references: :id
 
     timestamps()
   end

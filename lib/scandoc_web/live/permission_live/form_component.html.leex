@@ -1,0 +1,42 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "permission-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+<div class="d-flex flex-column flex-md-row">
+  <label class="sr-only" for="input-contacts-04">Email</label>
+  <input type="text" name="q" value="xxx" placeholder="Live dependency search" list="results" autocomplete="off"/>
+    <datalist id="results">
+      <%= for {app, _vsn} <- @results do %>
+        <option value="<%= app %>"><%= app %></option>
+      <% end %>
+    </datalist>
+  <select name="permission[perm_type]" class="form-control mb-3">
+    <option disabled selected><%= gettext("Permission type") %></option>
+    <option value="0"> <%= gettext("allowed all") %>  </option>
+    <option value="1"> <%= gettext("allowed school") %>  </option>
+    <option value="2"> <%= gettext("allowed classroom") %>  </option>
+    <option value="3"> <%= gettext("allowed student") %>  </option>
+  </select>
+</div>
+<label class="sr-only" for="textarea-contacts-04">Write something...</label>
+<textarea class="form-control mb-3" id="textarea-contacts-04" rows="4" placeholder="Write something..."></textarea>
+<button class="btn btn-primary px-5 d-block mx-auto" type="submit" data-config-id="primary-action">Submit</button>
+
+<%= label f, :user_id %>
+<%= number_input f, :user_id %>
+<%= error_tag f, :user_id %>
+
+<%= label f, :permission_type %>
+<%= number_input f, :permission_type %>
+<%= error_tag f, :permission_type %>
+
+<%= label f, :ref_id %>
+<%= number_input f, :ref_id %>
+<%= error_tag f, :ref_id %>
+
+<%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary" %>
+</form>

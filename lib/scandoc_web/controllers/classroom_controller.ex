@@ -14,6 +14,8 @@ defmodule ScandocWeb.ClassroomController do
     classrooms =
       Classroom
       |> order_by(:school_id)
+      |> preload(:school)
+      |> preload(:teacher)
       |> Repo.paginate(page: current_page, page_size: 17)
 
     conn

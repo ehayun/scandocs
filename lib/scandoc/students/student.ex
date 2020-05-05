@@ -1,9 +1,10 @@
 defmodule Scandoc.Students.Student do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Scandoc.Classrooms.Classroom
 
   schema "students" do
-    field :classroom_id, :integer
+    belongs_to :classroom, Classroom, references: :id
     field :full_name, :string
     field :has_picture, :boolean, default: false
     field :student_zehut, :string

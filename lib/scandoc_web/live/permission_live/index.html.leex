@@ -1,0 +1,39 @@
+<h1>Listing Permissions</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, ScandocWeb.PermissionLive.FormComponent,
+    id: @permission.id || :new,
+    title: @page_title,
+    action: @live_action,
+    permission: @permission,
+    return_to: Routes.permission_index_path(@socket, :index) %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Permission type</th>
+      <th>Ref</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="permissions">
+    <%= for permission <- @permissions do %>
+      <tr id="permission-<%= permission.id %>">
+        <td><%= permission.user_id %></td>
+        <td><%= permission.permission_type %></td>
+        <td><%= permission.ref_id %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.permission_show_path(@socket, :show, permission) %></span>
+          <span><%= live_patch "Edit", to: Routes.permission_index_path(@socket, :edit, permission) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: permission.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Permission", to: Routes.permission_index_path(@socket, :new) %></span>

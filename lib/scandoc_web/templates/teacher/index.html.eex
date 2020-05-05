@@ -1,11 +1,11 @@
-<h1>Listing Teachers</h1>
+<h1><%= gettext("Listing Teachers") %></h1>
 
-<table class="table">
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
-      <th>Zehut</th>
-      <th>Full name</th>
-      <th>Date of birth</th>
+      <th><%= gettext("Zehut") %></th>
+      <th><%= gettext("Full name") %></th>
+      <th><%= gettext("Date of birth") %></th>
 
       <th></th>
     </tr>
@@ -21,6 +21,8 @@
         <span class="hidden"><%= link "Show", to: Routes.teacher_path(@conn, :show, teacher) %></span>
         <span class="hidden"><%= link "Edit", to: Routes.teacher_path(@conn, :edit, teacher) %></span>
         <span class="hidden"><%= link "Delete", to: Routes.teacher_path(@conn, :delete, teacher), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@conn, :loginas, teacher) %>
+
       </td>
     </tr>
 <% end %>

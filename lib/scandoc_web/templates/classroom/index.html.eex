@@ -1,12 +1,12 @@
-<h1>Listing Classrooms</h1>
+<h1><%= gettext("Listing Classrooms") %></h1>
 
-<table class="table">
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
-      <th>Code</th>
-      <th>Classroom name</th>
-      <th>School</th>
-      <th>Teacher</th>
+      <th><%= gettext("Code") %></th>
+      <th><%= gettext("Classroom name") %></th>
+      <th><%= gettext("School") %></th>
+      <th><%= gettext("Teacher") %></th>
 
       <th></th>
     </tr>
@@ -16,8 +16,8 @@
     <tr>
       <td><%= classroom.code %></td>
       <td><%= classroom.classroom_name %></td>
-      <td><%= classroom.school_id %></td>
-      <td><%= classroom.teacher_id %></td>
+      <td><%= classroom.school.school_name %></td>
+      <td><%= classroom.teacher.full_name %></td>
 
       <td>
         <span class="hidden"><%= link "Show", to: Routes.classroom_path(@conn, :show, classroom) %></span>

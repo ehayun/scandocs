@@ -1,12 +1,14 @@
 defmodule Scandoc.Classrooms.Classroom do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Scandoc.Schools.School
+  alias Scandoc.Schools.Teacher
 
   schema "classrooms" do
     field :classroom_name, :string
     field :code, :string
-    field :school_id, :integer
-    field :teacher_id, :integer
+    belongs_to :teacher, Teacher, references: :id
+    belongs_to :school, School, references: :id
 
     timestamps()
   end

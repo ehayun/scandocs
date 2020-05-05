@@ -12,6 +12,7 @@ defmodule ScandocWeb.StudentController do
     students =
       Student
       |> order_by(:full_name)
+      |> preload(:classroom)
       |> Repo.paginate(page: current_page, page_size: 17)
 
     conn

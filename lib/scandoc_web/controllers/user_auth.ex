@@ -135,7 +135,7 @@ defmodule ScandocWeb.UserAuth do
   def require_admin_user(conn, _opts) do
     user = conn.assigns[:current_user]
 
-    if user && user.role == "admin" do
+    if user && (user.is_admin || user.role == "000") do
       conn
     else
       conn

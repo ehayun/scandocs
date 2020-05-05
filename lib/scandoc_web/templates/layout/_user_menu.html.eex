@@ -27,7 +27,7 @@
       </li>
 
       <li class="nav-item <%= active_menu(@conn, :permission) %>">
-        <a class="nav-link" href="#"><i class="fas fa-user-lock"></i> <%= gettext("Permissions") %></a>
+        <a class="nav-link" href="<%= Routes.permission_index_path(@conn, :index) %>"><i class="fas fa-user-lock"></i> <%= gettext("Permissions") %></a>
       </li>
 
 

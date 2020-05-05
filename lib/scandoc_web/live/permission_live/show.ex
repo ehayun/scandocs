@@ -1,7 +1,7 @@
-defmodule ScandocWeb.PhoneLive.Show do
+defmodule ScandocWeb.PermissionLive.Show do
   use ScandocWeb, :live_view
 
-  alias Scandoc.Customers
+  alias Scandoc.Permissions
 
   @impl true
   def mount(_params, _session, socket) do
@@ -13,9 +13,9 @@ defmodule ScandocWeb.PhoneLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:phone, Customers.get_phone!(id))}
+     |> assign(:permission, Permissions.get_permission!(id))}
   end
 
-  defp page_title(:show), do: "Show Phone"
-  defp page_title(:edit), do: "Edit Phone"
+  defp page_title(:show), do: "Show Permission"
+  defp page_title(:edit), do: "Edit Permission"
 end

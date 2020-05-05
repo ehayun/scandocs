@@ -6,10 +6,9 @@
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
-      <th>Student zehut</th>
-      <th>Full name</th>
-      <th>Has picture</th>
-      <th>Classroom</th>
+      <th><%= gettext("Zehut") %></th>
+      <th><%= gettext("Full name") %></th>
+      <th><%= gettext("Classroom") %></th>
 
       <th></th>
     </tr>
@@ -21,8 +20,7 @@
       <td>
         <%= link student.full_name, to: Routes.student_path(@conn, :show, student) %>
       </td>
-      <td><%= student.has_picture %></td>
-      <td><%= student.classroom_id %></td>
+      <td><%= student.classroom.classroom_name %></td>
 
       <td>
         <span class="hidden"><%= link "Show", to: Routes.student_path(@conn, :show, student) %></span>
@@ -34,4 +32,6 @@
   </tbody>
 </table>
 
-<span><%= link "New Student", to: Routes.student_path(@conn, :new) %></span>
+<span class="hidden"><%= link "New Student", to: Routes.student_path(@conn, :new) %></span>
+
+<%= paginate @conn, @students, &ScandocWeb.Router.Helpers.student_path/3, [:index] %>
