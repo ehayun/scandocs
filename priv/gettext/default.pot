@@ -95,7 +95,7 @@ msgid "Logged out successfully."
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:49
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:50
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:18
 msgid "Login"
 msgstr ""
@@ -106,7 +106,7 @@ msgid "Login as"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:44
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:43
 msgid "Logout"
 msgstr ""
 
@@ -172,7 +172,7 @@ msgid "Send instructions to reset password"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:43
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:42
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:3
 msgid "Settings"
 msgstr ""
@@ -208,7 +208,7 @@ msgstr ""
 #, elixir-format
 #: lib/scandoc_web/live/customer_live/form_component.html.leex:11
 #: lib/scandoc_web/live/customer_live/index.html.leex:20 lib/scandoc_web/templates/manager/index.html.eex:9
-#: lib/scandoc_web/templates/student/index.html.eex:9 lib/scandoc_web/templates/teacher/index.html.eex:6
+#: lib/scandoc_web/templates/student/index.html.eex:9 lib/scandoc_web/templates/teacher/index.html.eex:8
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:9 lib/scandoc_web/templates/user_session/new.html.eex:15
 msgid "Zehut"
 msgstr ""
@@ -251,7 +251,7 @@ msgid "Teachers"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:6
+#: lib/scandoc_web/templates/classroom/index.html.eex:8
 #: lib/scandoc_web/templates/school/index.html.eex:8
 msgid "Code"
 msgstr ""
@@ -259,7 +259,7 @@ msgstr ""
 #, elixir-format
 #: lib/scandoc_web/live/customer_live/form_component.html.leex:9
 #: lib/scandoc_web/templates/manager/index.html.eex:10 lib/scandoc_web/templates/student/index.html.eex:10
-#: lib/scandoc_web/templates/teacher/index.html.eex:7
+#: lib/scandoc_web/templates/teacher/index.html.eex:9
 msgid "Full name"
 msgstr ""
 
@@ -325,36 +325,76 @@ msgid "allowed student"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:7
+#: lib/scandoc_web/templates/classroom/index.html.eex:9
 msgid "Classroom name"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/teacher/index.html.eex:8
+#: lib/scandoc_web/templates/teacher/index.html.eex:10
 msgid "Date of birth"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:1
+#: lib/scandoc_web/templates/classroom/index.html.eex:2
 msgid "Listing Classrooms"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/teacher/index.html.eex:1
+#: lib/scandoc_web/templates/teacher/index.html.eex:2
 msgid "Listing Teachers"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:8
+#: lib/scandoc_web/templates/classroom/index.html.eex:10
 msgid "School"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:9
+#: lib/scandoc_web/templates/classroom/index.html.eex:11
 msgid "Teacher"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/student/index.html.eex:11
 msgid "Classroom"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:22
+msgid "Permission Ref"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:21
+msgid "Permission level"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:20
+msgid "User name"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:5
+msgid "Add New"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:3
+msgid "Listing permissions"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.ex:25
+msgid "Edit Permission"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.ex:37
+msgid "Listing Permissions"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.ex:31
+msgid "New Permission"
 msgstr ""

@@ -1,4 +1,6 @@
-<h1><%= gettext("Listing Teachers") %></h1>
+<h2><i class="fas fa-chalkboard-teacher"></i>
+<%= gettext("Listing Teachers") %>
+</h2>
 
 <table class="table table-striped">
   <thead class="thead-dark">

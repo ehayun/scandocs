@@ -1,4 +1,6 @@
-<h1><%= gettext("Listing Classrooms") %></h1>
+<h2><i class="fas fa-chalkboard"></i>
+  <%= gettext("Listing Classrooms") %>
+</h2>
 
 <table class="table table-striped">
   <thead class="thead-dark">
@@ -12,7 +14,7 @@
     </tr>
   </thead>
   <tbody>
-<%= for classroom <- @classrooms do %>
+    <%= for classroom <- @classrooms do %>
     <tr>
       <td><%= classroom.code %></td>
       <td><%= classroom.classroom_name %></td>
@@ -25,7 +27,7 @@
         <span class="hidden"><%= link "Delete", to: Routes.classroom_path(@conn, :delete, classroom), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
-<% end %>
+    <% end %>
   </tbody>
 </table>
 

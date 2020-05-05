@@ -20,4 +20,14 @@ defmodule ScandocWeb.LiveHelpers do
     modal_opts = [id: :modal, return_to: path, component: component, opts: opts]
     live_component(socket, ScandocWeb.ModalComponent, modal_opts)
   end
+
+  def getPermissionType(id) do
+    case id do
+      0 -> "ללא הגבלה"
+      1 -> "הרשאת בית ספר"
+      2 -> "הרשאת כיתה"
+      3 -> "הרשאת תלמיד"
+      _ -> "לא ידוע"
+    end
+  end
 end

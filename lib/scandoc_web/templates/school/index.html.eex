@@ -1,7 +1,7 @@
-<h1>
+<h2>
   <i class="fas fa-school"></i>
   <%= gettext("Listing Schools") %>
-</h1>
+</h2>
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>

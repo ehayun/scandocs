@@ -96,7 +96,7 @@ msgid "Logged out successfully."
 msgstr "יצאתם מהמערכת"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:49
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:50
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:18
 msgid "Login"
 msgstr "כניסה למערכת"
@@ -107,7 +107,7 @@ msgid "Login as"
 msgstr "כניסה כלקוח"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:44
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:43
 msgid "Logout"
 msgstr "יציאה מהמערכת"
 
@@ -173,7 +173,7 @@ msgid "Send instructions to reset password"
 msgstr "שלח הוראות לשינוי סיסמה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:43
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:42
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -209,7 +209,7 @@ msgstr "אין לכם הרשאות מתאימות"
 #, elixir-format
 #: lib/scandoc_web/live/customer_live/form_component.html.leex:11
 #: lib/scandoc_web/live/customer_live/index.html.leex:20 lib/scandoc_web/templates/manager/index.html.eex:9
-#: lib/scandoc_web/templates/student/index.html.eex:9 lib/scandoc_web/templates/teacher/index.html.eex:6
+#: lib/scandoc_web/templates/student/index.html.eex:9 lib/scandoc_web/templates/teacher/index.html.eex:8
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:9 lib/scandoc_web/templates/user_session/new.html.eex:15
 msgid "Zehut"
 msgstr "מספר זהות"
@@ -252,7 +252,7 @@ msgid "Teachers"
 msgstr "מורים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:6
+#: lib/scandoc_web/templates/classroom/index.html.eex:8
 #: lib/scandoc_web/templates/school/index.html.eex:8
 msgid "Code"
 msgstr "קוד"
@@ -260,7 +260,7 @@ msgstr "קוד"
 #, elixir-format
 #: lib/scandoc_web/live/customer_live/form_component.html.leex:9
 #: lib/scandoc_web/templates/manager/index.html.eex:10 lib/scandoc_web/templates/student/index.html.eex:10
-#: lib/scandoc_web/templates/teacher/index.html.eex:7
+#: lib/scandoc_web/templates/teacher/index.html.eex:9
 msgid "Full name"
 msgstr "שם מלא"
 
@@ -326,32 +326,32 @@ msgid "allowed student"
 msgstr "הרשאת סטודנט"
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:7
+#: lib/scandoc_web/templates/classroom/index.html.eex:9
 msgid "Classroom name"
 msgstr "כיתה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/teacher/index.html.eex:8
+#: lib/scandoc_web/templates/teacher/index.html.eex:10
 msgid "Date of birth"
 msgstr "תאריך לידה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:1
+#: lib/scandoc_web/templates/classroom/index.html.eex:2
 msgid "Listing Classrooms"
 msgstr "רשימת כיתות"
 
 #, elixir-format
-#: lib/scandoc_web/templates/teacher/index.html.eex:1
+#: lib/scandoc_web/templates/teacher/index.html.eex:2
 msgid "Listing Teachers"
 msgstr "רשימת מורים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:8
+#: lib/scandoc_web/templates/classroom/index.html.eex:10
 msgid "School"
 msgstr "בתי ספר"
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:9
+#: lib/scandoc_web/templates/classroom/index.html.eex:11
 msgid "Teacher"
 msgstr "מורים"
 
@@ -359,3 +359,43 @@ msgstr "מורים"
 #: lib/scandoc_web/templates/student/index.html.eex:11
 msgid "Classroom"
 msgstr "כיתה"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:22
+msgid "Permission Ref"
+msgstr "מושא הרשאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:21
+msgid "Permission level"
+msgstr "רמת הרשאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:20
+msgid "User name"
+msgstr "משתמש"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:5
+msgid "Add New"
+msgstr "הוספה"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.html.leex:3
+msgid "Listing permissions"
+msgstr "רשימת הרשאות"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.ex:25
+msgid "Edit Permission"
+msgstr "עדכון הרשאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.ex:37
+msgid "Listing Permissions"
+msgstr "רשימת הרשאות"
+
+#, elixir-format
+#: lib/scandoc_web/live/permission_live/index.ex:31
+msgid "New Permission"
+msgstr "הוספת הרשאה"
