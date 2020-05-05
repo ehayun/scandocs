@@ -23,3 +23,5 @@ config :scandoc, ScandocWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :scandoc, ScandocWeb.Gettext, locales: ~w(en he), default_locale: "en"
