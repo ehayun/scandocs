@@ -2,11 +2,18 @@ defmodule ScandocWeb.UserAuth do
   import Plug.Conn
   import Phoenix.Controller
 
+  import Ecto.Query, warn: false
+  alias Scandoc.Repo
+
   require ScandocWeb.Gettext
   alias ScandocWeb.Gettext
 
   alias Scandoc.Accounts
   alias ScandocWeb.Router.Helpers, as: Routes
+
+  alias Scandoc.Permissions
+  alias Scandoc.Classrooms.Classroom
+  alias Scandoc.Students.Student
 
   # Make the remember me cookie valid for 60 days.
   # If you want bump or reduce this value, also change
@@ -135,7 +142,7 @@ defmodule ScandocWeb.UserAuth do
   def require_admin_user(conn, _opts) do
     user = conn.assigns[:current_user]
 
-    if user && (user.is_admin || user.role == "000") do
+    if user && (user.is_admin || user.role == "000" || isAdmin(user)) do
       conn
     else
       conn
@@ -153,4 +160,42 @@ defmodule ScandocWeb.UserAuth do
   defp maybe_store_return_to(conn), do: conn
 
   defp signed_in_path(_conn), do: "/"
+
+  def isAdmin(%Plug.Conn{} = conn) do
+    isAdmin(conn.assigns.current_user)
+  end
+
+  def isAdmin(user), do: Permissions.isAdmin(user)
+
+  defp getScools(user), do: Permissions.getSchools(user.id)
+  defp geClassrooms(user), do: Permissions.getClassrooms(user.id)
+  defp geStudents(user), do: Permissions.getStudents(user.id)
+
+  def getIds(conn, module) do
+    user = conn.assigns.current_user
+
+    case module do
+      :school ->
+        getScools(user)
+
+      :classroom ->
+        s = getScools(user)
+        q = from(c in Classroom, where: c.school_id in ^s)
+        c = q |> Repo.all() |> Enum.map(fn u -> u.id end)
+
+        geClassrooms(user) ++ c
+
+      :student ->
+        cls = getIds(conn, :classroom)
+        q = from(c in Student, where: c.classroom_id in ^cls)
+        c = q |> Repo.all() |> Enum.map(fn u -> u.id end)
+
+        geStudents(user) ++ c
+
+      _ ->
+        []
+    end
+  end
+
+  # EOF
 end

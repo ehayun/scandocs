@@ -7,12 +7,24 @@ defmodule ScandocWeb.ClassroomController do
   alias Scandoc.Classrooms
   alias Scandoc.Classrooms.Classroom
 
+  alias ScandocWeb.UserAuth
+
   def index(conn, %{"page" => current_page}) do
     # classrooms = Classrooms.list_classrooms()
     # render(conn, "index.html", classrooms: classrooms)
+    classList = UserAuth.getIds(conn, :classroom)
+
+    q = Classroom
+
+    q =
+      if UserAuth.isAdmin(conn) do
+        q
+      else
+        from(c in q, where: c.id in ^classList)
+      end
 
     classrooms =
-      Classroom
+      q
       |> order_by(:school_id)
       |> preload(:school)
       |> preload(:teacher)

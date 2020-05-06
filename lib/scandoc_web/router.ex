@@ -82,13 +82,6 @@ defmodule ScandocWeb.Router do
 
     get "/users/loginas/:id", UserSessionController, :loginas
 
-    live "/customers", CustomerLive.Index, :index
-    live "/customers/new", CustomerLive.Index, :new
-    live "/customers/:id/edit", CustomerLive.Index, :edit
-
-    live "/customers/:id", CustomerLive.Show, :show
-    live "/customers/:id/show/edit", CustomerLive.Show, :edit
-
     # Permissions
     live "/permissions", PermissionLive.Index, :index
     live "/permissions/new", PermissionLive.Index, :new

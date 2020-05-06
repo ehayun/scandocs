@@ -1,13 +1,36 @@
 defmodule ScandocWeb.SchoolController do
   use ScandocWeb, :controller
 
+  import Ecto.Query
+  alias Scandoc.Repo
+
   alias Scandoc.Schools
   alias Scandoc.Schools.School
+  alias ScandocWeb.UserAuth
 
-  def index(conn, _params) do
-    schools = Schools.list_schools()
+  def index(conn, %{"page" => current_page}) do
+    schoolList = UserAuth.getIds(conn, :school)
+
+    q = School
+
+    q =
+      if UserAuth.isAdmin(conn) do
+        q
+      else
+        from(c in q, where: c.id in ^schoolList)
+      end
+
+    schools =
+      q
+      |> order_by(:school_name)
+      |> preload(:manager)
+      |> Repo.paginate(page: current_page, page_size: 17)
+
+    # schools = Schools.list_schools()
     render(conn, "index.html", schools: schools)
   end
+
+  def index(conn, _params), do: index(conn, %{"page" => "1"})
 
   def new(conn, _params) do
     changeset = Schools.change_school(%School{})

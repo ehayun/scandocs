@@ -38,16 +38,16 @@ defmodule Scandoc.Util.ImportStudents do
         # res = Regex.scan(~r/[0-9]+.*$/, f)
         # IO.inspect(res, label: "[#{f}]")
 
-        case Regex.scan(~r/[0-9]+.*$/, f) do
-          [] ->
-            if f != "חכמת_ישראל" do
-            end
+        # case Regex.scan(~r/[0-9]+.*$/, f) do
+        #   [] ->
+        #     if f != "חכמת_ישראל" do
+        #     end
 
-            nil
+        #     nil
 
-          _ ->
-            addStudent(f, file)
-        end
+        #   _ ->
+        #     addStudent(f, file)
+        # end
 
         getFiles(file)
       else
@@ -99,9 +99,9 @@ defmodule Scandoc.Util.ImportStudents do
     end
   end
 
-  defp addStudent(f, file) do
-    # IO.puts("Student #{f} as: #{file}")
-  end
+  # defp addStudent(f, file) do
+  #   # IO.puts("Student #{f} as: #{file}")
+  # end
 
   defp getDoctype(file) do
     # IO.inspect(file, label: "doctype")

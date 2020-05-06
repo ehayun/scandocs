@@ -1,6 +1,6 @@
 defmodule Scandoc.Util.ImportSchools do
   alias Scandoc.Schools
-  alias Scandoc.Schools.{School, Manager}
+  alias Scandoc.Schools.{School}
   alias Scandoc.Repo
 
   def run() do

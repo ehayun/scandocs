@@ -9,6 +9,8 @@ defmodule Scandoc.Permissions do
   alias Scandoc.Permissions.Permission
   alias Scandoc.Schools.School
   alias Scandoc.Classrooms.Classroom
+  alias Scandoc.Accounts
+  alias Scandoc.Accounts.User
 
   @doc """
   Returns the list of permissions.
@@ -124,4 +126,38 @@ defmodule Scandoc.Permissions do
   def change_permission(%Permission{} = permission, attrs \\ %{}) do
     Permission.changeset(permission, attrs)
   end
+
+  def isAdmin(nil), do: false
+
+  def isAdmin(%User{} = user) do
+    if isAdmin(user.id) do
+      true
+    else
+      user.is_admin || user.role == "000"
+    end
+  end
+
+  def isAdmin(user_id) do
+    p =
+      Permission
+      |> where(user_id: ^user_id)
+      |> where(permission_type: 0)
+      |> Repo.aggregate(:count)
+
+    p > 0
+  end
+
+  defp getIds(type, user_id) do
+    Permission
+    |> where(user_id: ^user_id)
+    |> where(permission_type: ^type)
+    |> Repo.all()
+    |> Enum.map(fn u -> u.ref_id end)
+  end
+
+  def getSchools(user_id), do: getIds(1, user_id)
+  def getClassrooms(user_id), do: getIds(2, user_id)
+  def getStudents(user_id), do: getIds(3, user_id)
+
+  # EOF
 end

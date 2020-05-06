@@ -8,9 +8,22 @@ defmodule ScandocWeb.StudentController do
   alias Scandoc.Students.Student
   alias Scandoc.Documents.Document
 
+  alias ScandocWeb.UserAuth
+
   def index(conn, %{"page" => current_page}) do
+    stdList = UserAuth.getIds(conn, :student)
+
+    q = Student
+
+    q =
+      if UserAuth.isAdmin(conn) do
+        q
+      else
+        from(c in q, where: c.id in ^stdList)
+      end
+
     students =
-      Student
+      q
       |> order_by(:full_name)
       |> preload(:classroom)
       |> Repo.paginate(page: current_page, page_size: 17)
@@ -40,16 +53,24 @@ defmodule ScandocWeb.StudentController do
   end
 
   def show(conn, %{"id" => id}) do
-    student = Students.get_student!(id)
+    stdList = UserAuth.getIds(conn, :student)
 
-    documents =
-      Document
-      |> preload(:doctype)
-      |> where(ref_id: ^id)
-      |> order_by(desc: :ref_year, desc: :ref_month)
-      |> Repo.all()
+    if String.to_integer(id) in stdList do
+      student = Students.get_student!(id)
 
-    render(conn, "show.html", student: student, documents: documents)
+      documents =
+        Document
+        |> preload(:doctype)
+        |> where(ref_id: ^id)
+        |> order_by(desc: :ref_year, desc: :ref_month)
+        |> Repo.all()
+
+      render(conn, "show.html", student: student, documents: documents)
+    else
+      conn
+      |> put_flash(:info, "Not authorize.")
+      |> redirect(to: Routes.student_path(conn, :index))
+    end
   end
 
   def edit(conn, %{"id" => id}) do
