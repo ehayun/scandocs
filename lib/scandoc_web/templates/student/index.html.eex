@@ -1,7 +1,29 @@
-<h2>
-  <i class="fas fa-user-graduate"></i>
-  <%= gettext("Listing Students") %>
-</h2>
+<div class="row">
+  <div class="col">
+    <h2>
+      <i class="fas fa-user-graduate"></i>
+      <%= gettext("Listing Students") %>
+      <div class="float-left">
+
+        <form action="<%= Routes.student_path(@conn, :index) %>">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <input type="text" class="form-control mb-2" name="q" value="<%= @search %>" placeholder='<%= gettext("Name or Zehut")%>'>
+            </div>
+
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary mb-2"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+        </form>
+
+
+
+
+      </div>
+    </h2>
+  </div>
+</div>
 
 <table class="table table-striped">
   <thead class="thead-dark">

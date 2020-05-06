@@ -10,10 +10,20 @@ defmodule ScandocWeb.StudentController do
 
   alias ScandocWeb.UserAuth
 
-  def index(conn, %{"page" => current_page}) do
+  def index(conn, %{"page" => current_page, "search" => query}) do
     stdList = UserAuth.getIds(conn, :student)
 
     q = Student
+
+    q =
+      if query == "" do
+        q
+      else
+        from(s in q,
+        where: ilike(s.full_name, ^"%#{query}%"),
+        or_where: like(s.student_zehut, ^"%#{query}%")
+        )
+      end
 
     q =
       if UserAuth.isAdmin(conn) do
@@ -30,10 +40,19 @@ defmodule ScandocWeb.StudentController do
 
     conn
     |> assign(:students, students)
+    |> assign(:search, query)
     |> render("index.html")
   end
 
-  def index(conn, _params), do: index(conn, %{"page" => "1"})
+  def index(conn, params) do
+    q =
+      case params do
+        %{"q" => q} -> q
+        _ -> ""
+      end
+
+    index(conn, %{"page" => "1", "search" => q})
+  end
 
   def new(conn, _params) do
     changeset = Students.change_student(%Student{})
@@ -55,7 +74,7 @@ defmodule ScandocWeb.StudentController do
   def show(conn, %{"id" => id}) do
     stdList = UserAuth.getIds(conn, :student)
 
-    if UserAuth.isAdmin(conn) ||  String.to_integer(id) in stdList do
+    if UserAuth.isAdmin(conn) || String.to_integer(id) in stdList do
       student = Students.get_student!(id)
 
       documents =

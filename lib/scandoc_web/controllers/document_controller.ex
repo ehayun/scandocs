@@ -74,7 +74,7 @@ defmodule ScandocWeb.DocumentController do
 
     if document do
       path = document.doc_path
-      path = String.replace(path, "/home/eli", "./downloads")
+      path = String.replace(path, "/home/eli", "/downloads")
 
       # file = "#{path}/#{document.doc_name}"
 
@@ -83,9 +83,10 @@ defmodule ScandocWeb.DocumentController do
       # file = "/home/eli/pCloudDrive/Scan_files/חכמת_ישראל/גנים_חכמת_ישראל/אוחיון_יצחק_342232436/342232436-213-1119.pdf"
       # file = String.replace(file, "/home/eli", "./downloads")
 
-      if File.exists?(path) do
+      if File.exists?(".#{path}") do
         conn
-        |> send_download({:file, path})
+        |> send_download({:file, ".#{path}"})
+        # render(conn, "show.html", document: path)
       end
     else
       if !student do
