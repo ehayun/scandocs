@@ -34,29 +34,9 @@ msgid "Confirmation link is invalid or it has expired."
 msgstr "קישור לאימות פג תוקף"
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/index.html.leex:40
-msgid "Delete"
-msgstr "מחיקה"
-
-#, elixir-format
 #: lib/scandoc_web/templates/layout/translations.html.eex:5
 msgid "E-mail changed successfully."
 msgstr "אימייל שונה בהצלחה"
-
-#, elixir-format
-#: lib/scandoc_web/live/customer_live/index.html.leex:37
-msgid "Edit"
-msgstr "עריכה"
-
-#, elixir-format
-#: lib/scandoc_web/live/customer_live/index.ex:20
-msgid "Edit Customer"
-msgstr "עריכת לקוח"
-
-#, elixir-format
-#: lib/scandoc_web/live/customer_live/index.html.leex:21
-msgid "First name"
-msgstr "שם פרטי"
 
 #, elixir-format
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:4
@@ -70,52 +50,20 @@ msgid "Invalid e-mail or password"
 msgstr "אימייל או סיסמה אינם נכונים"
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:12
-msgid "Is Freezed"
-msgstr "לקוח בהקפאה"
-
-#, elixir-format
-#: lib/scandoc_web/live/customer_live/index.html.leex:23
-msgid "Is freezed"
-msgstr "לקוח בהקפאה"
-
-#, elixir-format
-#: lib/scandoc_web/live/customer_live/index.html.leex:22
-msgid "Last name"
-msgstr "שם משפחה"
-
-#, elixir-format
-#: lib/scandoc_web/live/customer_live/index.ex:32
-#: lib/scandoc_web/live/customer_live/index.html.leex:3
-msgid "Listing Users"
-msgstr "רשימת לקוחות"
-
-#, elixir-format
 #: lib/scandoc_web/templates/layout/translations.html.eex:8
 msgid "Logged out successfully."
 msgstr "יצאתם מהמערכת"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:50
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:52
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:18
 msgid "Login"
 msgstr "כניסה למערכת"
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/index.html.leex:43
-msgid "Login as"
-msgstr "כניסה כלקוח"
-
-#, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:43
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:45
 msgid "Logout"
 msgstr "יציאה מהמערכת"
-
-#, elixir-format
-#: lib/scandoc_web/live/customer_live/index.ex:26
-#: lib/scandoc_web/live/customer_live/index.html.leex:4
-msgid "New Customer"
-msgstr "לקוח חדש"
 
 #, elixir-format
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:16
@@ -124,7 +72,6 @@ msgid "Oops, something went wrong! Please check the errors below."
 msgstr "אופס... אירעה שגיאה. אנא בידקו"
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:13
 #: lib/scandoc_web/templates/user_session/new.html.eex:19
 msgid "Password"
 msgstr "סיסמה"
@@ -156,13 +103,11 @@ msgid "Reset password link is invalid or it has expired."
 msgstr "קישור זה אינו תקין או פג תוקף"
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:16
 #: lib/scandoc_web/live/permission_live/form_component.html.leex:33
 msgid "Save"
 msgstr "שמירה"
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:16
 #: lib/scandoc_web/live/permission_live/form_component.html.leex:33
 msgid "Saving..."
 msgstr "שומר..."
@@ -173,7 +118,7 @@ msgid "Send instructions to reset password"
 msgstr "שלח הוראות לשינוי סיסמה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:42
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:44
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -196,20 +141,19 @@ msgid "Welcome to %{name}!"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/controllers/user_auth.ex:128
+#: lib/scandoc_web/controllers/user_auth.ex:135
 #: lib/scandoc_web/templates/layout/translations.html.eex:2
 msgid "You must login to access this page."
 msgstr "עליכם להכנס למערכת על מנת להציג דף זה"
 
 #, elixir-format
-#: lib/scandoc_web/controllers/user_auth.ex:142
+#: lib/scandoc_web/controllers/user_auth.ex:149
 msgid "You must to be admin to access this page."
 msgstr "אין לכם הרשאות מתאימות"
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:11
-#: lib/scandoc_web/live/customer_live/index.html.leex:20 lib/scandoc_web/templates/manager/index.html.eex:9
-#: lib/scandoc_web/templates/student/index.html.eex:9 lib/scandoc_web/templates/teacher/index.html.eex:8
+#: lib/scandoc_web/templates/manager/index.html.eex:9
+#: lib/scandoc_web/templates/student/index.html.eex:31 lib/scandoc_web/templates/teacher/index.html.eex:8
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:9 lib/scandoc_web/templates/user_session/new.html.eex:15
 msgid "Zehut"
 msgstr "מספר זהות"
@@ -220,18 +164,18 @@ msgid "Zehut change link is invalid or it has expired."
 msgstr "לינק לשינוי מייל לא תקין או פג תוקף"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:19
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:20
 #: lib/scandoc_web/templates/school/index.html.eex:11
 msgid "Classrooms"
 msgstr "כיתות"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:15
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:16
 msgid "Managers"
 msgstr "מנהלים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:30
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:32
 msgid "Permissions"
 msgstr "הרשאות"
 
@@ -241,12 +185,12 @@ msgid "Schools"
 msgstr "בתי ספר"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:26
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:28
 msgid "Students"
 msgstr "תלמידים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:22
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:24
 #: lib/scandoc_web/templates/school/index.html.eex:12
 msgid "Teachers"
 msgstr "מורים"
@@ -258,9 +202,8 @@ msgid "Code"
 msgstr "קוד"
 
 #, elixir-format
-#: lib/scandoc_web/live/customer_live/form_component.html.leex:9
-#: lib/scandoc_web/templates/manager/index.html.eex:10 lib/scandoc_web/templates/student/index.html.eex:10
-#: lib/scandoc_web/templates/teacher/index.html.eex:9
+#: lib/scandoc_web/templates/manager/index.html.eex:10
+#: lib/scandoc_web/templates/student/index.html.eex:32 lib/scandoc_web/templates/teacher/index.html.eex:9
 msgid "Full name"
 msgstr "שם מלא"
 
@@ -296,34 +239,9 @@ msgid "Back"
 msgstr "חזרה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/student/index.html.eex:3
+#: lib/scandoc_web/templates/student/index.html.eex:5
 msgid "Listing Students"
 msgstr "רשימת תלמידים"
-
-#, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:13
-msgid "Permission type"
-msgstr "הרשאות"
-
-#, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:14
-msgid "allowed all"
-msgstr "ללא הגבלה"
-
-#, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:16
-msgid "allowed classroom"
-msgstr "הרשאת כיתה"
-
-#, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:15
-msgid "allowed school"
-msgstr "הרשאת בית ספר"
-
-#, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:17
-msgid "allowed student"
-msgstr "הרשאת תלמיד"
 
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:9
@@ -356,7 +274,7 @@ msgid "Teacher"
 msgstr "מורים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/student/index.html.eex:11
+#: lib/scandoc_web/templates/student/index.html.eex:33
 msgid "Classroom"
 msgstr "כיתה"
 
@@ -401,11 +319,16 @@ msgid "New Permission"
 msgstr "הוספת הרשאה"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.ex:86
+#: lib/scandoc_web/live/permission_live/form_component.ex:132
 msgid "Permission created successfully"
 msgstr " נוצר בהצלחה"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.ex:73
+#: lib/scandoc_web/live/permission_live/form_component.ex:119
 msgid "Permission updated successfully"
 msgstr "עודכן  בהצלחה"
+
+#, elixir-format
+#: lib/scandoc_web/templates/student/index.html.eex:11
+msgid "Name or Zehut"
+msgstr "שם או מספר זהות"
