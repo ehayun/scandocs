@@ -55,7 +55,7 @@ defmodule ScandocWeb.StudentController do
   def show(conn, %{"id" => id}) do
     stdList = UserAuth.getIds(conn, :student)
 
-    if String.to_integer(id) in stdList do
+    if UserAuth.isAdmin(conn) ||  String.to_integer(id) in stdList do
       student = Students.get_student!(id)
 
       documents =
