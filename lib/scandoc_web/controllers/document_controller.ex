@@ -86,6 +86,7 @@ defmodule ScandocWeb.DocumentController do
       if File.exists?(".#{path}") do
         conn
         |> send_download({:file, ".#{path}"})
+
         # render(conn, "show.html", document: path)
       end
     else

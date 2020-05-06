@@ -8,9 +8,7 @@
 
 <div class="d-flex flex-column flex-md-row">
   <%= Phoenix.HTML.Form.select(f, :user_id, Enum.map(@users, &{&1.full_name, &1.id}), class: "form-control") %>
-
   <%= Phoenix.HTML.Form.select(f, :permission_type, Enum.map(@p_types, &{&1.type, &1.id}), class: "form-control") %>
-
 </div>
 
 

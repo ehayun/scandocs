@@ -1,5 +1,5 @@
 defmodule Scandoc.AccountsFixtures do
-  def unique_user_email, do: "user#{System.unique_integer()}@example.com"
+  def unique_user_zehut, do: "user#{System.unique_integer()}@example.com"
   def valid_user_password, do: "hello world!"
 
   def valid_firstname, do: "first_#{System.unique_integer()}"
@@ -9,7 +9,7 @@ defmodule Scandoc.AccountsFixtures do
     {:ok, user} =
       attrs
       |> Enum.into(%{
-        email: unique_user_email(),
+        zehut: unique_user_zehut(),
         password: valid_user_password(),
         first_name: valid_firstname(),
         last_name: valid_lastname()

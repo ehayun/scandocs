@@ -20,8 +20,8 @@ defmodule ScandocWeb.StudentController do
         q
       else
         from(s in q,
-        where: ilike(s.full_name, ^"%#{query}%"),
-        or_where: like(s.student_zehut, ^"%#{query}%")
+          where: ilike(s.full_name, ^"%#{query}%"),
+          or_where: like(s.student_zehut, ^"%#{query}%")
         )
       end
 
@@ -51,7 +51,8 @@ defmodule ScandocWeb.StudentController do
         _ -> ""
       end
 
-      p = case params do
+    p =
+      case params do
         %{"page" => p} -> p
         _ -> 1
       end
