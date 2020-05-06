@@ -51,7 +51,12 @@ defmodule ScandocWeb.StudentController do
         _ -> ""
       end
 
-    index(conn, %{"page" => "1", "search" => q})
+      p = case params do
+        %{"page" => p} -> p
+        _ -> 1
+      end
+
+    index(conn, %{"page" => "#{p}", "search" => q})
   end
 
   def new(conn, _params) do
