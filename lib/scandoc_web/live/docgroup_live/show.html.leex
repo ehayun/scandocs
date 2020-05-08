@@ -1,0 +1,27 @@
+<h1>Show Docgroup</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.DocgroupLive.FormComponent,
+    id: @docgroup.id,
+    title: @page_title,
+    action: @live_action,
+    docgroup: @docgroup,
+    return_to: Routes.docgroup_show_path(@socket, :show, @docgroup) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Grp:</strong>
+    <%= @docgroup.grp_id %>
+  </li>
+
+  <li>
+    <strong>Grp name:</strong>
+    <%= @docgroup.grp_name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.docgroup_show_path(@socket, :edit, @docgroup), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.docgroup_index_path(@socket, :index) %></span>

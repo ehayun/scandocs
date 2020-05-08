@@ -9,6 +9,11 @@
       <td><%= document.ref_year %> <%= document.ref_month %></td>
       <td>
         <%= if document.doctype do %>
+        <%= getDocGroup(document.doctype.doc_group_id) %>
+        <% end %>
+      </td>
+      <td>
+        <%= if document.doctype do %>
         <a href="/docdownload/<%= document.id %>"><%=document.doctype.doc_name %></a>
         <% end %>
       </td>

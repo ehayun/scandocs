@@ -197,4 +197,100 @@ defmodule Scandoc.Documents do
   def change_doctype(%Doctype{} = doctype, attrs \\ %{}) do
     Doctype.changeset(doctype, attrs)
   end
+
+  alias Scandoc.Documents.Docgroup
+
+  @doc """
+  Returns the list of docgroups.
+
+  ## Examples
+
+      iex> list_docgroups()
+      [%Docgroup{}, ...]
+
+  """
+  def list_docgroups do
+    Repo.all(Docgroup)
+  end
+
+  @doc """
+  Gets a single docgroup.
+
+  Raises `Ecto.NoResultsError` if the Docgroup does not exist.
+
+  ## Examples
+
+      iex> get_docgroup!(123)
+      %Docgroup{}
+
+      iex> get_docgroup!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_docgroup!(id), do: Repo.get!(Docgroup, id)
+
+  @doc """
+  Creates a docgroup.
+
+  ## Examples
+
+      iex> create_docgroup(%{field: value})
+      {:ok, %Docgroup{}}
+
+      iex> create_docgroup(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_docgroup(attrs \\ %{}) do
+    %Docgroup{}
+    |> Docgroup.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a docgroup.
+
+  ## Examples
+
+      iex> update_docgroup(docgroup, %{field: new_value})
+      {:ok, %Docgroup{}}
+
+      iex> update_docgroup(docgroup, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_docgroup(%Docgroup{} = docgroup, attrs) do
+    docgroup
+    |> Docgroup.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a docgroup.
+
+  ## Examples
+
+      iex> delete_docgroup(docgroup)
+      {:ok, %Docgroup{}}
+
+      iex> delete_docgroup(docgroup)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_docgroup(%Docgroup{} = docgroup) do
+    Repo.delete(docgroup)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking docgroup changes.
+
+  ## Examples
+
+      iex> change_docgroup(docgroup)
+      %Ecto.Changeset{data: %Docgroup{}}
+
+  """
+  def change_docgroup(%Docgroup{} = docgroup, attrs \\ %{}) do
+    Docgroup.changeset(docgroup, attrs)
+  end
 end

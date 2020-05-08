@@ -164,4 +164,65 @@ defmodule Scandoc.DocumentsTest do
       assert %Ecto.Changeset{} = Documents.change_doctype(doctype)
     end
   end
+
+  describe "docgroups" do
+    alias Scandoc.Documents.Docgroup
+
+    @valid_attrs %{grp_id: 42, grp_name: "some grp_name"}
+    @update_attrs %{grp_id: 43, grp_name: "some updated grp_name"}
+    @invalid_attrs %{grp_id: nil, grp_name: nil}
+
+    def docgroup_fixture(attrs \\ %{}) do
+      {:ok, docgroup} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Documents.create_docgroup()
+
+      docgroup
+    end
+
+    test "list_docgroups/0 returns all docgroups" do
+      docgroup = docgroup_fixture()
+      assert Documents.list_docgroups() == [docgroup]
+    end
+
+    test "get_docgroup!/1 returns the docgroup with given id" do
+      docgroup = docgroup_fixture()
+      assert Documents.get_docgroup!(docgroup.id) == docgroup
+    end
+
+    test "create_docgroup/1 with valid data creates a docgroup" do
+      assert {:ok, %Docgroup{} = docgroup} = Documents.create_docgroup(@valid_attrs)
+      assert docgroup.grp_id == 42
+      assert docgroup.grp_name == "some grp_name"
+    end
+
+    test "create_docgroup/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Documents.create_docgroup(@invalid_attrs)
+    end
+
+    test "update_docgroup/2 with valid data updates the docgroup" do
+      docgroup = docgroup_fixture()
+      assert {:ok, %Docgroup{} = docgroup} = Documents.update_docgroup(docgroup, @update_attrs)
+      assert docgroup.grp_id == 43
+      assert docgroup.grp_name == "some updated grp_name"
+    end
+
+    test "update_docgroup/2 with invalid data returns error changeset" do
+      docgroup = docgroup_fixture()
+      assert {:error, %Ecto.Changeset{}} = Documents.update_docgroup(docgroup, @invalid_attrs)
+      assert docgroup == Documents.get_docgroup!(docgroup.id)
+    end
+
+    test "delete_docgroup/1 deletes the docgroup" do
+      docgroup = docgroup_fixture()
+      assert {:ok, %Docgroup{}} = Documents.delete_docgroup(docgroup)
+      assert_raise Ecto.NoResultsError, fn -> Documents.get_docgroup!(docgroup.id) end
+    end
+
+    test "change_docgroup/1 returns a docgroup changeset" do
+      docgroup = docgroup_fixture()
+      assert %Ecto.Changeset{} = Documents.change_docgroup(docgroup)
+    end
+  end
 end

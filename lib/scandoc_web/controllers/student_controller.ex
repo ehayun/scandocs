@@ -41,6 +41,8 @@ defmodule ScandocWeb.StudentController do
     conn
     |> assign(:students, students)
     |> assign(:search, query)
+    |> assign(:page_number, students.page_number)
+    |> assign(:total_pages, students.total_pages)
     |> render("index.html")
   end
 

@@ -56,4 +56,6 @@
 
 <span class="hidden"><%= link "New Student", to: Routes.student_path(@conn, :new) %></span>
 
+<%= if @students.total_pages > 0 do %>
 <%= paginate @conn, @students, &ScandocWeb.Router.Helpers.student_path/3, [:index] %>
+<% end %>

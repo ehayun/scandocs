@@ -4,7 +4,7 @@ defmodule Scandoc.Repo.Migrations.CreateDoctypes do
   def change do
     create table(:doctypes) do
       add :code, :string
-      add :doc_group, :integer, default: 1
+      add :doc_group_id, references(:docgroups, on_delete: :nothing), null: false
       add :doc_name, :string
       add :doc_notes, :text
 

@@ -1,0 +1,37 @@
+<h1>Listing Docgroups</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, ScandocWeb.DocgroupLive.FormComponent,
+    id: @docgroup.id || :new,
+    title: @page_title,
+    action: @live_action,
+    docgroup: @docgroup,
+    return_to: Routes.docgroup_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Grp</th>
+      <th>Grp name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="docgroups">
+    <%= for docgroup <- @docgroups do %>
+      <tr id="docgroup-<%= docgroup.id %>">
+        <td><%= docgroup.grp_id %></td>
+        <td><%= docgroup.grp_name %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.docgroup_show_path(@socket, :show, docgroup) %></span>
+          <span><%= live_patch "Edit", to: Routes.docgroup_index_path(@socket, :edit, docgroup) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: docgroup.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Docgroup", to: Routes.docgroup_index_path(@socket, :new) %></span>

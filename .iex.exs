@@ -7,7 +7,10 @@ alias Scandoc.Repo
 alias Scandoc.Classrooms
 alias Scandoc.Classrooms.Classroom
 alias Scandoc.Accounts.User
+alias Scandoc.Documents
 alias Scandoc.Documents.Document
+alias Scandoc.Documents.Docgroup
+alias Scandoc.Documents.Doctype
 alias alias Scandoc.Students
 alias alias Scandoc.Students.Student
 alias Scandoc.Permissions

@@ -10,6 +10,7 @@ defmodule Scandoc.Repo.Migrations.CreateDocuments do
       add :ref_id, :integer
       add :ref_year, :string
       add :ref_month, :string
+      add :ref_date, :date
       add :doctype_id, references(:doctypes, on_delete: :nothing), null: false
       add :has_picture, :boolean, default: false, null: false
 
