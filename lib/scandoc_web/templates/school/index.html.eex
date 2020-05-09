@@ -19,8 +19,8 @@
         <td><%= school.code %></td>
         <td><%= school.school_name %></td>
         <td><%= school.manager.full_name%> </td>
-        <td><i class="fas fa-chalkboard"></i></td>
-        <td><i class="fas fa-chalkboard-teacher"></i></td>
+        <td><%= link raw("<i class='fas fa-chalkboard'></i>"),  to: Routes.classroom_path(@conn, :index, [school: school]) %> </td>
+        <td><%= link raw("<i class='fas fa-chalkboard-teacher'></i>"),  to: Routes.teacher_path(@conn, :index, [school: school]) %> </td>
         <td>
           <span class="hidden"><%= link "Show", to: Routes.school_path(@conn, :show, school) %></span>
           <span class="hidden"><%= link "Edit", to: Routes.school_path(@conn, :edit, school) %></span>

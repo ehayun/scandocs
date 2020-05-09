@@ -7,23 +7,23 @@
     <tr>
       <th><%= gettext("Zehut") %></th>
       <th><%= gettext("Full name") %></th>
-      <th><%= gettext("Date of birth") %></th>
+      <th><%= gettext("Classroom") %></th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for teacher <- @teachers do %>
+<%= for classroom <- @classrooms do %>
     <tr>
-      <td><%= teacher.zehut %></td>
-      <td><%= teacher.full_name %></td>
-      <td><%= teacher.date_of_birth %></td>
+      <td><%= classroom.teacher.zehut %></td>
+      <td><%= classroom.teacher.full_name %></td>
+      <td><%= classroom.school.school_name %>/<%= classroom.classroom_name %></td>
 
       <td>
-        <span class="hidden"><%= link "Show", to: Routes.teacher_path(@conn, :show, teacher) %></span>
-        <span class="hidden"><%= link "Edit", to: Routes.teacher_path(@conn, :edit, teacher) %></span>
-        <span class="hidden"><%= link "Delete", to: Routes.teacher_path(@conn, :delete, teacher), method: :delete, data: [confirm: "Are you sure?"] %></span>
-        <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@conn, :loginas, teacher) %>
+        <span class="hidden"><%= link "Show", to: Routes.teacher_path(@conn, :show, classroom.teacher) %></span>
+        <span class="hidden"><%= link "Edit", to: Routes.teacher_path(@conn, :edit, classroom.teacher) %></span>
+        <span class="hidden"><%= link "Delete", to: Routes.teacher_path(@conn, :delete, classroom.teacher), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@conn, :loginas, classroom.teacher) %>
 
       </td>
     </tr>
@@ -34,4 +34,4 @@
 <span class="hidden"><%= link "New Teacher", to: Routes.teacher_path(@conn, :new) %></span>
 
 
-<%= paginate @conn, @teachers, &ScandocWeb.Router.Helpers.teacher_path/3, [:index] %>
+<%= paginate @conn, @classrooms, &ScandocWeb.Router.Helpers.teacher_path/3, [:index] %>

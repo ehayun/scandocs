@@ -9,10 +9,11 @@ defmodule ScandocWeb.ClassroomController do
 
   alias ScandocWeb.UserAuth
 
-  def index(conn, %{"page" => current_page}) do
+  def index(conn, %{"page" => current_page, "school" => schoolId}) do
     # classrooms = Classrooms.list_classrooms()
     # render(conn, "index.html", classrooms: classrooms)
     classList = UserAuth.getIds(conn, :classroom)
+    schoolId = String.to_integer(schoolId)
 
     q = Classroom
 
@@ -21,6 +22,13 @@ defmodule ScandocWeb.ClassroomController do
         q
       else
         from(c in q, where: c.id in ^classList)
+      end
+
+    q =
+      if schoolId > 0 do
+        from(c in q, where: c.school_id == ^schoolId)
+      else
+        q
       end
 
     classrooms =
@@ -35,7 +43,21 @@ defmodule ScandocWeb.ClassroomController do
     |> render("index.html")
   end
 
-  def index(conn, _params), do: index(conn, %{"page" => "1"})
+  def index(conn, params) do
+    schoolId =
+      case params do
+        %{"school" => schoolId} -> schoolId
+        _ -> "-1"
+      end
+
+    p =
+      case params do
+        %{"page" => p} -> p
+        _ -> 1
+      end
+
+    index(conn, %{"page" => "#{p}", "school" => schoolId})
+  end
 
   def new(conn, _params) do
     changeset = Classrooms.change_classroom(%Classroom{})

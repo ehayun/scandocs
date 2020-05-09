@@ -3,23 +3,46 @@ defmodule ScandocWeb.TeacherController do
 
   alias Scandoc.Schools
   alias Scandoc.Schools.Teacher
+  alias Scandoc.Classrooms.Classroom
   import Ecto.Query
 
   alias Scandoc.Repo
 
-  def index(conn, %{"page" => current_page}) do
-    teachers =
-      Teacher
-      |> where(role: "030")
-      |> order_by(:full_name)
+  def index(conn, %{"page" => current_page, "school" => schoolId}) do
+    schoolId = String.to_integer(schoolId)
+
+    q =
+      if schoolId > 0 do
+        Classroom |> where(school_id: ^schoolId) |> preload(:teacher) |> preload(:school)
+      else
+        Classroom |> preload(:teacher) |> preload(:school)
+      end
+
+    classrooms =
+      q
       |> Repo.paginate(page: current_page, page_size: 15)
 
+
     conn
-    |> assign(:teachers, teachers)
+    |> assign(:classrooms, classrooms)
     |> render("index.html")
   end
 
-  def index(conn, _params), do: index(conn, %{"page" => "1"})
+  def index(conn, params) do
+    schoolId =
+      case params do
+        %{"school" => schoolId} -> schoolId
+        _ -> "-1"
+      end
+
+    p =
+      case params do
+        %{"page" => p} -> p
+        _ -> 1
+      end
+
+    index(conn, %{"page" => "#{p}", "school" => schoolId})
+  end
 
   def new(conn, _params) do
     changeset = Schools.change_teacher(%Teacher{})

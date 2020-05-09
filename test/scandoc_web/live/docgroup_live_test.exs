@@ -33,7 +33,7 @@ defmodule ScandocWeb.DocgroupLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.docgroup_index_path(conn, :index))
 
       assert index_live |> element("a", "New Docgroup") |> render_click() =~
-        "New Docgroup"
+               "New Docgroup"
 
       assert_patch(index_live, Routes.docgroup_index_path(conn, :new))
 
@@ -55,7 +55,7 @@ defmodule ScandocWeb.DocgroupLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.docgroup_index_path(conn, :index))
 
       assert index_live |> element("#docgroup-#{docgroup.id} a", "Edit") |> render_click() =~
-        "Edit Docgroup"
+               "Edit Docgroup"
 
       assert_patch(index_live, Routes.docgroup_index_path(conn, :edit, docgroup))
 
@@ -95,7 +95,7 @@ defmodule ScandocWeb.DocgroupLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.docgroup_show_path(conn, :show, docgroup))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Docgroup"
+               "Edit Docgroup"
 
       assert_patch(show_live, Routes.docgroup_show_path(conn, :edit, docgroup))
 

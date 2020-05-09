@@ -1,0 +1,12 @@
+<%= if @document do %>
+<%= if File.exists?("./priv/static/uploads/#{@document}.png") do %>
+<img src='<%= Routes.static_path(@conn, "/uploads/#{@document}.png") %>'>
+<% end %>
+<%= for page <- 0..20 do %>
+<%= if File.exists?("./priv/static/uploads/#{@document}-#{page}.png") do %>
+<img src='<%= Routes.static_path(@conn, "/uploads/#{@document}-#{page}.png") %>'>
+<% end %>
+<% end %>
+<% else %>
+Null
+<% end %>

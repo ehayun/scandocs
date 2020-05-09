@@ -35,7 +35,9 @@ defmodule Scandoc.Documents do
       ** (Ecto.NoResultsError)
 
   """
-  def get_document!(id), do: Repo.get!(Document, id)
+  def get_document!(id) do
+    Document |> where(id: ^id) |> Repo.one()
+  end
 
   @doc """
   Creates a document.

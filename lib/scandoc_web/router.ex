@@ -68,6 +68,8 @@ defmodule ScandocWeb.Router do
     put "/users/settings/update_zehut", UserSettingsController, :update_zehut
     get "/users/settings/confirm_zehut/:token", UserSettingsController, :confirm_zehut
 
+    get "/documents/display/:id", DocumentController, :display
+
     resources "/schools", SchoolController
     resources "/managers", ManagerController
     resources "/teachers", TeacherController
@@ -90,17 +92,12 @@ defmodule ScandocWeb.Router do
     live "/permissions/:id", PermissionLive.Show, :show
     live "/permissions/:id/show/edit", PermissionLive.Show, :edit
 
-
     live "/docgroups", DocgroupLive.Index, :index
     live "/docgroups/new", DocgroupLive.Index, :new
     live "/docgroups/:id/edit", DocgroupLive.Index, :edit
 
     live "/docgroups/:id", DocgroupLive.Show, :show
     live "/docgroups/:id/show/edit", DocgroupLive.Show, :edit
-
-
-
-
   end
 
   scope "/", ScandocWeb do

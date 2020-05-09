@@ -7,6 +7,5 @@ defmodule Scandoc.Repo.Migrations.CreateDocgroups do
 
       timestamps()
     end
-
   end
 end
