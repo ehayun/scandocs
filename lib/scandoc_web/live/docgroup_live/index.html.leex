@@ -1,7 +1,10 @@
-<h1>Listing Docgroups</h1>
+<h2><%= gettext("Listing Categories") %>
+
+  <%= live_patch  gettext("Add New"), to: Routes.docgroup_index_path(@socket, :new), class: "float-left btn btn-primary" %>
+</h2>
 
 <%= if @live_action in [:new, :edit] do %>
-  <%= live_modal @socket, ScandocWeb.DocgroupLive.FormComponent,
+<%= live_modal @socket, ScandocWeb.DocgroupLive.FormComponent,
     id: @docgroup.id || :new,
     title: @page_title,
     action: @live_action,
@@ -9,29 +12,28 @@
     return_to: Routes.docgroup_index_path(@socket, :index) %>
 <% end %>
 
-<table>
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
-      <th>Grp</th>
-      <th>Grp name</th>
+      <th><%= gettext("code")%></th>
+      <th><%= gettext("category")%></th>
 
       <th></th>
     </tr>
   </thead>
   <tbody id="docgroups">
     <%= for docgroup <- @docgroups do %>
-      <tr id="docgroup-<%= docgroup.id %>">
-        <td><%= docgroup.grp_id %></td>
-        <td><%= docgroup.grp_name %></td>
+    <tr id="docgroup-<%= docgroup.id %>">
+      <td><%= docgroup.id %></td>
+      <td><%= docgroup.grp_name %></td>
 
-        <td>
-          <span><%= live_redirect "Show", to: Routes.docgroup_show_path(@socket, :show, docgroup) %></span>
-          <span><%= live_patch "Edit", to: Routes.docgroup_index_path(@socket, :edit, docgroup) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: docgroup.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
+      <td>
+        <span class="hidden"><%= live_redirect "Show", to: Routes.docgroup_show_path(@socket, :show, docgroup) %></span>
+        <span><%= live_patch raw("<i class='fas fa-user-edit'></i>"), to: Routes.docgroup_index_path(@socket, :edit, docgroup) %></span>
+        <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: docgroup.id, data: [confirm: gettext("Are you sure?")] %></span>
+
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
-
-<span><%= live_patch "New Docgroup", to: Routes.docgroup_index_path(@socket, :new) %></span>

@@ -5,9 +5,9 @@ defmodule ScandocWeb.DocgroupLiveTest do
 
   alias Scandoc.Documents
 
-  @create_attrs %{grp_id: 42, grp_name: "some grp_name"}
-  @update_attrs %{grp_id: 43, grp_name: "some updated grp_name"}
-  @invalid_attrs %{grp_id: nil, grp_name: nil}
+  @create_attrs %{grp_name: "some grp_name"}
+  @update_attrs %{grp_name: "some updated grp_name"}
+  @invalid_attrs %{grp_name: nil}
 
   defp fixture(:docgroup) do
     {:ok, docgroup} = Documents.create_docgroup(@create_attrs)

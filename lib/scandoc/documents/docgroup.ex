@@ -11,7 +11,7 @@ defmodule Scandoc.Documents.Docgroup do
   @doc false
   def changeset(docgroup, attrs) do
     docgroup
-    |> cast(attrs, [:grp_name])
+    |> cast(attrs, [:id, :grp_name])
     |> validate_required([:grp_name])
   end
 end

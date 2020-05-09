@@ -34,7 +34,7 @@
         <td>
           <span class="hidden"><%= live_redirect "Show", to: Routes.permission_show_path(@socket, :show, permission) %></span>
           <span><%= live_patch raw("<i class='fas fa-user-edit'></i>"), to: Routes.permission_index_path(@socket, :edit, permission) %></span>
-          <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: permission.id, data: [confirm: "Are you sure?"] %></span>
+          <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: permission.id, data: [confirm: gettext("Are you sure?")] %></span>
           <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@socket, :loginas, permission.user) %>
         </td>
       </tr>

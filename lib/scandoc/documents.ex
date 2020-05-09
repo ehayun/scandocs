@@ -210,7 +210,7 @@ defmodule Scandoc.Documents do
 
   """
   def list_docgroups do
-    Repo.all(Docgroup)
+    Docgroup |> order_by(:id) |> Repo.all()
   end
 
   @doc """

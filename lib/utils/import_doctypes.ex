@@ -13,11 +13,14 @@ defmodule Scandoc.Util.ImportDoctypes do
       %{id: 3, grp_name: "השמות ושיבוצים"},
       %{id: 4, grp_name: "תעודת והוואי"},
       %{id: 5, grp_name: "מכתבים יוצאים"},
-      %{id: 6, grp_name: "מכתבים נכנסים"}
+      %{id: 6, grp_name: "מכתבים נכנסים"},
+      %{id: 100, grp_name: "חשבוניות "},
+      %{id: 200, grp_name: "דפי בנק "},
+      %{id: 300, grp_name: "אישורי יתרה "}
     ]
 
     for g <- grps do
-      case Docgroup |> where(id: ^g.id) |> Repo.one do
+      case Docgroup |> where(id: ^g.id) |> Repo.one() do
         nil ->
           Documents.create_docgroup(g)
 
@@ -27,7 +30,7 @@ defmodule Scandoc.Util.ImportDoctypes do
     end
 
     filename = "./storage/doctypes.csv"
-    import_from_csv(filename)
+    # import_from_csv(filename)
   end
 
   defp import_from_csv(csv_path) do

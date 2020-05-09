@@ -55,13 +55,14 @@ msgid "Logged out successfully."
 msgstr "יצאתם מהמערכת"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:52
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:68
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:18
 msgid "Login"
 msgstr "כניסה למערכת"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:45
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:43
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:61
 msgid "Logout"
 msgstr "יציאה מהמערכת"
 
@@ -103,12 +104,12 @@ msgid "Reset password link is invalid or it has expired."
 msgstr "קישור זה אינו תקין או פג תוקף"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:33
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:31
 msgid "Save"
 msgstr "שמירה"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:33
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:31
 msgid "Saving..."
 msgstr "שומר..."
 
@@ -118,7 +119,7 @@ msgid "Send instructions to reset password"
 msgstr "שלח הוראות לשינוי סיסמה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:44
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:60
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -234,7 +235,7 @@ msgid "School name"
 msgstr "בתי ספר"
 
 #, elixir-format
-#: lib/scandoc_web/templates/student/show.html.eex:27
+#: lib/scandoc_web/templates/student/show.html.eex:32
 msgid "Back"
 msgstr "חזרה"
 
@@ -294,6 +295,7 @@ msgid "User name"
 msgstr "משתמש"
 
 #, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.html.leex:3
 #: lib/scandoc_web/live/permission_live/index.html.leex:5
 msgid "Add New"
 msgstr "הוספה"
@@ -332,3 +334,34 @@ msgstr "עודכן  בהצלחה"
 #: lib/scandoc_web/templates/student/index.html.eex:11
 msgid "Name or Zehut"
 msgstr "שם או מספר זהות"
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:38
+msgid "Admin"
+msgstr "ניהול"
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.html.leex:33
+#: lib/scandoc_web/live/permission_live/index.html.leex:37
+msgid "Are you sure?"
+msgstr "בטוחים שברצונכם למחוק"
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:42
+msgid "Categories"
+msgstr "קטגוריות"
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.html.leex:1
+msgid "Listing Categories"
+msgstr "רשימת מנהלים"
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.html.leex:19
+msgid "category"
+msgstr "קטגוריה/סוג מסמך"
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.html.leex:18
+msgid "code"
+msgstr "קוד"
