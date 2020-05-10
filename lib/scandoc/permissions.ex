@@ -138,6 +138,8 @@ defmodule Scandoc.Permissions do
   end
 
   def isAdmin(user_id) do
+    IO.inspect(user_id, label: "isAdmin")
+
     p =
       Permission
       |> where(user_id: ^user_id)

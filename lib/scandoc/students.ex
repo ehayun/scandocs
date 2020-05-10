@@ -18,7 +18,7 @@ defmodule Scandoc.Students do
 
   """
   def list_students do
-    Repo.all(Student)
+    Student |> preload(:classroom) |> Repo.all()
   end
 
   @doc """

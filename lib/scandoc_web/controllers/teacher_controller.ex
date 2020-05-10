@@ -22,7 +22,6 @@ defmodule ScandocWeb.TeacherController do
       q
       |> Repo.paginate(page: current_page, page_size: 15)
 
-
     conn
     |> assign(:classrooms, classrooms)
     |> render("index.html")

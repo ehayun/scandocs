@@ -25,7 +25,7 @@
       </li>
       <% end %>
       <li class="nav-item <%= active_menu(@conn, :student) %>">
-        <a class="nav-link" href="<%= Routes.student_path(@conn, :index) %>"><i class="fas fa-user-graduate"></i> <%= gettext("Students") %></a>
+        <a class="nav-link" href="<%= Routes.student_index_path(@conn, :index) %>"><i class="fas fa-user-graduate"></i> <%= gettext("Students") %></a>
       </li>
       <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
       <li class="nav-item <%= active_menu(@conn, :permission) %>">

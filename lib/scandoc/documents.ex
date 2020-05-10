@@ -7,6 +7,7 @@ defmodule Scandoc.Documents do
   alias Scandoc.Repo
 
   alias Scandoc.Documents.Document
+  alias Scandoc.Documents.Doctype
 
   @doc """
   Returns the list of documents.
@@ -19,6 +20,21 @@ defmodule Scandoc.Documents do
   """
   def list_documents do
     Repo.all(Document)
+  end
+
+  def list_student_documents(id, sort_by \\ nil) do
+    q = Document |> where(ref_id: ^id)
+
+    q =
+      if sort_by do
+        tmp = Doctype |> where(doc_group_id: ^sort_by) |> Repo.all()
+        dgIds = tmp |> Enum.map(fn u -> u.id end)
+        from(d in q, where: d.doctype_id in ^dgIds)
+      else
+        q
+      end
+
+    q |> preload(:doctype) |> Repo.all()
   end
 
   @doc """
@@ -119,6 +135,10 @@ defmodule Scandoc.Documents do
     Repo.all(Doctype)
   end
 
+  def list_student_doctypes do
+    from(d in Doctype, where: d.id < 100) |> Repo.all()
+  end
+
   @doc """
   Gets a single doctype.
 
@@ -213,6 +233,10 @@ defmodule Scandoc.Documents do
   """
   def list_docgroups do
     Docgroup |> order_by(:id) |> Repo.all()
+  end
+
+  def list_student_docgroups do
+    from(d in Docgroup, where: d.id < 100) |> Repo.all()
   end
 
   @doc """

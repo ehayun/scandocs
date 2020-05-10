@@ -44,6 +44,10 @@ config :scrivener_phoenix,
   param_name: :page,
   template: Scrivener.Phoenix.Template.Bootstrap4
 
+config :scandoc,
+  full_upload_path: "/home/eli/projects/scandocs/uploads",
+  full_download_path: "/home/eli/projects/scandocs/downloads"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

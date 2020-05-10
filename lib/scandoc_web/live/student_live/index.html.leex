@@ -1,0 +1,42 @@
+<h2>
+<i class="fas fa-user-graduate"></i>
+<%= gettext("Listing Students") %>
+</h2>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, ScandocWeb.StudentLive.FormComponent,
+    id: @student.id || :new,
+    title: @page_title,
+    action: @live_action,
+    student: @student,
+    return_to: Routes.student_index_path(@socket, :index) %>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th><%= gettext("Zehut")%></th>
+      <th><%= gettext("Full name")%></th>
+      <th><%= gettext("Classroom")%></th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="students">
+    <%= for student <- @students do %>
+      <tr id="student-<%= student.id %>">
+        <td><%= student.student_zehut %></td>
+        <td><%= live_redirect student.full_name, to: Routes.student_show_path(@socket, :show, student) %></td>
+        <td> <%= student.classroom.classroom_name %></td>
+
+        <td>
+          <span class="hidden"><%= live_redirect "Show", to: Routes.student_show_path(@socket, :show, student) %></span>
+          <span class="hidden"><%= live_patch "Edit", to: Routes.student_index_path(@socket, :edit, student) %></span>
+          <span class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: student.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span class="hidden"><%= live_patch "New Student", to: Routes.student_index_path(@socket, :new) %></span>

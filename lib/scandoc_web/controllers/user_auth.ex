@@ -161,6 +161,10 @@ defmodule ScandocWeb.UserAuth do
 
   defp signed_in_path(_conn), do: "/"
 
+  def isAdmin(%Phoenix.LiveView.Socket{} = socket) do
+    isAdmin(socket.assigns.current_user)
+  end
+
   def isAdmin(%Plug.Conn{} = conn) do
     isAdmin(conn.assigns.current_user)
   end
@@ -173,6 +177,8 @@ defmodule ScandocWeb.UserAuth do
 
   def getIds(conn, module) do
     user = conn.assigns.current_user
+
+    IO.inspect(user, label: "getIds #{module}")
 
     case module do
       :school ->

@@ -114,10 +114,10 @@ defmodule ScandocWeb.DocumentController do
         if student do
           conn
           |> put_flash(:info, "File Not found")
-          |> redirect(to: Routes.student_path(conn, :show, student))
+          |> redirect(to: Routes.student_index_path(conn, :show, student))
         else
           conn
-          |> redirect(to: Routes.student_path(conn, :index))
+          |> redirect(to: Routes.student_index_path(conn, :index))
           |> put_flash(:info, "File Not found")
         end
       end
@@ -125,10 +125,10 @@ defmodule ScandocWeb.DocumentController do
       if student do
         conn
         |> put_flash(:info, "File Not found")
-        |> redirect(to: Routes.student_path(conn, :show, student))
+        |> redirect(to: Routes.student_index_path(conn, :show, student))
       else
         conn
-        |> redirect(to: Routes.student_path(conn, :index))
+        |> redirect(to: Routes.student_index_path(conn, :index))
         |> put_flash(:info, "File Not found")
       end
     end

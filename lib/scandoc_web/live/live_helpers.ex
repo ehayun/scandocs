@@ -8,6 +8,15 @@ defmodule ScandocWeb.LiveHelpers do
   alias Scandoc.Classrooms.Classroom
   alias Scandoc.Students.Student
 
+  alias Scandoc.Documents.Docgroup
+
+  def getDocGroup(id) do
+    case Docgroup |> where(id: ^id) |> Repo.one() do
+      nil -> ""
+      g -> g.grp_name
+    end
+  end
+
   @doc """
   Renders a component inside the `ScandocWeb.ModalComponent` component.
 

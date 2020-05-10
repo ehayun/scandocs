@@ -26,12 +26,11 @@ defmodule ScandocWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js uploads downloads png favicon.ico robots.txt)
 
-    # plug Plug.Static,
-    # at: "/home/eli/scandocs/priv/static/uploads",
-    # from: :scandoc,
-    # gzip: false,
-    # only: ~w(png jpg pdf)
-
+  plug Plug.Static,
+    at: "/uploads",
+    from: Application.get_env(:scandoc, :full_upload_path),
+    gzip: false,
+    only: ~w(png jpg pdf)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
