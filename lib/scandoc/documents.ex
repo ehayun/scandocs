@@ -136,7 +136,7 @@ defmodule Scandoc.Documents do
   end
 
   def list_student_doctypes do
-    from(d in Doctype, where: d.id < 100) |> Repo.all()
+    from(d in Doctype) |> Repo.all()
   end
 
   @doc """
@@ -236,7 +236,7 @@ defmodule Scandoc.Documents do
   end
 
   def list_student_docgroups do
-    from(d in Docgroup, where: d.id < 100) |> Repo.all()
+    from(d in Docgroup) |> Repo.all()
   end
 
   @doc """
