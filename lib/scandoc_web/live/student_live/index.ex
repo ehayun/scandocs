@@ -14,7 +14,7 @@ defmodule ScandocWeb.StudentLive.Index do
   alias ScandocWeb.UserAuth
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(_params, session, socket) do
     %{"user_token" => user_token} = session
     u = UserToken |> where(token: ^user_token) |> Repo.one()
 
@@ -68,6 +68,9 @@ defmodule ScandocWeb.StudentLive.Index do
   end
 
   defp fetch_students(socket) do
+    upp = Application.get_env(:scandoc, :full_upload_path)
+    IO.inspect(upp, lebel: "*******Upload path")
+
     stdList = UserAuth.getIds(socket, :student)
 
     query = ""
