@@ -25,6 +25,43 @@
 </div>
 
 
+<%= if @display do %>
+
+<div class="container-fluid" id="content">
+
+  <section data-section-id="1" data-category="gallery" data-component-id="2c0d_17_01_awz" class="py-5">
+    <div class="container text-center">
+      <h2 class="mb-5" data-config-id="header">
+        <button phx-click="close-modal" type="button" class="btn btn-primary"><%= gettext("close")%></button>
+
+      </h2>
+      <div class="row" data-config-id="gallery_01">
+        <div class="col-md-12 mb-12">
+
+          <%= if File.exists?("./priv/static/uploads/#{@doc_path}.png") do %>
+          <img src="/uploads/<%= @doc_path %>.png">
+          <% end %>
+          <%= for f <- 0..20 do %>
+          <%= if File.exists?("./priv/static/uploads/#{@doc_path}-#{f}.png") do %>
+          <img src="/uploads/<%= @doc_path %>-<%= f %>.png">
+          <% end %>
+          <% end %>
+
+
+        </div>
+      </div>
+      <h2 class="mb-5" data-config-id="header">
+        <button phx-click="close-modal" type="button" class="btn btn-primary"><%= gettext("close")%></button>
+
+      </h2>
+    </div>
+  </section>
+</div>
+
+
+
+<% end %>
+
 <button type="button" id="pdfBtn" class="hidden btn btn-primary" data-toggle="modal" data-target="#pdfModal">Large modal</button>
 
 <div id="pdfModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -62,7 +99,7 @@
       </td>
       <td>
         <%= if document.doctype do %>
-        <a phx-update="ignore" phx-hook="DisplayPdfModal" href="#" phx-click="show-pdf" phx-value-id="<%= document.id %>"><%=document.doctype.doc_name %></a>
+        <a href="#" phx-click="show-pdf" phx-value-id="<%= document.id %>"><%=document.doctype.doc_name %></a>
         <% end %>
       </td>
       <td>

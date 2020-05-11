@@ -20,6 +20,7 @@ defmodule ScandocWeb.StudentLive.Show do
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:student, Students.get_student!(id))
+     |> assign(:display, false)
      |> assign(:documents, documents)
      |> assign(:docgroups, docgroups)}
   end
@@ -67,7 +68,7 @@ defmodule ScandocWeb.StudentLive.Show do
                 nil
             end
 
-          {:noreply, assign(socket, pdf_id: id, doc_path: png)}
+          {:noreply, assign(socket, pdf_id: id, display: true, doc_path: png)}
         else
           {:noreply, assign(socket, pdf_id: id)}
         end
@@ -77,6 +78,10 @@ defmodule ScandocWeb.StudentLive.Show do
     else
       {:noreply, socket}
     end
+  end
+
+  def handle_event("close-modal", _, socket) do
+    {:noreply, assign(socket, display: false)}
   end
 
   defp pdf_thumbnail(pdf_path, thumb_path) do
