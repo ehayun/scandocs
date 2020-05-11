@@ -104,11 +104,13 @@ msgid "Reset password link is invalid or it has expired."
 msgstr "קישור זה אינו תקין או פג תוקף"
 
 #, elixir-format
+#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26
 #: lib/scandoc_web/live/permission_live/form_component.html.leex:31
 msgid "Save"
 msgstr "שמירה"
 
 #, elixir-format
+#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26
 #: lib/scandoc_web/live/permission_live/form_component.html.leex:31
 msgid "Saving..."
 msgstr "שומר..."
@@ -153,8 +155,8 @@ msgid "You must to be admin to access this page."
 msgstr "אין לכם הרשאות מתאימות"
 
 #, elixir-format
-#: lib/scandoc_web/templates/manager/index.html.eex:9
-#: lib/scandoc_web/templates/student/index.html.eex:31 lib/scandoc_web/templates/teacher/index.html.eex:8
+#: lib/scandoc_web/live/student_live/index.html.leex:18
+#: lib/scandoc_web/templates/manager/index.html.eex:9 lib/scandoc_web/templates/teacher/index.html.eex:8
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:9 lib/scandoc_web/templates/user_session/new.html.eex:15
 msgid "Zehut"
 msgstr "מספר זהות"
@@ -176,7 +178,7 @@ msgid "Managers"
 msgstr "מנהלים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:32
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:41
 msgid "Permissions"
 msgstr "הרשאות"
 
@@ -197,14 +199,14 @@ msgid "Teachers"
 msgstr "מורים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:8
-#: lib/scandoc_web/templates/school/index.html.eex:8
+#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:12
+#: lib/scandoc_web/templates/classroom/index.html.eex:8 lib/scandoc_web/templates/school/index.html.eex:8
 msgid "Code"
 msgstr "קוד"
 
 #, elixir-format
-#: lib/scandoc_web/templates/manager/index.html.eex:10
-#: lib/scandoc_web/templates/student/index.html.eex:32 lib/scandoc_web/templates/teacher/index.html.eex:9
+#: lib/scandoc_web/live/student_live/index.html.leex:19
+#: lib/scandoc_web/templates/manager/index.html.eex:10 lib/scandoc_web/templates/teacher/index.html.eex:9
 msgid "Full name"
 msgstr "שם מלא"
 
@@ -235,12 +237,7 @@ msgid "School name"
 msgstr "בתי ספר"
 
 #, elixir-format
-#: lib/scandoc_web/templates/student/show.html.eex:32
-msgid "Back"
-msgstr "חזרה"
-
-#, elixir-format
-#: lib/scandoc_web/templates/student/index.html.eex:5
+#: lib/scandoc_web/live/student_live/index.html.leex:3
 msgid "Listing Students"
 msgstr "רשימת תלמידים"
 
@@ -248,11 +245,6 @@ msgstr "רשימת תלמידים"
 #: lib/scandoc_web/templates/classroom/index.html.eex:9
 msgid "Classroom name"
 msgstr "כיתה"
-
-#, elixir-format
-#: lib/scandoc_web/templates/teacher/index.html.eex:10
-msgid "Date of birth"
-msgstr "תאריך לידה"
 
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:2
@@ -275,7 +267,8 @@ msgid "Teacher"
 msgstr "מורים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/student/index.html.eex:33
+#: lib/scandoc_web/live/student_live/index.html.leex:20
+#: lib/scandoc_web/templates/teacher/index.html.eex:10
 msgid "Classroom"
 msgstr "כיתה"
 
@@ -331,12 +324,7 @@ msgid "Permission updated successfully"
 msgstr "עודכן  בהצלחה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/student/index.html.eex:11
-msgid "Name or Zehut"
-msgstr "שם או מספר זהות"
-
-#, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:38
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:37
 msgid "Admin"
 msgstr "ניהול"
 
@@ -357,6 +345,7 @@ msgid "Listing Categories"
 msgstr "רשימת מנהלים"
 
 #, elixir-format
+#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:17
 #: lib/scandoc_web/live/docgroup_live/index.html.leex:19
 msgid "category"
 msgstr "קטגוריה/סוג מסמך"
@@ -365,3 +354,18 @@ msgstr "קטגוריה/סוג מסמך"
 #: lib/scandoc_web/live/docgroup_live/index.html.leex:18
 msgid "code"
 msgstr "קוד"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/show.ex:101
+msgid "Edit Student"
+msgstr "עדכון תלמיד"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/show.ex:100
+msgid "Show Student"
+msgstr "תלמידים"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/show.html.leex:17
+msgid "show all"
+msgstr "הצג הכל"
