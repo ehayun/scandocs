@@ -56,7 +56,6 @@ defmodule Scandoc.MixProject do
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_phoenix, "~> 0.1.0"},
       {:mogrify, "~> 0.7.3"},
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:plug_cowboy, "~> 2.0"}
     ]
   end
