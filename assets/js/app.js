@@ -30,13 +30,14 @@ let Hooks = {}
 Hooks.DisplayPdfModal = {
   mounted() {
     this.el.addEventListener("click", e => {
+      console.log("click....")
       sleep(500)
       const pdf = document.getElementById("pdfBtn")
       pdf.click()
     })
   },
   updated() {
-    sleep(500)
+    console.log("Update....")
   }
 }
 
