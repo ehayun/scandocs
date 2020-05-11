@@ -95,7 +95,7 @@ defmodule ScandocWeb.StudentLive.Index do
       q
       |> order_by(:full_name)
       |> preload(:classroom)
-      |> Repo.paginate(page: current_page, page_size: 14)
+      |> Repo.paginate(page: current_page, page_size: 16)
 
     students
   end

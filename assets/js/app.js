@@ -32,6 +32,7 @@ Hooks.DisplayPdfModal = {
     this.el.addEventListener("click", e => {
       const pdf = document.getElementById("pdfBtn")
       sleep(500)
+      alert("click")
       pdf.click()
     })
   }
