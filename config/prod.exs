@@ -52,4 +52,8 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
+config :scandoc,
+  full_upload_path: "/home/eli/scandocs/uploads",
+  full_download_path: "/home/eli/scandocs/downloads"
+
 import_config "prod.secret.exs"
