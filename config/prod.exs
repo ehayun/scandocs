@@ -15,7 +15,7 @@ use Mix.Config
 
 
   config :mango, MangoWeb.Endpoint,
-  url: [host: "scantzlev.com"],
+  url: [host: "https://scantzlev.com"],
   check_origin: ["//localhost", "//127.0.0.1", "//scantzlev.com"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
