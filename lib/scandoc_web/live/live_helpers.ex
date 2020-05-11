@@ -1,6 +1,8 @@
 defmodule ScandocWeb.LiveHelpers do
   import Phoenix.LiveView.Helpers
 
+  import Scrivener.PhoenixView
+
   import Ecto.Query
   alias Scandoc.Repo
 

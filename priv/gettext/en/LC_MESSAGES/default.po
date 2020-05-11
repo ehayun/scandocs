@@ -155,7 +155,7 @@ msgid "You must to be admin to access this page."
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/index.html.leex:18
+#: lib/scandoc_web/live/student_live/index.html.leex:19
 #: lib/scandoc_web/templates/manager/index.html.eex:9 lib/scandoc_web/templates/teacher/index.html.eex:8
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:9 lib/scandoc_web/templates/user_session/new.html.eex:15
 msgid "Zehut"
@@ -205,7 +205,7 @@ msgid "Code"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/index.html.leex:19
+#: lib/scandoc_web/live/student_live/index.html.leex:20
 #: lib/scandoc_web/templates/manager/index.html.eex:10 lib/scandoc_web/templates/teacher/index.html.eex:9
 msgid "Full name"
 msgstr ""
@@ -267,7 +267,7 @@ msgid "Teacher"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/index.html.leex:20
+#: lib/scandoc_web/live/student_live/index.html.leex:21
 #: lib/scandoc_web/templates/teacher/index.html.eex:10
 msgid "Classroom"
 msgstr ""
@@ -366,6 +366,21 @@ msgid "Show Student"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/show.html.leex:17
+#: lib/scandoc_web/live/student_live/show.html.leex:20
 msgid "show all"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/show.html.leex:13
+msgid "Back"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/index.html.leex:44
+msgid "Prev"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/index.html.leex:48
+msgid "next"
 msgstr ""

@@ -100,7 +100,6 @@ defmodule ScandocWeb.DocumentController do
         png =
           case pdf_thumbnail(".#{path}", "./priv/static//uploads/#{just_name}.png") do
             {:ok, png} ->
-              IO.inspect(png, label: "png")
               doc_name = Path.basename(png)
               Path.rootname(doc_name)
 
@@ -108,7 +107,6 @@ defmodule ScandocWeb.DocumentController do
               nil
           end
 
-        IO.inspect(png, label: "**********************************")
         render(conn, "display.html", document: png)
       else
         if student do

@@ -76,6 +76,10 @@ config :scandoc, ScandocWeb.Endpoint,
     ]
   ]
 
+config :scandoc,
+  full_upload_path: "/home/eli/projects/scandocs/uploads",
+  full_download_path: "/home/eli/projects/scandocs/downloads"
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 

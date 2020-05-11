@@ -178,8 +178,6 @@ defmodule ScandocWeb.UserAuth do
   def getIds(conn, module) do
     user = conn.assigns.current_user
 
-    IO.inspect(user, label: "getIds #{module}")
-
     case module do
       :school ->
         getScools(user)

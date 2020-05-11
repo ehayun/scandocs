@@ -14,7 +14,7 @@ defmodule ScandocWeb.StudentLive.Index do
   alias ScandocWeb.UserAuth
 
   @impl true
-  def mount(_params, session, socket) do
+  def mount(params, session, socket) do
     %{"user_token" => user_token} = session
     u = UserToken |> where(token: ^user_token) |> Repo.one()
 
@@ -26,6 +26,7 @@ defmodule ScandocWeb.StudentLive.Index do
     socket =
       socket
       |> assign(current_user: user)
+      |> assign(current_page: 1)
 
     {:ok, assign(socket, :students, fetch_students(socket))}
   end
@@ -61,11 +62,16 @@ defmodule ScandocWeb.StudentLive.Index do
     {:noreply, assign(socket, :students, fetch_students(socket))}
   end
 
+  def handle_event("nav", %{"page" => page}, socket) do
+    socket = assign(socket, current_page: String.to_integer(page))
+    {:noreply, assign(socket, students: fetch_students(socket))}
+  end
+
   defp fetch_students(socket) do
     stdList = UserAuth.getIds(socket, :student)
 
     query = ""
-    current_page = 1
+    current_page = socket.assigns.current_page
     q = Student
 
     q =
