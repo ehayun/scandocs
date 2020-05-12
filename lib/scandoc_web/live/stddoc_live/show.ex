@@ -4,7 +4,7 @@ defmodule ScandocWeb.StddocLive.Show do
   alias Scandoc.Students
 
   # alias Scandoc.Documents
-  # alias Scandoc.Students.Stddoc
+  alias Scandoc.Students.Stddoc
 
   @impl true
   def mount(_params, _session, socket) do
@@ -34,39 +34,51 @@ defmodule ScandocWeb.StddocLive.Show do
       else
         case params do
           %{"docnum" => docnum} -> Students.get_stddoc!(docnum)
-          _ -> Students.get_stddoc!(id)
+          _ -> nil
         end
       end
 
-    IO.inspect(stddoc, label: "[#{id}] [#{student.id}]")
-    path = stddoc.doc_path
-    path = String.replace(path, "/home/eli", "/downloads")
+    if stddoc do
+      IO.inspect(stddoc, label: "[#{id}] [#{student.id}]")
+      path = stddoc.doc_path
+      path = String.replace(path, "/home/eli", "/downloads")
 
-    png =
-      if File.exists?(".#{path}") do
-        doc_name = Path.basename(path)
+      png =
+        if File.exists?(".#{path}") do
+          doc_name = Path.basename(path)
 
-        just_name = Path.rootname(doc_name)
+          just_name = Path.rootname(doc_name)
 
-        case pdf_thumbnail(".#{path}", "./priv/static//uploads/#{just_name}.png") do
-          {:ok, png} ->
-            doc_name = Path.basename(png)
-            Path.rootname(doc_name)
+          case pdf_thumbnail(".#{path}", "./priv/static//uploads/#{just_name}.png") do
+            {:ok, png} ->
+              doc_name = Path.basename(png)
+              Path.rootname(doc_name)
 
-          _ ->
-            nil
+            _ ->
+              nil
+          end
         end
-      end
 
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:student, student)
-     |> assign(:stam, "show student")
-     |> assign(:stddocs, Students.list_stddocs(id))
-     |> assign(:document_name, png)
-     |> assign(:return_to, "/stddocs/#{student.id}")
-     |> assign(:stddoc, stddoc)}
+      {:noreply,
+       socket
+       |> assign(:page_title, page_title(socket.assigns.live_action))
+       |> assign(:student, student)
+       |> assign(:stam, "show student")
+       |> assign(:stddocs, Students.list_stddocs(id))
+       |> assign(:document_name, png)
+       |> assign(:return_to, "/stddocs/#{student.id}")
+       |> assign(:stddoc, stddoc)}
+    else
+      {:noreply,
+       socket
+       |> assign(:page_title, page_title(socket.assigns.live_action))
+       |> assign(:student, student)
+       |> assign(:stam, "show student")
+       |> assign(:stddocs, Students.list_stddocs(id))
+       |> assign(:document_name, "")
+       |> assign(:return_to, "/stddocs/#{student.id}")
+       |> assign(:stddoc, stddoc)}
+    end
   end
 
   defp pdf_thumbnail(pdf_path, thumb_path) do
