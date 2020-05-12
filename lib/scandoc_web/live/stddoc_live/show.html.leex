@@ -1,17 +1,26 @@
-<h1>Show Stddoc</h1>
+<header>
+  <%= @student.full_name %>
+  <span class="btn btn-primary float-left"><%= live_redirect gettext("Back"), to: Routes.student_index_path(@socket, :index) %></span>
+</header>
 
 <%= if @live_action in [:edit] do %>
-  <%= live_modal @socket, ScandocWeb.StddocLive.FormComponent,
+<%= live_modal @socket, ScandocWeb.StddocLive.FormComponent,
     id: @stddoc.id,
     title: @page_title,
     action: @live_action,
     stddoc: @stddoc,
+    doc_path: @document_name,
+    return_to: "/stddocs/#{@student.id}",
     return_to: Routes.stddoc_show_path(@socket, :show, @stddoc) %>
 <% end %>
 
-<ul>
+<table class="table table-striped">
 
-</ul>
-
-<span><%= live_patch "Edit", to: Routes.stddoc_show_path(@socket, :edit, @stddoc), class: "button" %></span>
-<span><%= live_redirect "Back", to: Routes.stddoc_index_path(@socket, :index) %></span>
+  <tbody id="stddocs">
+    <%= for d <- @stddocs do %>
+    <tr id="stddoc-<%= @student.id %>">
+      <td><%= getDocGroup(d.doctype.doc_group_id) %></td>
+      <td><%= live_patch d.doctype.doc_name, to: Routes.stddoc_show_path(@socket, :edit, @student, docnum: d.id) %></td>
+    </tr>
+    <% end %>
+  </tbody>

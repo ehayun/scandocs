@@ -32,7 +32,7 @@ defmodule ScandocWeb.StddocLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.stddoc_index_path(conn, :index))
 
       assert index_live |> element("a", "New Stddoc") |> render_click() =~
-        "New Stddoc"
+               "New Stddoc"
 
       assert_patch(index_live, Routes.stddoc_index_path(conn, :new))
 
@@ -53,7 +53,7 @@ defmodule ScandocWeb.StddocLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.stddoc_index_path(conn, :index))
 
       assert index_live |> element("#stddoc-#{stddoc.id} a", "Edit") |> render_click() =~
-        "Edit Stddoc"
+               "Edit Stddoc"
 
       assert_patch(index_live, Routes.stddoc_index_path(conn, :edit, stddoc))
 
@@ -91,7 +91,7 @@ defmodule ScandocWeb.StddocLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.stddoc_show_path(conn, :show, stddoc))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Stddoc"
+               "Edit Stddoc"
 
       assert_patch(show_live, Routes.stddoc_show_path(conn, :edit, stddoc))
 

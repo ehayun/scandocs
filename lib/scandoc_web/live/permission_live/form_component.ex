@@ -106,8 +106,7 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
     save_permission(socket, socket.assigns.action, permission_params)
   end
 
-  def handle_event("updatePermissionType", params, socket) do
-    IO.inspect(params)
+  def handle_event("updatePermissionType", _params, socket) do
     {:noreply, socket}
   end
 

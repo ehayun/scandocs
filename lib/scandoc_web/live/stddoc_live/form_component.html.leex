@@ -1,12 +1,10 @@
 <header><%= @stddoc.doctype.doc_name %></header>
-
 <%= f = form_for @changeset, "#",
   id: "stddoc-form",
   phx_target: @myself,
   phx_submit: "close-doc" %>
 
-<% doc_path =  @title %>
-
+<% doc_path =  @doc_path %>
 <%= text_input f, :ref_id, class: "hidden" %>
 
 
@@ -18,9 +16,6 @@
 <img src="/uploads/<%= doc_path %>-<%= f %>.png">
 <% end %>
 <% end %>
-
-
-
 
 
 

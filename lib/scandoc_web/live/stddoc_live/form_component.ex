@@ -4,7 +4,8 @@ defmodule ScandocWeb.StddocLive.FormComponent do
   alias Scandoc.Students
 
   @impl true
-  def update(%{stddoc: stddoc} = assigns, socket) do
+  def update(assigns, socket) do
+    %{stddoc: stddoc} = assigns
     changeset = Students.change_stddoc(stddoc)
 
     {:ok,
@@ -12,6 +13,9 @@ defmodule ScandocWeb.StddocLive.FormComponent do
      |> assign(assigns)
      |> assign(:changeset, changeset)}
   end
+
+  # def notupdate(%{stddoc: stddoc} = assigns, socket) do
+  # end
 
   @impl true
   def handle_event("validate", %{"stddoc" => stddoc_params}, socket) do
@@ -23,18 +27,19 @@ defmodule ScandocWeb.StddocLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
+  # =================================================================================
   def handle_event("close-doc", params, socket) do
-    IO.inspect(socket.assigns)
-
+    # =================================================================================
     student =
       case params do
-        %{"stddoc" => %{"ref_id" => student}} -> student
+        %{"stddoc" => %{"ref_id" => student}} -> Students.get_student!(student)
         _ -> 290
       end
 
-    {:noreply, push_patch(socket, student: student, to: socket.assigns.return_to)}
-    # {:noreply,
-    #  socket
-    #  |> push_redirect(to: Routes.stddoc_index_path(socket, :index, student: student))}
+    {:noreply,
+     push_patch(socket,
+       student: student,
+       to: Routes.stddoc_show_path(socket, :show, student)
+     )}
   end
 end
