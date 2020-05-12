@@ -13,16 +13,17 @@ config :scandoc, ScandocWeb.Endpoint,
   url: [host: "scantzlev.com", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
-
-  # config :mango, ScandocWeb.Endpoint,
-  # url: [host: "scantzlev.com"],
-  # check_origin: ["//localhost", "//127.0.0.1", "scantzlev.com"],
-  # cache_static_manifest: "priv/static/cache_manifest.json"
-
-
+# config :mango, ScandocWeb.Endpoint,
+# url: [host: "scantzlev.com"],
+# check_origin: ["//localhost", "//127.0.0.1", "scantzlev.com"],
+# cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+config :scandoc,
+  full_upload_path: "/home/eli/scandocs/priv/static/uploads",
+  full_download_path: "/home/eli/scandocs/priv/static/downloads"
 
 # ## SSL Support
 #
@@ -60,6 +61,5 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-
 
 # import_config "prod.secret.exs"
