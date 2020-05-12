@@ -1,0 +1,28 @@
+<header><%= @stddoc.doctype.doc_name %></header>
+
+<%= f = form_for @changeset, "#",
+  id: "stddoc-form",
+  phx_target: @myself,
+  phx_submit: "close-doc" %>
+
+<% doc_path =  @title %>
+
+<%= text_input f, :ref_id, class: "hidden" %>
+
+
+<%= if File.exists?("./priv/static/uploads/#{doc_path}.png") do %>
+<img src="/uploads/<%= doc_path %>.png">
+<% end %>
+<%= for f <- 0..20 do %>
+<%= if File.exists?("./priv/static/uploads/#{doc_path}-#{f}.png") do %>
+<img src="/uploads/<%= doc_path %>-<%= f %>.png">
+<% end %>
+<% end %>
+
+
+
+
+
+
+<%= submit gettext("Close"), phx_disable_with: "Closing...", class: "btn btn-primary" %>
+</form>

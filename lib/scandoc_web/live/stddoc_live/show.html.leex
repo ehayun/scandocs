@@ -1,0 +1,17 @@
+<h1>Show Stddoc</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.StddocLive.FormComponent,
+    id: @stddoc.id,
+    title: @page_title,
+    action: @live_action,
+    stddoc: @stddoc,
+    return_to: Routes.stddoc_show_path(@socket, :show, @stddoc) %>
+<% end %>
+
+<ul>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.stddoc_show_path(@socket, :edit, @stddoc), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.stddoc_index_path(@socket, :index) %></span>

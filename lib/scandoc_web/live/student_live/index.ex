@@ -68,9 +68,6 @@ defmodule ScandocWeb.StudentLive.Index do
   end
 
   defp fetch_students(socket) do
-    upp = Application.get_env(:scandoc, :full_upload_path)
-    IO.inspect(upp, lebel: "*******Upload path")
-
     stdList = UserAuth.getIds(socket, :student)
 
     query = ""

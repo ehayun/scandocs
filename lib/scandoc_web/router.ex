@@ -77,6 +77,18 @@ defmodule ScandocWeb.Router do
     live "/students/:id", StudentLive.Show, :show
     live "/students/:id/show/edit", StudentLive.Show, :edit
 
+    # Student document
+
+    live "/stddocs", StddocLive.Index, :index
+    live "/stddocs/new", StddocLive.Index, :new
+    live "/stddocs/:id/edit", StddocLive.Index, :edit
+
+    live "/stddocs/:id", StddocLive.Show, :show
+    live "/stddocs/:id/show/edit", StddocLive.Show, :edit
+
+
+
+
     resources "/schools", SchoolController
     resources "/managers", ManagerController
     resources "/teachers", TeacherController

@@ -77,4 +77,61 @@ defmodule Scandoc.StudentsTest do
       assert %Ecto.Changeset{} = Students.change_student(student)
     end
   end
+
+  describe "stddocs" do
+    alias Scandoc.Students.Stddoc
+
+    @valid_attrs %{}
+    @update_attrs %{}
+    @invalid_attrs %{}
+
+    def stddoc_fixture(attrs \\ %{}) do
+      {:ok, stddoc} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Students.create_stddoc()
+
+      stddoc
+    end
+
+    test "list_stddocs/0 returns all stddocs" do
+      stddoc = stddoc_fixture()
+      assert Students.list_stddocs() == [stddoc]
+    end
+
+    test "get_stddoc!/1 returns the stddoc with given id" do
+      stddoc = stddoc_fixture()
+      assert Students.get_stddoc!(stddoc.id) == stddoc
+    end
+
+    test "create_stddoc/1 with valid data creates a stddoc" do
+      assert {:ok, %Stddoc{} = stddoc} = Students.create_stddoc(@valid_attrs)
+    end
+
+    test "create_stddoc/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Students.create_stddoc(@invalid_attrs)
+    end
+
+    test "update_stddoc/2 with valid data updates the stddoc" do
+      stddoc = stddoc_fixture()
+      assert {:ok, %Stddoc{} = stddoc} = Students.update_stddoc(stddoc, @update_attrs)
+    end
+
+    test "update_stddoc/2 with invalid data returns error changeset" do
+      stddoc = stddoc_fixture()
+      assert {:error, %Ecto.Changeset{}} = Students.update_stddoc(stddoc, @invalid_attrs)
+      assert stddoc == Students.get_stddoc!(stddoc.id)
+    end
+
+    test "delete_stddoc/1 deletes the stddoc" do
+      stddoc = stddoc_fixture()
+      assert {:ok, %Stddoc{}} = Students.delete_stddoc(stddoc)
+      assert_raise Ecto.NoResultsError, fn -> Students.get_stddoc!(stddoc.id) end
+    end
+
+    test "change_stddoc/1 returns a stddoc changeset" do
+      stddoc = stddoc_fixture()
+      assert %Ecto.Changeset{} = Students.change_stddoc(stddoc)
+    end
+  end
 end
