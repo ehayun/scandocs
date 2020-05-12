@@ -30,8 +30,6 @@ defmodule Scandoc.Util.ImportTeachers do
     {:ok, d} =
       Date.from_erl({String.to_integer(yyyy), String.to_integer(mm), String.to_integer(dd)})
 
-    IO.inspect(d)
-
     user_params = %{
       full_name: full_name,
       date_of_birth: d,

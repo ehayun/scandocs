@@ -62,7 +62,6 @@ defmodule Scandoc.Util.ImportStudents do
     doc_name = Path.basename(file)
 
     student_id = getStudent(doc_path)
-    IO.inspect(doc_name, label: "***")
     just_name = Path.rootname(doc_name)
 
     [_zehut, _type, yymm] =
@@ -166,7 +165,6 @@ defmodule Scandoc.Util.ImportStudents do
 
           case res = Scandoc.Students.create_student(student) do
             {:ok, std} ->
-              IO.inspect(res, label: "**Create student")
               std.id
 
             _ ->
@@ -188,8 +186,6 @@ defmodule Scandoc.Util.ImportStudents do
     school_name = paths |> Enum.at(cc - 3)
 
     school_name = String.replace(school_name, "_", " ")
-
-    IO.inspect(school_name, label: "[#{school_name}]")
 
     school_id =
       case School |> where(school_name: ^school_name) |> Repo.one() do

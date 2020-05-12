@@ -15,8 +15,6 @@ defmodule ScandocWeb.StddocLive.Show do
   def handle_params(params, _session, socket) do
     # def handle_params(%{"id" => id}, _, socket) do
 
-    IO.inspect(params, label: "show get params")
-
     %{"id" => id} = params
 
     {id, _} = Integer.parse(id)
@@ -39,7 +37,6 @@ defmodule ScandocWeb.StddocLive.Show do
       end
 
     if stddoc do
-      IO.inspect(stddoc, label: "[#{id}] [#{student.id}]")
       path = stddoc.doc_path
       path = String.replace(path, "/home/eli", "/downloads")
 

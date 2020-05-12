@@ -76,9 +76,6 @@ defmodule Scandoc.Util.ImportSchools do
       }
 
       Schools.create_school(rec)
-      IO.inspect(rec)
-
-      IO.puts("adding #{school_name}")
     end
   end
 

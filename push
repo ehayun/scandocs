@@ -1,3 +1,4 @@
 npm run deploy --prefix ./assets
+mix phx.digest.clean
 mix phx.digest
 
