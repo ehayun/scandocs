@@ -28,7 +28,7 @@ defmodule ScandocWeb.Endpoint do
 
   plug Plug.Static,
     at: "/uploads",
-    from: "/home/eli/scandocs/priv/static/uploads",
+    from: Application.get_env(:scandoc, :full_upload_path),
     gzip: false,
     only: ~w(png jpg pdf)
 
