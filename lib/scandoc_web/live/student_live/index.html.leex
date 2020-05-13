@@ -1,53 +1,52 @@
 <h2>
   <i class="fas fa-user-graduate"></i>
   <%= gettext("Listing Students") %>
+  <span class="float-left">
+    <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
+      <input class="form-control" type="text" value='<%= @search %>' name="search" placeholder='<%= gettext("Search by zehut or name")%>'>
+    </form>
+  </span>
 </h2>
-
 <%= if @live_action in [:new, :edit] do %>
-<%= live_modal @socket, ScandocWeb.StudentLive.FormComponent,
+  <%= live_modal @socket, ScandocWeb.StudentLive.FormComponent,
     id: @student.id || :new,
     title: @page_title,
     action: @live_action,
     student: @student,
     return_to: Routes.student_index_path(@socket, :index) %>
 <% end %>
-
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
       <th><%= gettext("Zehut")%></th>
       <th><%= gettext("Full name")%></th>
       <th><%= gettext("Classroom")%></th>
-
       <th></th>
     </tr>
   </thead>
   <tbody id="students">
     <%= for student <- @students do %>
-    <tr id="student-<%= student.id %>">
-      <td><%= student.student_zehut %></td>
-      <td><%= live_redirect student.full_name, to: Routes.stddoc_show_path(@socket, :show, student) %></td>
-      <td> <%= student.classroom.classroom_name %></td>
-
-      <td>
-        <span class="hidden"><%= live_redirect "Show", to: Routes.student_show_path(@socket, :show, student) %></span>
-        <span class="hidden"><%= live_patch "Edit", to: Routes.student_index_path(@socket, :edit, student) %></span>
-        <span class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: student.id, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
+      <tr id="student-<%= student.id %>">
+        <td><%= student.student_zehut %></td>
+        <td><%= live_redirect student.full_name, to: Routes.stddoc_show_path(@socket, :show, student) %></td>
+        <td> <%= student.classroom.classroom_name %></td>
+        <td>
+          <span class="hidden"><%= live_redirect "Show", to: Routes.student_show_path(@socket, :show, student) %></span>
+          <span class="hidden"><%= live_patch "Edit", to: Routes.student_index_path(@socket, :edit, student) %></span>
+          <span class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: student.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
-  <nav  class="p-2" aria-label="Pagination">
-    <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
-      <li phx-click="nav" phx-value-page="<%= (@students.page_number - 1)  %>" class='page-item <%= if @students.page_number == 1, do: "disabled" %>'><a class="page-link" href="#"><%= gettext("Prev")%></a></li>
-      <%= for idx <-  Enum.to_list(1..@students.total_pages) do %>
+<nav  class="p-2" aria-label="Pagination">
+  <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
+    <li phx-click="nav" phx-value-page="<%= (@students.page_number - 1)  %>" class='page-item <%= if @students.page_number == 1, do: "disabled" %>'><a class="page-link" href="#"><%= gettext("Prev")%></a></li>
+    <%= for idx <-  Enum.to_list(1..@students.total_pages) do %>
       <li phx-click="nav" phx-value-page="<%= idx  %>" class='page-item <%= if idx == @students.page_number, do: "active" %>'><a class="page-link" href="#"><%= idx %></a></li>
-      <% end  %>
-      <li phx-click="nav" phx-value-page="<%= (@students.page_number + 1) %>" class='page-item <%= if @students.page_number == @students.total_pages, do: "disabled" %>'><a class="page-link" href="#"><%= gettext("next")%></a></li>
-    </ul>
-  </nav>
+    <% end  %>
+    <li phx-click="nav" phx-value-page="<%= (@students.page_number + 1) %>" class='page-item <%= if @students.page_number == @students.total_pages, do: "disabled" %>'><a class="page-link" href="#"><%= gettext("next")%></a></li>
+  </ul>
+</nav>
 </div>
-
-
 <span class="hidden"><%= live_patch "New Student", to: Routes.student_index_path(@socket, :new) %></span>

@@ -3,18 +3,21 @@ defmodule ScandocWeb.StddocLive.Show do
 
   alias Scandoc.Students
 
-  # alias Scandoc.Documents
+  alias Scandoc.Documents
   alias Scandoc.Students.Stddoc
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    docgroups = Documents.list_student_docgroups()
+
+    {:ok, assign(socket, docgroups: docgroups, filter_by: nil)}
   end
 
   @impl true
   def handle_params(params, _session, socket) do
     # def handle_params(%{"id" => id}, _, socket) do
 
+    filter_by = socket.assigns.filter_by
     %{"id" => id} = params
 
     {id, _} = Integer.parse(id)
@@ -61,7 +64,7 @@ defmodule ScandocWeb.StddocLive.Show do
        |> assign(:page_title, page_title(socket.assigns.live_action))
        |> assign(:student, student)
        |> assign(:stam, "show student")
-       |> assign(:stddocs, Students.list_stddocs(id))
+       |> assign(:stddocs, Students.list_stddocs(id, filter_by))
        |> assign(:document_name, png)
        |> assign(:return_to, "/stddocs/#{student.id}")
        |> assign(:stddoc, stddoc)}
@@ -71,11 +74,23 @@ defmodule ScandocWeb.StddocLive.Show do
        |> assign(:page_title, page_title(socket.assigns.live_action))
        |> assign(:student, student)
        |> assign(:stam, "show student")
-       |> assign(:stddocs, Students.list_stddocs(id))
+       |> assign(:stddocs, Students.list_stddocs(id, filter_by))
        |> assign(:document_name, "")
        |> assign(:return_to, "/stddocs/#{student.id}")
        |> assign(:stddoc, stddoc)}
     end
+  end
+
+  def handle_event("filter_by", %{"id" => id}, socket) do
+    id =
+      case id do
+        "" -> nil
+        id -> String.to_integer(id)
+      end
+
+    stddocs = Students.list_stddocs(socket.assigns.student.id, id)
+
+    {:noreply, assign(socket, stddocs: stddocs, filter_by: id)}
   end
 
   defp pdf_thumbnail(pdf_path, thumb_path) do

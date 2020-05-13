@@ -1,8 +1,18 @@
 <header>
+  <i class="fas fa-user-graduate"></i>
   <%= @student.full_name %>
   <span class="btn btn-primary float-left"><%= live_redirect gettext("Back"), to: Routes.student_index_path(@socket, :index) %></span>
 </header>
 
+
+<div class="row">
+  <ul class="nav nav-pills mb-4 d-flex flex-column flex-md-row" data-config-id="tabs">
+    <li phx-click="filter_by" phx-value-id="<%= nil %>" class="nav-item"><a class='nav-link p-2 ml-2 <%= if @filter_by == nil , do: "active", else: "badge badge-info" %>' href="#"><%= gettext("show all") %></a></li>
+    <%= for d <- @docgroups do %>
+    <li phx-click="filter_by" phx-value-id="<%= d.id %>" class="nav-item"><a class='nav-link p-2 ml-2 <%= if @filter_by == d.id, do: "active", else: "badge badge-info" %>' href="#"><%= d.grp_name %></a></li>
+    <% end %>
+  </ul>
+</div>
 <%= if @live_action in [:edit] do %>
 <%= live_modal @socket, ScandocWeb.StddocLive.FormComponent,
     id: @stddoc.id,
@@ -18,9 +28,12 @@
 
   <tbody id="stddocs">
     <%= for d <- @stddocs do %>
-    <tr id="stddoc-<%= @student.id %>">
+    <tr>
       <td><%= getDocGroup(d.doctype.doc_group_id) %></td>
       <td><%= live_patch d.doctype.doc_name, to: Routes.stddoc_show_path(@socket, :edit, @student, docnum: d.id) %></td>
+      <td>
+      <%= d.ref_month %>/<%= d.ref_year %>
+      </td>
     </tr>
     <% end %>
   </tbody>

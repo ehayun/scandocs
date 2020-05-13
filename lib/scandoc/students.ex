@@ -114,12 +114,12 @@ defmodule Scandoc.Students do
       [%Stddoc{}, ...]
 
   """
-  def list_stddocs(student_id, sort_by \\ nil) do
+  def list_stddocs(student_id, filter_by \\ nil) do
     q = Stddoc |> where(ref_id: ^student_id)
 
     q =
-      if sort_by do
-        tmp = Doctype |> where(doc_group_id: ^sort_by) |> Repo.all()
+      if filter_by do
+        tmp = Doctype |> where(doc_group_id: ^filter_by) |> Repo.all()
         dgIds = tmp |> Enum.map(fn u -> u.id end)
         from(d in q, where: d.doctype_id in ^dgIds)
       else

@@ -26,6 +26,7 @@ defmodule ScandocWeb.StudentLive.Index do
     socket =
       socket
       |> assign(current_user: user)
+      |> assign(search: "")
       |> assign(current_page: 1)
 
     {:ok, assign(socket, :students, fetch_students(socket))}
@@ -55,6 +56,13 @@ defmodule ScandocWeb.StudentLive.Index do
   end
 
   @impl true
+
+  def handle_event("search", %{"search" => search}, socket) do
+    socket = assign(socket, search: search)
+    {:noreply, assign(socket, :students, fetch_students(socket))}
+  end
+
+  @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     student = Students.get_student!(id)
     {:ok, _} = Students.delete_student(student)
@@ -70,7 +78,7 @@ defmodule ScandocWeb.StudentLive.Index do
   defp fetch_students(socket) do
     stdList = UserAuth.getIds(socket, :student)
 
-    query = ""
+    query = socket.assigns.search
     current_page = socket.assigns.current_page
     q = Student
 
