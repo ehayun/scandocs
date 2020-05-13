@@ -3,11 +3,13 @@ defmodule Scandoc.Schools.School do
   import Ecto.Changeset
 
   alias Scandoc.Schools.Manager
+  alias Scandoc.Classrooms.Classroom
 
   schema "schools" do
     field :code, :string
     belongs_to :manager, Manager, references: :id
     field :school_name, :string
+    has_many :classrooms, Classroom, references: :id
 
     timestamps()
   end

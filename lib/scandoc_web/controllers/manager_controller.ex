@@ -5,8 +5,8 @@ defmodule ScandocWeb.ManagerController do
   alias Scandoc.Schools.Manager
 
   def index(conn, _params) do
-    managers = Schools.list_managers()
-    render(conn, "index.html", managers: managers)
+    schools = Schools.list_managers()
+    render(conn, "index.html", schools: schools)
   end
 
   def new(conn, _params) do

@@ -14,18 +14,20 @@
     </tr>
   </thead>
   <tbody>
-    <%= for manager <- @managers do %>
+    <%= for school <- @schools do %>
     <tr>
-      <td><%= manager.zehut %></td>
-      <td><%= manager.full_name %></td>
-      <td><%= manager.school.school_name %></td>
+      <td><%= school.manager.zehut %></td>
+      <td><%= school.manager.full_name %></td>
+      <td>
+        <%= link school.school_name, to: Routes.school_path(@conn, :show, school) %>
+      </td>
 
       <td>
-        <span class="hidden"><%= link "Show", to: Routes.manager_path(@conn, :show, manager) %></span>
-        <span class="hidden"><%= link "Edit", to: Routes.manager_path(@conn, :edit, manager) %></span>
-        <span class="hidden"><%= link "Delete", to: Routes.manager_path(@conn, :delete, manager), method: :delete, data: [confirm: "Are you sure?"] %></span>
-<%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
-        <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@conn, :loginas, manager) %>
+        <span class="hidden"><%= link "Show", to: Routes.manager_path(@conn, :show, school.manager) %></span>
+        <span class="hidden"><%= link "Edit", to: Routes.manager_path(@conn, :edit, school.manager) %></span>
+        <span class="hidden"><%= link "Delete", to: Routes.manager_path(@conn, :delete, school.manager), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
+        <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@conn, :loginas, school.manager) %>
         <% end %>
       </td>
     </tr>

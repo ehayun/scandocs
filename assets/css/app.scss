@@ -14,12 +14,19 @@ html {
 table {
   line-height: 0.5em;
 }
+
 box-icon {
   color: white;
+  background-color: $info;
 }
 
 main {
   font-size: 1.2em;
+}
+
+.list-active {
+  border-bottom: 5px solid $primary;
+
 }
 
 .white {
@@ -45,9 +52,9 @@ main {
 }
 
 header {
-	font-size: 1.4em;
-	border-bottom: 3px solid $app-blue;
-	margin-bottom: 0.5em;
+  font-size: 1.4em;
+  border-bottom: 3px solid $app-blue;
+  margin-bottom: 0.5em;
 }
 
 .nav-link {
@@ -70,8 +77,8 @@ header {
 .page-item.active {
   background-color: #0f7864;
   // padding: 0.3em;
-	padding-left: 0.6em;
-	padding-right: 0.6em;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
 }
 
 

@@ -1,5 +1,5 @@
 <h2><i class="fas fa-chalkboard-teacher"></i>
-<%= gettext("Listing Teachers") %>
+  <%= gettext("Listing Teachers") %>
 </h2>
 
 <table class="table table-striped">
@@ -13,11 +13,15 @@
     </tr>
   </thead>
   <tbody>
-<%= for classroom <- @classrooms do %>
+    <%= for classroom <- @classrooms do %>
     <tr>
       <td><%= classroom.teacher.zehut %></td>
       <td><%= classroom.teacher.full_name %></td>
-      <td><%= classroom.school.school_name %>/<%= classroom.classroom_name %></td>
+      <td>
+        <%= link classroom.school.school_name, to:  Routes.school_path(@conn, :show, classroom.school) %>
+        /
+        <%= link classroom.classroom_name , to:  Routes.classroom_path(@conn, :show, classroom)%>
+      </td>
 
       <td>
         <span class="hidden"><%= link "Show", to: Routes.teacher_path(@conn, :show, classroom.teacher) %></span>
@@ -29,7 +33,7 @@
 
       </td>
     </tr>
-<% end %>
+    <% end %>
   </tbody>
 </table>
 

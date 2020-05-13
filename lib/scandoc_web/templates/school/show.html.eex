@@ -1,23 +1,42 @@
-<h1>Show School</h1>
+<header>
+  <i class="fas fa-school"></i>
+  <%= gettext("School") %>:&nbsp;
+  <%= @school.school_name %> - <%= @school.code %>
+  <span class="btn btn-primary btn-md float-left"><%= live_redirect gettext("Listing Schools"), to: Routes.school_path(@conn, :index) %></span>
+
+</header>
 
 <ul>
 
   <li>
-    <strong>Code:</strong>
-    <%= @school.code %>
-  </li>
-
-  <li>
-    <strong>School name:</strong>
-    <%= @school.school_name %>
-  </li>
-
-  <li>
-    <strong>Manager:</strong>
-    <%= @school.manager_id %>
+    <strong><%= gettext("Manager")%>:</strong>
+    <%= @school.manager.zehut %>&nbsp;
+    <%= @school.manager.full_name %>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.school_path(@conn, :edit, @school) %></span>
-<span><%= link "Back", to: Routes.school_path(@conn, :index) %></span>
+
+<section class="py-2">
+  <h4><%= gettext("Classrooms") %></h4>
+  <div class="container-fluid">
+    <div class="row" data-config-id="list_02">
+      <%= for c <- @school.classrooms do %>
+      <div class="m-1 col-xl-3 col-md-4 mb-2 mb-lg-0">
+        <div class="border rounded">
+          <div class="d-flex border-bottom p-3 w-100 align-items-center">
+            <h3 class="h5 mr-auto mb-0">
+              <i class="fas fa-chalkboard"></i> <%= link c.classroom_name, to: Routes.classroom_path(@conn, :show, c) %>
+            </h3>
+          </div>
+          <div class="d-flex px-3 w-100">
+            <p class="mr-auto">
+              <small><i class="fas fa-chalkboard-teacher"></i></small> <%= getTeacherName(c.teacher_id) %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% end  %>
+    </div>
+  </div>
+</section>

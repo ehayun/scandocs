@@ -1,15 +1,15 @@
 <header>
-<i class="fas fa-chalkboard"></i>
-<%= @classroom.code %>&nbsp;
-<%= @classroom.classroom_name %>
-<span class="float-left"><%= link gettext("Back"), to: Routes.classroom_path(@conn, :index), class: "btn btn-primary" %></span>
+  <i class="fas fa-chalkboard"></i>
+  <%= gettext("Classroom") %>: &nbsp;
+  <%= @classroom.classroom_name %> - <%= @classroom.code %>
+  <span class="float-left"><%= link gettext("Listing Classrooms"), to: Routes.classroom_path(@conn, :index), class: "btn btn-primary" %></span>
 </header>
 
 <ul>
 
   <li>
     <strong><%= gettext("School") %>:</strong>
-    <%= @classroom.school.school_name %>
+    <%= link @classroom.school.school_name, to: Routes.school_path(@conn, :show, @classroom.school) %>
   </li>
 
   <li>
@@ -19,7 +19,23 @@
 
 </ul>
 
-<h4><%= gettext("Students")  %> </h4>
-<%= for student <- @students do %>
-<span class="badge badge-primary p-2 white"><%= link student.full_name, to: Routes.stddoc_show_path(@conn, :show, student), class: "white" %></span>
-<% end %>
+
+<section class="py-2">
+  <h4><%= gettext("Students") %></h4>
+  <div class="container-fluid">
+    <div class="row" data-config-id="list_02">
+      <%= for student <- @students do %>
+      <div class="m-1 col-xl-3 col-md-4 mb-2 mb-lg-0">
+        <div class="border rounded">
+          <div class="d-flex border-bottom p-3 w-100 align-items-center">
+            <h3 class="h5 mr-auto mb-0">
+              <i class="fas fa-user-graduate"></i> <%= link student.full_name, to: Routes.stddoc_show_path(@conn, :show, student) %>
+            </h3>
+          </div>
+
+        </div>
+      </div>
+      <% end  %>
+    </div>
+  </div>
+</section>

@@ -35,7 +35,8 @@ defmodule Scandoc.Schools do
       ** (Ecto.NoResultsError)
 
   """
-  def get_school!(id), do: Repo.get!(School, id)
+  def get_school!(id),
+    do: School |> where(id: ^id) |> preload(:classrooms) |> preload(:manager) |> Repo.one()
 
   def get_school_by_name(name) do
     Repo.get_by(School, school_name: name)
@@ -118,7 +119,9 @@ defmodule Scandoc.Schools do
 
   """
   def list_managers do
-    Repo.all(Manager |> preload(:school) |> where(role: "020"))
+
+    School |> preload(:manager) |> Repo.all()
+    # Repo.all(Manager |> preload(:school) |> where(role: "020"))
   end
 
   @doc """

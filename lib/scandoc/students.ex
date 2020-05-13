@@ -40,7 +40,7 @@ defmodule Scandoc.Students do
       ** (Ecto.NoResultsError)
 
   """
-  def get_student!(id), do: Repo.get!(Student, id)
+  def get_student!(id), do: Student |> preload(:classroom) |> where(id: ^id) |> Repo.one()
 
   @doc """
   Creates a student.

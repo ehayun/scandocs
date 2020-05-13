@@ -1,4 +1,7 @@
-<h1><%= @student.full_name %></h1>
+<h1>
+<%= @student.full_name %>
+<%= @student.classroom.classroom_name %>
+</h1>
 
 <%= if @live_action in [:new, :edit] do %>
 <%= live_modal @socket, ScandocWeb.StddocLive.FormComponent,

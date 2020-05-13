@@ -29,7 +29,7 @@
       <tr id="student-<%= student.id %>">
         <td><%= student.student_zehut %></td>
         <td><%= live_redirect student.full_name, to: Routes.stddoc_show_path(@socket, :show, student) %></td>
-        <td> <%= student.classroom.classroom_name %></td>
+        <td> <%= student.classroom.classroom_name %>  </td>
         <td>
           <span class="hidden"><%= live_redirect "Show", to: Routes.student_show_path(@socket, :show, student) %></span>
           <span class="hidden"><%= live_patch "Edit", to: Routes.student_index_path(@socket, :edit, student) %></span>

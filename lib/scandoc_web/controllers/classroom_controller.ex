@@ -81,7 +81,9 @@ defmodule ScandocWeb.ClassroomController do
     classList = UserAuth.getIds(conn, :classroom)
     {id, _} = Integer.parse(id)
 
-    if id in classList do
+    IO.inspect(classList, label: "classes in [#{id}]")
+
+    if id in classList || UserAuth.isAdmin(conn) do
       classroom = Classrooms.get_classroom!(id)
       students = Students.list_students_in_classroom(id)
       render(conn, "show.html", classroom: classroom, students: students)

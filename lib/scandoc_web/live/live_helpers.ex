@@ -6,6 +6,7 @@ defmodule ScandocWeb.LiveHelpers do
   import Ecto.Query
   alias Scandoc.Repo
 
+  alias Scandoc.Schools
   alias Scandoc.Schools.School
   alias Scandoc.Classrooms.Classroom
   alias Scandoc.Students.Student
@@ -17,6 +18,11 @@ defmodule ScandocWeb.LiveHelpers do
       nil -> ""
       g -> g.grp_name
     end
+  end
+
+  def getSchoolName(id) do
+    s = Schools.get_school!(id)
+    s.school_name
   end
 
   @doc """

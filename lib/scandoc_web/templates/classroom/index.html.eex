@@ -20,8 +20,12 @@
       <td>
       <%= link classroom.classroom_name, to: Routes.classroom_path(@conn, :show, classroom) %>
       </td>
-      <td><%= classroom.school.school_name %></td>
-      <td><%= classroom.teacher.full_name %></td>
+      <td>
+      <%= link classroom.school.school_name, to: Routes.school_path(@conn, :show, classroom.school) %>
+      </td>
+      <td>
+      <%= link classroom.teacher.full_name , to: Routes.teacher_path(@conn, :show, classroom.teacher) %>
+      </td>
 
       <td>
         <span class="hidden"><%= link "Show", to: Routes.classroom_path(@conn, :show, classroom) %></span>
