@@ -228,13 +228,13 @@ msgstr "מנהל"
 #, elixir-format
 #: lib/scandoc_web/templates/school/form.html.eex:7
 msgid "School code"
-msgstr "בתי ספר"
+msgstr " קוד בית ספר"
 
 #, elixir-format
 #: lib/scandoc_web/templates/manager/index.html.eex:11
 #: lib/scandoc_web/templates/school/form.html.eex:8 lib/scandoc_web/templates/school/index.html.eex:9
 msgid "School name"
-msgstr "בתי ספר"
+msgstr "בית ספר"
 
 #, elixir-format
 #: lib/scandoc_web/live/student_live/index.html.leex:3
@@ -244,7 +244,7 @@ msgstr "רשימת תלמידים"
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:9
 msgid "Classroom name"
-msgstr "כיתה"
+msgstr "שם הכיתה"
 
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:2
@@ -259,12 +259,12 @@ msgstr "רשימת מורים"
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:10
 msgid "School"
-msgstr "בתי ספר"
+msgstr "בית ספר"
 
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:11
 msgid "Teacher"
-msgstr "מורים"
+msgstr "מורה"
 
 #, elixir-format
 #: lib/scandoc_web/live/student_live/index.html.leex:23
@@ -363,7 +363,7 @@ msgstr "עדכון תלמיד"
 #, elixir-format
 #: lib/scandoc_web/live/student_live/show.ex:105
 msgid "Show Student"
-msgstr "תלמידים"
+msgstr "הצג תלמיד"
 
 #, elixir-format
 #: lib/scandoc_web/live/stddoc_live/index.html.leex:15

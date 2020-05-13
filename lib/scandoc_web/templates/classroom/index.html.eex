@@ -17,7 +17,9 @@
     <%= for classroom <- @classrooms do %>
     <tr>
       <td><%= classroom.code %></td>
-      <td><%= classroom.classroom_name %></td>
+      <td>
+      <%= link classroom.classroom_name, to: Routes.classroom_path(@conn, :show, classroom) %>
+      </td>
       <td><%= classroom.school.school_name %></td>
       <td><%= classroom.teacher.full_name %></td>
 

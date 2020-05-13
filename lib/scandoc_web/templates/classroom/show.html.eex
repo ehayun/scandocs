@@ -1,28 +1,25 @@
-<h1>Show Classroom</h1>
+<header>
+<i class="fas fa-chalkboard"></i>
+<%= @classroom.code %>&nbsp;
+<%= @classroom.classroom_name %>
+<span class="float-left"><%= link gettext("Back"), to: Routes.classroom_path(@conn, :index), class: "btn btn-primary" %></span>
+</header>
 
 <ul>
 
   <li>
-    <strong>Code:</strong>
-    <%= @classroom.code %>
+    <strong><%= gettext("School") %>:</strong>
+    <%= @classroom.school.school_name %>
   </li>
 
   <li>
-    <strong>Classroom name:</strong>
-    <%= @classroom.classroom_name %>
-  </li>
-
-  <li>
-    <strong>School:</strong>
-    <%= @classroom.school_id %>
-  </li>
-
-  <li>
-    <strong>Teacher:</strong>
-    <%= @classroom.teacher_id %>
+    <strong><%= gettext("Teacher") %>:</strong>
+    <%= @classroom.teacher.full_name %>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: Routes.classroom_path(@conn, :edit, @classroom) %></span>
-<span><%= link "Back", to: Routes.classroom_path(@conn, :index) %></span>
+<h4><%= gettext("Students")  %> </h4>
+<%= for student <- @students do %>
+<span class="badge badge-primary p-2 white"><%= link student.full_name, to: Routes.stddoc_show_path(@conn, :show, student), class: "white" %></span>
+<% end %>

@@ -5,6 +5,7 @@ defmodule ScandocWeb.ClassroomController do
   alias Scandoc.Repo
 
   alias Scandoc.Classrooms
+  alias Scandoc.Students
   alias Scandoc.Classrooms.Classroom
 
   alias ScandocWeb.UserAuth
@@ -77,8 +78,19 @@ defmodule ScandocWeb.ClassroomController do
   end
 
   def show(conn, %{"id" => id}) do
-    classroom = Classrooms.get_classroom!(id)
-    render(conn, "show.html", classroom: classroom)
+    classList = UserAuth.getIds(conn, :classroom)
+    {id, _} = Integer.parse(id)
+
+    if id in classList do
+      classroom = Classrooms.get_classroom!(id)
+      students = Students.list_students_in_classroom(id)
+      render(conn, "show.html", classroom: classroom, students: students)
+    else
+      conn
+      |> put_flash(:error, Gettext.gettext("You dont have permission to see this page."))
+      |> redirect(to: Routes.classroom_path(conn, :index))
+      |> halt()
+    end
   end
 
   def edit(conn, %{"id" => id}) do

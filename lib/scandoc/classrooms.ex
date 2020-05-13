@@ -38,7 +38,8 @@ defmodule Scandoc.Classrooms do
       ** (Ecto.NoResultsError)
 
   """
-  def get_classroom!(id), do: Repo.get!(Classroom, id)
+  def get_classroom!(id),
+    do: Classroom |> where(id: ^id) |> preload(:school) |> preload(:teacher) |> Repo.one()
 
   @doc """
   Creates a classroom.

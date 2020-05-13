@@ -22,6 +22,10 @@ defmodule Scandoc.Students do
     Student |> preload(:classroom) |> Repo.all()
   end
 
+  def list_students_in_classroom(classroom_id) do
+    Student |> where(classroom_id: ^classroom_id) |> preload(:classroom) |> Repo.all()
+  end
+
   @doc """
   Gets a single student.
 

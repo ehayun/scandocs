@@ -23,6 +23,10 @@ defmodule ScandocWeb do
 
       import Plug.Conn
       import ScandocWeb.Gettext
+
+      require ScandocWeb.Gettext
+      alias ScandocWeb.Gettext
+
       alias ScandocWeb.Router.Helpers, as: Routes
     end
   end
