@@ -409,4 +409,9 @@ msgstr "חפש לפי זהות או חלק משם התלמיד"
 #, elixir-format
 #: lib/scandoc_web/controllers/classroom_controller.ex:92
 msgid "You dont have permission to see this page."
-msgstr ""
+msgstr "אין לכם הרשאה מתאימה"
+
+#, elixir-format
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:21
+msgid "Search"
+msgstr "חיפוש חופשי"

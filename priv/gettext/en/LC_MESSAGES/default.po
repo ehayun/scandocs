@@ -410,3 +410,8 @@ msgstr ""
 #: lib/scandoc_web/controllers/classroom_controller.ex:92
 msgid "You dont have permission to see this page."
 msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:21
+msgid "Search"
+msgstr ""
