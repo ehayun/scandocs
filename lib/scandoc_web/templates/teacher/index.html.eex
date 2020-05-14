@@ -37,7 +37,5 @@
   </tbody>
 </table>
 
-<span class="hidden"><%= link "New Teacher", to: Routes.teacher_path(@conn, :new) %></span>
-
 
 <%= paginate @conn, @classrooms, &ScandocWeb.Router.Helpers.teacher_path/3, [:index] %>

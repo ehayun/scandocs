@@ -119,7 +119,6 @@ defmodule Scandoc.Schools do
 
   """
   def list_managers do
-
     School |> preload(:manager) |> Repo.all()
     # Repo.all(Manager |> preload(:school) |> where(role: "020"))
   end

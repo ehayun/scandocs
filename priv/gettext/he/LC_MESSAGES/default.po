@@ -168,7 +168,7 @@ msgstr "לינק לשינוי מייל לא תקין או פג תוקף"
 
 #, elixir-format
 #: lib/scandoc_web/templates/layout/_user_menu.html.eex:20
-#: lib/scandoc_web/templates/school/index.html.eex:11
+#: lib/scandoc_web/templates/school/index.html.eex:11 lib/scandoc_web/templates/school/show.html.eex:21
 msgid "Classrooms"
 msgstr "כיתות"
 
@@ -188,6 +188,7 @@ msgid "Schools"
 msgstr "בתי ספר"
 
 #, elixir-format
+#: lib/scandoc_web/templates/classroom/show.html.eex:24
 #: lib/scandoc_web/templates/layout/_user_menu.html.eex:28
 msgid "Students"
 msgstr "תלמידים"
@@ -217,11 +218,13 @@ msgstr "רשימת מנהלים"
 
 #, elixir-format
 #: lib/scandoc_web/templates/school/index.html.eex:3
+#: lib/scandoc_web/templates/school/show.html.eex:5
 msgid "Listing Schools"
 msgstr "רשימת בתי ספר"
 
 #, elixir-format
 #: lib/scandoc_web/templates/school/index.html.eex:10
+#: lib/scandoc_web/templates/school/show.html.eex:12
 msgid "Manager"
 msgstr "מנהל"
 
@@ -237,6 +240,7 @@ msgid "School name"
 msgstr "בית ספר"
 
 #, elixir-format
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:8
 #: lib/scandoc_web/live/student_live/index.html.leex:3
 msgid "Listing Students"
 msgstr "רשימת תלמידים"
@@ -247,7 +251,8 @@ msgid "Classroom name"
 msgstr "שם הכיתה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:2
+#: lib/scandoc_web/live/student_live/show.html.leex:13
+#: lib/scandoc_web/templates/classroom/index.html.eex:2 lib/scandoc_web/templates/classroom/show.html.eex:5
 msgid "Listing Classrooms"
 msgstr "רשימת כיתות"
 
@@ -257,17 +262,21 @@ msgid "Listing Teachers"
 msgstr "רשימת מורים"
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:10
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:6
+#: lib/scandoc_web/templates/classroom/index.html.eex:10 lib/scandoc_web/templates/classroom/show.html.eex:11
+#: lib/scandoc_web/templates/school/show.html.eex:3
 msgid "School"
 msgstr "בית ספר"
 
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:11
+#: lib/scandoc_web/templates/classroom/show.html.eex:16
 msgid "Teacher"
 msgstr "מורה"
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/index.html.leex:23
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:5
+#: lib/scandoc_web/live/student_live/index.html.leex:23 lib/scandoc_web/templates/classroom/show.html.eex:3
 #: lib/scandoc_web/templates/teacher/index.html.eex:10
 msgid "Classroom"
 msgstr "כיתה"
@@ -366,16 +375,10 @@ msgid "Show Student"
 msgstr "הצג תלמיד"
 
 #, elixir-format
-#: lib/scandoc_web/live/stddoc_live/index.html.leex:15
-#: lib/scandoc_web/live/stddoc_live/show.html.leex:10 lib/scandoc_web/live/student_live/show.html.leex:20
+#: lib/scandoc_web/live/stddoc_live/index.html.leex:18
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:14 lib/scandoc_web/live/student_live/show.html.leex:20
 msgid "show all"
 msgstr "הצג הכל"
-
-#, elixir-format
-#: lib/scandoc_web/live/stddoc_live/show.html.leex:4
-#: lib/scandoc_web/live/student_live/show.html.leex:13
-msgid "Back"
-msgstr "חזרה"
 
 #, elixir-format
 #: lib/scandoc_web/live/student_live/index.html.leex:44
@@ -402,3 +405,8 @@ msgstr "סגירה"
 #: lib/scandoc_web/live/student_live/index.html.leex:6
 msgid "Search by zehut or name"
 msgstr "חפש לפי זהות או חלק משם התלמיד"
+
+#, elixir-format
+#: lib/scandoc_web/controllers/classroom_controller.ex:92
+msgid "You dont have permission to see this page."
+msgstr ""

@@ -10,7 +10,7 @@ defmodule ScandocWeb.StddocLive.Show do
   def mount(_params, _session, socket) do
     docgroups = Documents.list_student_docgroups()
 
-    {:ok, assign(socket, docgroups: docgroups, filter_by: nil)}
+    {:ok, assign(socket, docgroups: docgroups, filter_by: nil, search: "")}
   end
 
   @impl true
@@ -18,6 +18,7 @@ defmodule ScandocWeb.StddocLive.Show do
     # def handle_params(%{"id" => id}, _, socket) do
 
     filter_by = socket.assigns.filter_by
+    search = socket.assigns.search
     %{"id" => id} = params
 
     {id, _} = Integer.parse(id)
@@ -43,6 +44,8 @@ defmodule ScandocWeb.StddocLive.Show do
       path = stddoc.doc_path
       path = String.replace(path, "/home/eli", "/downloads")
 
+      IO.inspect(path, label: "search for")
+
       png =
         if File.exists?(".#{path}") do
           doc_name = Path.basename(path)
@@ -64,9 +67,8 @@ defmodule ScandocWeb.StddocLive.Show do
        |> assign(:page_title, page_title(socket.assigns.live_action))
        |> assign(:student, student)
        |> assign(:stam, "show student")
-       |> assign(:stddocs, Students.list_stddocs(id, filter_by))
+       |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
        |> assign(:document_name, png)
-       |> assign(:return_to, "/stddocs/#{student.id}")
        |> assign(:stddoc, stddoc)}
     else
       {:noreply,
@@ -74,13 +76,13 @@ defmodule ScandocWeb.StddocLive.Show do
        |> assign(:page_title, page_title(socket.assigns.live_action))
        |> assign(:student, student)
        |> assign(:stam, "show student")
-       |> assign(:stddocs, Students.list_stddocs(id, filter_by))
+       |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
        |> assign(:document_name, "")
-       |> assign(:return_to, "/stddocs/#{student.id}")
        |> assign(:stddoc, stddoc)}
     end
   end
 
+  @impl true
   def handle_event("filter_by", %{"id" => id}, socket) do
     id =
       case id do
@@ -91,6 +93,14 @@ defmodule ScandocWeb.StddocLive.Show do
     stddocs = Students.list_stddocs(socket.assigns.student.id, id)
 
     {:noreply, assign(socket, stddocs: stddocs, filter_by: id)}
+  end
+
+  @impl true
+  def handle_event("search", %{"search" => search}, socket) do
+    filter_by = socket.assigns.filter_by
+    stddocs = Students.list_stddocs(socket.assigns.student.id, filter_by, search)
+
+    {:noreply, assign(socket, stddocs: stddocs, search: search)}
   end
 
   defp pdf_thumbnail(pdf_path, thumb_path) do

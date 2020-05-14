@@ -167,7 +167,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/layout/_user_menu.html.eex:20
-#: lib/scandoc_web/templates/school/index.html.eex:11
+#: lib/scandoc_web/templates/school/index.html.eex:11 lib/scandoc_web/templates/school/show.html.eex:21
 msgid "Classrooms"
 msgstr ""
 
@@ -187,6 +187,7 @@ msgid "Schools"
 msgstr ""
 
 #, elixir-format
+#: lib/scandoc_web/templates/classroom/show.html.eex:24
 #: lib/scandoc_web/templates/layout/_user_menu.html.eex:28
 msgid "Students"
 msgstr ""
@@ -216,11 +217,13 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/school/index.html.eex:3
+#: lib/scandoc_web/templates/school/show.html.eex:5
 msgid "Listing Schools"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/school/index.html.eex:10
+#: lib/scandoc_web/templates/school/show.html.eex:12
 msgid "Manager"
 msgstr ""
 
@@ -236,6 +239,7 @@ msgid "School name"
 msgstr ""
 
 #, elixir-format
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:8
 #: lib/scandoc_web/live/student_live/index.html.leex:3
 msgid "Listing Students"
 msgstr ""
@@ -246,7 +250,8 @@ msgid "Classroom name"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:2
+#: lib/scandoc_web/live/student_live/show.html.leex:13
+#: lib/scandoc_web/templates/classroom/index.html.eex:2 lib/scandoc_web/templates/classroom/show.html.eex:5
 msgid "Listing Classrooms"
 msgstr ""
 
@@ -256,17 +261,21 @@ msgid "Listing Teachers"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/templates/classroom/index.html.eex:10
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:6
+#: lib/scandoc_web/templates/classroom/index.html.eex:10 lib/scandoc_web/templates/classroom/show.html.eex:11
+#: lib/scandoc_web/templates/school/show.html.eex:3
 msgid "School"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/index.html.eex:11
+#: lib/scandoc_web/templates/classroom/show.html.eex:16
 msgid "Teacher"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/index.html.leex:23
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:5
+#: lib/scandoc_web/live/student_live/index.html.leex:23 lib/scandoc_web/templates/classroom/show.html.eex:3
 #: lib/scandoc_web/templates/teacher/index.html.eex:10
 msgid "Classroom"
 msgstr ""
@@ -365,15 +374,9 @@ msgid "Show Student"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/stddoc_live/index.html.leex:15
-#: lib/scandoc_web/live/stddoc_live/show.html.leex:10 lib/scandoc_web/live/student_live/show.html.leex:20
+#: lib/scandoc_web/live/stddoc_live/index.html.leex:18
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:14 lib/scandoc_web/live/student_live/show.html.leex:20
 msgid "show all"
-msgstr ""
-
-#, elixir-format
-#: lib/scandoc_web/live/stddoc_live/show.html.leex:4
-#: lib/scandoc_web/live/student_live/show.html.leex:13
-msgid "Back"
 msgstr ""
 
 #, elixir-format
@@ -400,4 +403,9 @@ msgstr ""
 #, elixir-format
 #: lib/scandoc_web/live/student_live/index.html.leex:6
 msgid "Search by zehut or name"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/controllers/classroom_controller.ex:92
+msgid "You dont have permission to see this page."
 msgstr ""

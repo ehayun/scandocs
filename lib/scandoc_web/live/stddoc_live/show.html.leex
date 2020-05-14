@@ -2,8 +2,8 @@
   <i class="fas fa-user-graduate"></i>
   <%= @student.full_name %>
   &nbsp;<small>
-   <%= gettext("Classroom") %>:  <%= link @student.classroom.classroom_name, to: Routes.classroom_path(@socket, :show, @student.classroom) %>
-  &nbsp; <%= gettext("School") %>:  <%= link getSchoolName(@student.classroom.school_id), to: Routes.classroom_path(@socket, :show, @student.classroom) %>
+    <%= gettext("Classroom") %>: <%= link @student.classroom.classroom_name, to: Routes.classroom_path(@socket, :show, @student.classroom) %>
+    &nbsp; <%= gettext("School") %>: <%= link getSchoolName(@student.classroom.school_id), to: Routes.classroom_path(@socket, :show, @student.classroom) %>
   </small>
   <span class="btn btn-primary float-left"><%= live_redirect gettext("Listing Students"), to: Routes.student_index_path(@socket, :index) %></span>
 </header>
@@ -16,7 +16,13 @@
     <li phx-click="filter_by" phx-value-id="<%= d.id %>" class="nav-item"><a class='nav-link p-2 ml-2 badge badge-info <%= if @filter_by == d.id, do: "list-active " %>' href="#"><%= d.grp_name %></a></li>
     <% end %>
   </ul>
+  <span class="float-left ml-2">
+    <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
+      <input class="form-control" type="text" value='<%= @search %>' name="search" placeholder='<%= gettext("Search")%>'>
+    </form>
+  </span>
 </div>
+
 <%= if @live_action in [:edit] do %>
 <%= live_modal @socket, ScandocWeb.StddocLive.FormComponent,
     id: @stddoc.id,

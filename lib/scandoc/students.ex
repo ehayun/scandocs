@@ -118,19 +118,31 @@ defmodule Scandoc.Students do
       [%Stddoc{}, ...]
 
   """
-  def list_stddocs(student_id, filter_by \\ nil) do
+  def list_stddocs(student_id, filter_by \\ nil, search \\ "") do
     q = Stddoc |> where(ref_id: ^student_id)
 
     q =
       if filter_by do
-        tmp = Doctype |> where(doc_group_id: ^filter_by) |> Repo.all()
+        tmp =
+          from(dt in Doctype,
+            where: dt.doc_group_id in ^filter_by and ilike(dt.doc_name, ^"%#{search}%")
+          )
+
+        tmp = tmp |> Repo.all()
         dgIds = tmp |> Enum.map(fn u -> u.id end)
         from(d in q, where: d.doctype_id in ^dgIds)
       else
-        q
+        tmp =
+          from(dt in Doctype,
+            where: ilike(dt.doc_name, ^"%#{search}%")
+          )
+
+        tmp = tmp |> Repo.all()
+        dgIds = tmp |> Enum.map(fn u -> u.id end)
+        from(d in q, where: d.doctype_id in ^dgIds)
       end
 
-    q |> preload(:doctype) |> Repo.all()
+    q |> order_by(:doctype_id) |> preload(:doctype) |> Repo.all()
   end
 
   @doc """

@@ -1,4 +1,4 @@
-npm run deploy --prefix ./assets
 mix phx.digest.clean
+npm run deploy --prefix ./assets
 mix phx.digest
 
