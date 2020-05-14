@@ -84,13 +84,15 @@ defmodule ScandocWeb.StddocLive.Show do
 
   @impl true
   def handle_event("filter_by", %{"id" => id}, socket) do
+    search = socket.assigns.search
+
     id =
       case id do
         "" -> nil
         id -> String.to_integer(id)
       end
 
-    stddocs = Students.list_stddocs(socket.assigns.student.id, id)
+    stddocs = Students.list_stddocs(socket.assigns.student.id, id, search)
 
     {:noreply, assign(socket, stddocs: stddocs, filter_by: id)}
   end

@@ -125,7 +125,8 @@ defmodule Scandoc.Students do
       if filter_by do
         tmp =
           from(dt in Doctype,
-            where: dt.doc_group_id in ^filter_by and ilike(dt.doc_name, ^"%#{search}%")
+            where: dt.doc_group_id == ^filter_by,
+            where: ilike(dt.doc_name, ^"%#{search}%")
           )
 
         tmp = tmp |> Repo.all()
