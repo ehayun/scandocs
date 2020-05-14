@@ -7,12 +7,15 @@
 <% doc_path =  @doc_path %>
 <%= text_input f, :ref_id, class: "hidden" %>
 
+<% upload_path = Application.get_env(:scandoc, :full_upload_path) %>
 
-<%= if File.exists?("./priv/static/uploads/#{doc_path}.png") do %>
+<% "#{upload_path}/#{doc_path}.png" %>
+<br>
+<%= if File.exists?("#{upload_path}/#{doc_path}.png") do %>
 <img src="/uploads/<%= doc_path %>.png">
 <% end %>
 <%= for f <- 0..20 do %>
-<%= if File.exists?("./priv/static/uploads/#{doc_path}-#{f}.png") do %>
+<%= if File.exists?("#{upload_path}/#{doc_path}-#{f}.png") do %>
 <img src="/uploads/<%= doc_path %>-<%= f %>.png">
 <% end %>
 <% end %>

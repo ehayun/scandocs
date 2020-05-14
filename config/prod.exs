@@ -22,7 +22,7 @@ config :scandoc, ScandocWeb.Endpoint,
 config :logger, level: :info
 
 config :scandoc,
-  full_upload_path: "/home/eli/scandocs/uploads",
+  full_upload_path: "/home/eli/scandocs/priv/static/uploads",
   full_download_path: "/home/eli/scandocs/downloads"
 
 # ## SSL Support

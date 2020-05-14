@@ -58,8 +58,10 @@ defmodule ScandocWeb.StudentLive.Show do
 
           just_name = Path.rootname(doc_name)
 
+          upload_path = Application.get_env(:scandoc, :full_upload_path)
+
           png =
-            case pdf_thumbnail(".#{path}", "./priv/static//uploads/#{just_name}.png") do
+            case pdf_thumbnail(".#{path}", "#{upload_path}/#{just_name}.png") do
               {:ok, png} ->
                 doc_name = Path.basename(png)
                 Path.rootname(doc_name)
@@ -85,6 +87,8 @@ defmodule ScandocWeb.StudentLive.Show do
   end
 
   defp pdf_thumbnail(pdf_path, thumb_path) do
+    IO.puts("**********444****** convert.....")
+
     args = ["#{pdf_path}", thumb_path]
     name = Path.rootname(thumb_path)
 

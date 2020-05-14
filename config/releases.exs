@@ -31,7 +31,7 @@ config :scandoc, ScandocWeb.Endpoint,
   secret_key_base: secret_key_base
 
 config :scandoc,
-  full_upload_path: "/home/eli/scandocs/uploads",
+  full_upload_path: "/home/eli/scandocs/priv/static/uploads",
   full_download_path: "/home/eli/scandocs/downloads"
 
 # ## Using releases (Elixir v1.9+)
