@@ -143,7 +143,12 @@ defmodule Scandoc.Students do
         from(d in q, where: d.doctype_id in ^dgIds)
       end
 
-    q |> order_by(:doctype_id) |> preload(:doctype) |> Repo.all()
+    q
+    |> order_by(desc: :ref_date)
+    |> order_by(desc: :ref_year)
+    |> order_by(desc: :ref_month)
+    |> preload(:doctype)
+    |> Repo.all()
   end
 
   @doc """
