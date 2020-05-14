@@ -10,6 +10,11 @@
 <% upload_path = Application.get_env(:scandoc, :full_upload_path) %>
 
 
+<%= if doc_path do %>
+<span class="xhidden">
+  <embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://scantzlev.com/uploads/#{doc_path}.pdf" width="90%" height="700">
+</span>
+<% end %>
 
 
 <% "#{upload_path}/#{doc_path}.png" %>

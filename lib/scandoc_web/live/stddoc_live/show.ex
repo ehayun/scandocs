@@ -111,7 +111,9 @@ defmodule ScandocWeb.StddocLive.Show do
     IO.inspect(thumb_path, label: "*** pdf: [#{pdf_path}]")
 
     args = ["#{pdf_path}", thumb_path]
+    IO.inspect(args)
     name = Path.rootname(thumb_path)
+    File.copy!("#{pdf_path}", "#{name}.pdf")
 
     if File.exists?("#{name}.png") || File.exists?("#{name}-0.png") do
       {:ok, thumb_path}

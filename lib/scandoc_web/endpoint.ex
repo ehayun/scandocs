@@ -28,7 +28,8 @@ defmodule ScandocWeb.Endpoint do
 
   plug Plug.Static,
     at: "/uploads",
-    from: :scandoc, ##"./uploads", #Application.get_env(:scandoc, :full_upload_path),
+    ## "./uploads", #Application.get_env(:scandoc, :full_upload_path),
+    from: :scandoc,
     gzip: false
 
   # Code reloading can be explicitly enabled under the
