@@ -9,12 +9,18 @@
 
 <% upload_path = Application.get_env(:scandoc, :full_upload_path) %>
 
+
+
+<embed src="https://drive.google.com/viewerng/
+viewer?embedded=true&url=https://scantzlev.com/uploads/aaa.pdf" width="500" height="375">
+
+
 <% "#{upload_path}/#{doc_path}.png" %>
 <br>
-<%= if File.exists?("#{upload_path}/#{doc_path}.png") do %>
+<% if File.exists?("#{upload_path}/#{doc_path}.png") do %>
 <img src="/uploads/<%= doc_path %>.png">
 <% end %>
-<%= for f <- 0..20 do %>
+<% for f <- 0..20 do %>
 <%= if File.exists?("#{upload_path}/#{doc_path}-#{f}.png") do %>
 <img src="/uploads/<%= doc_path %>-<%= f %>.png">
 <% end %>
