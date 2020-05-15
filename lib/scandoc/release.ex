@@ -1,5 +1,5 @@
 defmodule Scandoc.Release do
-  @app :my_app
+  @app :scandoc
 
   def migrate do
     load_app()
