@@ -86,6 +86,47 @@ defmodule ScandocWeb.Router do
     live "/stddocs/:id", StddocLive.Show, :show
     live "/stddocs/:id/show/edit", StddocLive.Show, :edit
 
+    # Institutes
+    live "/institutes", InstituteLive.Index, :index
+    live "/institutes/new", InstituteLive.Index, :new
+    live "/institutes/:id/edit", InstituteLive.Index, :edit
+
+    live "/institutes/:id", InstituteLive.Show, :show
+    live "/institutes/:id/show/edit", InstituteLive.Show, :edit
+
+    # Cagegories
+    live "/categories", CategoryLive.Index, :index
+    live "/categories/new", CategoryLive.Index, :new
+    live "/categories/:id/edit", CategoryLive.Index, :edit
+
+    live "/categories/:id", CategoryLive.Show, :show
+    live "/categories/:id/show/edit", CategoryLive.Show, :edit
+
+    # outcome category
+    live "/outcome_categoryes", OutcomeCategoryLive.Index, :index
+    live "/outcome_categoryes/new", OutcomeCategoryLive.Index, :new
+    live "/outcome_categoryes/:id/edit", OutcomeCategoryLive.Index, :edit
+
+    live "/outcome_categoryes/:id", OutcomeCategoryLive.Show, :show
+    live "/outcome_categoryes/:id/show/edit", OutcomeCategoryLive.Show, :edit
+
+    # Vendors
+    live "/vendors", VendorLive.Index, :index
+    live "/vendors/new", VendorLive.Index, :new
+    live "/vendors/:id/edit", VendorLive.Index, :edit
+
+    live "/vendors/:id", VendorLive.Show, :show
+    live "/vendors/:id/show/edit", VendorLive.Show, :edit
+
+    # Vendor coduments
+    live "/inst_docs", InstdocLive.Index, :index
+    live "/inst_docs/new", InstdocLive.Index, :new
+    live "/inst_docs/:id/edit", InstdocLive.Index, :edit
+
+    live "/inst_docs/:id", InstdocLive.Show, :show
+    live "/inst_docs/:id/show/edit", InstdocLive.Show, :edit
+
+
     resources "/schools", SchoolController
     resources "/managers", ManagerController
     resources "/teachers", TeacherController

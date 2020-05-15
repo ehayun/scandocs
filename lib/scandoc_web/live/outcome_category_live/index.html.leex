@@ -1,0 +1,42 @@
+<h2><%= gettext("Listing Outcome categoryes") %>
+  <%= live_patch  gettext("Add New"), to: Routes.outcome_category_index_path(@socket, :new), class: "float-left btn btn-primary" %>
+
+
+</h2>
+
+<%= if @live_action in [:new, :edit] do %>
+<%= live_modal @socket, ScandocWeb.OutcomeCategoryLive.FormComponent,
+    id: @outcome_category.id || :new,
+    title: @page_title,
+    action: @live_action,
+    outcome_category: @outcome_category,
+    return_to: Routes.outcome_category_index_path(@socket, :index) %>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th><%= gettext("Outcome card") %></th>
+      <th><%= gettext("Category") %></th>
+      <th><%= gettext("Outcome description") %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="outcome_categoryes">
+    <%= for outcome_category <- @outcome_categoryes do %>
+    <tr id="outcome_category-<%= outcome_category.id %>">
+      <td><%= outcome_category.outcome_card %></td>
+      <td><%= outcome_category.category_id %></td>
+      <td><%= outcome_category.outcome_description %></td>
+
+      <td>
+        <span class="hidden"><%= live_redirect "Show", to: Routes.outcome_category_show_path(@socket, :show, outcome_category) %></span>
+        <span><%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.outcome_category_index_path(@socket, :edit, outcome_category) %></span>
+        <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: outcome_category.id, data: [confirm: gettext("Are you sure?")] %></span>
+
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

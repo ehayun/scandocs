@@ -163,7 +163,7 @@ defmodule Scandoc.Util.ImportStudents do
             classroom_id: cls
           }
 
-          case res = Scandoc.Students.create_student(student) do
+          case Scandoc.Students.create_student(student) do
             {:ok, std} ->
               std.id
 

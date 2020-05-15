@@ -1,0 +1,22 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "outcome_category-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+  <%= label f, :outcome_card %>
+  <%= text_input f, :outcome_card %>
+  <%= error_tag f, :outcome_card %>
+
+  <%= label f, :category_id %>
+  <%= number_input f, :category_id %>
+  <%= error_tag f, :category_id %>
+
+  <%= label f, :outcome_description %>
+  <%= text_input f, :outcome_description %>
+  <%= error_tag f, :outcome_description %>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>

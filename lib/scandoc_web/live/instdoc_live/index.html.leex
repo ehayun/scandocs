@@ -1,0 +1,53 @@
+<h1>Listing Inst docs</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, ScandocWeb.InstdocLive.FormComponent,
+    id: @instdoc.id || :new,
+    title: @page_title,
+    action: @live_action,
+    instdoc: @instdoc,
+    return_to: Routes.instdoc_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Category</th>
+      <th>Payment code</th>
+      <th>Line code</th>
+      <th>Vendor</th>
+      <th>Outcome category</th>
+      <th>Doc date</th>
+      <th>Amount</th>
+      <th>Doc name</th>
+      <th>Doc path</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="inst_docs">
+    <%= for instdoc <- @inst_docs do %>
+      <tr id="instdoc-<%= instdoc.id %>">
+        <td><%= instdoc.institute_id %></td>
+        <td><%= instdoc.category_id %></td>
+        <td><%= instdoc.payment_code %></td>
+        <td><%= instdoc.line_code %></td>
+        <td><%= instdoc.vendor_id %></td>
+        <td><%= instdoc.outcome_category_id %></td>
+        <td><%= instdoc.doc_date %></td>
+        <td><%= instdoc.amount %></td>
+        <td><%= instdoc.doc_name %></td>
+        <td><%= instdoc.doc_path %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.instdoc_show_path(@socket, :show, instdoc) %></span>
+          <span><%= live_patch "Edit", to: Routes.instdoc_index_path(@socket, :edit, instdoc) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: instdoc.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Instdoc", to: Routes.instdoc_index_path(@socket, :new) %></span>

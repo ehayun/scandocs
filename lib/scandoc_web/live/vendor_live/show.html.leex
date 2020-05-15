@@ -1,0 +1,42 @@
+<h1>Show Vendor</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.VendorLive.FormComponent,
+    id: @vendor.id,
+    title: @page_title,
+    action: @live_action,
+    vendor: @vendor,
+    return_to: Routes.vendor_show_path(@socket, :show, @vendor) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Vendor name:</strong>
+    <%= @vendor.vendor_name %>
+  </li>
+
+  <li>
+    <strong>Contact name:</strong>
+    <%= @vendor.contact_name %>
+  </li>
+
+  <li>
+    <strong>Address:</strong>
+    <%= @vendor.address %>
+  </li>
+
+  <li>
+    <strong>Phone number:</strong>
+    <%= @vendor.phone_number %>
+  </li>
+
+  <li>
+    <strong>Vendor site:</strong>
+    <%= @vendor.vendor_site %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.vendor_show_path(@socket, :edit, @vendor), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.vendor_index_path(@socket, :index) %></span>

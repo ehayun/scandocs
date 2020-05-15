@@ -1,0 +1,43 @@
+<h2><%= gettext("Listing Institutes") %>
+
+  <%= live_patch  gettext("Add New"), to: Routes.institute_index_path(@socket, :new), class: "float-left btn btn-primary" %>
+</h2>
+
+
+
+<%= if @live_action in [:new, :edit] do %>
+<%= live_modal @socket, ScandocWeb.InstituteLive.FormComponent,
+    id: @institute.id || :new,
+    title: @page_title,
+    action: @live_action,
+    institute: @institute,
+    return_to: Routes.institute_index_path(@socket, :index) %>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th><%= gettext("Code") %></th>
+      <th><%= gettext("Title") %></th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="institutes">
+    <%= for institute <- @institutes do %>
+    <tr id="institute-<%= institute.id %>">
+      <td><%= institute.code %></td>
+      <td><%= institute.title %></td>
+
+      <td>
+        <span class="hidden"><%= live_redirect "Show", to: Routes.institute_show_path(@socket, :show, institute) %></span>
+        <span><%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.institute_index_path(@socket, :edit, institute) %></span>
+        <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: institute.id, data: [confirm: gettext("Are you sure?")] %></span>
+
+
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

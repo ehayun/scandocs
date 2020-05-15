@@ -4,7 +4,6 @@ defmodule ScandocWeb.StddocLive.Show do
   alias Scandoc.Students
 
   alias Scandoc.Documents
-  alias Scandoc.Students.Stddoc
 
   @impl true
   def mount(_params, _session, socket) do

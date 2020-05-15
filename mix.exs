@@ -55,6 +55,7 @@ defmodule Scandoc.MixProject do
       {:scrivener, "~> 2.0"},
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_phoenix, "~> 0.1.0"},
+      {:money, "~> 1.7"},
       {:mogrify, "~> 0.7.3"},
       {:plug_cowboy, "~> 2.0"}
     ]

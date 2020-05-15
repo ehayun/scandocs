@@ -1,0 +1,27 @@
+<h1>Show Institute</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.InstituteLive.FormComponent,
+    id: @institute.id,
+    title: @page_title,
+    action: @live_action,
+    institute: @institute,
+    return_to: Routes.institute_show_path(@socket, :show, @institute) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Code:</strong>
+    <%= @institute.code %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @institute.title %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.institute_show_path(@socket, :edit, @institute), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.institute_index_path(@socket, :index) %></span>

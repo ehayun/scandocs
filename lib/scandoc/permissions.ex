@@ -9,7 +9,6 @@ defmodule Scandoc.Permissions do
   alias Scandoc.Permissions.Permission
   alias Scandoc.Schools.School
   alias Scandoc.Classrooms.Classroom
-  alias Scandoc.Accounts
   alias Scandoc.Accounts.User
 
   @doc """

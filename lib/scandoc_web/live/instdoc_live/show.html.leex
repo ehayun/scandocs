@@ -1,0 +1,67 @@
+<h1>Show Instdoc</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.InstdocLive.FormComponent,
+    id: @instdoc.id,
+    title: @page_title,
+    action: @live_action,
+    instdoc: @instdoc,
+    return_to: Routes.instdoc_show_path(@socket, :show, @instdoc) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Code:</strong>
+    <%= @instdoc.institute_id %>
+  </li>
+
+  <li>
+    <strong>Category:</strong>
+    <%= @instdoc.category_id %>
+  </li>
+
+  <li>
+    <strong>Payment code:</strong>
+    <%= @instdoc.payment_code %>
+  </li>
+
+  <li>
+    <strong>Line code:</strong>
+    <%= @instdoc.line_code %>
+  </li>
+
+  <li>
+    <strong>Vendor:</strong>
+    <%= @instdoc.vendor_id %>
+  </li>
+
+  <li>
+    <strong>Outcome category:</strong>
+    <%= @instdoc.outcome_category_id %>
+  </li>
+
+  <li>
+    <strong>Doc date:</strong>
+    <%= @instdoc.doc_date %>
+  </li>
+
+  <li>
+    <strong>Amount:</strong>
+    <%= @instdoc.amount %>
+  </li>
+
+  <li>
+    <strong>Doc name:</strong>
+    <%= @instdoc.doc_name %>
+  </li>
+
+  <li>
+    <strong>Doc path:</strong>
+    <%= @instdoc.doc_path %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.instdoc_show_path(@socket, :edit, @instdoc), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.instdoc_index_path(@socket, :index) %></span>

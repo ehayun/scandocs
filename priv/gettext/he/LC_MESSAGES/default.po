@@ -55,14 +55,14 @@ msgid "Logged out successfully."
 msgstr "יצאתם מהמערכת"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:68
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:71
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:18
 msgid "Login"
 msgstr "כניסה למערכת"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:43
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:61
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:46
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:64
 msgid "Logout"
 msgstr "יציאה מהמערכת"
 
@@ -104,13 +104,15 @@ msgid "Reset password link is invalid or it has expired."
 msgstr "קישור זה אינו תקין או פג תוקף"
 
 #, elixir-format
-#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26
+#: lib/scandoc_web/live/category_live/form_component.html.leex:25
+#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/institute_live/form_component.html.leex:26
 #: lib/scandoc_web/live/permission_live/form_component.html.leex:31
 msgid "Save"
 msgstr "שמירה"
 
 #, elixir-format
-#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26
+#: lib/scandoc_web/live/category_live/form_component.html.leex:25
+#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/institute_live/form_component.html.leex:26
 #: lib/scandoc_web/live/permission_live/form_component.html.leex:31
 msgid "Saving..."
 msgstr "שומר..."
@@ -121,7 +123,7 @@ msgid "Send instructions to reset password"
 msgstr "שלח הוראות לשינוי סיסמה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:60
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:63
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -200,7 +202,9 @@ msgid "Teachers"
 msgstr "מורים"
 
 #, elixir-format
-#: lib/scandoc_web/live/docgroup_live/form_component.html.leex:12
+#: lib/scandoc_web/live/category_live/form_component.html.leex:11
+#: lib/scandoc_web/live/category_live/index.html.leex:18 lib/scandoc_web/live/docgroup_live/form_component.html.leex:12
+#: lib/scandoc_web/live/institute_live/form_component.html.leex:12 lib/scandoc_web/live/institute_live/index.html.leex:20
 #: lib/scandoc_web/templates/classroom/index.html.eex:8 lib/scandoc_web/templates/school/index.html.eex:8
 msgid "Code"
 msgstr "קוד"
@@ -297,7 +301,8 @@ msgid "User name"
 msgstr "משתמש"
 
 #, elixir-format
-#: lib/scandoc_web/live/docgroup_live/index.html.leex:3
+#: lib/scandoc_web/live/category_live/index.html.leex:2
+#: lib/scandoc_web/live/docgroup_live/index.html.leex:3 lib/scandoc_web/live/institute_live/index.html.leex:3
 #: lib/scandoc_web/live/permission_live/index.html.leex:5
 msgid "Add New"
 msgstr "הוספה"
@@ -338,7 +343,8 @@ msgid "Admin"
 msgstr "ניהול"
 
 #, elixir-format
-#: lib/scandoc_web/live/docgroup_live/index.html.leex:33
+#: lib/scandoc_web/live/category_live/index.html.leex:34
+#: lib/scandoc_web/live/docgroup_live/index.html.leex:33 lib/scandoc_web/live/institute_live/index.html.leex:35
 #: lib/scandoc_web/live/permission_live/index.html.leex:37
 msgid "Are you sure?"
 msgstr "בטוחים שברצונכם למחוק"
@@ -349,6 +355,7 @@ msgid "Categories"
 msgstr "קטגוריות"
 
 #, elixir-format
+#: lib/scandoc_web/live/category_live/index.ex:31
 #: lib/scandoc_web/live/docgroup_live/index.html.leex:1
 msgid "Listing Categories"
 msgstr "רשימת קטגוריות"
@@ -430,3 +437,96 @@ msgstr "רשימת בתי ספר"
 #: lib/scandoc_web/live/docgroup_live/index.ex:25
 msgid "New Docgroup"
 msgstr "קטגוריה חדשה"
+
+#, elixir-format
+#: lib/scandoc_web/live/institute_live/index.ex:19
+msgid "Edit Institute"
+msgstr "עדכון מוסד"
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:43
+msgid "Institutes"
+msgstr "מוסדות"
+
+#, elixir-format
+#: lib/scandoc_web/live/institute_live/index.ex:31
+#: lib/scandoc_web/live/institute_live/index.html.leex:1
+msgid "Listing Institutes"
+msgstr "רשימת מוסדות"
+
+#, elixir-format
+#: lib/scandoc_web/live/institute_live/index.ex:25
+msgid "New Institute"
+msgstr "הוספת מוסד"
+
+#, elixir-format
+#: lib/scandoc_web/live/institute_live/form_component.html.leex:17
+msgid "institute"
+msgstr "מוסד"
+
+#, elixir-format
+#: lib/scandoc_web/live/category_live/index.html.leex:19
+#: lib/scandoc_web/live/institute_live/index.html.leex:21
+msgid "Title"
+msgstr "שם"
+
+#, elixir-format
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:18
+msgid "Category"
+msgstr "קטגוריה/סוג מסמך"
+
+#, elixir-format
+#: lib/scandoc_web/live/category_live/form_component.html.leex:16
+msgid "Cetegory name"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/category_live/index.ex:19
+msgid "Edit Category"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/outcome_category_live/index.ex:19
+msgid "Edit Outcome category"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:44
+msgid "Institutes Categories"
+msgstr "קטגוריות מוסד"
+
+#, elixir-format
+#: lib/scandoc_web/live/category_live/index.html.leex:1
+msgid "Listing Institute Categories"
+msgstr "רשימת קטגוריות מוסדות"
+
+#, elixir-format
+#: lib/scandoc_web/live/outcome_category_live/index.ex:31
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:1
+msgid "Listing Outcome categoryes"
+msgstr "רשימת קטגוריות הוצאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/category_live/index.ex:25
+msgid "New Category"
+msgstr "הוספת קטגוריה"
+
+#, elixir-format
+#: lib/scandoc_web/live/outcome_category_live/index.ex:25
+msgid "New Outcome category"
+msgstr "הוספת קטגורית הוצאה"
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:45
+msgid "Outcome Categories"
+msgstr "קטגורית הוצאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:17
+msgid "Outcome card"
+msgstr "כרטיס הוצאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:19
+msgid "Outcome description"
+msgstr "תיאור הוצאה"

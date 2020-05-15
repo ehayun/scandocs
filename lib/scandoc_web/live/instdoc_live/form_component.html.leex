@@ -1,0 +1,50 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "instdoc-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+  <%= label f, :institute_id %>
+  <%= text_input f, :institute_id %>
+  <%= error_tag f, :institute_id %>
+
+  <%= label f, :category_id %>
+  <%= number_input f, :category_id %>
+  <%= error_tag f, :category_id %>
+
+  <%= label f, :payment_code %>
+  <%= text_input f, :payment_code %>
+  <%= error_tag f, :payment_code %>
+
+  <%= label f, :line_code %>
+  <%= text_input f, :line_code %>
+  <%= error_tag f, :line_code %>
+
+  <%= label f, :vendor_id %>
+  <%= number_input f, :vendor_id %>
+  <%= error_tag f, :vendor_id %>
+
+  <%= label f, :outcome_category_id %>
+  <%= number_input f, :outcome_category_id %>
+  <%= error_tag f, :outcome_category_id %>
+
+  <%= label f, :doc_date %>
+  <%= date_select f, :doc_date %>
+  <%= error_tag f, :doc_date %>
+
+  <%= label f, :amount %>
+  <%= number_input f, :amount, step: "any" %>
+  <%= error_tag f, :amount %>
+
+  <%= label f, :doc_name %>
+  <%= text_input f, :doc_name %>
+  <%= error_tag f, :doc_name %>
+
+  <%= label f, :doc_path %>
+  <%= text_input f, :doc_path %>
+  <%= error_tag f, :doc_path %>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>
