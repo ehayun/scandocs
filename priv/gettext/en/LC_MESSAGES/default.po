@@ -365,12 +365,12 @@ msgid "code"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/show.ex:106
+#: lib/scandoc_web/live/student_live/show.ex:110
 msgid "Edit Student"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/show.ex:105
+#: lib/scandoc_web/live/student_live/show.ex:109
 msgid "Show Student"
 msgstr ""
 
@@ -397,7 +397,7 @@ msgid "close"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/stddoc_live/form_component.html.leex:22
+#: lib/scandoc_web/live/stddoc_live/form_component.html.leex:33
 msgid "Close"
 msgstr ""
 
@@ -414,4 +414,19 @@ msgstr ""
 #, elixir-format
 #: lib/scandoc_web/live/stddoc_live/show.html.leex:21
 msgid "Search"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.ex:19
+msgid "Edit Docgroup"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.ex:31
+msgid "Listing Docgroups"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.ex:25
+msgid "New Docgroup"
 msgstr ""

@@ -29,7 +29,7 @@
 
       <td>
         <span class="hidden"><%= live_redirect "Show", to: Routes.docgroup_show_path(@socket, :show, docgroup) %></span>
-        <span><%= live_patch raw("<i class='fas fa-user-edit'></i>"), to: Routes.docgroup_index_path(@socket, :edit, docgroup) %></span>
+        <span><%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.docgroup_index_path(@socket, :edit, docgroup) %></span>
         <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: docgroup.id, data: [confirm: gettext("Are you sure?")] %></span>
 
       </td>

@@ -16,19 +16,19 @@ defmodule ScandocWeb.DocgroupLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Docgroup")
+    |> assign(:page_title, gettext("Edit Docgroup"))
     |> assign(:docgroup, Documents.get_docgroup!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Docgroup")
+    |> assign(:page_title, gettext("New Docgroup"))
     |> assign(:docgroup, %Docgroup{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Docgroups")
+    |> assign(:page_title, gettext("Listing Docgroups"))
     |> assign(:docgroup, nil)
   end
 

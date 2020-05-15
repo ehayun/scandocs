@@ -351,7 +351,7 @@ msgstr "קטגוריות"
 #, elixir-format
 #: lib/scandoc_web/live/docgroup_live/index.html.leex:1
 msgid "Listing Categories"
-msgstr "רשימת מנהלים"
+msgstr "רשימת קטגוריות"
 
 #, elixir-format
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:17
@@ -365,12 +365,12 @@ msgid "code"
 msgstr "קוד"
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/show.ex:106
+#: lib/scandoc_web/live/student_live/show.ex:110
 msgid "Edit Student"
 msgstr "עדכון תלמיד"
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/show.ex:105
+#: lib/scandoc_web/live/student_live/show.ex:109
 msgid "Show Student"
 msgstr "הצג תלמיד"
 
@@ -397,7 +397,7 @@ msgid "close"
 msgstr "סגירה"
 
 #, elixir-format
-#: lib/scandoc_web/live/stddoc_live/form_component.html.leex:22
+#: lib/scandoc_web/live/stddoc_live/form_component.html.leex:33
 msgid "Close"
 msgstr "סגירה"
 
@@ -415,3 +415,18 @@ msgstr "אין לכם הרשאה מתאימה"
 #: lib/scandoc_web/live/stddoc_live/show.html.leex:21
 msgid "Search"
 msgstr "חיפוש חופשי"
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.ex:19
+msgid "Edit Docgroup"
+msgstr "עדכון קטגוריה"
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.ex:31
+msgid "Listing Docgroups"
+msgstr "רשימת בתי ספר"
+
+#, elixir-format
+#: lib/scandoc_web/live/docgroup_live/index.ex:25
+msgid "New Docgroup"
+msgstr "קטגוריה חדשה"
