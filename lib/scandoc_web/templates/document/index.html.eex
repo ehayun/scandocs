@@ -1,9 +1,5 @@
 <h1>Listing Documents</h1>
 
-
-
-<a href="/uploads/Scan_files/צוהר/רוב_יוני_211339981/211339981-216-0105.pdf">AAA</a>
-
 <table>
   <thead>
     <tr>
@@ -21,7 +17,7 @@
     </tr>
   </thead>
   <tbody>
-<%= for document <- @documents do %>
+    <%= for document <- @documents do %>
     <tr>
       <td><%= document.line_code %></td>
       <td><%= document.doc_name %></td>
@@ -39,7 +35,7 @@
         <span><%= link "Delete", to: Routes.document_path(@conn, :delete, document), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
-<% end %>
+    <% end %>
   </tbody>
 </table>
 

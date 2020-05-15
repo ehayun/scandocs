@@ -23,6 +23,12 @@ defmodule ScandocWeb.LiveHelpers do
     s.school_name
   end
 
+  def getDocumentPath(path) do
+    if File.exists?("#{path}"),
+      do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
+      else: "#"
+  end
+
   @doc """
   Renders a component inside the `ScandocWeb.ModalComponent` component.
 
