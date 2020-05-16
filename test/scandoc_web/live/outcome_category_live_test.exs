@@ -5,8 +5,16 @@ defmodule ScandocWeb.OutcomeCategoryLiveTest do
 
   alias Scandoc.Categories
 
-  @create_attrs %{category_id: 42, outcome_card: "some outcome_card", outcome_description: "some outcome_description"}
-  @update_attrs %{category_id: 43, outcome_card: "some updated outcome_card", outcome_description: "some updated outcome_description"}
+  @create_attrs %{
+    category_id: 42,
+    outcome_card: "some outcome_card",
+    outcome_description: "some outcome_description"
+  }
+  @update_attrs %{
+    category_id: 43,
+    outcome_card: "some updated outcome_card",
+    outcome_description: "some updated outcome_description"
+  }
   @invalid_attrs %{category_id: nil, outcome_card: nil, outcome_description: nil}
 
   defp fixture(:outcome_category) do
@@ -33,7 +41,7 @@ defmodule ScandocWeb.OutcomeCategoryLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.outcome_category_index_path(conn, :index))
 
       assert index_live |> element("a", "New Outcome category") |> render_click() =~
-        "New Outcome category"
+               "New Outcome category"
 
       assert_patch(index_live, Routes.outcome_category_index_path(conn, :new))
 
@@ -54,8 +62,10 @@ defmodule ScandocWeb.OutcomeCategoryLiveTest do
     test "updates outcome_category in listing", %{conn: conn, outcome_category: outcome_category} do
       {:ok, index_live, _html} = live(conn, Routes.outcome_category_index_path(conn, :index))
 
-      assert index_live |> element("#outcome_category-#{outcome_category.id} a", "Edit") |> render_click() =~
-        "Edit Outcome category"
+      assert index_live
+             |> element("#outcome_category-#{outcome_category.id} a", "Edit")
+             |> render_click() =~
+               "Edit Outcome category"
 
       assert_patch(index_live, Routes.outcome_category_index_path(conn, :edit, outcome_category))
 
@@ -76,7 +86,10 @@ defmodule ScandocWeb.OutcomeCategoryLiveTest do
     test "deletes outcome_category in listing", %{conn: conn, outcome_category: outcome_category} do
       {:ok, index_live, _html} = live(conn, Routes.outcome_category_index_path(conn, :index))
 
-      assert index_live |> element("#outcome_category-#{outcome_category.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#outcome_category-#{outcome_category.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#outcome_category-#{outcome_category.id}")
     end
   end
@@ -85,17 +98,22 @@ defmodule ScandocWeb.OutcomeCategoryLiveTest do
     setup [:create_outcome_category]
 
     test "displays outcome_category", %{conn: conn, outcome_category: outcome_category} do
-      {:ok, _show_live, html} = live(conn, Routes.outcome_category_show_path(conn, :show, outcome_category))
+      {:ok, _show_live, html} =
+        live(conn, Routes.outcome_category_show_path(conn, :show, outcome_category))
 
       assert html =~ "Show Outcome category"
       assert html =~ outcome_category.outcome_card
     end
 
-    test "updates outcome_category within modal", %{conn: conn, outcome_category: outcome_category} do
-      {:ok, show_live, _html} = live(conn, Routes.outcome_category_show_path(conn, :show, outcome_category))
+    test "updates outcome_category within modal", %{
+      conn: conn,
+      outcome_category: outcome_category
+    } do
+      {:ok, show_live, _html} =
+        live(conn, Routes.outcome_category_show_path(conn, :show, outcome_category))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Outcome category"
+               "Edit Outcome category"
 
       assert_patch(show_live, Routes.outcome_category_show_path(conn, :edit, outcome_category))
 

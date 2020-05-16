@@ -20,7 +20,29 @@ defmodule Scandoc.Institutes.Instdoc do
   @doc false
   def changeset(instdoc, attrs) do
     instdoc
-    |> cast(attrs, [:institute_id, :category_id, :payment_code, :line_code, :vendor_id, :outcome_category_id, :doc_date, :amount, :doc_name, :doc_path])
-    |> validate_required([:institute_id, :category_id, :payment_code, :line_code, :vendor_id, :outcome_category_id, :doc_date, :amount, :doc_name, :doc_path])
+    |> cast(attrs, [
+      :institute_id,
+      :category_id,
+      :payment_code,
+      :line_code,
+      :vendor_id,
+      :outcome_category_id,
+      :doc_date,
+      :amount,
+      :doc_name,
+      :doc_path
+    ])
+    |> validate_required([
+      :institute_id,
+      :category_id,
+      :payment_code,
+      :line_code,
+      :vendor_id,
+      :outcome_category_id,
+      :doc_date,
+      :amount,
+      :doc_name,
+      :doc_path
+    ])
   end
 end

@@ -8,6 +8,5 @@ defmodule Scandoc.Repo.Migrations.CreateInstitutes do
 
       timestamps()
     end
-
   end
 end

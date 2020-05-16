@@ -8,6 +8,5 @@ defmodule Scandoc.Repo.Migrations.CreateCategories do
 
       timestamps()
     end
-
   end
 end

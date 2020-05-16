@@ -41,7 +41,10 @@ defmodule Scandoc.InstitutesTest do
 
     test "update_institute/2 with valid data updates the institute" do
       institute = institute_fixture()
-      assert {:ok, %Institute{} = institute} = Institutes.update_institute(institute, @update_attrs)
+
+      assert {:ok, %Institute{} = institute} =
+               Institutes.update_institute(institute, @update_attrs)
+
       assert institute.code == "some updated code"
       assert institute.title == "some updated title"
     end
@@ -67,9 +70,42 @@ defmodule Scandoc.InstitutesTest do
   describe "inst_docs" do
     alias Scandoc.Institutes.Instdoc
 
-    @valid_attrs %{amount: "120.5", category_id: 42, code: "some code", doc_date: ~D[2010-04-17], doc_name: "some doc_name", doc_path: "some doc_path", line_code: "some line_code", outcome_category_id: 42, payment_code: "some payment_code", vendor_id: 42}
-    @update_attrs %{amount: "456.7", category_id: 43, code: "some updated code", doc_date: ~D[2011-05-18], doc_name: "some updated doc_name", doc_path: "some updated doc_path", line_code: "some updated line_code", outcome_category_id: 43, payment_code: "some updated payment_code", vendor_id: 43}
-    @invalid_attrs %{amount: nil, category_id: nil, code: nil, doc_date: nil, doc_name: nil, doc_path: nil, line_code: nil, outcome_category_id: nil, payment_code: nil, vendor_id: nil}
+    @valid_attrs %{
+      amount: "120.5",
+      category_id: 42,
+      code: "some code",
+      doc_date: ~D[2010-04-17],
+      doc_name: "some doc_name",
+      doc_path: "some doc_path",
+      line_code: "some line_code",
+      outcome_category_id: 42,
+      payment_code: "some payment_code",
+      vendor_id: 42
+    }
+    @update_attrs %{
+      amount: "456.7",
+      category_id: 43,
+      code: "some updated code",
+      doc_date: ~D[2011-05-18],
+      doc_name: "some updated doc_name",
+      doc_path: "some updated doc_path",
+      line_code: "some updated line_code",
+      outcome_category_id: 43,
+      payment_code: "some updated payment_code",
+      vendor_id: 43
+    }
+    @invalid_attrs %{
+      amount: nil,
+      category_id: nil,
+      code: nil,
+      doc_date: nil,
+      doc_name: nil,
+      doc_path: nil,
+      line_code: nil,
+      outcome_category_id: nil,
+      payment_code: nil,
+      vendor_id: nil
+    }
 
     def instdoc_fixture(attrs \\ %{}) do
       {:ok, instdoc} =

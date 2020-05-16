@@ -67,8 +67,16 @@ defmodule Scandoc.CategoriesTest do
   describe "outcome_categoryes" do
     alias Scandoc.Categories.OutcomeCategory
 
-    @valid_attrs %{category_id: 42, outcome_card: "some outcome_card", outcome_description: "some outcome_description"}
-    @update_attrs %{category_id: 43, outcome_card: "some updated outcome_card", outcome_description: "some updated outcome_description"}
+    @valid_attrs %{
+      category_id: 42,
+      outcome_card: "some outcome_card",
+      outcome_description: "some outcome_description"
+    }
+    @update_attrs %{
+      category_id: 43,
+      outcome_card: "some updated outcome_card",
+      outcome_description: "some updated outcome_description"
+    }
     @invalid_attrs %{category_id: nil, outcome_card: nil, outcome_description: nil}
 
     def outcome_category_fixture(attrs \\ %{}) do
@@ -91,7 +99,9 @@ defmodule Scandoc.CategoriesTest do
     end
 
     test "create_outcome_category/1 with valid data creates a outcome_category" do
-      assert {:ok, %OutcomeCategory{} = outcome_category} = Categories.create_outcome_category(@valid_attrs)
+      assert {:ok, %OutcomeCategory{} = outcome_category} =
+               Categories.create_outcome_category(@valid_attrs)
+
       assert outcome_category.category_id == 42
       assert outcome_category.outcome_card == "some outcome_card"
       assert outcome_category.outcome_description == "some outcome_description"
@@ -103,7 +113,10 @@ defmodule Scandoc.CategoriesTest do
 
     test "update_outcome_category/2 with valid data updates the outcome_category" do
       outcome_category = outcome_category_fixture()
-      assert {:ok, %OutcomeCategory{} = outcome_category} = Categories.update_outcome_category(outcome_category, @update_attrs)
+
+      assert {:ok, %OutcomeCategory{} = outcome_category} =
+               Categories.update_outcome_category(outcome_category, @update_attrs)
+
       assert outcome_category.category_id == 43
       assert outcome_category.outcome_card == "some updated outcome_card"
       assert outcome_category.outcome_description == "some updated outcome_description"
@@ -111,14 +124,20 @@ defmodule Scandoc.CategoriesTest do
 
     test "update_outcome_category/2 with invalid data returns error changeset" do
       outcome_category = outcome_category_fixture()
-      assert {:error, %Ecto.Changeset{}} = Categories.update_outcome_category(outcome_category, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Categories.update_outcome_category(outcome_category, @invalid_attrs)
+
       assert outcome_category == Categories.get_outcome_category!(outcome_category.id)
     end
 
     test "delete_outcome_category/1 deletes the outcome_category" do
       outcome_category = outcome_category_fixture()
       assert {:ok, %OutcomeCategory{}} = Categories.delete_outcome_category(outcome_category)
-      assert_raise Ecto.NoResultsError, fn -> Categories.get_outcome_category!(outcome_category.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        Categories.get_outcome_category!(outcome_category.id)
+      end
     end
 
     test "change_outcome_category/1 returns a outcome_category changeset" do

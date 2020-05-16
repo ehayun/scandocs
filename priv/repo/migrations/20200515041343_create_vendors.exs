@@ -11,6 +11,5 @@ defmodule Scandoc.Repo.Migrations.CreateVendors do
 
       timestamps()
     end
-
   end
 end

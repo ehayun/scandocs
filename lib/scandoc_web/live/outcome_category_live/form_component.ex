@@ -28,7 +28,10 @@ defmodule ScandocWeb.OutcomeCategoryLive.FormComponent do
   end
 
   defp save_outcome_category(socket, :edit, outcome_category_params) do
-    case Categories.update_outcome_category(socket.assigns.outcome_category, outcome_category_params) do
+    case Categories.update_outcome_category(
+           socket.assigns.outcome_category,
+           outcome_category_params
+         ) do
       {:ok, _outcome_category} ->
         {:noreply,
          socket

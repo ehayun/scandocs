@@ -33,7 +33,7 @@ defmodule ScandocWeb.CategoryLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.category_index_path(conn, :index))
 
       assert index_live |> element("a", "New Category") |> render_click() =~
-        "New Category"
+               "New Category"
 
       assert_patch(index_live, Routes.category_index_path(conn, :new))
 
@@ -55,7 +55,7 @@ defmodule ScandocWeb.CategoryLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.category_index_path(conn, :index))
 
       assert index_live |> element("#category-#{category.id} a", "Edit") |> render_click() =~
-        "Edit Category"
+               "Edit Category"
 
       assert_patch(index_live, Routes.category_index_path(conn, :edit, category))
 
@@ -95,7 +95,7 @@ defmodule ScandocWeb.CategoryLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.category_show_path(conn, :show, category))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Category"
+               "Edit Category"
 
       assert_patch(show_live, Routes.category_show_path(conn, :edit, category))
 

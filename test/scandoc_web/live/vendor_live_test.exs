@@ -5,9 +5,27 @@ defmodule ScandocWeb.VendorLiveTest do
 
   alias Scandoc.Vendors
 
-  @create_attrs %{address: "some address", contact_name: "some contact_name", phone_number: "some phone_number", vendor_name: "some vendor_name", vendor_site: "some vendor_site"}
-  @update_attrs %{address: "some updated address", contact_name: "some updated contact_name", phone_number: "some updated phone_number", vendor_name: "some updated vendor_name", vendor_site: "some updated vendor_site"}
-  @invalid_attrs %{address: nil, contact_name: nil, phone_number: nil, vendor_name: nil, vendor_site: nil}
+  @create_attrs %{
+    address: "some address",
+    contact_name: "some contact_name",
+    phone_number: "some phone_number",
+    vendor_name: "some vendor_name",
+    vendor_site: "some vendor_site"
+  }
+  @update_attrs %{
+    address: "some updated address",
+    contact_name: "some updated contact_name",
+    phone_number: "some updated phone_number",
+    vendor_name: "some updated vendor_name",
+    vendor_site: "some updated vendor_site"
+  }
+  @invalid_attrs %{
+    address: nil,
+    contact_name: nil,
+    phone_number: nil,
+    vendor_name: nil,
+    vendor_site: nil
+  }
 
   defp fixture(:vendor) do
     {:ok, vendor} = Vendors.create_vendor(@create_attrs)
@@ -33,7 +51,7 @@ defmodule ScandocWeb.VendorLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.vendor_index_path(conn, :index))
 
       assert index_live |> element("a", "New Vendor") |> render_click() =~
-        "New Vendor"
+               "New Vendor"
 
       assert_patch(index_live, Routes.vendor_index_path(conn, :new))
 
@@ -55,7 +73,7 @@ defmodule ScandocWeb.VendorLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.vendor_index_path(conn, :index))
 
       assert index_live |> element("#vendor-#{vendor.id} a", "Edit") |> render_click() =~
-        "Edit Vendor"
+               "Edit Vendor"
 
       assert_patch(index_live, Routes.vendor_index_path(conn, :edit, vendor))
 
@@ -95,7 +113,7 @@ defmodule ScandocWeb.VendorLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.vendor_show_path(conn, :show, vendor))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Vendor"
+               "Edit Vendor"
 
       assert_patch(show_live, Routes.vendor_show_path(conn, :edit, vendor))
 

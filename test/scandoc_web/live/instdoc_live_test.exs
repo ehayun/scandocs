@@ -5,9 +5,42 @@ defmodule ScandocWeb.InstdocLiveTest do
 
   alias Scandoc.Institutes
 
-  @create_attrs %{amount: "120.5", category_id: 42, code: "some code", doc_date: ~D[2010-04-17], doc_name: "some doc_name", doc_path: "some doc_path", line_code: "some line_code", outcome_category_id: 42, payment_code: "some payment_code", vendor_id: 42}
-  @update_attrs %{amount: "456.7", category_id: 43, code: "some updated code", doc_date: ~D[2011-05-18], doc_name: "some updated doc_name", doc_path: "some updated doc_path", line_code: "some updated line_code", outcome_category_id: 43, payment_code: "some updated payment_code", vendor_id: 43}
-  @invalid_attrs %{amount: nil, category_id: nil, code: nil, doc_date: nil, doc_name: nil, doc_path: nil, line_code: nil, outcome_category_id: nil, payment_code: nil, vendor_id: nil}
+  @create_attrs %{
+    amount: "120.5",
+    category_id: 42,
+    code: "some code",
+    doc_date: ~D[2010-04-17],
+    doc_name: "some doc_name",
+    doc_path: "some doc_path",
+    line_code: "some line_code",
+    outcome_category_id: 42,
+    payment_code: "some payment_code",
+    vendor_id: 42
+  }
+  @update_attrs %{
+    amount: "456.7",
+    category_id: 43,
+    code: "some updated code",
+    doc_date: ~D[2011-05-18],
+    doc_name: "some updated doc_name",
+    doc_path: "some updated doc_path",
+    line_code: "some updated line_code",
+    outcome_category_id: 43,
+    payment_code: "some updated payment_code",
+    vendor_id: 43
+  }
+  @invalid_attrs %{
+    amount: nil,
+    category_id: nil,
+    code: nil,
+    doc_date: nil,
+    doc_name: nil,
+    doc_path: nil,
+    line_code: nil,
+    outcome_category_id: nil,
+    payment_code: nil,
+    vendor_id: nil
+  }
 
   defp fixture(:instdoc) do
     {:ok, instdoc} = Institutes.create_instdoc(@create_attrs)
@@ -33,7 +66,7 @@ defmodule ScandocWeb.InstdocLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.instdoc_index_path(conn, :index))
 
       assert index_live |> element("a", "New Instdoc") |> render_click() =~
-        "New Instdoc"
+               "New Instdoc"
 
       assert_patch(index_live, Routes.instdoc_index_path(conn, :new))
 
@@ -55,7 +88,7 @@ defmodule ScandocWeb.InstdocLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.instdoc_index_path(conn, :index))
 
       assert index_live |> element("#instdoc-#{instdoc.id} a", "Edit") |> render_click() =~
-        "Edit Instdoc"
+               "Edit Instdoc"
 
       assert_patch(index_live, Routes.instdoc_index_path(conn, :edit, instdoc))
 
@@ -95,7 +128,7 @@ defmodule ScandocWeb.InstdocLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.instdoc_show_path(conn, :show, instdoc))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Instdoc"
+               "Edit Instdoc"
 
       assert_patch(show_live, Routes.instdoc_show_path(conn, :edit, instdoc))
 

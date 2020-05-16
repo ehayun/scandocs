@@ -33,7 +33,7 @@ defmodule ScandocWeb.InstituteLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.institute_index_path(conn, :index))
 
       assert index_live |> element("a", "New Institute") |> render_click() =~
-        "New Institute"
+               "New Institute"
 
       assert_patch(index_live, Routes.institute_index_path(conn, :new))
 
@@ -55,7 +55,7 @@ defmodule ScandocWeb.InstituteLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.institute_index_path(conn, :index))
 
       assert index_live |> element("#institute-#{institute.id} a", "Edit") |> render_click() =~
-        "Edit Institute"
+               "Edit Institute"
 
       assert_patch(index_live, Routes.institute_index_path(conn, :edit, institute))
 
@@ -95,7 +95,7 @@ defmodule ScandocWeb.InstituteLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.institute_show_path(conn, :show, institute))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Institute"
+               "Edit Institute"
 
       assert_patch(show_live, Routes.institute_show_path(conn, :edit, institute))
 

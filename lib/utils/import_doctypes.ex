@@ -3,7 +3,7 @@ defmodule Scandoc.Util.ImportDoctypes do
   alias Scandoc.Repo
 
   alias Scandoc.Documents
-  #alias Scandoc.Documents.Doctype
+  # alias Scandoc.Documents.Doctype
   alias Scandoc.Documents.Docgroup
 
   def run() do
@@ -29,34 +29,34 @@ defmodule Scandoc.Util.ImportDoctypes do
       end
     end
 
-    #filename = "./storage/doctypes.csv"
+    # filename = "./storage/doctypes.csv"
     # import_from_csv(filename)
   end
 
-  #defp import_from_csv(csv_path) do
+  # defp import_from_csv(csv_path) do
   #  CSVLixir.read(csv_path) |> Enum.to_list() |> Enum.each(fn line -> _process_csv_row(line) end)
-  #end
+  # end
 
-#  defp _process_csv_row(row) do
-#    [code, doc_group, doc_name, note] = row
-#
-#    params = %{
-#      code: code,
-#      doc_name: doc_name,
-#      doc_group_id: doc_group,
-#      doc_notes: "#{note}" |> String.trim()
-#    }
-#
-#    # IO.inspect(params)
-#    # Accounts.register_user(user_params)
-#    case Doctype |> where(code: ^code) |> Repo.one() do
-#      nil ->
-#        Documents.create_doctype(params)
-#
-#      doc ->
-#        Documents.update_doctype(doc, params)
-#    end
-#  end
+  #  defp _process_csv_row(row) do
+  #    [code, doc_group, doc_name, note] = row
+  #
+  #    params = %{
+  #      code: code,
+  #      doc_name: doc_name,
+  #      doc_group_id: doc_group,
+  #      doc_notes: "#{note}" |> String.trim()
+  #    }
+  #
+  #    # IO.inspect(params)
+  #    # Accounts.register_user(user_params)
+  #    case Doctype |> where(code: ^code) |> Repo.one() do
+  #      nil ->
+  #        Documents.create_doctype(params)
+  #
+  #      doc ->
+  #        Documents.update_doctype(doc, params)
+  #    end
+  #  end
 
   # EOF
 end

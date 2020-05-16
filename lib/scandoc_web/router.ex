@@ -126,7 +126,6 @@ defmodule ScandocWeb.Router do
     live "/inst_docs/:id", InstdocLive.Show, :show
     live "/inst_docs/:id/show/edit", InstdocLive.Show, :edit
 
-
     resources "/schools", SchoolController
     resources "/managers", ManagerController
     resources "/teachers", TeacherController

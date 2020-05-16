@@ -6,9 +6,27 @@ defmodule Scandoc.VendorsTest do
   describe "vendors" do
     alias Scandoc.Vendors.Vendor
 
-    @valid_attrs %{address: "some address", contact_name: "some contact_name", phone_number: "some phone_number", vendor_name: "some vendor_name", vendor_site: "some vendor_site"}
-    @update_attrs %{address: "some updated address", contact_name: "some updated contact_name", phone_number: "some updated phone_number", vendor_name: "some updated vendor_name", vendor_site: "some updated vendor_site"}
-    @invalid_attrs %{address: nil, contact_name: nil, phone_number: nil, vendor_name: nil, vendor_site: nil}
+    @valid_attrs %{
+      address: "some address",
+      contact_name: "some contact_name",
+      phone_number: "some phone_number",
+      vendor_name: "some vendor_name",
+      vendor_site: "some vendor_site"
+    }
+    @update_attrs %{
+      address: "some updated address",
+      contact_name: "some updated contact_name",
+      phone_number: "some updated phone_number",
+      vendor_name: "some updated vendor_name",
+      vendor_site: "some updated vendor_site"
+    }
+    @invalid_attrs %{
+      address: nil,
+      contact_name: nil,
+      phone_number: nil,
+      vendor_name: nil,
+      vendor_site: nil
+    }
 
     def vendor_fixture(attrs \\ %{}) do
       {:ok, vendor} =
