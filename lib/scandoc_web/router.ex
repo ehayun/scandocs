@@ -2,6 +2,7 @@ defmodule ScandocWeb.Router do
   use ScandocWeb, :router
 
   import ScandocWeb.UserAuth
+  import Plug.BasicAuth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -42,6 +43,10 @@ defmodule ScandocWeb.Router do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: ScandocWeb.Telemetry
     end
+  end
+
+  pipeline :admins_only do
+    plug :basic_auth, username: "admin", password: "Vaadim68"
   end
 
   ## Authentication routes
