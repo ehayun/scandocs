@@ -1,7 +1,7 @@
 <h1>Listing Vendors</h1>
 
 <%= if @live_action in [:new, :edit] do %>
-  <%= live_modal @socket, ScandocWeb.VendorLive.FormComponent,
+<%= live_modal @socket, ScandocWeb.VendorLive.FormComponent,
     id: @vendor.id || :new,
     title: @page_title,
     action: @live_action,
@@ -9,33 +9,29 @@
     return_to: Routes.vendor_index_path(@socket, :index) %>
 <% end %>
 
-<table>
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
-      <th>Vendor name</th>
-      <th>Contact name</th>
-      <th>Address</th>
-      <th>Phone number</th>
-      <th>Vendor site</th>
+      <th><%= gettext("Vendor name") %></th>
+      <th><%= gettext("Contact name") %></th>
+      <th><%= gettext("Phone number") %></th>
 
       <th></th>
     </tr>
   </thead>
   <tbody id="vendors">
     <%= for vendor <- @vendors do %>
-      <tr id="vendor-<%= vendor.id %>">
-        <td><%= vendor.vendor_name %></td>
-        <td><%= vendor.contact_name %></td>
-        <td><%= vendor.address %></td>
-        <td><%= vendor.phone_number %></td>
-        <td><%= vendor.vendor_site %></td>
+    <tr id="vendor-<%= vendor.id %>">
+      <td><%= vendor.vendor_name %></td>
+      <td><%= vendor.contact_name %></td>
+      <td><%= vendor.phone_number %></td>
 
-        <td>
-          <span><%= live_redirect "Show", to: Routes.vendor_show_path(@socket, :show, vendor) %></span>
-          <span><%= live_patch "Edit", to: Routes.vendor_index_path(@socket, :edit, vendor) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: vendor.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
+      <td>
+        <span><%= live_redirect "Show", to: Routes.vendor_show_path(@socket, :show, vendor) %></span>
+        <span><%= live_patch "Edit", to: Routes.vendor_index_path(@socket, :edit, vendor) %></span>
+        <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: vendor.id, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>

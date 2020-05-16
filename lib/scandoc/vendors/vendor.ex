@@ -16,6 +16,6 @@ defmodule Scandoc.Vendors.Vendor do
   def changeset(vendor, attrs) do
     vendor
     |> cast(attrs, [:vendor_name, :contact_name, :address, :phone_number, :vendor_site])
-    |> validate_required([:vendor_name, :contact_name, :address, :phone_number, :vendor_site])
+    |> validate_required([:vendor_name])
   end
 end

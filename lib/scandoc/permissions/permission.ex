@@ -5,10 +5,15 @@ defmodule Scandoc.Permissions.Permission do
 
   schema "permissions" do
     field :permission_type, :integer
-    field :ref_id, :integer
-    field :school_id, :integer, virtual: true
-    belongs_to :user, User, references: :id
+    field :ref_id, :integer, default: 0
 
+    field :school_id, :integer, virtual: true
+    field :classroom_id, :integer, virtual: true
+    field :student_id, :integer, virtual: true
+    field :vendor_id, :integer, virtual: true
+    field :institute_id, :integer, virtual: true
+
+    belongs_to :user, User, references: :id
     timestamps()
   end
 

@@ -9,15 +9,15 @@
 ## effect: edit them in PO (`.po`) files instead.
 ## From Ecto.Changeset.cast/4
 msgid "can't be blank"
-msgstr ""
+msgstr "חייב להכיל ערך"
 
 ## From Ecto.Changeset.unique_constraint/3
 msgid "has already been taken"
-msgstr ""
+msgstr "יש כבר רשומה עם ערך זהה"
 
 ## From Ecto.Changeset.put_change/3
 msgid "is invalid"
-msgstr ""
+msgstr "לא חוקי"
 
 ## From Ecto.Changeset.validate_acceptance/3
 msgid "must be accepted"

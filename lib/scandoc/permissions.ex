@@ -40,8 +40,35 @@ defmodule Scandoc.Permissions do
   """
   def get_permission!(id) do
     perm = Repo.get!(Permission, id)
+    p = getPermType(perm.permission_type)
+    perm = perm |> Map.merge(%{permmission_level: p})
 
-    if perm.permission_type == 2 do
+    perm =
+      if perm.permmission_level == :allow_classroom,
+        do: Map.merge(perm, %{classroom_id: perm.ref_id}),
+        else: perm
+
+    perm =
+      if perm.permmission_level == :allow_school,
+        do: Map.merge(perm, %{school_id: perm.ref_id}),
+        else: perm
+
+    perm =
+      if perm.permmission_level == :allow_student,
+        do: Map.merge(perm, %{student_id: perm.ref_id}),
+        else: perm
+
+    perm =
+      if perm.permmission_level == :allow_institute,
+        do: Map.merge(perm, %{institute_id: perm.ref_id}),
+        else: perm
+
+    perm =
+      if perm.permmission_level == :allow_vendor,
+        do: Map.merge(perm, %{vendor_id: perm.ref_id}),
+        else: perm
+
+    if perm.permmission_level == :allow_classroom do
       # is class, get school id
       case Classroom |> where(id: ^perm.ref_id) |> Repo.one() do
         nil ->
@@ -147,6 +174,8 @@ defmodule Scandoc.Permissions do
   end
 
   defp getIds(type, user_id) do
+    type = getLevelToInt(type)
+
     Permission
     |> where(user_id: ^user_id)
     |> where(permission_type: ^type)
@@ -154,9 +183,46 @@ defmodule Scandoc.Permissions do
     |> Enum.map(fn u -> u.ref_id end)
   end
 
-  def getSchools(user_id), do: getIds(1, user_id)
-  def getClassrooms(user_id), do: getIds(2, user_id)
-  def getStudents(user_id), do: getIds(3, user_id)
+  def getSchools(user_id), do: getIds(:allow_school, user_id)
+  def getClassrooms(user_id), do: getIds(:allow_classroom, user_id)
+  def getStudents(user_id), do: getIds(:allow_student, user_id)
+  def getInstitutes(user_id), do: getIds(:allow_institute, user_id)
+  def getVendors(user_id), do: getIds(:allow_vendor, user_id)
+
+  def getLevelToInt(a) do
+    case a do
+      :allow_all -> 0
+      :allow_school -> 1
+      :allow_classroom -> 2
+      :allow_student -> 3
+      :allow_institute -> 4
+      :allow_vendor -> 5
+    end
+  end
+
+  def getPermType(t) do
+    case t do
+      0 -> :allow_all
+      1 -> :allow_school
+      2 -> :allow_classroom
+      3 -> :allow_student
+      4 -> :allow_institute
+      5 -> :allow_vendor
+      _ -> :unknown
+    end
+  end
+  def getLevelToString(l) do
+    case l do
+      0 -> "ללא הגבלה"
+      1 -> "הרשאת בית ספר"
+      2 -> "הרשאת כיתה"
+      3 -> "הרשאת תלמיד"
+      4 -> "הרשאת מוסד"
+      5 -> "הרשאת ספק"
+      _ -> "לא ידוע"
+    end
+
+  end
 
   # EOF
 end

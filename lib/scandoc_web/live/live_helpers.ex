@@ -4,10 +4,13 @@ defmodule ScandocWeb.LiveHelpers do
   import Ecto.Query
   alias Scandoc.Repo
 
+  alias Scandoc.Permissions
   alias Scandoc.Schools
   alias Scandoc.Schools.School
   alias Scandoc.Classrooms.Classroom
   alias Scandoc.Students.Student
+  alias Scandoc.Institutes.Institute
+  alias Scandoc.Vendors.Vendor
 
   alias Scandoc.Documents.Docgroup
 
@@ -50,27 +53,21 @@ defmodule ScandocWeb.LiveHelpers do
   end
 
   def getPermissionType(id) do
-    case id do
-      0 -> "ללא הגבלה"
-      1 -> "הרשאת בית ספר"
-      2 -> "הרשאת כיתה"
-      3 -> "הרשאת תלמיד"
-      _ -> "לא ידוע"
-    end
+    Permissions.getLevelToString(id)
   end
 
   def getPermissionRef(type, ref_id) do
-    case type do
-      0 ->
+    case Permissions.getPermType(type) do
+      :allow_all ->
         ""
 
-      1 ->
+      :allow_school ->
         case School |> where(id: ^ref_id) |> Repo.one() do
           nil -> "???"
           school -> school.school_name
         end
 
-      2 ->
+      :allow_classroom ->
         case Classroom |> where(id: ^ref_id) |> Repo.one() do
           nil ->
             "???"
@@ -80,14 +77,23 @@ defmodule ScandocWeb.LiveHelpers do
             "#{school.school_name} / #{classroom.classroom_name} "
         end
 
-      3 ->
+      :allow_student ->
         case Student |> where(id: ^ref_id) |> Repo.one() do
           nil -> "???"
           student -> "#{student.full_name}(#{student.student_zehut})"
         end
 
+      :allow_institute ->
+        case Institute |> where(id: ^ref_id) |> Repo.one() do
+          nil -> "???"
+          institute -> "#{institute.title} (#{institute.code})"
+        end
+
+      :allow_vendor ->
+        "No vendor"
+
       _ ->
-        "Wait"
+        "????"
     end
   end
 end

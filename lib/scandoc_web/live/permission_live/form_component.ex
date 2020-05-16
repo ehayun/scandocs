@@ -10,16 +10,20 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
   alias Scandoc.Schools.School
   alias Scandoc.Students.Student
   alias Scandoc.Classrooms.Classroom
+  alias Scandoc.Institutes.Institute
+  alias Scandoc.Vendors.Vendor
 
   @impl true
   def update(%{permission: permission} = assigns, socket) do
     changeset = Permissions.change_permission(permission)
 
     p_types = [
-      %{id: 0, type: "ללא הגבלה"},
-      %{id: 1, type: " הרשאת בית ספר"},
-      %{id: 2, type: " הרשאת כיתה"},
-      %{id: 3, type: " הרשאת תלמיד"}
+      %{id: Permissions.getLevelToInt(:allow_all), type: "ללא הגבלה"},
+      %{id: Permissions.getLevelToInt(:allow_school), type: " הרשאת בית ספר"},
+      %{id: Permissions.getLevelToInt(:allow_classroom), type: " הרשאת כיתה"},
+      %{id: Permissions.getLevelToInt(:allow_student), type: " הרשאת תלמיד"},
+      %{id: Permissions.getLevelToInt(:allow_institute), type: " הרשאת מוסד"},
+      %{id: Permissions.getLevelToInt(:allow_vendor), type: " הרשאת ספק"}
     ]
 
     permission_type = permission.permission_type
@@ -33,6 +37,12 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
 
     stdQ = from u in Student, select: [:id, :full_name, :student_zehut]
     students = stdQ |> Repo.all()
+
+    instQ = from u in Institute, select: [:id, :code, :title]
+    institutes = instQ |> Repo.all()
+
+    vendQ = from u in Vendor, select: [:id, :vendor_name, :contact_name]
+    vendors = vendQ |> Repo.all()
 
     s = schools |> Enum.at(0)
 
@@ -54,6 +64,8 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
      |> assign(p_types: p_types)
      |> assign(permission_type: permission_type)
      |> assign(classrooms: classrooms)
+     |> assign(institutes: institutes)
+     |> assign(vendors: vendors)
      |> assign(ref_id: ref_id)
      |> assign(:changeset, changeset)}
   end
@@ -93,6 +105,8 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
       socket.assigns.permission
       |> Permissions.change_permission(permission_params)
       |> Map.put(:action, :validate)
+
+    IO.inspect(changeset)
 
     {:noreply,
      socket
