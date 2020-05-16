@@ -24,6 +24,10 @@ defmodule ScandocWeb.Router do
     live "/", PageLive, :index
   end
 
+  pipeline :admins_only do
+    plug :basic_auth, username: "admin", password: "Vaadim68"
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", ScandocWeb do
   #   pipe_through :api
@@ -40,13 +44,9 @@ defmodule ScandocWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
+      pipe_through [:browser, :admins_only]
       live_dashboard "/dashboard", metrics: ScandocWeb.Telemetry
     end
-  end
-
-  pipeline :admins_only do
-    plug :basic_auth, username: "admin", password: "Vaadim68"
   end
 
   ## Authentication routes
