@@ -1,12 +1,12 @@
 <h1>Listing Documents</h1>
 
-<table>
+
+<table class="table">
   <thead>
     <tr>
       <th>Line code</th>
       <th>Doc name</th>
       <th>Doc name len</th>
-      <th>Doc path</th>
       <th>Ref</th>
       <th>Ref year</th>
       <th>Ref month</th>
@@ -22,7 +22,6 @@
       <td><%= document.line_code %></td>
       <td><%= document.doc_name %></td>
       <td><%= document.doc_name_len %></td>
-      <td><%= document.doc_path %></td>
       <td><%= document.ref_id %></td>
       <td><%= document.ref_year %></td>
       <td><%= document.ref_month %></td>

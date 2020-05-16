@@ -6,7 +6,7 @@ defmodule ScandocWeb.DocumentController do
   alias Scandoc.Students
 
   def index(conn, _params) do
-    documents = Documents.list_documents()
+    documents = Documents.list_documents(10)
     render(conn, "index.html", documents: documents)
   end
 
@@ -29,7 +29,8 @@ defmodule ScandocWeb.DocumentController do
 
   def show(conn, %{"id" => id}) do
     document = Documents.get_document!(id)
-    render(conn, "show.html", document: document)
+    # render(conn, "show.html", document: document)
+    redirect(conn, external: "http://docs.scantzlev.com")
   end
 
   def display(conn, %{"id" => id}) do

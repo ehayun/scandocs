@@ -18,8 +18,8 @@ defmodule Scandoc.Documents do
       [%Document{}, ...]
 
   """
-  def list_documents do
-    Repo.all(Document)
+  def list_documents(limit \\ 0) do
+    if limit > 0, do: Document |> limit(^limit) |> Repo.all(), else: Document |> Repo.all()
   end
 
   def list_student_documents(id, sort_by \\ nil) do
