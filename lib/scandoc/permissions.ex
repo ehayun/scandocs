@@ -211,6 +211,7 @@ defmodule Scandoc.Permissions do
       _ -> :unknown
     end
   end
+
   def getLevelToString(l) do
     case l do
       0 -> "ללא הגבלה"
@@ -221,7 +222,6 @@ defmodule Scandoc.Permissions do
       5 -> "הרשאת ספק"
       _ -> "לא ידוע"
     end
-
   end
 
   # EOF

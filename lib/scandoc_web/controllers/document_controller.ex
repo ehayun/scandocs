@@ -39,7 +39,7 @@ defmodule ScandocWeb.DocumentController do
 
     # render(conn, "show.html", document: document)
     url = "https://docs.scantzlev.com#{path}"
-    redirect(conn, external: url) |> Scandoc.Endpoint.url
+    redirect(conn, external: url) |> Scandoc.Endpoint.url()
   end
 
   def display(conn, %{"id" => id}) do
