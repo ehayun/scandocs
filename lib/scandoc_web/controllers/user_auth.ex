@@ -171,6 +171,7 @@ defmodule ScandocWeb.UserAuth do
 
   def isAdmin(user), do: Permissions.isAdmin(user)
 
+
   defp getScools(user), do: Permissions.getSchools(user.id)
   defp geClassrooms(user), do: Permissions.getClassrooms(user.id)
   defp geStudents(user), do: Permissions.getStudents(user.id)

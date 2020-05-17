@@ -30,6 +30,7 @@ defmodule ScandocWeb.Endpoint do
     at: "/uploads",
     ## "./uploads", #Application.get_env(:scandoc, :full_upload_path),
     from: :scandoc,
+    headers: %{"secret_header" => "1980"},
     gzip: false
 
   # Code reloading can be explicitly enabled under the

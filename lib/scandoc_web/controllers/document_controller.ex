@@ -6,7 +6,7 @@ defmodule ScandocWeb.DocumentController do
   alias Scandoc.Students
 
   def index(conn, _params) do
-    documents = Documents.list_documents(10)
+    documents = Documents.list_documents()
     render(conn, "index.html", documents: documents)
   end
 
@@ -29,8 +29,17 @@ defmodule ScandocWeb.DocumentController do
 
   def show(conn, %{"id" => id}) do
     document = Documents.get_document!(id)
+    path = document.doc_path
+    IO.puts("[#{path}]")
+
+    path =
+      if File.exists?("#{path}"),
+        do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
+        else: "#"
+
     # render(conn, "show.html", document: document)
-    redirect(conn, external: "http://docs.scantzlev.com")
+    url = "https://docs.scantzlev.com#{path}"
+    redirect(conn, external: url) |> Scandoc.Endpoint.url
   end
 
   def display(conn, %{"id" => id}) do
