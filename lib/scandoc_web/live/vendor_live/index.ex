@@ -16,19 +16,19 @@ defmodule ScandocWeb.VendorLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Vendor")
+    |> assign(:page_title, gettext("Edit Vendor"))
     |> assign(:vendor, Vendors.get_vendor!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Vendor")
+    |> assign(:page_title, gettext("New Vendor"))
     |> assign(:vendor, %Vendor{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Vendors")
+    |> assign(:page_title, gettext("Listing Vendors"))
     |> assign(:vendor, nil)
   end
 

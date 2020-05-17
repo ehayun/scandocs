@@ -41,9 +41,12 @@
           <%= link gettext("Permissions"), to: Routes.permission_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Categories"), to: Routes.docgroup_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Institutes"), to: Routes.institute_index_path(@conn, :index), class: "dropdown-item" %>
+          <%= link gettext("Vendors"), to: Routes.vendor_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Institutes Categories"), to: Routes.category_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Outcome Categories"), to: Routes.outcome_category_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Logout"), to: Routes.user_session_path(@conn, :delete), method: :delete, class: "hidden dropdown-item" %>
+
+
 
         </div>
       </li>

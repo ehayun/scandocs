@@ -7,9 +7,11 @@ defmodule ScandocWeb.OutcomeCategoryLive.FormComponent do
   def update(%{outcome_category: outcome_category} = assigns, socket) do
     changeset = Categories.change_outcome_category(outcome_category)
 
+    categories = Categories.list_categories()
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(:categories, categories)
      |> assign(:changeset, changeset)}
   end
 

@@ -55,14 +55,14 @@ msgid "Logged out successfully."
 msgstr "יצאתם מהמערכת"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:71
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:74
 #: lib/scandoc_web/templates/user_reset_password/new.html.eex:18
 msgid "Login"
 msgstr "כניסה למערכת"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:46
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:64
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:47
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:67
 msgid "Logout"
 msgstr "יציאה מהמערכת"
 
@@ -106,14 +106,16 @@ msgstr "קישור זה אינו תקין או פג תוקף"
 #, elixir-format
 #: lib/scandoc_web/live/category_live/form_component.html.leex:25
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/institute_live/form_component.html.leex:26
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:31
+#: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37 lib/scandoc_web/live/permission_live/form_component.html.leex:37
+#: lib/scandoc_web/live/vendor_live/form_component.html.leex:48
 msgid "Save"
 msgstr "שמירה"
 
 #, elixir-format
 #: lib/scandoc_web/live/category_live/form_component.html.leex:25
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/institute_live/form_component.html.leex:26
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:31
+#: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37 lib/scandoc_web/live/permission_live/form_component.html.leex:37
+#: lib/scandoc_web/live/vendor_live/form_component.html.leex:48
 msgid "Saving..."
 msgstr "שומר..."
 
@@ -123,7 +125,7 @@ msgid "Send instructions to reset password"
 msgstr "שלח הוראות לשינוי סיסמה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:63
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:66
 #: lib/scandoc_web/templates/user_settings/edit.html.eex:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -303,7 +305,8 @@ msgstr "משתמש"
 #, elixir-format
 #: lib/scandoc_web/live/category_live/index.html.leex:2
 #: lib/scandoc_web/live/docgroup_live/index.html.leex:3 lib/scandoc_web/live/institute_live/index.html.leex:3
-#: lib/scandoc_web/live/permission_live/index.html.leex:5
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:2 lib/scandoc_web/live/permission_live/index.html.leex:5
+#: lib/scandoc_web/live/vendor_live/index.html.leex:3
 msgid "Add New"
 msgstr "הוספה"
 
@@ -328,12 +331,12 @@ msgid "New Permission"
 msgstr "הוספת הרשאה"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.ex:131
+#: lib/scandoc_web/live/permission_live/form_component.ex:145
 msgid "Permission created successfully"
 msgstr " נוצר בהצלחה"
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.ex:118
+#: lib/scandoc_web/live/permission_live/form_component.ex:132
 msgid "Permission updated successfully"
 msgstr "עודכן  בהצלחה"
 
@@ -345,7 +348,8 @@ msgstr "ניהול"
 #, elixir-format
 #: lib/scandoc_web/live/category_live/index.html.leex:34
 #: lib/scandoc_web/live/docgroup_live/index.html.leex:33 lib/scandoc_web/live/institute_live/index.html.leex:35
-#: lib/scandoc_web/live/permission_live/index.html.leex:37
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:35 lib/scandoc_web/live/permission_live/index.html.leex:37
+#: lib/scandoc_web/live/vendor_live/index.html.leex:36
 msgid "Are you sure?"
 msgstr "בטוחים שברצונכם למחוק"
 
@@ -471,27 +475,28 @@ msgid "Title"
 msgstr "שם"
 
 #, elixir-format
-#: lib/scandoc_web/live/outcome_category_live/index.html.leex:18
+#: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:26
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:20
 msgid "Category"
 msgstr "קטגוריה/סוג מסמך"
 
 #, elixir-format
 #: lib/scandoc_web/live/category_live/form_component.html.leex:16
 msgid "Cetegory name"
-msgstr ""
+msgstr "קטגוריה"
 
 #, elixir-format
 #: lib/scandoc_web/live/category_live/index.ex:19
 msgid "Edit Category"
-msgstr ""
+msgstr "עדכון קטגוריה"
 
 #, elixir-format
 #: lib/scandoc_web/live/outcome_category_live/index.ex:19
 msgid "Edit Outcome category"
-msgstr ""
+msgstr "עדכון קטגורית הוצאה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:44
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:45
 msgid "Institutes Categories"
 msgstr "קטגוריות מוסד"
 
@@ -517,16 +522,83 @@ msgid "New Outcome category"
 msgstr "הוספת קטגורית הוצאה"
 
 #, elixir-format
-#: lib/scandoc_web/templates/layout/_user_menu.html.eex:45
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:46
 msgid "Outcome Categories"
 msgstr "קטגורית הוצאה"
 
 #, elixir-format
-#: lib/scandoc_web/live/outcome_category_live/index.html.leex:17
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:19
 msgid "Outcome card"
 msgstr "כרטיס הוצאה"
 
 #, elixir-format
-#: lib/scandoc_web/live/outcome_category_live/index.html.leex:19
+#: lib/scandoc_web/live/outcome_category_live/index.html.leex:21
 msgid "Outcome description"
 msgstr "תיאור הוצאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/index.html.leex:19
+msgid "Contact name"
+msgstr "איש קשר"
+
+#, elixir-format
+#: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:20
+msgid "Description"
+msgstr "תיאור"
+
+#, elixir-format
+#: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:14
+msgid "Outcome Card"
+msgstr "כרטיס הוצאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/form_component.html.leex:24
+#: lib/scandoc_web/live/vendor_live/index.html.leex:20
+msgid "Phone number"
+msgstr "מספר טלפון"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/index.html.leex:18
+msgid "Vendor name"
+msgstr "שם הספק"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/form_component.html.leex:29
+msgid "Address"
+msgstr "כתובת"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/form_component.html.leex:18
+msgid "Contact Name"
+msgstr "איש קשר"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/index.ex:19
+msgid "Edit Vendor"
+msgstr "עדכון ספק"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/index.ex:31
+#: lib/scandoc_web/live/vendor_live/index.html.leex:2
+msgid "Listing Vendors"
+msgstr "רשימת ספקים"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/index.ex:25
+msgid "New Vendor"
+msgstr "הוספת ספק"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/form_component.html.leex:12
+msgid "Vendor Name"
+msgstr "שם הספק"
+
+#, elixir-format
+#: lib/scandoc_web/live/vendor_live/form_component.html.leex:38
+msgid "Vendor site"
+msgstr "כתובת אתר הספק הספק"
+
+#, elixir-format
+#: lib/scandoc_web/templates/layout/_user_menu.html.eex:44
+msgid "Vendors"
+msgstr " ספקים"
