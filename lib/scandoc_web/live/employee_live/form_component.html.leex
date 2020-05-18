@@ -1,0 +1,40 @@
+<header><%= @title %></header>
+
+<%= f = form_for @changeset, "#",
+  id: "employee-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+<%= PBF.text_input f, :zehut, input: [class: "col-md-3"], label: [text: gettext("Zehut")] %>
+<%= PBF.text_input f, :full_name, input: [class: "col-md-5"], label: [text: gettext("Full name")] %>
+<small><%= gettext("Leave empty for not change") %></small>
+
+<%= PBF.text_input f, :password, input: [class: "col-md-5"], label: [text: gettext("Password")] %>
+
+
+<div class="form-group row">
+  <%= label f, gettext("Role"), class: "col-form-label text-sm-right col-sm-2" %>
+  <%= Phoenix.HTML.Form.select(f, :role, Enum.map(@roles, &{&1.title, &1.code}), class: "col-sm-3") %>
+  <%= error_tag f, :hashed_password %>
+
+</div>
+
+<div class="form-group row">
+  <%= label f, gettext("birth date"), class: "col-form-label text-sm-left col-sm-2" %>
+  <%= date_select f, :date_of_birth, year: [options: 1900..2100], class: "col-sm-10" %>
+  <%= error_tag f, :date_of_birth %>
+</div>
+
+<div class="form-group row">
+  <% label f, :is_freezed %>
+  <% checkbox f, :is_freezed %>
+  <% error_tag f, :is_freezed %>
+
+  <%= label f, gettext("Admin?"), class: "col-form-label text-sm-left col-sm-3" %>
+  <%= checkbox f, :is_admin %>
+  <%= error_tag f, :is_admin %>
+</div>
+
+<%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary" %>
+</form>

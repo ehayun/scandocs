@@ -158,6 +158,22 @@ defmodule ScandocWeb.Router do
 
     live "/docgroups/:id", DocgroupLive.Show, :show
     live "/docgroups/:id/show/edit", DocgroupLive.Show, :edit
+
+    # Employees
+    live "/employees", EmployeeLive.Index, :index
+    live "/employees/new", EmployeeLive.Index, :new
+    live "/employees/:id/edit", EmployeeLive.Index, :edit
+
+    live "/employees/:id", EmployeeLive.Show, :show
+    live "/employees/:id/show/edit", EmployeeLive.Show, :edit
+
+    # Roles
+    live "/roles", RoleLive.Index, :index
+    live "/roles/new", RoleLive.Index, :new
+    live "/roles/:id/edit", RoleLive.Index, :edit
+
+    live "/roles/:id", RoleLive.Show, :show
+    live "/roles/:id/show/edit", RoleLive.Show, :edit
   end
 
   scope "/", ScandocWeb do

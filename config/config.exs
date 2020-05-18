@@ -60,7 +60,7 @@ config :money,
   # don’t display the currency symbol in Money.to_string
   symbol: true,
   # position the symbol
-  symbol_on_right: false,
+  symbol_on_right: true,
   # add a space between symbol and number
   symbol_space: true,
   # display units after the delimeter

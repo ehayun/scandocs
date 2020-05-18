@@ -10,7 +10,7 @@ defmodule Scandoc.Permissions.Permission do
     field :school_id, :integer, virtual: true
     field :classroom_id, :integer, virtual: true
     field :student_id, :integer, virtual: true
-    field :vendor_id, :integer, virtual: true
+    field :vendor_name, :integer, virtual: true
     field :institute_id, :integer, virtual: true
 
     belongs_to :user, User, references: :id

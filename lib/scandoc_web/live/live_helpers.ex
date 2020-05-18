@@ -11,6 +11,7 @@ defmodule ScandocWeb.LiveHelpers do
   alias Scandoc.Students.Student
   alias Scandoc.Institutes.Institute
   alias Scandoc.Vendors.Vendor
+  alias Scandoc.Employees.Role
 
   alias Scandoc.Documents.Docgroup
 
@@ -30,6 +31,32 @@ defmodule ScandocWeb.LiveHelpers do
     if File.exists?("#{path}"),
       do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
       else: "#"
+  end
+
+  def displayAmount(amount) do
+    Money.to_string(Money.new(trunc(Decimal.to_float(amount) * 100.00)))
+  end
+
+  def displayDate(dt) do
+    case dt |> Calendar.Strftime.strftime("%d/%m/%Y") do
+      {:ok, d} -> d
+      _ -> dt
+    end
+  end
+
+  def displayRole(role) do
+    case Role |> where(code: ^role) |> Repo.one do
+      nil -> "???"
+      role -> role.title
+    end
+  end
+  def getFluid(socket) do
+    %{changed: changed} = socket
+
+    case changed do
+      %{instdoc: _} -> "container-fluid"
+      _ -> "container"
+    end
   end
 
   @doc """

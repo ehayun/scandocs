@@ -4,9 +4,17 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-
   <div class="collapse navbar-collapse" id="navbarColor02">
+
     <ul class="rtl navbar-nav ml-auto">
+
+      <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
+      <li class="nav-item <%= active_menu(@conn, :instdoc) %>">
+        <a class="nav-link" href="<%= Routes.instdoc_index_path(@conn, :index) %>"><i class="fas fa-file-invoice"></i> <%= gettext("Documents") %></a>
+      </li>
+      <% end %>
+
+
       <li class="nav-item <%= active_menu(@conn, :school) %>">
         <a class="nav-link" href="<%= Routes.school_path(@conn, :index) %>"> <i class="fas fa-school"></i> <%= gettext("Schools") %></a>
       </li>
@@ -38,6 +46,8 @@
           <span class="caret"></span></a>
         <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
 
+          <%= link gettext("Employees"), to: Routes.employee_index_path(@conn, :index), class: "dropdown-item" %>
+          <%= link gettext("Roles"), to: Routes.role_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Permissions"), to: Routes.permission_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Categories"), to: Routes.docgroup_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Institutes"), to: Routes.institute_index_path(@conn, :index), class: "dropdown-item" %>

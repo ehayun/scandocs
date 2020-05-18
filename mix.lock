@@ -1,6 +1,7 @@
 %{
   "bcrypt_elixir": {:hex, :bcrypt_elixir, "2.2.0", "3df902b81ce7fa8867a2ae30d20a1da6877a2c056bfb116fd0bc8a5f0190cea4", [:make, :mix], [{:comeonin, "~> 5.3", [hex: :comeonin, repo: "hexpm", optional: false]}, {:elixir_make, "~> 0.6", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm", "762be3fcb779f08207531bc6612cca480a338e4b4357abb49f5ce00240a77d1e"},
   "bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], [], "hexpm", "7af5c7e09fe1d40f76c8e4f9dd2be7cebd83909f31fee7cd0e9eadc567da8353"},
+  "calendar": {:hex, :calendar, "0.18.0", "3379e03694b9faab085fa2b96fc033644395c23170248c8ce0db78e11c88056a", [:mix], [{:tzdata, "~> 0.5.20 or ~> 0.1.201603 or ~> 1.0", [hex: :tzdata, repo: "hexpm", optional: false]}], "hexpm", "a8e67f33e1415d9088ce8922c6b66ac69f88ffea3bb0b33d666f1ab033c8de9d"},
   "certifi": {:hex, :certifi, "2.5.1", "867ce347f7c7d78563450a18a6a28a8090331e77fa02380b4a21962a65d36ee5", [:rebar3], [{:parse_trans, "~>3.3", [hex: :parse_trans, repo: "hexpm", optional: false]}], "hexpm", "805abd97539caf89ec6d4732c91e62ba9da0cda51ac462380bbd28ee697a8c42"},
   "cldr_utils": {:hex, :cldr_utils, "2.9.1", "be714403abe1a7abed5ee4f7dd3823a9067f96ab4b0613a454177b51ca204236", [:mix], [{:decimal, "~> 1.6", [hex: :decimal, repo: "hexpm", optional: false]}], "hexpm", "6cba0a485f57feb773291ca1816469ddd887e22d73d9b12a1b207d82a67a4e71"},
   "comeonin": {:hex, :comeonin, "5.3.1", "7fe612b739c78c9c1a75186ef2d322ce4d25032d119823269d0aa1e2f1e20025", [:mix], [], "hexpm", "d6222483060c17f0977fad1b7401ef0c5863c985a64352755f366aee3799c245"},
@@ -56,5 +57,6 @@
   "telemetry_metrics": {:hex, :telemetry_metrics, "0.4.2", "1de986fad9aa6bf81f8a33ddfd16e5d8ab0dec6272e624eb517c1a92a44d41a9", [:mix], [{:telemetry, "~> 0.4", [hex: :telemetry, repo: "hexpm", optional: false]}], "hexpm", "e56ffed2dbe293ab6cf7c94980faeb368cb360662c1927f54fc634a4ca55362e"},
   "telemetry_poller": {:hex, :telemetry_poller, "0.5.0", "4770888ef85599ead39c7f51d6b4b62306e602d96c69b2625d54dea3d9a5204b", [:rebar3], [{:telemetry, "~> 0.4", [hex: :telemetry, repo: "hexpm", optional: false]}], "hexpm", "69e4e8e65b0ae077c9e14cd5f42c7cc486de0e07ac6e3409e6f0e52699a7872c"},
   "turbo_ecto": {:hex, :turbo_ecto, "0.5.1", "5173b2988601541be0b48dd8595ea90217628594fef804cfe9b8e9b8098f75dd", [:mix], [{:ecto_sql, "~> 3.0", [hex: :ecto_sql, repo: "hexpm", optional: false]}], "hexpm", "e981b0e30895459a6c4c599ab86b2fb0245fcddfbfd80186f55cef99f6e5d1be"},
+  "tzdata": {:hex, :tzdata, "1.0.3", "73470ad29dde46e350c60a66e6b360d3b99d2d18b74c4c349dbebbc27a09a3eb", [:mix], [{:hackney, "~> 1.0", [hex: :hackney, repo: "hexpm", optional: false]}], "hexpm", "a6e1ee7003c4d04ecbd21dd3ec690d4c6662db5d3bbdd7262d53cdf5e7c746c1"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.4.1", "d869e4c68901dd9531385bb0c8c40444ebf624e60b6962d95952775cac5e90cd", [:rebar3], [], "hexpm", "1d1848c40487cdb0b30e8ed975e34e025860c02e419cb615d255849f3427439d"},
 }

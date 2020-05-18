@@ -1,0 +1,52 @@
+<h1>Show Employee</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.EmployeeLive.FormComponent,
+    id: @employee.id,
+    title: @page_title,
+    action: @live_action,
+    employee: @employee,
+    return_to: Routes.employee_show_path(@socket, :show, @employee) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Zehut:</strong>
+    <%= @employee.zehut %>
+  </li>
+
+  <li>
+    <strong>Hashed password:</strong>
+    <%= @employee.hashed_password %>
+  </li>
+
+  <li>
+    <strong>Full name:</strong>
+    <%= @employee.full_name %>
+  </li>
+
+  <li>
+    <strong>Role:</strong>
+    <%= @employee.role %>
+  </li>
+
+  <li>
+    <strong>Date of birth:</strong>
+    <%= @employee.date_of_birth %>
+  </li>
+
+  <li>
+    <strong>Is freezed:</strong>
+    <%= @employee.is_freezed %>
+  </li>
+
+  <li>
+    <strong>Is admin:</strong>
+    <%= @employee.is_admin %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.employee_show_path(@socket, :edit, @employee), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.employee_index_path(@socket, :index) %></span>

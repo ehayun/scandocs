@@ -70,6 +70,10 @@ header {
   display: none;
 }
 
+.nav-item.active {
+  border-bottom: 5px solid white;
+}
+
 .blue {
   color: #c2c2ea;
 }

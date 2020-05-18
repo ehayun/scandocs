@@ -18,7 +18,7 @@ defmodule Scandoc.Institutes do
 
   """
   def list_institutes do
-    Repo.all(Institute)
+    Institute |> order_by(:title) |> Repo.all()
   end
 
   @doc """
@@ -113,8 +113,37 @@ defmodule Scandoc.Institutes do
       [%Instdoc{}, ...]
 
   """
-  def list_inst_docs do
-    Repo.all(Instdoc)
+  def list_inst_docs(
+        limit \\ 0,
+        filter \\ filter = %{
+          "category" => "-1",
+          "institute" => "-1",
+          "outcome_category" => "-1",
+          "vendor_name" => ""
+        }
+      ) do
+    %{
+      "category" => category_id,
+      "institute" => institute_id,
+      "outcome_category" => outcome_category_id,
+      "vendor_name" => vendor_name
+    } = filter
+
+    q = from(i in Instdoc, where: ilike(i.vendor_name, ^"%#{vendor_name}%"))
+
+    q =
+      if limit > 0 do
+        q |> limit(^limit)
+      else
+        q
+      end
+
+    q
+    |> preload(:institute)
+    |> preload(:category)
+    |> preload(:outcome_category)
+    |> order_by(desc: :doc_date)
+    |> Repo.all()
   end
 
   @doc """

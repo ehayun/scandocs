@@ -1,0 +1,52 @@
+<h2>
+  <%= gettext("Listing Employees") %>
+  <span class="float-left">
+    <%= live_patch gettext("Add New"), to: Routes.employee_index_path(@socket, :new), class: "btn btn-primary" %>
+  </span>
+  <span class="float-left mr-2">
+    <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
+      <input class="form-control" type="text" value='<%= @search %>' name="search" placeholder='<%= gettext("Search by zehut or name")%>'>
+    </form>
+  </span>
+</h2>
+
+<%= if @live_action in [:new, :edit] do %>
+<%= live_modal @socket, ScandocWeb.EmployeeLive.FormComponent,
+    id: @employee.id || :new,
+    title: @page_title,
+    action: @live_action,
+    employee: @employee,
+    search: @search,
+    return_to: Routes.employee_index_path(@socket, :index) %>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th><%= gettext("Zehut") %></th>
+      <th><%= gettext("Full name") %></th>
+      <th><%= gettext("Role") %></th>
+      <th><%= gettext("Date of birth") %></th>
+
+      <th class="hidden"></th>
+    </tr>
+  </thead>
+  <tbody id="employees">
+    <%= for employee <- @employees do %>
+    <tr id="employee-<%= employee.id %>">
+      <td><%= employee.zehut %></td>
+      <td>
+        <%= live_patch employee.full_name, to: Routes.employee_index_path(@socket, :edit, employee) %>
+      </td>
+      <td><%= displayRole(employee.role) %></td>
+      <td><%= displayDate(employee.date_of_birth) %></td>
+
+      <td class="hidden">
+        <span><%= live_redirect "Show", to: Routes.employee_show_path(@socket, :show, employee) %></span>
+        <span><%= live_patch "Edit", to: Routes.employee_index_path(@socket, :edit, employee) %></span>
+        <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: employee.id, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

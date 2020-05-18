@@ -74,6 +74,15 @@ defmodule ScandocWeb.TeacherController do
   def update(conn, %{"id" => id, "teacher" => teacher_params}) do
     teacher = Schools.get_teacher!(id)
 
+    %{"password" => password} = teacher_params
+
+    teacher_params =
+      if password > "" do
+        Map.merge(teacher_params, %{"hashed_password" => Bcrypt.hash_pwd_salt(password)})
+      else
+        teacher_params
+      end
+
     case Schools.update_teacher(teacher, teacher_params) do
       {:ok, teacher} ->
         conn

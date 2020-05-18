@@ -22,7 +22,7 @@
 
 <section class="py-2">
   <h4><%= gettext("Students") %></h4>
-  <div class="container-fluid">
+  <div class="container">
     <div class="row" data-config-id="list_02">
       <%= for student <- @students do %>
       <div class="m-1 col-xl-3 col-md-4 mb-2 mb-lg-0">

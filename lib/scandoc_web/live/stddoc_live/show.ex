@@ -43,8 +43,6 @@ defmodule ScandocWeb.StddocLive.Show do
       path = stddoc.doc_path
       path = String.replace(path, "/home/eli", "/downloads")
 
-      IO.inspect(path, label: "search for")
-
       png =
         if File.exists?(".#{path}") do
           doc_name = Path.basename(path)
@@ -107,8 +105,6 @@ defmodule ScandocWeb.StddocLive.Show do
   end
 
   defp pdf_thumbnail(pdf_path, thumb_path) do
-    IO.inspect(thumb_path, label: "*** pdf: [#{pdf_path}]")
-
     args = ["#{pdf_path}", thumb_path]
     IO.inspect(args)
     name = Path.rootname(thumb_path)

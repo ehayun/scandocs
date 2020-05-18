@@ -114,7 +114,7 @@ defmodule Scandoc.Categories do
 
   """
   def list_outcome_categoryes do
-    Repo.all(OutcomeCategory)
+    OutcomeCategory |> order_by(:outcome_description) |> Repo.all
   end
 
   @doc """

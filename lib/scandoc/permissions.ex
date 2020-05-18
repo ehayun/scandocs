@@ -65,7 +65,7 @@ defmodule Scandoc.Permissions do
 
     perm =
       if perm.permmission_level == :allow_vendor,
-        do: Map.merge(perm, %{vendor_id: perm.ref_id}),
+        do: Map.merge(perm, %{vendor_name: perm.ref_id}),
         else: perm
 
     if perm.permmission_level == :allow_classroom do

@@ -1,7 +1,64 @@
-<h1>Listing Inst docs</h1>
+<header>
+  <i class="fas fa-file-invoice"></i>
+  <%= gettext("Listing Inst docs") %>
+</header>
+
+
+
+
+<div class="col-md-8 order-md-1">
+  <%= f = form_for @changeset, "#",
+  class: "form form-horizontal",
+  phx_change: "filter",
+  phx_submit: "filter" %>
+
+  <div class="row">
+    <div class="col-md-1 mb-1">
+    <%= gettext("Filter by") %>:
+    </div>
+    <div class="col-md-2 mb-2">
+      <select name="filter[institute]" class="custom-select d-block w-100" id="input8-ecommerce-03">
+        <option value="-1" selected=""><%= gettext("By Institute")%></option>
+        <%= for i <- @institutes do %>
+        <option value="<%=i.id %>"><%= i.title %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="col-md-2 mb-2">
+      <select name="filter[category]" class="custom-select d-block w-100" id="input7-ecommerce-03">
+        <option value="-1" selected=""><%= gettext("By category")%></option>
+        <%= for c <- @categories do %>
+        <option value="<%=c.id %>"><%= c.category_name %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="col-md-3 mb-3">
+      <select name="filter[outcome_category]" class="custom-select d-block w-100" id="input8-ecommerce-03">
+        <option value="-1" selected=""><%= gettext("By Outcome Category")%></option>
+        <%= for c <- @outcome_categories do %>
+        <option value="<%=c.id %>"><%= c.outcome_description %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="col-md-3 mb-3">
+      <input name="filter[vendor_name]" class="form-control" value="<%= @filter["vendor_name"] %>" type="text" placeholder="<%= gettext("Vendor name")%>">
+    </div>
+  </div>
+
+  </form>
+</div>
+
+
+
+
+
+
+
+
 
 <%= if @live_action in [:new, :edit] do %>
-  <%= live_modal @socket, ScandocWeb.InstdocLive.FormComponent,
+<%= live_modal @socket, ScandocWeb.InstdocLive.FormComponent,
     id: @instdoc.id || :new,
     title: @page_title,
     action: @live_action,
@@ -9,45 +66,37 @@
     return_to: Routes.instdoc_index_path(@socket, :index) %>
 <% end %>
 
-<table>
-  <thead>
+<table class="table table-striped">
+  <thead class="thead-dark">
     <tr>
-      <th>Code</th>
-      <th>Category</th>
-      <th>Payment code</th>
-      <th>Line code</th>
-      <th>Vendor</th>
-      <th>Outcome category</th>
-      <th>Doc date</th>
-      <th>Amount</th>
-      <th>Doc name</th>
-      <th>Doc path</th>
+      <th><%= gettext("Institute") %></th>
+      <th><%= gettext("Category") %></th>
+      <th><%= gettext("Payment code") %></th>
+      <th><%= gettext("Line code") %></th>
+      <th><%= gettext("Vendor") %></th>
+      <th><%= gettext("Doc date") %></th>
+      <th><%= gettext("Amount") %></th>
 
       <th></th>
     </tr>
   </thead>
   <tbody id="inst_docs">
     <%= for instdoc <- @inst_docs do %>
-      <tr id="instdoc-<%= instdoc.id %>">
-        <td><%= instdoc.institute_id %></td>
-        <td><%= instdoc.category_id %></td>
-        <td><%= instdoc.payment_code %></td>
-        <td><%= instdoc.line_code %></td>
-        <td><%= instdoc.vendor_id %></td>
-        <td><%= instdoc.outcome_category_id %></td>
-        <td><%= instdoc.doc_date %></td>
-        <td><%= instdoc.amount %></td>
-        <td><%= instdoc.doc_name %></td>
-        <td><%= instdoc.doc_path %></td>
+    <tr id="instdoc-<%= instdoc.id %>">
+      <td><%= instdoc.institute.title %></td>
+      <td><%= instdoc.category.category_name %>/<%= instdoc.outcome_category.outcome_description %></td>
+      <td><%= instdoc.payment_code %></td>
+      <td><%= instdoc.line_code %></td>
+      <td><%= instdoc.vendor_name %></td>
+      <td><%= displayDate(instdoc.doc_date) %></td>
+      <td><%= displayAmount(instdoc.amount) %></td>
 
-        <td>
-          <span><%= live_redirect "Show", to: Routes.instdoc_show_path(@socket, :show, instdoc) %></span>
-          <span><%= live_patch "Edit", to: Routes.instdoc_index_path(@socket, :edit, instdoc) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: instdoc.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
+      <td class="hidden">
+        <span><%= live_redirect "Show", to: Routes.instdoc_show_path(@socket, :show, instdoc) %></span>
+        <span><%= live_patch "Edit", to: Routes.instdoc_index_path(@socket, :edit, instdoc) %></span>
+        <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: instdoc.id, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>
-
-<span><%= live_patch "New Instdoc", to: Routes.instdoc_index_path(@socket, :new) %></span>

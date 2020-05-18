@@ -19,6 +19,11 @@ import {Socket} from "phoenix"
 import NProgress from "nprogress"
 import {LiveSocket} from "phoenix_live_view"
 
+// import jQuery from "jquery"
+// import select2 from "select2"
+// import "select2/dist/css/select2.css"
+
+
 function sleep(delay) {
   var start = new Date().getTime();
   while (new Date().getTime() < start + delay);
@@ -40,6 +45,9 @@ Hooks.DisplayPdfModal = {
     console.log("Update....")
   }
 }
+
+
+
 
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")

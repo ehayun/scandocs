@@ -2,17 +2,22 @@ defmodule Scandoc.Institutes.Instdoc do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Scandoc.Institutes.Institute
+  alias Scandoc.Categories.Category
+  alias Scandoc.Categories.OutcomeCategory
+
   schema "inst_docs" do
     field :amount, :decimal
-    field :category_id, :integer
-    field :institute_id, :string
+    belongs_to :category, Category, references: :id
+    belongs_to :institute, Institute, references: :id
+    belongs_to :outcome_category, OutcomeCategory, references: :id
+
     field :doc_date, :date
     field :doc_name, :string
     field :doc_path, :string
     field :line_code, :string
-    field :outcome_category_id, :integer
     field :payment_code, :string
-    field :vendor_id, :integer
+    field :vendor_name, :string
 
     timestamps()
   end
@@ -25,7 +30,7 @@ defmodule Scandoc.Institutes.Instdoc do
       :category_id,
       :payment_code,
       :line_code,
-      :vendor_id,
+      :vendor_name,
       :outcome_category_id,
       :doc_date,
       :amount,
@@ -37,7 +42,7 @@ defmodule Scandoc.Institutes.Instdoc do
       :category_id,
       :payment_code,
       :line_code,
-      :vendor_id,
+      :vendor_name,
       :outcome_category_id,
       :doc_date,
       :amount,

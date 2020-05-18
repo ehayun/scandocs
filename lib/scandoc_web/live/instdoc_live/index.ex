@@ -2,11 +2,32 @@ defmodule ScandocWeb.InstdocLive.Index do
   use ScandocWeb, :live_view
 
   alias Scandoc.Institutes
+  # alias Scandoc.Institutes.Institute
+  alias Scandoc.Categories
+  alias Scandoc.Institutes
   alias Scandoc.Institutes.Instdoc
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :inst_docs, fetch_inst_docs())}
+    changeset = Institutes.change_instdoc(%Instdoc{})
+
+    filter = %{
+      "category" => "-1",
+      "institute" => "-1",
+      "outcome_category" => "-1",
+      "vendor_name" => ""
+    }
+
+    socket = assign(socket, filter: filter)
+
+    {:ok,
+     assign(socket,
+       inst_docs: fetch_inst_docs(socket),
+       categories: fetch_categories(),
+       institutes: fetch_institutes(),
+       outcome_categories: fetch_outcome_categories(),
+       changeset: changeset
+     )}
   end
 
   @impl true
@@ -33,14 +54,35 @@ defmodule ScandocWeb.InstdocLive.Index do
   end
 
   @impl true
+  def handle_event("filter", params, socket) do
+    %{"filter" => filter} = params
+    socket = assign(socket, filter: filter)
+    {:noreply, assign(socket, :inst_docs, fetch_inst_docs(socket))}
+  end
+
+  @impl true
   def handle_event("delete", %{"id" => id}, socket) do
     instdoc = Institutes.get_instdoc!(id)
     {:ok, _} = Institutes.delete_instdoc(instdoc)
 
-    {:noreply, assign(socket, :inst_docs, fetch_inst_docs())}
+    {:noreply, assign(socket, :inst_docs, fetch_inst_docs(socket))}
   end
 
-  defp fetch_inst_docs do
-    Institutes.list_inst_docs()
+  defp fetch_inst_docs(socket) do
+    filter = socket.assigns.filter
+    # IO.inspect(filter)
+    Institutes.list_inst_docs(17, filter)
+  end
+
+  defp fetch_categories do
+    Categories.list_categories()
+  end
+
+  def fetch_outcome_categories do
+    Categories.list_outcome_categoryes()
+  end
+
+  def fetch_institutes do
+    Institutes.list_institutes()
   end
 end
