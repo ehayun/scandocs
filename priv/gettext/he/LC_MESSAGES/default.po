@@ -635,6 +635,7 @@ msgid "Line code"
 msgstr "קוד שורה"
 
 #, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.ex:74
 #: lib/scandoc_web/live/instdoc_live/index.html.leex:3
 msgid "Listing Inst docs"
 msgstr "רשימת מסמכים למוסדות"
@@ -740,3 +741,23 @@ msgstr "כל קטגוריות הוצאה"
 #: lib/scandoc_web/live/instdoc_live/index.html.leex:73
 msgid "Asmachta"
 msgstr "אסמכתא"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.ex:62
+msgid "Edit Instdoc"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.ex:68
+msgid "New Instdoc"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:106
+msgid "Next"
+msgstr " הבא >"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:105
+msgid "Previous"
+msgstr "< הקודם"

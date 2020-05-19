@@ -115,6 +115,7 @@ defmodule Scandoc.Institutes do
   """
   def list_inst_docs(
         limit \\ 0,
+        current_page \\ 1,
         filter \\ %{
           "category" => "-1",
           "institute" => "-1",
@@ -135,9 +136,6 @@ defmodule Scandoc.Institutes do
       %{outcome_category: outcome_category_id},
       %{vendor_name: vendor_name}
     ]
-
-
-
 
     query = from(b in Instdoc)
 
@@ -165,8 +163,7 @@ defmodule Scandoc.Institutes do
           from q in query,
             where:
               ilike(q.vendor_name, ^"%#{vendor_name}%") or
-                ilike(q.payment_code, ^"%#{vendor_name}%")
-                or
+                ilike(q.payment_code, ^"%#{vendor_name}%") or
                 ilike(q.asmachta, ^"%#{vendor_name}%")
       end)
 
@@ -175,8 +172,10 @@ defmodule Scandoc.Institutes do
     |> preload(:category)
     |> preload(:outcome_category)
     |> order_by(desc: :doc_date)
-    |> limit(^limit)
-    |> Repo.all()
+    |> Repo.paginate(page: current_page, page_size: limit)
+
+    # |> limit(^limit)
+    # |> Repo.all()
   end
 
   @doc """

@@ -10,6 +10,7 @@ defmodule ScandocWeb.InstdocLive.Index do
   @impl true
   def mount(_params, _session, socket) do
     changeset = Institutes.change_instdoc(%Instdoc{})
+    current_page = if socket.assigns[:current_page], do: socket.assigns[:current_page], else: 1
 
     filter = %{
       "category" => "-1",
@@ -21,6 +22,7 @@ defmodule ScandocWeb.InstdocLive.Index do
     socket =
       assign(socket,
         filter: filter,
+        current_page: current_page,
         by_category: "-1",
         by_outcome_category: "-1",
         by_institute: "-1",
@@ -39,24 +41,38 @@ defmodule ScandocWeb.InstdocLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
+    current_page =
+      case params do
+        %{"page" => page} -> page
+        _ -> socket.assigns.current_page
+      end
+
+    IO.inspect(params, label: "cp: #{current_page}")
+    socket = assign(socket, current_page: current_page)
+
+    socket =
+      assign(socket,
+        inst_docs: fetch_inst_docs(socket)
+      )
+
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Instdoc")
+    |> assign(:page_title, gettext("Edit Instdoc"))
     |> assign(:instdoc, Institutes.get_instdoc!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Instdoc")
+    |> assign(:page_title, gettext("New Instdoc"))
     |> assign(:instdoc, %Instdoc{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Inst docs")
+    |> assign(:page_title, gettext("Listing Inst docs"))
     |> assign(:instdoc, nil)
   end
 
@@ -74,6 +90,7 @@ defmodule ScandocWeb.InstdocLive.Index do
     socket =
       assign(socket,
         filter: filter,
+        current_page: 1,
         by_category: by_category,
         by_outcome_category: by_outcome_category,
         by_institute: by_institute,
@@ -91,10 +108,16 @@ defmodule ScandocWeb.InstdocLive.Index do
     {:noreply, assign(socket, :inst_docs, fetch_inst_docs(socket))}
   end
 
+  @impl true
+  def handle_event("nav", %{"page" => page}, socket) do
+    socket = assign(socket, current_page: String.to_integer(page))
+    {:noreply, assign(socket, inst_docs: fetch_inst_docs(socket))}
+  end
+
   defp fetch_inst_docs(socket) do
     filter = socket.assigns.filter
 
-    Institutes.list_inst_docs(17, filter)
+    Institutes.list_inst_docs(17, socket.assigns.current_page, filter)
   end
 
   defp fetch_categories do

@@ -33,7 +33,7 @@
       <select name="filter[outcome_category]" class="custom-select d-block w-100" id="input8-ecommerce-03">
         <option value="-1" selected="">&lt;&lt;<%= gettext("By All Outcome categories")%>&gt;&gt;</option>
         <%= for c <- @outcome_categories do %>
-        <option  <%= if @by_outcome_category == "#{c.id}", do: "selected" %> value="<%=c.id %>"><%= c.outcome_description %></option>
+        <option <%= if @by_outcome_category == "#{c.id}", do: "selected" %> value="<%=c.id %>"><%= c.outcome_description %></option>
         <% end %>
       </select>
     </div>
@@ -86,7 +86,7 @@
       <td><%= instdoc.payment_code %></td>
       <td><%= instdoc.line_code %></td>
       <td><%= instdoc.asmachta %></td>
-      <td><a href="https://docs.scantzlev.com<%= getDocumentPath(instdoc.doc_path) %>"><%= instdoc.vendor_name %></a></td>
+      <td><a target="sacndocs" href="https://docs.scantzlev.com<%= getDocumentPath(instdoc.doc_path) %>"><%= instdoc.vendor_name %></a></td>
       <td><%= displayDate(instdoc.doc_date) %></td>
       <td><%= displayAmount(instdoc.amount) %></td>
 
@@ -99,3 +99,11 @@
     <% end %>
   </tbody>
 </table>
+
+<nav data-section-id="4" data-category="pagination" data-component-id="2c0d_21_01_awz" class="p-2" aria-label="Pagination">
+  <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
+    <li phx-click="nav" phx-value-page="<%= (@inst_docs.page_number - 1)  %>" class="page-item "><a class="page-link" href="#"><%= gettext("Previous") %></a></li>
+    <li phx-click="nav" phx-value-page="<%= (@inst_docs.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
+  </ul>
+</nav>
+</div>
