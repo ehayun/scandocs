@@ -18,7 +18,14 @@ defmodule ScandocWeb.InstdocLive.Index do
       "vendor_name" => ""
     }
 
-    socket = assign(socket, filter: filter)
+    socket =
+      assign(socket,
+        filter: filter,
+        by_category: "-1",
+        by_outcome_category: "-1",
+        by_institute: "-1",
+        vendor_name: ""
+      )
 
     {:ok,
      assign(socket,
@@ -56,7 +63,23 @@ defmodule ScandocWeb.InstdocLive.Index do
   @impl true
   def handle_event("filter", params, socket) do
     %{"filter" => filter} = params
-    socket = assign(socket, filter: filter)
+
+    %{
+      "category" => by_category,
+      "institute" => by_institute,
+      "outcome_category" => by_outcome_category,
+      "vendor_name" => vendor_name
+    } = filter
+
+    socket =
+      assign(socket,
+        filter: filter,
+        by_category: by_category,
+        by_outcome_category: by_outcome_category,
+        by_institute: by_institute,
+        vendor_name: vendor_name
+      )
+
     {:noreply, assign(socket, :inst_docs, fetch_inst_docs(socket))}
   end
 
@@ -70,7 +93,7 @@ defmodule ScandocWeb.InstdocLive.Index do
 
   defp fetch_inst_docs(socket) do
     filter = socket.assigns.filter
-    # IO.inspect(filter)
+
     Institutes.list_inst_docs(17, filter)
   end
 

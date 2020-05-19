@@ -3,9 +3,6 @@
   <%= gettext("Listing Inst docs") %>
 </header>
 
-
-
-
 <div class="col-md-8 order-md-1">
   <%= f = form_for @changeset, "#",
   class: "form form-horizontal",
@@ -14,35 +11,35 @@
 
   <div class="row">
     <div class="col-md-1 mb-1">
-    <%= gettext("Filter by") %>:
+      <%= gettext("Filter by") %>:
     </div>
     <div class="col-md-2 mb-2">
       <select name="filter[institute]" class="custom-select d-block w-100" id="input8-ecommerce-03">
-        <option value="-1" selected=""><%= gettext("By Institute")%></option>
+        <option value="-1" <%= if @by_institute == "-1", do: "selected" %>>&lt;&lt;<%= gettext("By All Institute")%>&gt;&gt;</option>
         <%= for i <- @institutes do %>
-        <option value="<%=i.id %>"><%= i.title %></option>
+        <option value="<%=i.id %>" <%= if @by_institute == "#{i.id}", do: "selected" %>><%= i.title %></option>
         <% end %>
       </select>
     </div>
     <div class="col-md-2 mb-2">
       <select name="filter[category]" class="custom-select d-block w-100" id="input7-ecommerce-03">
-        <option value="-1" selected=""><%= gettext("By category")%></option>
+        <option value="-1" selected="">&lt;&lt;<%= gettext("By All Categories")%>&gt;&gt;</option>
         <%= for c <- @categories do %>
-        <option value="<%=c.id %>"><%= c.category_name %></option>
+        <option <%= if @by_category == "#{c.id}", do: "selected" %> value="<%=c.id %>"><%= c.category_name %></option>
         <% end %>
       </select>
     </div>
     <div class="col-md-3 mb-3">
       <select name="filter[outcome_category]" class="custom-select d-block w-100" id="input8-ecommerce-03">
-        <option value="-1" selected=""><%= gettext("By Outcome Category")%></option>
+        <option value="-1" selected="">&lt;&lt;<%= gettext("By All Outcome categories")%>&gt;&gt;</option>
         <%= for c <- @outcome_categories do %>
-        <option value="<%=c.id %>"><%= c.outcome_description %></option>
+        <option  <%= if @by_outcome_category == "#{c.id}", do: "selected" %> value="<%=c.id %>"><%= c.outcome_description %></option>
         <% end %>
       </select>
     </div>
 
     <div class="col-md-3 mb-3">
-      <input name="filter[vendor_name]" class="form-control" value="<%= @filter["vendor_name"] %>" type="text" placeholder="<%= gettext("Vendor name")%>">
+      <input name="filter[vendor_name]" class="form-control" value="<%= @filter["vendor_name"] %>" type="text" placeholder="<%= gettext("Vendor/payment code/asmachta")%>">
     </div>
   </div>
 
@@ -73,6 +70,7 @@
       <th><%= gettext("Category") %></th>
       <th><%= gettext("Payment code") %></th>
       <th><%= gettext("Line code") %></th>
+      <th><%= gettext("Asmachta") %></th>
       <th><%= gettext("Vendor") %></th>
       <th><%= gettext("Doc date") %></th>
       <th><%= gettext("Amount") %></th>
@@ -87,7 +85,8 @@
       <td><%= instdoc.category.category_name %>/<%= instdoc.outcome_category.outcome_description %></td>
       <td><%= instdoc.payment_code %></td>
       <td><%= instdoc.line_code %></td>
-      <td><%= instdoc.vendor_name %></td>
+      <td><%= instdoc.asmachta %></td>
+      <td><a href="https://docs.scantzlev.com<%= getDocumentPath(instdoc.doc_path) %>"><%= instdoc.vendor_name %></a></td>
       <td><%= displayDate(instdoc.doc_date) %></td>
       <td><%= displayAmount(instdoc.amount) %></td>
 

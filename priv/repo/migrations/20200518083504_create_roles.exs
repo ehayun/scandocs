@@ -8,6 +8,5 @@ defmodule Scandoc.Repo.Migrations.CreateRoles do
 
       timestamps()
     end
-
   end
 end

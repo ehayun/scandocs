@@ -33,7 +33,7 @@ defmodule ScandocWeb.RoleLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.role_index_path(conn, :index))
 
       assert index_live |> element("a", "New Role") |> render_click() =~
-        "New Role"
+               "New Role"
 
       assert_patch(index_live, Routes.role_index_path(conn, :new))
 
@@ -55,7 +55,7 @@ defmodule ScandocWeb.RoleLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.role_index_path(conn, :index))
 
       assert index_live |> element("#role-#{role.id} a", "Edit") |> render_click() =~
-        "Edit Role"
+               "Edit Role"
 
       assert_patch(index_live, Routes.role_index_path(conn, :edit, role))
 
@@ -95,7 +95,7 @@ defmodule ScandocWeb.RoleLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.role_show_path(conn, :show, role))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit Role"
+               "Edit Role"
 
       assert_patch(show_live, Routes.role_show_path(conn, :edit, role))
 

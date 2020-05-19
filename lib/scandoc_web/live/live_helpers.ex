@@ -45,11 +45,12 @@ defmodule ScandocWeb.LiveHelpers do
   end
 
   def displayRole(role) do
-    case Role |> where(code: ^role) |> Repo.one do
+    case Role |> where(code: ^role) |> Repo.one() do
       nil -> "???"
       role -> role.title
     end
   end
+
   def getFluid(socket) do
     %{changed: changed} = socket
 

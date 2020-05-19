@@ -15,3 +15,5 @@ alias alias Scandoc.Students
 alias alias Scandoc.Students.Student
 alias Scandoc.Permissions
 alias Scandoc.Permissions.Permission
+alias Scandoc.Institutes
+alias Scandoc.Institutes.Instdoc

@@ -481,7 +481,7 @@ msgid "Title"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:68
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:70
 #: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:26 lib/scandoc_web/live/outcome_category_live/index.html.leex:20
 msgid "Category"
 msgstr ""
@@ -564,7 +564,6 @@ msgid "Phone number"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:40
 #: lib/scandoc_web/live/vendor_live/index.html.leex:18
 msgid "Vendor name"
 msgstr ""
@@ -611,12 +610,12 @@ msgid "Vendors"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:73
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:76
 msgid "Amount"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:72
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:75
 msgid "Doc date"
 msgstr ""
 
@@ -626,12 +625,12 @@ msgid "Documents"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:67
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:69
 msgid "Institute"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:70
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:72
 msgid "Line code"
 msgstr ""
 
@@ -641,28 +640,18 @@ msgid "Listing Inst docs"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:69
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:71
 msgid "Payment code"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:71
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:74
 msgid "Vendor"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/employee_live/form_component.html.leex:34
 msgid "Admin?"
-msgstr ""
-
-#, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:24
-msgid "All Categoties"
-msgstr ""
-
-#, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:32
-msgid "All Outcome Categoties"
 msgstr ""
 
 #, elixir-format
@@ -720,4 +709,34 @@ msgstr ""
 #, elixir-format
 #: lib/scandoc_web/live/employee_live/form_component.ex:46
 msgid "Employee updated successfully"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:14
+msgid "Filter by"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:42
+msgid "Vendor/payment code/asmachta"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:26
+msgid "By All Categories"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:18
+msgid "By All Institute"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:34
+msgid "By All Outcome categories"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:73
+msgid "Asmachta"
 msgstr ""

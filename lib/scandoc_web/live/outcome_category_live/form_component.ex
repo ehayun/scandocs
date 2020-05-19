@@ -8,6 +8,7 @@ defmodule ScandocWeb.OutcomeCategoryLive.FormComponent do
     changeset = Categories.change_outcome_category(outcome_category)
 
     categories = Categories.list_categories()
+
     {:ok,
      socket
      |> assign(assigns)

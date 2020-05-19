@@ -115,7 +115,7 @@ defmodule Scandoc.Institutes do
   """
   def list_inst_docs(
         limit \\ 0,
-        filter \\ filter = %{
+        filter \\ %{
           "category" => "-1",
           "institute" => "-1",
           "outcome_category" => "-1",
@@ -129,20 +129,51 @@ defmodule Scandoc.Institutes do
       "vendor_name" => vendor_name
     } = filter
 
-    q = from(i in Instdoc, where: ilike(i.vendor_name, ^"%#{vendor_name}%"))
+    filter = [
+      %{category: category_id},
+      %{institute: institute_id},
+      %{outcome_category: outcome_category_id},
+      %{vendor_name: vendor_name}
+    ]
 
-    q =
-      if limit > 0 do
-        q |> limit(^limit)
-      else
-        q
-      end
 
-    q
+
+
+    query = from(b in Instdoc)
+
+    query =
+      Enum.reduce(filter, query, fn
+        %{category: "-1"}, query ->
+          query
+
+        %{category: category_id}, query ->
+          from q in query, where: q.category_id == ^category_id
+
+        %{institute: "-1"}, query ->
+          query
+
+        %{institute: institute_id}, query ->
+          from q in query, where: q.institute_id == ^institute_id
+
+        %{outcome_category: "-1"}, query ->
+          query
+
+        %{outcome_category: outcome_category_id}, query ->
+          from q in query, where: q.outcome_category_id == ^outcome_category_id
+
+        %{vendor_name: vendor_name}, query ->
+          from q in query,
+            where:
+              ilike(q.vendor_name, ^"%#{vendor_name}%") or
+                ilike(q.payment_code, ^"%#{vendor_name}%")
+      end)
+
+    query
     |> preload(:institute)
     |> preload(:category)
     |> preload(:outcome_category)
     |> order_by(desc: :doc_date)
+    |> limit(^limit)
     |> Repo.all()
   end
 

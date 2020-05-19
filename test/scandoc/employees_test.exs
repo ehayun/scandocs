@@ -6,9 +6,33 @@ defmodule Scandoc.EmployeesTest do
   describe "employees" do
     alias Scandoc.Employees.Employee
 
-    @valid_attrs %{date_of_birth: ~D[2010-04-17], full_name: "some full_name", hashed_password: "some hashed_password", is_admin: true, is_freezed: true, role: "some role", zehut: "some zehut"}
-    @update_attrs %{date_of_birth: ~D[2011-05-18], full_name: "some updated full_name", hashed_password: "some updated hashed_password", is_admin: false, is_freezed: false, role: "some updated role", zehut: "some updated zehut"}
-    @invalid_attrs %{date_of_birth: nil, full_name: nil, hashed_password: nil, is_admin: nil, is_freezed: nil, role: nil, zehut: nil}
+    @valid_attrs %{
+      date_of_birth: ~D[2010-04-17],
+      full_name: "some full_name",
+      hashed_password: "some hashed_password",
+      is_admin: true,
+      is_freezed: true,
+      role: "some role",
+      zehut: "some zehut"
+    }
+    @update_attrs %{
+      date_of_birth: ~D[2011-05-18],
+      full_name: "some updated full_name",
+      hashed_password: "some updated hashed_password",
+      is_admin: false,
+      is_freezed: false,
+      role: "some updated role",
+      zehut: "some updated zehut"
+    }
+    @invalid_attrs %{
+      date_of_birth: nil,
+      full_name: nil,
+      hashed_password: nil,
+      is_admin: nil,
+      is_freezed: nil,
+      role: nil,
+      zehut: nil
+    }
 
     def employee_fixture(attrs \\ %{}) do
       {:ok, employee} =

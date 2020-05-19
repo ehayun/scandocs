@@ -481,7 +481,7 @@ msgid "Title"
 msgstr "שם"
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:68
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:70
 #: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:26 lib/scandoc_web/live/outcome_category_live/index.html.leex:20
 msgid "Category"
 msgstr "קטגוריה/סוג מסמך"
@@ -564,7 +564,6 @@ msgid "Phone number"
 msgstr "מספר טלפון"
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:40
 #: lib/scandoc_web/live/vendor_live/index.html.leex:18
 msgid "Vendor name"
 msgstr "שם הספק"
@@ -611,12 +610,12 @@ msgid "Vendors"
 msgstr " ספקים"
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:73
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:76
 msgid "Amount"
 msgstr "סכום"
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:72
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:75
 msgid "Doc date"
 msgstr "ת. מסמך"
 
@@ -626,12 +625,12 @@ msgid "Documents"
 msgstr "מסמכים"
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:67
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:69
 msgid "Institute"
 msgstr "מוסדות"
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:70
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:72
 msgid "Line code"
 msgstr "קוד שורה"
 
@@ -641,12 +640,12 @@ msgid "Listing Inst docs"
 msgstr "רשימת מסמכים למוסדות"
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:69
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:71
 msgid "Payment code"
 msgstr "קוד תשלום"
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:71
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:74
 msgid "Vendor"
 msgstr " ספק"
 
@@ -654,16 +653,6 @@ msgstr " ספק"
 #: lib/scandoc_web/live/employee_live/form_component.html.leex:34
 msgid "Admin?"
 msgstr "הרשאות ניהול?"
-
-#, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:24
-msgid "All Categoties"
-msgstr "קטגוריות"
-
-#, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:32
-msgid "All Outcome Categoties"
-msgstr "קטגורית הוצאה"
 
 #, elixir-format
 #: lib/scandoc_web/live/employee_live/index.html.leex:29
@@ -721,3 +710,33 @@ msgstr "עובד נוצר בהצלחה"
 #: lib/scandoc_web/live/employee_live/form_component.ex:46
 msgid "Employee updated successfully"
 msgstr "עובד עודכן בהצלחה"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:14
+msgid "Filter by"
+msgstr "סינון לפי"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:42
+msgid "Vendor/payment code/asmachta"
+msgstr "ספק/קוד תשלום/אסמכתא"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:26
+msgid "By All Categories"
+msgstr "כל הקטגוריות"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:18
+msgid "By All Institute"
+msgstr "כל המוסדות"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:34
+msgid "By All Outcome categories"
+msgstr "כל קטגוריות הוצאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:73
+msgid "Asmachta"
+msgstr "אסמכתא"
