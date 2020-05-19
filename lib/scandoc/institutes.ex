@@ -166,6 +166,8 @@ defmodule Scandoc.Institutes do
             where:
               ilike(q.vendor_name, ^"%#{vendor_name}%") or
                 ilike(q.payment_code, ^"%#{vendor_name}%")
+                or
+                ilike(q.asmachta, ^"%#{vendor_name}%")
       end)
 
     query
