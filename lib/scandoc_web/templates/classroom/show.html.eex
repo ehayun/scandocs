@@ -1,6 +1,8 @@
 <header>
   <i class="fas fa-chalkboard"></i>
   <%= gettext("Classroom") %>: &nbsp;
+
+  <!-- %= link @classroom.classroom_name <> "- " <> @classroom.code, to: Routes.classroom_path(@conn, :edit, @classroom) % -->
   <%= @classroom.classroom_name %> - <%= @classroom.code %>
   <span class="float-left"><%= link gettext("Listing Classrooms"), to: Routes.classroom_path(@conn, :index), class: "btn btn-primary" %></span>
 </header>
