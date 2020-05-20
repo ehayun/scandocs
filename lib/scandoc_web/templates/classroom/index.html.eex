@@ -1,5 +1,15 @@
-<h2><i class="fas fa-chalkboard"></i>
+<h2>
+  <i class="fas fa-chalkboard"></i>
   <%= gettext("Listing Classrooms") %>
+  <form class="float-left">
+
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="search">
+      </div>
+      <button type="submit" class="col-sm-2  btn btn-primary"><i class="fas fa-search"></i></button>
+    </div>
+
 </h2>
 
 <table class="table table-striped">
@@ -18,18 +28,20 @@
     <tr>
       <td><%= classroom.code %></td>
       <td>
-      <%= link classroom.classroom_name, to: Routes.classroom_path(@conn, :show, classroom) %>
+        <%= link classroom.classroom_name, to: Routes.classroom_path(@conn, :show, classroom) %>
       </td>
       <td>
-      <%= link classroom.school.school_name, to: Routes.school_path(@conn, :show, classroom.school) %>
+        <%= link classroom.school.school_name, to: Routes.school_path(@conn, :show, classroom.school) %>
       </td>
       <td>
-      <%= link classroom.teacher.full_name , to: Routes.teacher_path(@conn, :show, classroom.teacher) %>
+        <%= classroom.teacher.full_name %>
       </td>
 
       <td>
         <span class="hidden"><%= link "Show", to: Routes.classroom_path(@conn, :show, classroom) %></span>
-        <span class="hidden"><%= link "Edit", to: Routes.classroom_path(@conn, :edit, classroom) %></span>
+        <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
+        <span class="hiddenx"><%= link raw("<i class='far fa-edit'></i>"), to: Routes.classroom_path(@conn, :edit, classroom) %></span>
+        <% end %>
         <span class="hidden"><%= link "Delete", to: Routes.classroom_path(@conn, :delete, classroom), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>

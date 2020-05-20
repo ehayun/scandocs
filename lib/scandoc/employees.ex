@@ -80,8 +80,6 @@ defmodule Scandoc.Employees do
         end
       end
     end
-
-
   end
 
   @doc """

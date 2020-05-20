@@ -4,17 +4,28 @@ defmodule ScandocWeb.ClassroomController do
   import Ecto.Query
   alias Scandoc.Repo
 
+  alias Scandoc.Schools
+  alias Scandoc.Schools.Teacher
   alias Scandoc.Classrooms
   alias Scandoc.Students
   alias Scandoc.Classrooms.Classroom
 
   alias ScandocWeb.UserAuth
 
-  def index(conn, %{"page" => current_page, "school" => schoolId}) do
+  def index(conn, %{"page" => current_page, "search" => search, "school" => schoolId}) do
     # classrooms = Classrooms.list_classrooms()
     # render(conn, "index.html", classrooms: classrooms)
     classList = UserAuth.getIds(conn, :classroom)
     schoolId = String.to_integer(schoolId)
+
+    teachers =
+      if search > "" do
+        from(t in Teacher, where: ilike(t.full_name, ^"%#{search}%"))
+        |> Repo.all()
+        |> Enum.map(fn u -> u.id end)
+      else
+        []
+      end
 
     q = Classroom
 
@@ -32,15 +43,26 @@ defmodule ScandocWeb.ClassroomController do
         q
       end
 
+    q =
+      if search > "" do
+        from(c in q, where: ilike(c.classroom_name, ^"%#{search}%") or c.teacher_id in ^teachers)
+      else
+        q
+      end
+
     classrooms =
       q
       |> order_by(:school_id)
+      |> order_by(:classroom_name)
       |> preload(:school)
       |> preload(:teacher)
-      |> Repo.paginate(page: current_page, page_size: 17)
+      |> Repo.paginate(page: current_page, page_size: 15)
+
+    teachers = Schools.list_teachers()
 
     conn
     |> assign(:classrooms, classrooms)
+    |> assign(:teachers, teachers)
     |> render("index.html")
   end
 
@@ -57,7 +79,13 @@ defmodule ScandocWeb.ClassroomController do
         _ -> 1
       end
 
-    index(conn, %{"page" => "#{p}", "school" => schoolId})
+    search =
+      case params do
+        %{"search" => p} -> p
+        _ -> ""
+      end
+
+    index(conn, %{"page" => "#{p}", "search" => "#{search}", "school" => schoolId})
   end
 
   def new(conn, _params) do
@@ -96,9 +124,11 @@ defmodule ScandocWeb.ClassroomController do
   end
 
   def edit(conn, %{"id" => id}) do
+    teachers = Schools.list_teachers()
+
     classroom = Classrooms.get_classroom!(id)
     changeset = Classrooms.change_classroom(classroom)
-    render(conn, "edit.html", classroom: classroom, changeset: changeset)
+    render(conn, "edit.html", classroom: classroom, changeset: changeset, teachers: teachers)
   end
 
   def update(conn, %{"id" => id, "classroom" => classroom_params}) do
@@ -107,8 +137,8 @@ defmodule ScandocWeb.ClassroomController do
     case Classrooms.update_classroom(classroom, classroom_params) do
       {:ok, classroom} ->
         conn
-        |> put_flash(:info, "Classroom updated successfully.")
-        |> redirect(to: Routes.classroom_path(conn, :show, classroom))
+        # |> put_flash(:info, "Classroom updated successfully.")
+        |> redirect(to: Routes.classroom_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", classroom: classroom, changeset: changeset)

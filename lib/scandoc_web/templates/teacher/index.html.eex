@@ -25,7 +25,7 @@
 
       <td>
         <span class="hidden"><%= link "Show", to: Routes.teacher_path(@conn, :show, classroom.teacher) %></span>
-        <span class="hiddenx"><%= link "Edit", to: Routes.teacher_path(@conn, :edit, classroom.teacher) %></span>
+        <span class="hidden"><%= link "Edit", to: Routes.teacher_path(@conn, :edit, classroom.teacher) %></span>
         <span class="hidden"><%= link "Delete", to: Routes.teacher_path(@conn, :delete, classroom.teacher), method: :delete, data: [confirm: "Are you sure?"] %></span>
         <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
         <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@conn, :loginas, classroom.teacher) %>

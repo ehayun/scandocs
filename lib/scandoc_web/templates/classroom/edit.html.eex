@@ -1,5 +1,7 @@
-<h1>Edit Classroom</h1>
+<header><%= gettext("Edit Classroom") %>
+<span class="float-left"><%= link gettext("Back"), to: Routes.classroom_path(@conn, :index), class: "btn btn-primary" %></span>
+
+</header>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.classroom_path(@conn, :update, @classroom)) %>
 
-<span><%= link "Back", to: Routes.classroom_path(@conn, :index) %></span>

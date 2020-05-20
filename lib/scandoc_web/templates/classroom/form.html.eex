@@ -1,27 +1,28 @@
-<%= form_for @changeset, @action, fn f -> %>
+<div class="blueBorder p-2">
+  <%= form_for @changeset, @action, fn f -> %>
   <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
+  <div class="alert alert-danger">
+    <p>Oops, something went wrong! Please check the errors below.</p>
+  </div>
   <% end %>
 
-  <%= label f, :code %>
-  <%= text_input f, :code %>
-  <%= error_tag f, :code %>
 
-  <%= label f, :classroom_name %>
-  <%= text_input f, :classroom_name %>
-  <%= error_tag f, :classroom_name %>
+  <%= PBF.text_input f, :code, input: [class: "col-md-3"], label: [text: gettext("Code")] %>
+  <%= PBF.text_input f, :classroom_name, input: [class: "col-md-5"], label: [text: gettext("Classroom name")] %>
 
-  <%= label f, :school_id %>
-  <%= number_input f, :school_id %>
-  <%= error_tag f, :school_id %>
 
-  <%= label f, :teacher_id %>
-  <%= number_input f, :teacher_id %>
-  <%= error_tag f, :teacher_id %>
+  <div class="form-group row"><label class="col-form-label text-sm-right col-sm-2" for="classroom_code"><%= gettext("Teacher") %></label>
+    <div class="col-sm-10">
+
+      <%= select(f, :teacher_id, Enum.map(@teachers, &{&1.full_name, &1.id})) %>
+
+    </div>
+  </div>
+
+
 
   <div>
-    <%= submit "Save" %>
+    <%= PBF.submit f, gettext("Save"), class: "btn-primary" %>
   </div>
-<% end %>
+  <% end %>
+</div>
