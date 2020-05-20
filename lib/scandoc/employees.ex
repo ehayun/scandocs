@@ -6,6 +6,9 @@ defmodule Scandoc.Employees do
   import Ecto.Query, warn: false
   alias Scandoc.Repo
 
+  alias Scandoc.Schools.School
+  alias Scandoc.Classrooms.Classroom
+
   alias Scandoc.Employees.Employee
 
   @doc """
@@ -48,6 +51,38 @@ defmodule Scandoc.Employees do
 
   """
   def get_employee!(id), do: Repo.get!(Employee, id)
+
+  @doc """
+  get classroom where this worker is a teacher
+  return {school_id, classroom_id}
+  if this worker is a school manager it returns {school_id, nil}
+  """
+  def get_classroom(id) do
+    s = School |> where(manager_id: ^id) |> Repo.all() |> Enum.at(0)
+
+    c =
+      if s do
+        Classroom |> where(school_id: ^s.id) |> Repo.all() |> Enum.at(0)
+      else
+        Classroom |> where(teacher_id: ^id) |> Repo.all() |> Enum.at(0)
+      end
+
+    if s && c do
+      {s.id, c.id}
+    else
+      if s do
+        {s.id, nil}
+      else
+        if c do
+          {c.school_id, c.id}
+        else
+          {nil, nil}
+        end
+      end
+    end
+
+
+  end
 
   @doc """
   Creates a employee.

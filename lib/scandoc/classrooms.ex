@@ -17,8 +17,17 @@ defmodule Scandoc.Classrooms do
       [%Classroom{}, ...]
 
   """
-  def list_classrooms do
-    Classroom
+  def list_classrooms(school_id \\ nil) do
+    q = Classroom
+
+    q =
+      if school_id do
+        q |> where(school_id: ^school_id)
+      else
+        q
+      end
+
+    q
     |> preload(:school)
     |> preload(:teacher)
     |> Repo.all()

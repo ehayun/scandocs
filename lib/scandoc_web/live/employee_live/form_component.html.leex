@@ -1,4 +1,4 @@
-<header><%= @title %></header>
+<header><%= @title %> <%= @role %> </header>
 
 <%= f = form_for @changeset, "#",
   id: "employee-form",
@@ -16,9 +16,11 @@
 <div class="form-group row">
   <%= label f, gettext("Role"), class: "col-form-label text-sm-right col-sm-2" %>
   <%= Phoenix.HTML.Form.select(f, :role, Enum.map(@roles, &{&1.title, &1.code}), class: "col-sm-3") %>
-  <%= error_tag f, :hashed_password %>
 
+  <%= error_tag f, :hashed_password %>
 </div>
+
+
 
 <div class="form-group row">
   <%= label f, gettext("birth date"), class: "col-form-label text-sm-left col-sm-2" %>

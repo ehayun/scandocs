@@ -33,6 +33,14 @@ defmodule ScandocWeb.LiveHelpers do
       else: "#"
   end
 
+  def isTeacher(role) do
+    role == "030"
+  end
+
+  def isSchoolManager(role) do
+    role == "020"
+  end
+
   def displayAmount(amount) do
     Money.to_string(Money.new(trunc(Decimal.to_float(amount) * 100.00)))
   end

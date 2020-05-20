@@ -10,6 +10,8 @@ defmodule Scandoc.Employees.Employee do
     field :is_admin, :boolean, default: false
     field :is_freezed, :boolean, default: false
     field :role, :string, default: "030"
+    field :school_id, :integer, virtual: true
+    field :classroom_id, :integer, virtual: true
     field :zehut, :string
 
     timestamps()
