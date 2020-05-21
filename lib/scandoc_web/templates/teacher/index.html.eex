@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-    <%= for classroom <- @classrooms do %>
+    <%= for classroom <- @classrooms, classroom.teacher do %>
     <tr>
       <td><%= classroom.teacher.zehut %></td>
       <td><%= classroom.teacher.full_name %></td>

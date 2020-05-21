@@ -25,7 +25,7 @@
     </tr>
   </thead>
   <tbody id="permissions">
-    <%= for permission <- @permissions do %>
+    <%= for permission <- @permissions, permission.user  do %>
     <tr id="permission-<%= permission.id %>">
       <td><%= permission.user.full_name %></td>
       <td><%= getPermissionType(permission.permission_type) %></td>
