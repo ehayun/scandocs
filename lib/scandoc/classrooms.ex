@@ -50,6 +50,15 @@ defmodule Scandoc.Classrooms do
   def get_classroom!(id),
     do: Classroom |> where(id: ^id) |> preload(:school) |> preload(:teacher) |> Repo.one()
 
+  def get_classroom_by_teacher(id) do
+    Classroom
+    |> where(teacher_id: ^id)
+    |> preload(:school)
+    |> preload(:teacher)
+    |> Repo.all()
+    |> Enum.at(0)
+  end
+
   @doc """
   Creates a classroom.
 

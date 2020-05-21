@@ -20,7 +20,7 @@ defmodule Scandoc.Employees do
       [%Employee{}, ...]
 
   """
-  def list_employees(query \\ "") do
+  def list_employees(limit \\ 0, current_page \\ 1, query \\ "") do
     q = Employee
 
     q =
@@ -33,7 +33,7 @@ defmodule Scandoc.Employees do
         q
       end
 
-    q |> order_by(:full_name) |> Repo.all()
+    q |> order_by(:full_name) |> Repo.paginate(page: current_page, page_size: limit)
   end
 
   @doc """

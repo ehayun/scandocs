@@ -1,0 +1,64 @@
+<h2>
+  <%%= gettext("Listing <%= schema.human_plural %>") %>
+    <span class="float-left">
+      <%%= live_patch gettext("Add New"), to: Routes.<%= schema.route_helper %>_index_path(@socket, :new), class: "btn btn-primary" %>
+    </span>
+    <span class="float-left mr-2 m-2">
+      <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
+        <input class="form-control" type="text" value='<%%= @search %>' name="search" placeholder='<%%= gettext("Search")%>'>
+      </form>
+    </span>
+</h2>
+
+
+
+
+<%%= if @live_action in [:new, :edit] do %>
+<%%= live_modal @socket, <%= inspect context.web_module %>.<%= inspect Module.concat(schema.web_namespace, schema.alias) %>Live.FormComponent, id: @<%= schema.singular %>.id || :new, title: @page_title, action: @live_action, <%= schema.singular %>: @<%= schema.singular %>, return_to: Routes.<%= schema.route_helper %>_index_path(@socket, :index) %>
+<%% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <%= for {k, _} <- schema.attrs do %> <th>
+        <%%= gettext("<%= Phoenix.Naming.humanize(Atom.to_string(k)) %>") %>
+      </th>
+      <% end %>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="<%= schema.plural %>">
+    <%%= for <%= schema.singular %> <- @<%= schema.plural %> do %>
+      <tr id="<%= schema.singular %>-<%%= <%= schema.singular %>.id %>">
+        <%= for {k, _} <- schema.attrs do %> <td>
+          <%%= <%= schema.singular %>.<%= k %> %>
+        </td>
+        <% end %>
+        <td>
+          <span class="hidden">
+            <%%= live_redirect "Show" , to: Routes.<%= schema.route_helper %>_show_path(@socket, :show, <%= schema.singular %>) %>
+          </span>
+          <span class="hidden">
+            <%%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.<%= schema.route_helper %>_index_path(@socket, :edit, <%= schema.singular %>) %>
+          </span>
+          <span class="hidden">
+            <%%= link "Delete" , to: "#" , phx_click: "delete" , phx_value_id: <%= schema.singular %>.id, data: [confirm: gettext("Are you sure?")] %>
+          </span>
+        </td>
+      </tr>
+      <%% end %>
+  </tbody>
+</table>
+
+
+<nav class="p-2" aria-label="Pagination">
+  <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
+    <li phx-click="nav" phx-value-page="<%%= (@<%= schema.plural %>.page_number - 1)  %>" class="page-item "><a class="page-link" href="#"><%= gettext("Previous") %></a></li>
+    <li class="m-1"><%%= gettext("Page") %></li>
+    <li class="m-1"><%%= @<%= schema.plural %>.page_number %></li>
+    <li class="m-1"><%%= gettext("Out of") %></li>
+    <li class="m-1"><%%= @<%= schema.plural %>.total_pages %></li>
+    <li phx-click="nav" phx-value-page="<%%= (@<%= schema.plural %>.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
+  </ul>
+</nav>
+

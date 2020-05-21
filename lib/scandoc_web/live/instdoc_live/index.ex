@@ -47,7 +47,6 @@ defmodule ScandocWeb.InstdocLive.Index do
         _ -> socket.assigns.current_page
       end
 
-    IO.inspect(params, label: "cp: #{current_page}")
     socket = assign(socket, current_page: current_page)
 
     socket =

@@ -755,7 +755,7 @@ msgid "New Instdoc"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:106
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:110
 msgid "Next"
 msgstr ""
 
@@ -772,4 +772,14 @@ msgstr ""
 #, elixir-format
 #: lib/scandoc_web/templates/classroom/edit.html.eex:1
 msgid "Edit Classroom"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:108
+msgid "Out of"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:106
+msgid "Page"
 msgstr ""

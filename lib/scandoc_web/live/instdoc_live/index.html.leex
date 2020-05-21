@@ -100,9 +100,13 @@
   </tbody>
 </table>
 
-<nav data-section-id="4" data-category="pagination" data-component-id="2c0d_21_01_awz" class="p-2" aria-label="Pagination">
+<nav  class="p-2" aria-label="Pagination">
   <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
     <li phx-click="nav" phx-value-page="<%= (@inst_docs.page_number - 1)  %>" class="page-item "><a class="page-link" href="#"><%= gettext("Previous") %></a></li>
+    <li class="m-1"><%= gettext("Page") %></li>
+    <li class="m-1"><%= @inst_docs.page_number %></li>
+    <li class="m-1"><%= gettext("Out of") %></li>
+    <li class="m-1"><%= @inst_docs.total_pages %></li>
     <li phx-click="nav" phx-value-page="<%= (@inst_docs.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
   </ul>
 </nav>

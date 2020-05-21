@@ -7,6 +7,7 @@ defmodule Scandoc.Schools do
   alias Scandoc.Repo
 
   alias Scandoc.Schools.School
+  alias Scandoc.Classrooms
 
   @doc """
   Returns the list of schools.
@@ -40,6 +41,15 @@ defmodule Scandoc.Schools do
 
   def get_school_by_name(name) do
     Repo.get_by(School, school_name: name)
+  end
+
+  def get_school_by_manager(manager_id) do
+    School |> where(manager_id: ^manager_id) |> Repo.all() |> Enum.at(0)
+  end
+
+  def get_school_by_classroom(class_id) do
+    c = Classrooms.get_classroom!(class_id)
+    get_school!(c.school_id)
   end
 
   @doc """

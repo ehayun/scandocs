@@ -7,10 +7,10 @@ defmodule ScandocWeb.LiveHelpers do
   alias Scandoc.Permissions
   alias Scandoc.Schools
   alias Scandoc.Schools.School
+  alias Scandoc.Classrooms
   alias Scandoc.Classrooms.Classroom
   alias Scandoc.Students.Student
   alias Scandoc.Institutes.Institute
-  alias Scandoc.Vendors.Vendor
   alias Scandoc.Employees.Role
 
   alias Scandoc.Documents.Docgroup
@@ -22,9 +22,55 @@ defmodule ScandocWeb.LiveHelpers do
     end
   end
 
-  def getSchoolName(id) do
-    s = Schools.get_school!(id)
-    s.school_name
+  def getSchoolName(id, type \\ :school) do
+    s =
+      case type do
+        :school -> Schools.get_school!(id)
+        :classroom -> Schools.get_school_by_classroom(id)
+        :employee -> Schools.get_school_by_manager(id)
+      end
+
+    if s do
+      s.school_name
+    else
+      ""
+    end
+  end
+
+  def getClassroomName(id, role) do
+    school_name =
+      case role do
+        "020" ->
+          s = Schools.get_school_by_manager(id)
+          if s, do: s.school_name, else: ""
+
+        "030" ->
+          c = Classrooms.get_classroom_by_teacher(id)
+
+          if c do
+            s = Schools.get_school!(c.school_id)
+            if s, do: s.school_name, else: ""
+          else
+            ""
+          end
+
+        _ ->
+          ""
+      end
+
+    classroom_name =
+      case role do
+        "030" ->
+          c = Classrooms.get_classroom_by_teacher(id)
+          if c, do: c.classroom_name, else: ""
+
+        _ ->
+          ""
+      end
+
+    slash = if classroom_name > "", do: "/", else: ""
+
+    "#{school_name}#{slash}#{classroom_name}"
   end
 
   def getDocumentPath(path) do

@@ -8,6 +8,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   @impl true
   def update(%{employee: employee} = assigns, socket) do
     {school_id, classroom_id} = Employees.get_classroom(employee.id)
+    IO.puts("Emp: [#{employee.id}] [#{school_id}, #{classroom_id}]")
     employee = Map.merge(employee, %{school_id: school_id, classroom_id: classroom_id})
     changeset = Employees.change_employee(employee)
     IO.inspect(changeset)
@@ -47,7 +48,10 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
         _ -> socket.assigns.school_id
       end
 
-    socket = assign(socket, role: role, school_id: school_id)
+    classrooms = Classrooms.list_classrooms(school_id)
+    classrooms = List.insert_at(classrooms, 0, %{id: -1, classroom_name: ""})
+
+    socket = assign(socket, role: role, school_id: school_id, classrooms: classrooms)
 
     changeset =
       socket.assigns.employee
@@ -106,7 +110,6 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       {:ok, _employee} ->
         {:noreply,
          socket
-         |> put_flash(:info, gettext("Employee updated successfully"))
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -119,7 +122,6 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       {:ok, _employee} ->
         {:noreply,
          socket
-         |> put_flash(:info, gettext("Employee created successfully"))
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
