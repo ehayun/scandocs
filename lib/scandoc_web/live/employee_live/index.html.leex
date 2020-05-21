@@ -28,7 +28,7 @@
       <th><%= gettext("Role") %></th>
       <th></th>
 
-      <th class="hidden"></th>
+      <th class="hiddenx"></th>
     </tr>
   </thead>
   <tbody id="employees">
@@ -41,10 +41,12 @@
       <td><%= displayRole(employee.role) %></td>
       <td><%= getClassroomName(employee.id, employee.role) %></td>
 
-      <td class="hidden">
-        <span><%= live_redirect "Show", to: Routes.employee_show_path(@socket, :show, employee) %></span>
-        <span><%= live_patch "Edit", to: Routes.employee_index_path(@socket, :edit, employee) %></span>
-        <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: employee.id, data: [confirm: "Are you sure?"] %></span>
+      <td class="hiddenx">
+        <span class="hidden"><%= live_redirect "Show", to: Routes.employee_show_path(@socket, :show, employee) %></span>
+        <span class="hidden"><%= live_patch "Edit", to: Routes.employee_index_path(@socket, :edit, employee) %></span>
+        <span class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: employee.id, data: [confirm: "Are you sure?"] %></span>
+        <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@socket, :loginas, employee) %>
+
       </td>
     </tr>
     <% end %>

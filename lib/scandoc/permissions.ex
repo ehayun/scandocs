@@ -7,7 +7,9 @@ defmodule Scandoc.Permissions do
   alias Scandoc.Repo
 
   alias Scandoc.Permissions.Permission
+  alias Scandoc.Schools
   alias Scandoc.Schools.School
+  alias Scandoc.Classrooms
   alias Scandoc.Classrooms.Classroom
   alias Scandoc.Accounts.User
 
@@ -174,13 +176,32 @@ defmodule Scandoc.Permissions do
   end
 
   defp getIds(type, user_id) do
+    aType = type
     type = getLevelToInt(type)
 
-    Permission
-    |> where(user_id: ^user_id)
-    |> where(permission_type: ^type)
-    |> Repo.all()
-    |> Enum.map(fn u -> u.ref_id end)
+    list =
+      Permission
+      |> where(user_id: ^user_id)
+      |> where(permission_type: ^type)
+      |> Repo.all()
+      |> Enum.map(fn u -> u.ref_id end)
+
+    ndList =
+      case aType do
+        :allow_school ->
+          School |> where(manager_id: ^user_id) |> Repo.all() |> Enum.map(fn u -> u.id end)
+
+        :allow_classroom ->
+          Classroom |> where(teacher_id: ^user_id) |> Repo.all() |> Enum.map(fn u -> u.id end)
+
+        :allow_student ->
+          []
+
+        _ ->
+          []
+      end
+
+    Enum.uniq(list ++ ndList)
   end
 
   def getSchools(user_id), do: getIds(:allow_school, user_id)
