@@ -43,7 +43,7 @@
       <td class="hidden"><%= live_patch d.doctype.doc_name, to: Routes.stddoc_show_path(@socket, :edit, @student, docnum: d.id) %></td>
       <td><a target="_scandocs" href="https://docs.scantzlev.com<%= raw getDocumentPath(d.doc_path) %>"><%= d.doctype.doc_name %></a></td>
       <td>
-        <%= d.ref_month %>/<%= d.ref_year %>
+        <%= displayDate(d.ref_date, "%m/%Y") %>
       </td>
     </tr>
     <% end %>

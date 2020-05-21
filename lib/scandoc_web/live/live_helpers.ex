@@ -91,8 +91,8 @@ defmodule ScandocWeb.LiveHelpers do
     Money.to_string(Money.new(trunc(Decimal.to_float(amount) * 100.00)))
   end
 
-  def displayDate(dt) do
-    case dt |> Calendar.Strftime.strftime("%d/%m/%Y") do
+  def displayDate(dt, dmy \\ "%d/%m/%Y") do
+    case dt |> Calendar.Strftime.strftime(dmy) do
       {:ok, d} -> d
       _ -> dt
     end

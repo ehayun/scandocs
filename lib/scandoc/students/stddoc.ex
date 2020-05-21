@@ -11,6 +11,7 @@ defmodule Scandoc.Students.Stddoc do
     field :has_picture, :boolean, default: false
     field :line_code, :string
     field :ref_id, :integer
+    field :ref_date, :date
     field :ref_month, :string
     field :ref_year, :string
 
@@ -28,6 +29,7 @@ defmodule Scandoc.Students.Stddoc do
       :ref_id,
       :ref_year,
       :ref_month,
+      :ref_date,
       :doctype_id,
       :has_picture
     ])
