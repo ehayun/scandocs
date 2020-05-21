@@ -1,0 +1,70 @@
+<h2>
+  <%= gettext("Listing Cities") %>
+    <span class="float-left">
+      <%= live_patch gettext("Add New"), to: Routes.city_index_path(@socket, :new), class: "btn btn-primary" %>
+    </span>
+    <span class="float-left mr-2 m-2">
+      <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
+        <input class="form-control" type="text" value='<%= @search %>' name="search" placeholder='<%= gettext("Search")%>'>
+      </form>
+    </span>
+</h2>
+
+
+
+
+<%= if @live_action in [:new, :edit] do %>
+<%= live_modal @socket, ScandocWeb.CityLive.FormComponent, id: @city.id || :new, title: @page_title, action: @live_action, city: @city, return_to: Routes.city_index_path(@socket, :index) %>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+       <th>
+        <%= gettext("Code") %>
+      </th>
+       <th>
+        <%= gettext("Title") %>
+      </th>
+      
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="cities">
+    <%= for city <- @cities do %>
+      <tr id="city-<%= city.id %>">
+         <td>
+          <%= city.code %>
+        </td>
+         <td>
+          <%= city.title %>
+        </td>
+        
+        <td>
+          <span class="hidden">
+            <%= live_redirect "Show" , to: Routes.city_show_path(@socket, :show, city) %>
+          </span>
+          <span class="hidden">
+            <%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.city_index_path(@socket, :edit, city) %>
+          </span>
+          <span class="hidden">
+            <%= link "Delete" , to: "#" , phx_click: "delete" , phx_value_id: city.id, data: [confirm: gettext("Are you sure?")] %>
+          </span>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
+
+<nav class="p-2" aria-label="Pagination">
+  <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
+    <li phx-click="nav" phx-value-page="<%= (@cities.page_number - 1)  %>" class="page-item "><a class="page-link" href="#"><%= gettext("Previous") %></a></li>
+    <li class="m-1"><%= gettext("Page") %></li>
+    <li class="m-1"><%= @cities.page_number %></li>
+    <li class="m-1"><%= gettext("Out of") %></li>
+    <li class="m-1"><%= @cities.total_pages %></li>
+    <li phx-click="nav" phx-value-page="<%= (@cities.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
+  </ul>
+</nav>
+

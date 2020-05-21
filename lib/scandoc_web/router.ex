@@ -174,6 +174,16 @@ defmodule ScandocWeb.Router do
 
     live "/roles/:id", RoleLive.Show, :show
     live "/roles/:id/show/edit", RoleLive.Show, :edit
+
+    # Cities
+    live "/cities", CityLive.Index, :index
+    live "/cities/new", CityLive.Index, :new
+    live "/cities/:id/edit", CityLive.Index, :edit
+
+    live "/cities/:id", CityLive.Show, :show
+    live "/cities/:id/show/edit", CityLive.Show, :edit
+
+
   end
 
   scope "/", ScandocWeb do

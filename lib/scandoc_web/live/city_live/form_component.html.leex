@@ -1,0 +1,14 @@
+<h2>
+  <%= @title %>
+</h2>
+
+<%= f=form_for @changeset, "#" , id: "city-form" , phx_target: @myself, phx_change: "validate" , phx_submit: "save" %>
+
+
+  <%= PBF.text_input f, :code, input: [class: "col-md-3"], label: [text: gettext("Code")] %>
+
+  <%= PBF.text_input f, :title, input: [class: "col-md-3"], label: [text: gettext("City Name")] %>
+
+
+  <%= submit "Save" , phx_disable_with: "Saving..." , class: "btn btn-primary" %>
+    </form>

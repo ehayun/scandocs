@@ -1,0 +1,27 @@
+<h1>Show City</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.CityLive.FormComponent,
+    id: @city.id,
+    title: @page_title,
+    action: @live_action,
+    city: @city,
+    return_to: Routes.city_show_path(@socket, :show, @city) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Code:</strong>
+    <%= @city.code %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @city.title %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.city_show_path(@socket, :edit, @city), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.city_index_path(@socket, :index) %></span>
