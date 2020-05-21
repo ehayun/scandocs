@@ -1,11 +1,13 @@
 <h2>
   <i class="fas fa-user-graduate"></i>
   <%= gettext("Listing Students") %>
+  <span class="float-left pl-1"><%= live_patch gettext("Add New"), to: Routes.student_index_path(@socket, :new), class: "btn btn-primary" %></span>
   <span class="float-left">
     <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
       <input class="form-control" type="text" value='<%= @search %>' name="search" placeholder='<%= gettext("Search by zehut or name")%>'>
     </form>
   </span>
+
 </h2>
 <%= if @live_action in [:new, :edit] do %>
 <%= live_modal @socket, ScandocWeb.StudentLive.FormComponent,
@@ -32,7 +34,7 @@
       <td> <%= getSchoolName(student.classroom.id, :classroom)%>/ <%= student.classroom.classroom_name %> </td>
       <td>
         <span class="hidden"><%= live_redirect "Show", to: Routes.student_show_path(@socket, :show, student) %></span>
-        <span class="hidden"><%= live_patch "Edit", to: Routes.student_index_path(@socket, :edit, student) %></span>
+        <span class="hiddenx"><%= live_patch raw("<i class='fas fa-user-edit'></i>"), to: Routes.student_index_path(@socket, :edit, student) %></span>
         <span class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: student.id, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
@@ -51,7 +53,3 @@
     <li phx-click="nav" phx-value-page="<%= (@students.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
   </ul>
 </nav>
-
-
-
-<span class="hidden"><%= live_patch "New Student", to: Routes.student_index_path(@socket, :new) %></span>

@@ -39,19 +39,19 @@ defmodule ScandocWeb.StudentLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Student")
+    |> assign(:page_title, gettext("Edit Student"))
     |> assign(:student, Students.get_student!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Student")
+    |> assign(:page_title, gettext("New Student"))
     |> assign(:student, %Student{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Students")
+    |> assign(:page_title, gettext("Listing Students"))
     |> assign(:student, nil)
   end
 
@@ -103,7 +103,7 @@ defmodule ScandocWeb.StudentLive.Index do
       q
       |> order_by(:full_name)
       |> preload(:classroom)
-      |> Repo.paginate(page: current_page, page_size: 16)
+      |> Repo.paginate(page: current_page, page_size: 14)
 
     students
   end

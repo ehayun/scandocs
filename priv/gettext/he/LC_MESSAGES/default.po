@@ -108,7 +108,8 @@ msgstr "קישור זה אינו תקין או פג תוקף"
 #: lib/scandoc_web/live/category_live/form_component.html.leex:25
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/employee_live/form_component.html.leex:49
 #: lib/scandoc_web/live/institute_live/form_component.html.leex:26 lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:37 lib/scandoc_web/live/vendor_live/form_component.html.leex:48
+#: lib/scandoc_web/live/permission_live/form_component.html.leex:37 lib/scandoc_web/live/student_live/form_component.html.leex:8
+#: lib/scandoc_web/live/student_live/form_component.html.leex:89 lib/scandoc_web/live/vendor_live/form_component.html.leex:48
 #: lib/scandoc_web/templates/classroom/form.html.eex:25
 msgid "Save"
 msgstr "שמירה"
@@ -162,7 +163,7 @@ msgstr "אין לכם הרשאות מתאימות"
 
 #, elixir-format
 #: lib/scandoc_web/live/employee_live/form_component.html.leex:9
-#: lib/scandoc_web/live/employee_live/index.html.leex:26 lib/scandoc_web/live/student_live/index.html.leex:21
+#: lib/scandoc_web/live/employee_live/index.html.leex:26 lib/scandoc_web/live/student_live/index.html.leex:23
 #: lib/scandoc_web/templates/manager/index.html.eex:9 lib/scandoc_web/templates/teacher/form.html.eex:8
 #: lib/scandoc_web/templates/teacher/index.html.eex:8 lib/scandoc_web/templates/user_reset_password/new.html.eex:9
 #: lib/scandoc_web/templates/user_session/new.html.eex:15
@@ -218,9 +219,9 @@ msgstr "קוד"
 
 #, elixir-format
 #: lib/scandoc_web/live/employee_live/form_component.html.leex:10
-#: lib/scandoc_web/live/employee_live/index.html.leex:27 lib/scandoc_web/live/student_live/index.html.leex:22
-#: lib/scandoc_web/templates/manager/index.html.eex:10 lib/scandoc_web/templates/teacher/form.html.eex:9
-#: lib/scandoc_web/templates/teacher/index.html.eex:9
+#: lib/scandoc_web/live/employee_live/index.html.leex:27 lib/scandoc_web/live/student_live/form_component.html.leex:24
+#: lib/scandoc_web/live/student_live/index.html.leex:24 lib/scandoc_web/templates/manager/index.html.eex:10
+#: lib/scandoc_web/templates/teacher/form.html.eex:9 lib/scandoc_web/templates/teacher/index.html.eex:9
 msgid "Full name"
 msgstr "שם מלא"
 
@@ -254,7 +255,7 @@ msgstr "בית ספר"
 
 #, elixir-format
 #: lib/scandoc_web/live/stddoc_live/show.html.leex:8
-#: lib/scandoc_web/live/student_live/index.html.leex:3
+#: lib/scandoc_web/live/student_live/index.ex:54 lib/scandoc_web/live/student_live/index.html.leex:3
 msgid "Listing Students"
 msgstr "רשימת תלמידים"
 
@@ -290,7 +291,7 @@ msgstr "מורה"
 
 #, elixir-format
 #: lib/scandoc_web/live/stddoc_live/show.html.leex:5
-#: lib/scandoc_web/live/student_live/index.html.leex:23 lib/scandoc_web/templates/classroom/show.html.eex:3
+#: lib/scandoc_web/live/student_live/index.html.leex:25 lib/scandoc_web/templates/classroom/show.html.eex:3
 #: lib/scandoc_web/templates/teacher/index.html.eex:10
 msgid "Classroom"
 msgstr "כיתה"
@@ -314,7 +315,8 @@ msgstr "משתמש"
 #: lib/scandoc_web/live/category_live/index.html.leex:2
 #: lib/scandoc_web/live/docgroup_live/index.html.leex:3 lib/scandoc_web/live/employee_live/index.html.leex:4
 #: lib/scandoc_web/live/institute_live/index.html.leex:3 lib/scandoc_web/live/outcome_category_live/index.html.leex:2
-#: lib/scandoc_web/live/permission_live/index.html.leex:5 lib/scandoc_web/live/vendor_live/index.html.leex:3
+#: lib/scandoc_web/live/permission_live/index.html.leex:5 lib/scandoc_web/live/student_live/index.html.leex:4
+#: lib/scandoc_web/live/vendor_live/index.html.leex:3
 msgid "Add New"
 msgstr "הוספה"
 
@@ -384,6 +386,7 @@ msgid "code"
 msgstr "קוד"
 
 #, elixir-format
+#: lib/scandoc_web/live/student_live/index.ex:42
 #: lib/scandoc_web/live/student_live/show.ex:110
 msgid "Edit Student"
 msgstr "עדכון תלמיד"
@@ -412,7 +415,7 @@ msgstr "סגירה"
 
 #, elixir-format
 #: lib/scandoc_web/live/employee_live/index.html.leex:8
-#: lib/scandoc_web/live/student_live/index.html.leex:6
+#: lib/scandoc_web/live/student_live/index.html.leex:7
 msgid "Search by zehut or name"
 msgstr "חפש לפי זהות או חלק משם "
 
@@ -731,14 +734,14 @@ msgid "New Instdoc"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/employee_live/index.html.leex:61
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:110 lib/scandoc_web/live/student_live/index.html.leex:51
+#: lib/scandoc_web/live/employee_live/index.html.leex:63
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:110 lib/scandoc_web/live/student_live/index.html.leex:53
 msgid "Next"
 msgstr " הבא >"
 
 #, elixir-format
-#: lib/scandoc_web/live/employee_live/index.html.leex:56
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:105 lib/scandoc_web/live/student_live/index.html.leex:46
+#: lib/scandoc_web/live/employee_live/index.html.leex:58
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:105 lib/scandoc_web/live/student_live/index.html.leex:48
 msgid "Previous"
 msgstr "< הקודם"
 
@@ -753,23 +756,56 @@ msgid "Edit Classroom"
 msgstr "עדכון כיתה"
 
 #, elixir-format
-#: lib/scandoc_web/live/employee_live/index.html.leex:59
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:108 lib/scandoc_web/live/student_live/index.html.leex:49
+#: lib/scandoc_web/live/employee_live/index.html.leex:61
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:108 lib/scandoc_web/live/student_live/index.html.leex:51
 msgid "Out of"
 msgstr "מתוך"
 
 #, elixir-format
-#: lib/scandoc_web/live/employee_live/index.html.leex:57
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:106 lib/scandoc_web/live/student_live/index.html.leex:47
+#: lib/scandoc_web/live/employee_live/index.html.leex:59
+#: lib/scandoc_web/live/instdoc_live/index.html.leex:106 lib/scandoc_web/live/student_live/index.html.leex:49
 msgid "Page"
 msgstr "עמוד"
 
 #, elixir-format
-#: lib/scandoc_web/live/employee_live/form_component.ex:19
+#: lib/scandoc_web/live/employee_live/form_component.ex:17
+#: lib/scandoc_web/live/employee_live/form_component.ex:50 lib/scandoc_web/live/student_live/form_component.ex:21
+#: lib/scandoc_web/live/student_live/form_component.ex:51
 msgid "Select classroom"
 msgstr "<<בחירת כיתה>>"
 
 #, elixir-format
-#: lib/scandoc_web/live/employee_live/form_component.ex:17
+#: lib/scandoc_web/live/employee_live/form_component.ex:15
+#: lib/scandoc_web/live/student_live/form_component.ex:16
 msgid "Select school"
 msgstr "<<בחירת בית ספר>>"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/form_component.html.leex:43
+msgid "Contacts"
+msgstr "אנשי קשר"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/form_component.html.leex:19
+msgid "General details"
+msgstr "פרטים כללייים"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/form_component.html.leex:33
+msgid "Has picture?"
+msgstr "קיימת תמונה?"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/index.ex:48
+msgid "New Student"
+msgstr " תלמיד חדש"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/form_component.html.leex:51
+msgid "Placement Committees"
+msgstr "וועדות השמה"
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/form_component.html.leex:23
+msgid "zehut"
+msgstr "זהות"

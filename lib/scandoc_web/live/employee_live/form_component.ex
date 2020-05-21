@@ -8,10 +8,8 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   @impl true
   def update(%{employee: employee} = assigns, socket) do
     {school_id, classroom_id} = Employees.get_classroom(employee.id)
-    IO.puts("Emp: [#{employee.id}] [#{school_id}, #{classroom_id}]")
     employee = Map.merge(employee, %{school_id: school_id, classroom_id: classroom_id})
     changeset = Employees.change_employee(employee)
-    IO.inspect(changeset)
     roles = Employees.list_roles()
     schools = Schools.list_schools()
     schools = List.insert_at(schools, 0, %{id: -1, school_name: gettext("Select school")})
