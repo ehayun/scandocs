@@ -14,11 +14,11 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
     schools = Schools.list_schools()
     schools = List.insert_at(schools, 0, %{id: -1, school_name: gettext("Select school")})
     classrooms = Classrooms.list_classrooms(school_id)
-    classrooms = List.insert_at(classrooms, 0, %{id: -1, classroom_name: gettext("Select classroom")})
+
+    classrooms =
+      List.insert_at(classrooms, 0, %{id: -1, classroom_name: gettext("Select classroom")})
 
     role = employee.role
-
-    IO.puts("[#{employee.id}] [#{school_id}] [#{classroom_id}]")
 
     {:ok,
      socket
@@ -47,7 +47,9 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       end
 
     classrooms = Classrooms.list_classrooms(school_id)
-    classrooms = List.insert_at(classrooms, 0, %{id: -1, classroom_name: gettext("Select classroom")})
+
+    classrooms =
+      List.insert_at(classrooms, 0, %{id: -1, classroom_name: gettext("Select classroom")})
 
     socket = assign(socket, role: role, school_id: school_id, classrooms: classrooms)
 

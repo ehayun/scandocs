@@ -58,27 +58,31 @@ defmodule Scandoc.Employees do
   if this worker is a school manager it returns {school_id, nil}
   """
   def get_classroom(id) do
-    s = School |> where(manager_id: ^id) |> Repo.all() |> Enum.at(0)
+    if id do
+      s = School |> where(manager_id: ^id) |> Repo.all() |> Enum.at(0)
 
-    c =
-      if s do
-        Classroom |> where(school_id: ^s.id) |> Repo.all() |> Enum.at(0)
-      else
-        Classroom |> where(teacher_id: ^id) |> Repo.all() |> Enum.at(0)
-      end
-
-    if s && c do
-      {s.id, c.id}
-    else
-      if s do
-        {s.id, nil}
-      else
-        if c do
-          {c.school_id, c.id}
+      c =
+        if s do
+          Classroom |> where(school_id: ^s.id) |> Repo.all() |> Enum.at(0)
         else
-          {nil, nil}
+          Classroom |> where(teacher_id: ^id) |> Repo.all() |> Enum.at(0)
+        end
+
+      if s && c do
+        {s.id, c.id}
+      else
+        if s do
+          {s.id, nil}
+        else
+          if c do
+            {c.school_id, c.id}
+          else
+            {nil, nil}
+          end
         end
       end
+    else
+      {-1, -1}
     end
   end
 
