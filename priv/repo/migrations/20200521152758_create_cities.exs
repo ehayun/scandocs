@@ -8,6 +8,5 @@ defmodule Scandoc.Repo.Migrations.CreateCities do
 
       timestamps()
     end
-
   end
 end

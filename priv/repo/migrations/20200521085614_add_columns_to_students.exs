@@ -10,7 +10,7 @@ defmodule Scandoc.Repo.Migrations.AddColumnsToStudents do
       add :gender, :string
       add :address, :string
       add :healthcare, :string
-      add :city, :integer
+      add :city_id, :integer
       add :sending_authority_id, :integer
       add :father_name, :string
       add :mother_name, :string

@@ -4,9 +4,15 @@ defmodule ScandocWeb.StudentLive.FormComponent do
   alias Scandoc.Students
   alias Scandoc.Classrooms
   alias Scandoc.Schools
+  alias Scandoc.Tables
 
   @impl true
   def update(%{student: student} = assigns, socket) do
+    cities = Tables.list_cities()
+    genders = Tables.list_gender()
+
+    healthcares = Tables.list_healthcare()
+
     classroom_id = if student.classroom_id, do: student.classroom_id, else: -1
 
     classroom = Classrooms.get_classroom!(classroom_id)
@@ -25,6 +31,9 @@ defmodule ScandocWeb.StudentLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(cities: cities)
+     |> assign(genders: genders)
+     |> assign(healthcares: healthcares)
      |> assign(schools: schools)
      |> assign(school_id: school_id)
      |> assign(classrooms: classrooms)
@@ -62,11 +71,14 @@ defmodule ScandocWeb.StudentLive.FormComponent do
   end
 
   def handle_event("save", %{"student" => student_params}, socket) do
-    IO.inspect(student_params)
     save_student(socket, socket.assigns.action, student_params)
   end
 
   defp save_student(socket, :edit, student_params) do
+    student_params = case student_params do
+      %{"birthdate" => %{"day" => "1", "month" => "1", "year" => "1920"}} -> Map.merge(student_params, %{"birthdate" => %{"day" => "0", "month" => "0", "year" => "0"}})
+      student_params -> student_params
+    end
     case Students.update_student(socket.assigns.student, student_params) do
       {:ok, _student} ->
         {:noreply,

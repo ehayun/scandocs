@@ -2,6 +2,7 @@ defmodule Scandoc.Students.Student do
   use Ecto.Schema
   import Ecto.Changeset
   alias Scandoc.Classrooms.Classroom
+  alias Scandoc.Tables.City
 
   schema "students" do
     belongs_to :classroom, Classroom, references: :id
@@ -18,7 +19,7 @@ defmodule Scandoc.Students.Student do
     field :gender, :string
     field :address, :string
     field :healthcare, :string
-    field :city, :integer
+    belongs_to :city, City, references: :id
     field :sending_authority_id, :integer
     field :father_name, :string
     field :mother_name, :string
@@ -47,7 +48,7 @@ defmodule Scandoc.Students.Student do
       :gender,
       :address,
       :healthcare,
-      :city,
+      :city_id,
       :sending_authority_id,
       :father_name,
       :mother_name,

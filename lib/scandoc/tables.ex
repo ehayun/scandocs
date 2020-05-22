@@ -8,6 +8,25 @@ defmodule Scandoc.Tables do
 
   alias Scandoc.Tables.City
 
+  def list_healthcare do
+    [
+      %{name: ""},
+      %{name: "כללית"},
+      %{name: "לאומית"},
+      %{name: "מכבי"},
+      %{name: "מאוחדת"}
+    ]
+  end
+
+  def list_gender do
+    [
+      %{code: "", title: ""},
+      %{code: nil, title: ""},
+      %{code: "1", title: "זכר"},
+      %{code: "2", title: "נקבה"}
+    ]
+  end
+
   @doc """
   Returns the list of cities.
 
@@ -17,8 +36,8 @@ defmodule Scandoc.Tables do
       [%City{}, ...]
 
   """
-  def list_cities(limit) do
-    City |> Repo.paginate(page_size: limit)
+  def list_cities(limit \\ 10000) do
+    City |> order_by(:title) |> Repo.paginate(page_size: limit)
   end
 
   @doc """

@@ -33,7 +33,7 @@ defmodule ScandocWeb.CityLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.city_index_path(conn, :index))
 
       assert index_live |> element("a", "New City") |> render_click() =~
-        "New City"
+               "New City"
 
       assert_patch(index_live, Routes.city_index_path(conn, :new))
 
@@ -55,7 +55,7 @@ defmodule ScandocWeb.CityLiveTest do
       {:ok, index_live, _html} = live(conn, Routes.city_index_path(conn, :index))
 
       assert index_live |> element("#city-#{city.id} a", "Edit") |> render_click() =~
-        "Edit City"
+               "Edit City"
 
       assert_patch(index_live, Routes.city_index_path(conn, :edit, city))
 
@@ -95,7 +95,7 @@ defmodule ScandocWeb.CityLiveTest do
       {:ok, show_live, _html} = live(conn, Routes.city_show_path(conn, :show, city))
 
       assert show_live |> element("a", "Edit") |> render_click() =~
-        "Edit City"
+               "Edit City"
 
       assert_patch(show_live, Routes.city_show_path(conn, :edit, city))
 

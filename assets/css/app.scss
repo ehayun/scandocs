@@ -52,6 +52,19 @@ main {
 }
 
 
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: $app-blue;
+  background-color: $info;
+  border-color: #dee2e6 #dee2e6 #fff;
+  color: white;
+}
+
+.list-group-item {
+  padding: 0;
+  border: none;
+}
+
 
 header {
   font-size: 1.4em;

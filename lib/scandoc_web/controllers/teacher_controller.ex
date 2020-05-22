@@ -11,8 +11,7 @@ defmodule ScandocWeb.TeacherController do
   def index(conn, %{"page" => current_page, "school" => schoolId}) do
     schoolId = String.to_integer(schoolId)
 
-    teachers_order_query =
-      from(t in Teacher, where: t.role == "030", order_by: t.full_name)
+    teachers_order_query = from(t in Teacher, where: t.role == "030", order_by: t.full_name)
 
     # r = teachers_order_query |> Repo.all()
     # IO.inspect(r)

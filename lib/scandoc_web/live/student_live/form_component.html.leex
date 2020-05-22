@@ -10,78 +10,128 @@
 
 
 
+<ul class="nav nav-tabs">
+  <li class="nav-item m-1 p-1">
+    <a class="nav-link active" data-toggle="tab" href="#home"><%= gettext("General details") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a class="nav-link " data-toggle="tab" href="#menu1"><%= gettext("Contacts") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a class="nav-link" data-toggle="tab" href="#menu2"><%= gettext("Placement Committees") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a class="nav-link" data-toggle="tab" href="#menuComments"><%= gettext("Comments") %></a>
+  </li>
+</ul>
 
-<section data-section-id="1" data-category="faqs" data-component-id="2c0d_9_01_awz" class="py-1">
-  <div class="container">
-    <div class="accordion" id="faq-01" data-config-id="faq">
-      <div class="mb-2 border-bottom">
-        <h5 id="faq-heading1-01">
-          <button class="shadow-sm p-1 mb-3 bg-white rounded btn btn-link btn-block text-left d-flex" type="button" data-toggle="collapse" data-target="#faq-collapse1-01" aria-expanded="false" aria-controls="faq-collapse1-01" style="white-space:normal !important; word-wrap: break-word"><%= gettext("General details") %><img class="p-1 ml-auto my-auto" src="placeholder/icons/chevron-circle-down.svg" alt=""></button>
-        </h5>
-        <div class="collapse show blueBorder p-2" id="faq-collapse1-01" aria-labelledby="faq-heading1-01" data-parent="#faq-01">
+<!-- Tab panes -->
+<div class="tab-content">
+  <div id="menu1" class="container tab-pane fade"><br>
 
-          <%= PBF.text_input f, :student_zehut, input: [class: "col-md-3"], label: [text: gettext("zehut")] %>
-          <%= PBF.text_input f, :first_name, input: [class: "col-md-5"], label: [text: gettext("First name")] %>
-          <%= PBF.text_input f, :last_name, input: [class: "col-md-5"], label: [text: gettext("Last name")] %>
+    <%= PBF.text_input f, :student_zehut, input: [class: "col-md-3"], label: [text: gettext("zehut")] %>
+    <%= PBF.text_input f, :first_name, input: [class: "col-md-5"], label: [text: gettext("First name")] %>
+    <%= PBF.text_input f, :last_name, input: [class: "col-md-5"], label: [text: gettext("Last name")] %>
 
-          <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "col-sm-3") %>
-          <%= Phoenix.HTML.Form.select(f, :classroom_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "col-sm-3") %>
+    <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "col-sm-3") %>
+    <%= Phoenix.HTML.Form.select(f, :classroom_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "col-sm-3") %>
 
-          <br>
+    <br>
 
-          <div class="form-group row">
+    <div class="form-group row">
+      <%= label f, gettext("Has picture?"), class: "col-form-label text-sm-left col-sm-3" %>
+      <%= checkbox f, :has_picture %>
+      <%= error_tag f, :has_picture %>
 
-            <%= label f, gettext("Has picture?"), class: "col-form-label text-sm-left col-sm-3" %>
-            <%= checkbox f, :has_picture %>
-            <%= error_tag f, :has_picture %>
+    </div>
 
-          </div>
+  </div>
+  <div id="home" class="container tab-pane active"><br>
 
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= text_input f, :first_name, class: "form-control", placeholder: gettext("First name") %>
+        </div>
+
+        <div class="form-group">
+          <%= text_input f, :student_zehut, class: "form-control col-md-6", placeholder: gettext("Zehut") %>
+        </div>
+
+        <div class="form-group">
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item"><%= Phoenix.HTML.Form.select(f, :gender, Enum.map(@genders, &{&1.title, &1.code}), class: "label") %></li>
+            <li class="list-group-item ml-4"><%= gettext("Person Age") %>: <%= getAge(@student.birthdate) %></li>
+          </ul>
+        </div>
+
+
+        <div class="form-group">
+          <%= text_input f, :address, class: "form-control", placeholder: gettext("Address") %>
+        </div>
+
+        <div class="form-group">
+          <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "form-control col-sm-12") %>
+        </div>
+
+        <div class="form-group">
+          <label><%= gettext("Healthcare name")%></label>
+          <%= Phoenix.HTML.Form.select(f, :healthcare, Enum.map(@healthcares, &{&1.name, &1.name}), class: "form-control col-sm-12") %>
+        </div>
+
+
+
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" /> <%= gettext("Has picture?") %>
+          </label>
         </div>
       </div>
-      <div class="mb-2 border-bottom">
-        <h5 id="faq-heading2-01">
-          <button class="shadow-sm p-1 mb-3 bg-white rounded btn btn-link btn-block text-left d-flex" type="button" data-toggle="collapse" data-target="#faq-collapse2-01" aria-expanded="false" aria-controls="faq-collapse2-01" style="white-space:normal !important; word-wrap: break-word"><%= gettext("Contacts") %><img class="p-1 ml-auto my-auto" src="placeholder/icons/chevron-circle-down.svg" alt=""></button>
-        </h5>
-        <div class="collapse" id="faq-collapse2-01" aria-labelledby="faq-heading2-01" data-parent="#faq-01">
-          <p>That's just the thing - if you store your data in a single place, like Gavin Belsons' poorly-made server box, your data will very susceptible to hacking. Whereas on PiperNet, your data is safe with many copies to back it up from.</p>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= text_input f, :last_name, class: "form-control", placeholder: gettext("Last name") %>
         </div>
-      </div>
-      <div class="mb-2 border-bottom">
-        <h5 id="faq-heading3-01">
-          <button class="shadow-sm p-1 mb-3 bg-white rounded btn btn-link btn-block text-left d-flex" type="button" data-toggle="collapse" data-target="#faq-collapse3-01" aria-expanded="false" aria-controls="faq-collapse3-01" style="white-space:normal !important; word-wrap: break-word"><%= gettext("Placement Committees") %><img class="p-1 ml-auto my-auto" src="placeholder/icons/chevron-circle-down.svg" alt=""></button>
-        </h5>
-        <div class="collapse" id="faq-collapse3-01" aria-labelledby="faq-heading3-01" data-parent="#faq-01">
-          <p>Placement Committees</p>
+
+        <div class="form-group">
+          <%= date_select f, :birthdate, class: "form-control", year: [options: 1920..2200] %>
+          <%= error_tag f, :birthdate %>
+
         </div>
-      </div>
-      <div class="mb-2 border-bottom">
-        <h5 id="faq-heading4-01">
-          <button class="shadow-sm p-1 mb-3 bg-white rounded btn btn-link btn-block text-left d-flex" type="button" data-toggle="collapse" data-target="#faq-collapse4-01" aria-expanded="false" aria-controls="faq-collapse4-01" style="white-space:normal !important; word-wrap: break-word">How long does it take to get a company up and running on PiperNet?<img class="p-1 ml-auto my-auto" src="placeholder/icons/chevron-circle-down.svg" alt=""></button>
-        </h5>
-        <div class="collapse" id="faq-collapse4-01" aria-labelledby="faq-heading4-01" data-parent="#faq-01">
-          <p>Access to the public network is granted within a day, but moving all your data and integrating your existing software depends on how big your company is. Startups can expect to be fully online within a week, enterprises can take up to a month due to large reliance on legacy systems and huge datasets.</p>
+
+        <div class="form-group">
+          <%= text_input f, :hebrew_birthdate, class: "form-control", placeholder: gettext("Hebrew birthday") %>
         </div>
-      </div>
-      <div class="mb-2 border-bottom">
-        <h5 id="faq-heading5-01">
-          <button class="shadow-sm p-1 mb-3 bg-white rounded btn btn-link btn-block text-left d-flex" type="button" data-toggle="collapse" data-target="#faq-collapse5-01" aria-expanded="false" aria-controls="faq-collapse5-01" style="white-space:normal !important; word-wrap: break-word">How is a decentralized network different from the traditional web?<img class="p-1 ml-auto my-auto" src="placeholder/icons/chevron-circle-down.svg" alt=""></button>
-        </h5>
-        <div class="collapse" id="faq-collapse5-01" aria-labelledby="faq-heading5-01" data-parent="#faq-01">
-          <p>Decentralization is a key aspect of PiperNet. Traditionally, to access data on a website, you needed to connect to a single server containing that data. This method of storing data makes it easy for third parties to get access to it, corrupt it or even delete it. In PiperNet it is securely stored on multiple devices in the network, which makes it harder to hack and interfere with your data.</p>
+
+
+
+        <div class="form-group">
+          <%= Phoenix.HTML.Form.select(f, :city_id, Enum.map(@cities, &{&1.title, &1.id}), class: "form-control col-sm-12") %>
         </div>
-      </div>
-      <div class="mb-2 border-bottom">
-        <h5 id="faq-heading6-01">
-          <button class="shadow-sm p-1 mb-3 bg-white rounded btn btn-link btn-block text-left d-flex" type="button" data-toggle="collapse" data-target="#faq-collapse6-01" aria-expanded="false" aria-controls="faq-collapse6-01" style="white-space:normal !important; word-wrap: break-word">Why shouldn't I just store my data on a Hooli Box?<img class="p-1 ml-auto my-auto" src="placeholder/icons/chevron-circle-down.svg" alt=""></button>
-        </h5>
-        <div class="collapse" id="faq-collapse6-01" aria-labelledby="faq-heading6-01" data-parent="#faq-01">
-          <p>That's just the thing - if you store your data in a single place, like Gavin Belsons' poorly-made server box, your data will very susceptible to hacking. Whereas on PiperNet, your data is safe with many copies to back it up from.</p>
+
+        <div class="form-group">
+          <%= Phoenix.HTML.Form.select(f, :classroom_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "form-control col-sm-12") %>
+        </div>
+
+        <div class="form-group">
+          <label><%= gettext("Sending Authority")%></label>
+          <%= Phoenix.HTML.Form.select(f, :sending_authority_id, Enum.map(@cities, &{&1.title, &1.id}), class: "form-control col-sm-12") %>
         </div>
       </div>
     </div>
+
+
+
   </div>
-</section>
+  <div id="menu2" class="container tab-pane fade"><br>
+    m2
+  </div>
+  <div id="menuComments" class="container tab-pane fade">
+  Comments<br>
+  </div>
+</div>
+</div>
+
 
 
 
