@@ -8,6 +8,7 @@ defmodule ScandocWeb.StudentLive.FormComponent do
 
   @impl true
   def update(%{student: student} = assigns, socket) do
+    tabnum = if socket.assigns[:tabnum], do: socket.assigns[:tabnum], else: 3
     cities = Tables.list_cities()
     genders = Tables.list_gender()
 
@@ -31,6 +32,7 @@ defmodule ScandocWeb.StudentLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(tabnum: tabnum)
      |> assign(cities: cities)
      |> assign(genders: genders)
      |> assign(healthcares: healthcares)
@@ -70,15 +72,32 @@ defmodule ScandocWeb.StudentLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
+  @impl true
   def handle_event("save", %{"student" => student_params}, socket) do
     save_student(socket, socket.assigns.action, student_params)
   end
 
+  def handle_event("setTab", %{"tabid" => tabnum}, socket) do
+    {:noreply, assign(socket, tabnum: String.to_integer(tabnum))}
+  end
+
+  def handle_event("setTab", _params, socket) do
+    {:noreply, socket}
+  end
+
+  @impl true
   defp save_student(socket, :edit, student_params) do
-    student_params = case student_params do
-      %{"birthdate" => %{"day" => "1", "month" => "1", "year" => "1920"}} -> Map.merge(student_params, %{"birthdate" => %{"day" => "0", "month" => "0", "year" => "0"}})
-      student_params -> student_params
-    end
+    student_params =
+      case student_params do
+        %{"birthdate" => %{"day" => "1", "month" => "1", "year" => "1920"}} ->
+          Map.merge(student_params, %{
+            "birthdate" => %{"day" => "0", "month" => "0", "year" => "0"}
+          })
+
+        student_params ->
+          student_params
+      end
+
     case Students.update_student(socket.assigns.student, student_params) do
       {:ok, _student} ->
         {:noreply,

@@ -4,7 +4,7 @@
 </header>
 
 <div class="col-md-8 order-md-1">
-  <%= f = form_for @changeset, "#",
+  <%= _f = form_for @changeset, "#",
   class: "form form-horizontal",
   phx_change: "filter",
   phx_submit: "filter" %>
@@ -15,7 +15,8 @@
     </div>
     <div class="col-md-2 mb-2">
       <select name="filter[institute]" class="custom-select d-block w-100" id="input8-ecommerce-03">
-        <option value="-1" <%= if @by_institute == "-1", do: "selected" %>>&lt;&lt;<%= gettext("By All Institute")%>&gt;&gt;</option>
+        <option value="-1" <%= if @by_institute == "-1", do: "selected" %>>
+          &lt;&lt;<%= gettext("By All Institute")%>&gt;&gt;</option>
         <%= for i <- @institutes do %>
         <option value="<%=i.id %>" <%= if @by_institute == "#{i.id}", do: "selected" %>><%= i.title %></option>
         <% end %>
@@ -33,13 +34,15 @@
       <select name="filter[outcome_category]" class="custom-select d-block w-100" id="input8-ecommerce-03">
         <option value="-1" selected="">&lt;&lt;<%= gettext("By All Outcome categories")%>&gt;&gt;</option>
         <%= for c <- @outcome_categories do %>
-        <option <%= if @by_outcome_category == "#{c.id}", do: "selected" %> value="<%=c.id %>"><%= c.outcome_description %></option>
+        <option <%= if @by_outcome_category == "#{c.id}", do: "selected" %> value="<%=c.id %>">
+          <%= c.outcome_description %></option>
         <% end %>
       </select>
     </div>
 
     <div class="col-md-3 mb-3">
-      <input name="filter[vendor_name]" class="form-control" value="<%= @filter["vendor_name"] %>" type="text" placeholder="<%= gettext("Vendor/payment code/asmachta")%>">
+      <input name="filter[vendor_name]" class="form-control" value="<%= @filter["vendor_name"] %>" type="text"
+        placeholder="<%= gettext("Vendor/payment code/asmachta")%>">
     </div>
   </div>
 
@@ -86,7 +89,8 @@
       <td><%= instdoc.payment_code %></td>
       <td><%= instdoc.line_code %></td>
       <td><%= instdoc.asmachta %></td>
-      <td><a target="sacndocs" href="https://docs.scantzlev.com<%= getDocumentPath(instdoc.doc_path) %>"><%= instdoc.vendor_name %></a></td>
+      <td><a target="sacndocs"
+          href="https://docs.scantzlev.com<%= getDocumentPath(instdoc.doc_path) %>"><%= instdoc.vendor_name %></a></td>
       <td><%= displayDate(instdoc.doc_date) %></td>
       <td><%= displayAmount(instdoc.amount) %></td>
 
@@ -100,14 +104,16 @@
   </tbody>
 </table>
 
-<nav  class="p-2" aria-label="Pagination">
+<nav class="p-2" aria-label="Pagination">
   <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
-    <li phx-click="nav" phx-value-page="<%= (@inst_docs.page_number - 1)  %>" class="page-item "><a class="page-link" href="#"><%= gettext("Previous") %></a></li>
+    <li phx-click="nav" phx-value-page="<%= (@inst_docs.page_number - 1)  %>" class="page-item "><a class="page-link"
+        href="#"><%= gettext("Previous") %></a></li>
     <li class="m-1"><%= gettext("Page") %></li>
     <li class="m-1"><%= @inst_docs.page_number %></li>
     <li class="m-1"><%= gettext("Out of") %></li>
     <li class="m-1"><%= @inst_docs.total_pages %></li>
-    <li phx-click="nav" phx-value-page="<%= (@inst_docs.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
+    <li phx-click="nav" phx-value-page="<%= (@inst_docs.page_number + 1) %>" class="page-item"><a class="page-link"
+        href="#"><%= gettext("Next") %></a></li>
   </ul>
 </nav>
 </div>

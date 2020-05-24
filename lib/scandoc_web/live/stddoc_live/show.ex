@@ -106,7 +106,6 @@ defmodule ScandocWeb.StddocLive.Show do
 
   defp pdf_thumbnail(pdf_path, thumb_path) do
     args = ["#{pdf_path}", thumb_path]
-    IO.inspect(args)
     name = Path.rootname(thumb_path)
     File.copy!("#{pdf_path}", "#{name}.pdf")
 

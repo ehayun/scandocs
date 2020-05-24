@@ -1,5 +1,5 @@
 defmodule Scandoc.Util.ImportCities do
-  import Ecto.Query
+  # import Ecto.Query
   alias Scandoc.Repo
 
   def run() do
@@ -48,12 +48,11 @@ defmodule Scandoc.Util.ImportCities do
     for c <- cities do
       now = Calendar.DateTime.now!("UTC")
 
-      res =
-        Ecto.Adapters.SQL.query!(
-          Repo,
-          "insert into cities(id, code, title, updated_at, inserted_at) values($1, $2, $3, $4, $4)",
-          [c.id, c.code, c.title, now]
-        )
+      Ecto.Adapters.SQL.query!(
+        Repo,
+        "insert into cities(id, code, title, updated_at, inserted_at) values($1, $2, $3, $4, $4)",
+        [c.id, c.code, c.title, now]
+      )
     end
   end
 end

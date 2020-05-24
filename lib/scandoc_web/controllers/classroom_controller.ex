@@ -135,7 +135,7 @@ defmodule ScandocWeb.ClassroomController do
     classroom = Classrooms.get_classroom!(id)
 
     case Classrooms.update_classroom(classroom, classroom_params) do
-      {:ok, classroom} ->
+      {:ok, _classroom} ->
         conn
         # |> put_flash(:info, "Classroom updated successfully.")
         |> redirect(to: Routes.classroom_path(conn, :index))

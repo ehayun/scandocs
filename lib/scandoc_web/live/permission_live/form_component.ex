@@ -106,8 +106,6 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
       |> Permissions.change_permission(permission_params)
       |> Map.put(:action, :validate)
 
-    IO.inspect(changeset)
-
     {:noreply,
      socket
      |> assign(:changeset, changeset)

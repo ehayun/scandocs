@@ -34,7 +34,6 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"employee" => employee_params}, socket) do
-    IO.inspect(employee_params)
 
     %{
       "role" => role
@@ -83,13 +82,11 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       end
 
     if isTeacher(role) do
-      IO.puts("is teacher")
       classroom = Classrooms.get_classroom!(classroom_id)
       Classrooms.update_classroom(classroom, %{teacher_id: socket.assigns.employee.id})
     end
 
     if isSchoolManager(role) do
-      IO.puts("is manager")
 
       school = Schools.get_school!(school_id)
       Schools.update_school(school, %{manager_id: socket.assigns.employee.id})

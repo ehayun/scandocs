@@ -12,46 +12,28 @@
 
 <ul class="nav nav-tabs">
   <li class="nav-item m-1 p-1">
-    <a class="nav-link active" data-toggle="tab" href="#home"><%= gettext("General details") %></a>
+    <a phx-click="setTab" phx-value-tabid="1"  phx-target="<%= @myself %>" class='nav-link <%= if @tabnum == 1, do: "active" %>' data-toggle="tab" href="#menuDetails"><%= gettext("General details") %></a>
   </li>
   <li class="nav-item m-1 p-1">
-    <a class="nav-link " data-toggle="tab" href="#menu1"><%= gettext("Contacts") %></a>
+    <a phx-click="setTab" phx-value-tabid="2" phx-target="<%= @myself %>" class='nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab" href="#menuContacts"><%= gettext("Contacts") %></a>
   </li>
   <li class="nav-item m-1 p-1">
-    <a class="nav-link" data-toggle="tab" href="#menu2"><%= gettext("Placement Committees") %></a>
+    <a phx-click="setTab" phx-value-tabid="3" phx-target="<%= @myself %>" class='nav-link <%= if @tabnum == 3, do: "active" %>' data-toggle="tab" href="#menuCommities"><%= gettext("Placement Committees") %></a>
   </li>
   <li class="nav-item m-1 p-1">
-    <a class="nav-link" data-toggle="tab" href="#menuComments"><%= gettext("Comments") %></a>
+    <a phx-click="setTab" phx-value-tabid="4" phx-target="<%= @myself %>" class='nav-link <%= if @tabnum == 4, do: "active" %>' data-toggle="tab" href="#menuComments"><%= gettext("Comments") %></a>
   </li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div id="menu1" class="container tab-pane fade"><br>
 
-    <%= PBF.text_input f, :student_zehut, input: [class: "col-md-3"], label: [text: gettext("zehut")] %>
-    <%= PBF.text_input f, :first_name, input: [class: "col-md-5"], label: [text: gettext("First name")] %>
-    <%= PBF.text_input f, :last_name, input: [class: "col-md-5"], label: [text: gettext("Last name")] %>
-
-    <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "col-sm-3") %>
-    <%= Phoenix.HTML.Form.select(f, :classroom_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "col-sm-3") %>
-
-    <br>
-
-    <div class="form-group row">
-      <%= label f, gettext("Has picture?"), class: "col-form-label text-sm-left col-sm-3" %>
-      <%= checkbox f, :has_picture %>
-      <%= error_tag f, :has_picture %>
-
-    </div>
-
-  </div>
-  <div id="home" class="container tab-pane active"><br>
+  <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>"><br>
 
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <%= text_input f, :first_name, class: "form-control", placeholder: gettext("First name") %>
+          <%= text_input f, :first_name, class: "form-control bold", placeholder: gettext("First name") %>
         </div>
 
         <div class="form-group">
@@ -60,7 +42,8 @@
 
         <div class="form-group">
           <ul class="list-group list-group-horizontal">
-            <li class="list-group-item"><%= Phoenix.HTML.Form.select(f, :gender, Enum.map(@genders, &{&1.title, &1.code}), class: "label") %></li>
+            <li class="list-group-item">
+              <%= Phoenix.HTML.Form.select(f, :gender, Enum.map(@genders, &{&1.title, &1.code}), class: "label") %></li>
             <li class="list-group-item ml-4"><%= gettext("Person Age") %>: <%= getAge(@student.birthdate) %></li>
           </ul>
         </div>
@@ -90,7 +73,7 @@
 
       <div class="col-md-6">
         <div class="form-group">
-          <%= text_input f, :last_name, class: "form-control", placeholder: gettext("Last name") %>
+          <%= text_input f, :last_name, class: "form-control bold", placeholder: gettext("Last name") %>
         </div>
 
         <div class="form-group">
@@ -120,14 +103,39 @@
       </div>
     </div>
 
-
-
   </div>
-  <div id="menu2" class="container tab-pane fade"><br>
+  <div id="menuContacts" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label><%= gettext("Father zehut")%></label>
+          <%= text_input f, :father_zehut, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label><%= gettext("Mother zehut")%></label>
+          <%= text_input f, :mother_zehut, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label><%= gettext("Father name")%></label>
+          <%= text_input f, :father_name, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label><%= gettext("Mother name")%></label>
+          <%= text_input f, :mother_name, class: "form-control" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="menuCommities" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>">
     m2
   </div>
-  <div id="menuComments" class="container tab-pane fade">
-  Comments<br>
+  <div id="menuComments" class="container tab-pane  <%= if @tabnum == 4, do: "active" %>">
+    Comments
   </div>
 </div>
 </div>

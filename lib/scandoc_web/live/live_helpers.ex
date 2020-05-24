@@ -37,18 +37,15 @@ defmodule ScandocWeb.LiveHelpers do
     end
   end
 
-
   def getAge(dob) do
-
     if dob do
       {:ok, y} = dob |> Calendar.Strftime.strftime("%Y")
-      {:ok, cy} = Calendar.Date.today_utc |> Calendar.Strftime.strftime("%Y")
+      {:ok, cy} = Calendar.Date.today_utc() |> Calendar.Strftime.strftime("%Y")
 
       String.to_integer(cy) - String.to_integer(y)
     else
       ""
     end
-
   end
 
   def getClassroomName(id, role) do

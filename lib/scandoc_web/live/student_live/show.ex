@@ -87,8 +87,6 @@ defmodule ScandocWeb.StudentLive.Show do
   end
 
   defp pdf_thumbnail(pdf_path, thumb_path) do
-    IO.puts("**********444****** convert.....")
-
     args = ["#{pdf_path}", thumb_path]
     name = Path.rootname(thumb_path)
 

@@ -24,6 +24,18 @@ main {
   font-size: 1.2em;
 }
 
+label {
+  display: inline-block;
+  margin-bottom: 0.1rem;
+  font-weight: 700;
+  font-size: medium;
+}
+
+.bold {
+  font-weight: bold;
+  font-size: large;
+}
+
 .list-active {
   border-bottom: 5px solid $primary;
 

@@ -40,9 +40,11 @@
       <td>
         <span class="hidden"><%= link "Show", to: Routes.classroom_path(@conn, :show, classroom) %></span>
         <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
-        <span class="hiddenx"><%= link raw("<i class='far fa-edit'></i>"), to: Routes.classroom_path(@conn, :edit, classroom) %></span>
+        <span
+          class="hiddenx"><%= link raw("<i class='far fa-edit'></i>"), to: Routes.classroom_path(@conn, :edit, classroom) %></span>
         <% end %>
-        <span class="hidden"><%= link "Delete", to: Routes.classroom_path(@conn, :delete, classroom), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span
+          class="hidden"><%= link "Delete", to: Routes.classroom_path(@conn, :delete, classroom), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
     <% end %>
