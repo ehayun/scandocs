@@ -108,7 +108,7 @@ msgstr ""
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/employee_live/form_component.html.leex:48
 #: lib/scandoc_web/live/institute_live/form_component.html.leex:26 lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37
 #: lib/scandoc_web/live/permission_live/form_component.html.leex:37 lib/scandoc_web/live/student_live/form_component.html.leex:8
-#: lib/scandoc_web/live/student_live/form_component.html.leex:134 lib/scandoc_web/live/vendor_live/form_component.html.leex:48
+#: lib/scandoc_web/live/student_live/form_component.html.leex:148 lib/scandoc_web/live/vendor_live/form_component.html.leex:48
 #: lib/scandoc_web/templates/classroom/form.html.eex:25
 msgid "Save"
 msgstr ""
@@ -341,12 +341,12 @@ msgid "New Permission"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.ex:145
+#: lib/scandoc_web/live/permission_live/form_component.ex:143
 msgid "Permission created successfully"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/permission_live/form_component.ex:132
+#: lib/scandoc_web/live/permission_live/form_component.ex:130
 msgid "Permission updated successfully"
 msgstr ""
 
@@ -387,12 +387,12 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/student_live/index.ex:42
-#: lib/scandoc_web/live/student_live/show.ex:110
+#: lib/scandoc_web/live/student_live/show.ex:108
 msgid "Edit Student"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/show.ex:109
+#: lib/scandoc_web/live/student_live/show.ex:107
 msgid "Show Student"
 msgstr ""
 
@@ -775,14 +775,14 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/employee_live/form_component.ex:19
-#: lib/scandoc_web/live/employee_live/form_component.ex:52 lib/scandoc_web/live/student_live/form_component.ex:27
-#: lib/scandoc_web/live/student_live/form_component.ex:60
+#: lib/scandoc_web/live/employee_live/form_component.ex:51 lib/scandoc_web/live/student_live/form_component.ex:28
+#: lib/scandoc_web/live/student_live/form_component.ex:67
 msgid "Select classroom"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/employee_live/form_component.ex:15
-#: lib/scandoc_web/live/student_live/form_component.ex:22
+#: lib/scandoc_web/live/student_live/form_component.ex:23
 msgid "Select school"
 msgstr ""
 
@@ -880,4 +880,19 @@ msgstr ""
 #, elixir-format
 #: lib/scandoc_web/live/student_live/form_component.html.leex:111
 msgid "Father zehut"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/form_component.html.leex:122
+msgid "Father name"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/form_component.html.leex:126
+msgid "Mother name"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/student_live/form_component.html.leex:115
+msgid "Mother zehut"
 msgstr ""

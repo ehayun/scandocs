@@ -43,6 +43,11 @@ defmodule ScandocWeb.StudentLive.FormComponent do
   end
 
   @impl true
+  def handle_event("setTab", %{"tabid" => tabnum}, socket) do
+    {:noreply, assign(socket, tabnum: String.to_integer(tabnum))}
+  end
+
+  @impl true
   def handle_event("validate", %{"student" => student_params}, socket) do
     school_id =
       case student_params do
@@ -77,13 +82,7 @@ defmodule ScandocWeb.StudentLive.FormComponent do
     save_student(socket, socket.assigns.action, student_params)
   end
 
-  def handle_event("setTab", %{"tabid" => tabnum}, socket) do
-    {:noreply, assign(socket, tabnum: String.to_integer(tabnum))}
-  end
 
-  def handle_event("setTab", _params, socket) do
-    {:noreply, socket}
-  end
 
   @impl true
   defp save_student(socket, :edit, student_params) do
