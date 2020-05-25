@@ -4,6 +4,8 @@ defmodule ScandocWeb.DocgroupLive.FormComponent do
   alias Scandoc.Documents
 
   @impl true
+  @spec update(%{docgroup: Scandoc.Documents.Docgroup.t()}, Phoenix.LiveView.Socket.t()) ::
+          {:ok, Phoenix.LiveView.Socket.t()}
   def update(%{docgroup: docgroup} = assigns, socket) do
     changeset = Documents.change_docgroup(docgroup)
 

@@ -1,0 +1,160 @@
+<%= f = form_for @changeset, "#",
+  id: "student-form",
+  phx_submit: "save" %>
+
+<header><%=  @student.full_name%>
+    <%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary float-left mr-4" %>
+</header>
+
+
+<ul class="nav nav-tabs">
+    <li class="nav-item m-1 p-1">
+      <a phx-click="setTab" phx-value-tabid="1" 
+        class='nav-link <%= if @tabnum == 1, do: "active" %>' data-toggle="tab"
+        href="#menuDetails"><%= gettext("General details") %></a>
+    </li>
+    <li class="nav-item m-1 p-1">
+      <a phx-click="setTab" phx-value-tabid="2" 
+        class='nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab"
+        href="#menuContacts"><%= gettext("Contacts") %></a>
+    </li>
+    <li class="nav-item m-1 p-1">
+      <a phx-click="setTab" phx-value-tabid="3" 
+        class='nav-link <%= if @tabnum == 3, do: "active" %>' data-toggle="tab"
+        href="#menuCommities"><%= gettext("Placement Committees") %></a>
+    </li>
+    <li class="nav-item m-1 p-1">
+      <a phx-click="setTab" phx-value-tabid="4" 
+        class='nav-link <%= if @tabnum == 4, do: "active" %>' data-toggle="tab"
+        href="#menuComments"><%= gettext("Comments") %></a>
+    </li>
+  </ul>
+  <!-- Tab panes -->
+  <div class="tab-content blueBorder p-2">
+    <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>"><br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= text_input f, :first_name, class: "form-control bold", placeholder: gettext("First name") %>
+            <%= error_tag f, :first_name %>
+          </div>
+          <div class="form-group">
+            <%= text_input f, :student_zehut, class: "form-control col-md-6", placeholder: gettext("Zehut") %>
+            <%= error_tag f, :student_zehut %>
+          </div>
+          <div class="form-group">
+            <ul class="list-group list-group-horizontal">
+              <li class="list-group-item">
+                <%= Phoenix.HTML.Form.select(f, :gender, Enum.map(@genders, &{&1.title, &1.code}), class: "form-control col-sm-10") %></li>
+              <li class="list-group-item ml-4"><%= gettext("Person Age") %>: <%= getAge(@student.birthdate) %></li>
+            </ul>
+          </div>
+          <div class="form-group">
+            <%= text_input f, :address, class: "form-control", placeholder: gettext("Address") %>
+          </div>
+          <div class="form-group">
+            <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "form-control col-sm-12") %>
+          </div>
+          <div class="form-group">
+            <label><%= gettext("Healthcare name")%></label>
+            <%= Phoenix.HTML.Form.select(f, :healthcare, Enum.map(@healthcares, &{&1.name, &1.name}), class: "form-control col-sm-12") %>
+          </div>
+          <div class="checkbox">
+            <label>
+              <%= checkbox f, :has_picture %> <%= gettext("Has picture?") %>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= text_input f, :last_name, class: "form-control bold", placeholder: gettext("Last name") %>
+            <%= error_tag f, :last_name %>
+          </div>
+          <div class="form-group">
+            <%= date_input f, :birthdate, class: "form-control" %>
+            <%= error_tag f, :birthdate %>
+          </div>
+          <div class="form-group">
+            <%= text_input f, :hebrew_birthdate, class: "form-control", placeholder: gettext("Hebrew birthday") %>
+          </div>
+          <div class="form-group">
+            <%= Phoenix.HTML.Form.select(f, :city_id, Enum.map(@cities, &{&1.title, &1.id}), class: "form-control col-sm-12") %>
+          </div>
+          <div class="form-group">
+            <%= Phoenix.HTML.Form.select(f, :classroom_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "form-control col-sm-12") %>
+          </div>
+          <div class="form-group">
+            <label><%= gettext("Sending Authority")%></label>
+            <%= Phoenix.HTML.Form.select(f, :sending_authority_id, Enum.map(@cities, &{&1.title, &1.id}), class: "form-control col-sm-12") %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="menuContacts" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label><%= gettext("Father zehut")%></label>
+            <%= text_input f, :father_zehut, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label><%= gettext("Mother zehut")%></label>
+            <%= text_input f, :mother_zehut, class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label><%= gettext("Father name")%></label>
+            <%= text_input f, :father_name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <label><%= gettext("Mother name")%></label>
+            <%= text_input f, :mother_name, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="menuCommities" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>">
+      m2
+    </div>
+    <div id="menuComments" class="container tab-pane  <%= if @tabnum == 4, do: "active" %>">
+
+      <a href="#" phx-click="add-comment"  class="btn btn-info"><%= gettext("Add new")%></a>
+      <%= inputs_for f, :comments, fn sc -> %>
+      <div class="mb-2 border-bottom">
+        <div class="row mb-2">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= date_input sc, :comment_date, class: "form-control" %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="checkbox">
+              <label>
+                <%= checkbox sc, :done %> <%= gettext("Completed?") %>
+              </label>
+            </div>
+          </div>
+          <%= if is_nil(sc.data.temp_id) do %>
+          <%= checkbox sc, :delete %> &nbsp;<%= gettext("Delete") %>
+          <% else %>
+          <%= hidden_input sc, :temp_id %>
+          <%= hidden_input sc, :student_id %>
+          <a class="m-2" href="#" phx-click="remove-comment" phx-value-remove="<%= sc.data.temp_id %>"
+            >&times</a> <%= gettext("Delete") %>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= textarea sc, :comment, class: "form-control" %>
+          <%= error_tag sc, :comment %>
+
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  </div>
+
+
+
+</form>

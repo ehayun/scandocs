@@ -1,5 +1,5 @@
-defmodule ScandocWeb.StudentLive.FormComponent do
-  use ScandocWeb, :live_component
+defmodule ScandocWeb.StudentLive.Edit do
+  use ScandocWeb, :live_view
 
   alias Scandoc.Students
   alias Scandoc.Students.StudentComment
@@ -8,7 +8,16 @@ defmodule ScandocWeb.StudentLive.FormComponent do
   alias Scandoc.Tables
 
   @impl true
-  def update(%{student: student} = assigns, socket) do
+  def mount(_params, _session, socket) do
+    {:ok, assign(socket, sort_by: nil, pdf_id: nil, doc_path: nil)}
+  end
+
+  @impl true
+  @spec handle_params(map, any, Phoenix.LiveView.Socket.t()) ::
+          {:noreply, Phoenix.LiveView.Socket.t()}
+  def handle_params(%{"id" => id}, _, socket) do
+    student = Students.get_student!(id)
+
     tabnum = if socket.assigns[:tabnum], do: socket.assigns[:tabnum], else: 4
     cities = Tables.list_cities()
     genders = Tables.list_gender()
@@ -30,15 +39,14 @@ defmodule ScandocWeb.StudentLive.FormComponent do
 
     changeset = Students.change_student(student, %{school_id: school_id})
 
-    {:ok,
+    {:noreply,
      socket
-     |> assign(assigns)
-     |> assign(tabnum: tabnum)
-     |> assign(cities: cities)
+     |> assign(:student, Students.get_student!(id))
+     |> assign(:tabnum, 1)
      |> assign(genders: genders)
-     |> assign(healthcares: healthcares)
      |> assign(schools: schools)
-     |> assign(school_id: school_id)
+     |> assign(cities: cities)
+     |> assign(healthcares: healthcares)
      |> assign(classrooms: classrooms)
      |> assign(:changeset, changeset)}
   end
@@ -78,14 +86,12 @@ defmodule ScandocWeb.StudentLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
-  @impl true
   def handle_event("save", %{"student" => student_params}, socket) do
-    save_student(socket, socket.assigns.action, student_params)
+    save_student(socket, :edit, student_params)
   end
 
   @impl true
-  def handle_event("add-comment", student_params, socket) do
-    IO.inspect(student_params)
+  def handle_event("add-comment", _student_params, socket) do
 
     existing_comments =
       Map.get(socket.assigns.changeset.changes, :comments, socket.assigns.student.comments)
@@ -96,7 +102,6 @@ defmodule ScandocWeb.StudentLive.FormComponent do
         # NOTE temp_id
         Students.change_student_comment(%StudentComment{
           student_id: socket.assigns.student.id,
-          comment: "New",
           temp_id: get_temp_id()
         })
       ])
@@ -104,7 +109,20 @@ defmodule ScandocWeb.StudentLive.FormComponent do
     changeset =
       socket.assigns.changeset
       |> Ecto.Changeset.put_assoc(:comments, comments)
-      |> Map.put(:action, :validate)
+
+    {:noreply, assign(socket, changeset: changeset)}
+  end
+
+  def handle_event("remove-comment", %{"remove" => remove_id}, socket) do
+    comments =
+      socket.assigns.changeset.changes.comments
+      |> Enum.reject(fn %{data: comment} ->
+        comment.temp_id == remove_id
+      end)
+
+    changeset =
+      socket.assigns.changeset
+      |> Ecto.Changeset.put_assoc(:comments, comments)
 
     {:noreply, assign(socket, changeset: changeset)}
   end
@@ -131,9 +149,10 @@ defmodule ScandocWeb.StudentLive.FormComponent do
       {:ok, _student} ->
         {:noreply,
          socket
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_redirect(to: Routes.student_index_path(socket, :index))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        # IO.inspect(changeset, label: "error")
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end

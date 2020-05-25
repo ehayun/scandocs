@@ -34,7 +34,7 @@
       <td> <%= getSchoolName(student.classroom.id, :classroom)%>/ <%= student.classroom.classroom_name %> </td>
       <td>
         <span class="hidden"><%= live_redirect "Show", to: Routes.student_show_path(@socket, :show, student) %></span>
-        <span class="hiddenx"><%= live_patch raw("<i class='fas fa-user-edit'></i>"), to: Routes.student_index_path(@socket, :edit, student) %></span>
+        <span class="hiddenx"><%= live_redirect raw("<i class='fas fa-user-edit'></i>"), to: Routes.student_edit_path(@socket, :edit, student) %></span>
         <span class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: student.id, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>

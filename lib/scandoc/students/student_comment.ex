@@ -10,7 +10,7 @@ defmodule Scandoc.Students.StudentComment do
     field :done, :boolean, default: false
     belongs_to :student, Student, references: :id
     field :temp_id, :string, virtual: true
-    field :delete, :boolean, virtual: true
+    field :delete, :boolean, virtual: true, default: false
 
     timestamps()
   end
@@ -18,8 +18,8 @@ defmodule Scandoc.Students.StudentComment do
   @doc false
   def changeset(student_comment, attrs) do
     student_comment
-    |> cast(attrs, [:student_id, :comment, :comment_date, :done])
-    |> validate_required([:student_id, :comment, :comment_date, :done])
+    |> cast(attrs, [:student_id, :comment, :comment_date, :done, :delete])
+    |> validate_required([:student_id, :comment_date, :done, :comment])
     |> maybe_mark_for_deletion()
   end
 

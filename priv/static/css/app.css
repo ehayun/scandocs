@@ -8571,6 +8571,9 @@ label {
 .blueBorder {
   border: 2px solid #00a2ff; }
 
+.border-bottom {
+  border-bottom: 2px solid #2C3E50 !important; }
+
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #00a2ff;
