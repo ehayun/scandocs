@@ -135,7 +135,12 @@
     m2
   </div>
   <div id="menuComments" class="container tab-pane  <%= if @tabnum == 4, do: "active" %>">
-    Comments
+    <%= inputs_for f, :comments, fn sc -> %>
+        <div class="form-group">
+          <%= text_input sc, :comment, class: "form-control" %>
+
+        </div>
+    <%= end %>
   </div>
 </div>
 </div>

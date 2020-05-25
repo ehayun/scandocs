@@ -11,8 +11,9 @@ alias Scandoc.Documents
 alias Scandoc.Documents.Document
 alias Scandoc.Documents.Docgroup
 alias Scandoc.Documents.Doctype
-alias alias Scandoc.Students
-alias alias Scandoc.Students.Student
+alias Scandoc.Students
+alias Scandoc.Students.Student
+alias Scandoc.Students.StudentComment
 alias Scandoc.Permissions
 alias Scandoc.Permissions.Permission
 alias Scandoc.Institutes

@@ -19,7 +19,7 @@ defmodule Scandoc.Students do
 
   """
   def list_students do
-    Student |> preload(:classroom) |> Repo.all()
+    Student |> preload(:classroom) |> preload(:comments) |> Repo.all()
   end
 
   def list_students_in_classroom(classroom_id) do
@@ -41,7 +41,7 @@ defmodule Scandoc.Students do
 
   """
   def get_student!(id),
-    do: Student |> preload(:classroom) |> preload(:city) |> where(id: ^id) |> Repo.one()
+    do: Student |> preload(:classroom) |> preload(:city) |> preload(:comments) |> where(id: ^id) |> Repo.one()
 
   @doc """
   Creates a student.
@@ -231,5 +231,101 @@ defmodule Scandoc.Students do
   """
   def change_stddoc(%Stddoc{} = stddoc, attrs \\ %{}) do
     Stddoc.changeset(stddoc, attrs)
+  end
+
+  alias Scandoc.Students.StudentComment
+
+  @doc """
+  Returns the list of student_comments.
+
+  ## Examples
+
+      iex> list_student_comments()
+      [%StudentComment{}, ...]
+
+  """
+  def list_student_comments do
+    Repo.all(StudentComment)
+  end
+
+  @doc """
+  Gets a single student_comment.
+
+  Raises `Ecto.NoResultsError` if the Student comment does not exist.
+
+  ## Examples
+
+      iex> get_student_comment!(123)
+      %StudentComment{}
+
+      iex> get_student_comment!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_student_comment!(id), do: Repo.get!(StudentComment, id)
+
+  @doc """
+  Creates a student_comment.
+
+  ## Examples
+
+      iex> create_student_comment(%{field: value})
+      {:ok, %StudentComment{}}
+
+      iex> create_student_comment(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_student_comment(attrs \\ %{}) do
+    %StudentComment{}
+    |> StudentComment.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a student_comment.
+
+  ## Examples
+
+      iex> update_student_comment(student_comment, %{field: new_value})
+      {:ok, %StudentComment{}}
+
+      iex> update_student_comment(student_comment, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_student_comment(%StudentComment{} = student_comment, attrs) do
+    student_comment
+    |> StudentComment.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a student_comment.
+
+  ## Examples
+
+      iex> delete_student_comment(student_comment)
+      {:ok, %StudentComment{}}
+
+      iex> delete_student_comment(student_comment)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_student_comment(%StudentComment{} = student_comment) do
+    Repo.delete(student_comment)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking student_comment changes.
+
+  ## Examples
+
+      iex> change_student_comment(student_comment)
+      %Ecto.Changeset{data: %StudentComment{}}
+
+  """
+  def change_student_comment(%StudentComment{} = student_comment, attrs \\ %{}) do
+    StudentComment.changeset(student_comment, attrs)
   end
 end
