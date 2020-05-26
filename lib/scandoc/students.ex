@@ -6,7 +6,7 @@ defmodule Scandoc.Students do
   import Ecto.Query, warn: false
   alias Scandoc.Repo
 
-  alias Scandoc.Students.Student
+  alias Scandoc.Students.{Student, StudentComment}
   alias Scandoc.Documents.Doctype
 
   @doc """
@@ -40,8 +40,29 @@ defmodule Scandoc.Students do
       ** (Ecto.NoResultsError)
 
   """
-  def get_student!(id),
-    do: Student |> preload(:classroom) |> preload(:city) |> preload(:comments) |> where(id: ^id) |> Repo.one()
+  def get_student!(id) do
+    cc = from(sc in StudentComment, order_by: [desc: sc.comment_date])
+
+    from(s in Student,
+      where: s.id == ^"#{id}",
+      preload: [:city],
+      preload: [:classroom],
+      preload: [comments: ^cc]
+    )
+    |> Repo.one()
+  end
+
+  def get_student_by_zehut(id) do
+    cc = from(sc in StudentComment, order_by: [desc: sc.comment_date])
+
+    from(s in Student,
+      where: s.student_zehut == ^"#{id}",
+      preload: [:city],
+      preload: [:classroom],
+      preload: [comments: ^cc]
+    )
+    |> Repo.one()
+  end
 
   @doc """
   Creates a student.

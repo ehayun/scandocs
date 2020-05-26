@@ -9,12 +9,15 @@ defmodule ScandocWeb.LiveHelpers do
   alias Scandoc.Schools.School
   alias Scandoc.Classrooms
   alias Scandoc.Classrooms.Classroom
-  alias Scandoc.Students.Student
+  alias Scandoc.Students.{Stddoc, Student}
   alias Scandoc.Institutes.Institute
   alias Scandoc.Employees.Role
 
   alias Scandoc.Documents.Docgroup
 
+  def numOfDocs(id) do
+    from(s in Stddoc, where: s.ref_id == ^id) |> Repo.aggregate(:count)
+  end
   def getDocGroup(id) do
     case Docgroup |> where(id: ^id) |> Repo.one() do
       nil -> ""

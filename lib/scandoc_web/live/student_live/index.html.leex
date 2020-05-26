@@ -23,7 +23,7 @@
   <thead class="thead-dark">
     <tr>
       <th><%= gettext("Zehut")%></th>
-      <th><%= gettext("Full name")%></th>
+      <th><%= gettext("Full name")%> (<%= gettext("# docs") %>)</th>
       <th><%= gettext("Classroom")%></th>
       <th></th>
     </tr>
@@ -32,7 +32,7 @@
     <%= for student <- @students do %>
     <tr id="student-<%= student.id %>">
       <td><%= student.student_zehut %></td>
-      <td><%= live_redirect student.full_name, to: Routes.stddoc_show_path(@socket, :show, student) %></td>
+      <td><%= live_redirect student.full_name <> " (#{numOfDocs(student.id)})", to: Routes.stddoc_show_path(@socket, :show, student) %></td>
       <td>
         <%= if student.classroom do %>
         <%= getSchoolName(student.classroom.id, :classroom)%>/ <%= student.classroom.classroom_name %>

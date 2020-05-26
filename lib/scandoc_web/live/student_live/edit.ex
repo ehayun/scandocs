@@ -120,7 +120,6 @@ defmodule ScandocWeb.StudentLive.Edit do
     {:noreply, assign(socket, changeset: changeset)}
   end
 
-
   def handle_event("remove-comment", %{"remove" => remove_id}, socket) do
     comments =
       socket.assigns.changeset.changes.comments
@@ -133,6 +132,18 @@ defmodule ScandocWeb.StudentLive.Edit do
       |> Ecto.Changeset.put_assoc(:comments, comments)
 
     {:noreply, assign(socket, changeset: changeset)}
+  end
+
+  def handle_event("add-contact", _params, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("add-commity", _params, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("add-wellfare", _params, socket) do
+    {:noreply, socket}
   end
 
   defp get_temp_id, do: :crypto.strong_rand_bytes(5) |> Base.url_encode64() |> binary_part(0, 5)

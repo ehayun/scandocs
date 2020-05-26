@@ -85,7 +85,6 @@ defmodule ScandocWeb.StudentLive.FormComponent do
 
   @impl true
   def handle_event("add-comment", _student_params, socket) do
-
     existing_comments =
       Map.get(socket.assigns.changeset.changes, :comments, socket.assigns.student.comments)
 

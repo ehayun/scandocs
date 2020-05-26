@@ -10,6 +10,5 @@ defmodule Scandoc.Repo.Migrations.CreateStudentComments do
 
       timestamps()
     end
-
   end
 end
