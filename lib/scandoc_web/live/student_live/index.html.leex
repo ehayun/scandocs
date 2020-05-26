@@ -1,10 +1,12 @@
 <h2>
   <i class="fas fa-user-graduate"></i>
   <%= gettext("Listing Students") %>
-  <span class="float-left pl-1"><%= live_patch gettext("Add New"), to: Routes.student_index_path(@socket, :new), class: "btn btn-primary" %></span>
+  <span
+    class="float-left pl-1"><%= live_patch gettext("Add New"), to: Routes.student_index_path(@socket, :new), class: "btn btn-primary" %></span>
   <span class="float-left">
     <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
-      <input class="form-control" type="text" value='<%= @search %>' name="search" placeholder='<%= gettext("Search by zehut or name")%>'>
+      <input class="form-control" type="text" value='<%= @search %>' name="search"
+        placeholder='<%= gettext("Search by zehut or name")%>'>
     </form>
   </span>
 
@@ -31,11 +33,17 @@
     <tr id="student-<%= student.id %>">
       <td><%= student.student_zehut %></td>
       <td><%= live_redirect student.full_name, to: Routes.stddoc_show_path(@socket, :show, student) %></td>
-      <td> <%= getSchoolName(student.classroom.id, :classroom)%>/ <%= student.classroom.classroom_name %> </td>
+      <td>
+        <%= if student.classroom do %>
+        <%= getSchoolName(student.classroom.id, :classroom)%>/ <%= student.classroom.classroom_name %>
+        <% end %>
+      </td>
       <td>
         <span class="hidden"><%= live_redirect "Show", to: Routes.student_show_path(@socket, :show, student) %></span>
-        <span class="hiddenx"><%= live_redirect raw("<i class='fas fa-user-edit'></i>"), to: Routes.student_edit_path(@socket, :edit, student) %></span>
-        <span class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: student.id, data: [confirm: "Are you sure?"] %></span>
+        <span
+          class="hiddenx"><%= live_redirect raw("<i class='fas fa-user-edit'></i>"), to: Routes.student_edit_path(@socket, :edit, student) %></span>
+        <span
+          class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: student.id, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
     <% end %>
@@ -45,11 +53,13 @@
 
 <nav class="p-2" aria-label="Pagination">
   <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
-    <li phx-click="nav" phx-value-page="<%= (@students.page_number - 1)  %>" class="page-item "><a class="page-link" href="#"><%= gettext("Previous") %></a></li>
+    <li phx-click="nav" phx-value-page="<%= (@students.page_number - 1)  %>" class="page-item "><a class="page-link"
+        href="#"><%= gettext("Previous") %></a></li>
     <li class="m-1"><%= gettext("Page") %></li>
     <li class="m-1"><%= @students.page_number %></li>
     <li class="m-1"><%= gettext("Out of") %></li>
     <li class="m-1"><%= @students.total_pages %></li>
-    <li phx-click="nav" phx-value-page="<%= (@students.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
+    <li phx-click="nav" phx-value-page="<%= (@students.page_number + 1) %>" class="page-item"><a class="page-link"
+        href="#"><%= gettext("Next") %></a></li>
   </ul>
 </nav>

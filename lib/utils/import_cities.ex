@@ -43,8 +43,6 @@ defmodule Scandoc.Util.ImportCities do
       %{id: 1037, code: "1037", title: "רכסים"}
     ]
 
-    IO.puts("Start")
-
     for c <- cities do
       now = Calendar.DateTime.now!("UTC")
 

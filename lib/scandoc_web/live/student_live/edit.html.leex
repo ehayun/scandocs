@@ -1,5 +1,6 @@
 <%= f = form_for @changeset, "#",
   id: "student-form",
+  phx_change: "validate",
   phx_submit: "save" %>
 
 <header><%=  @student.full_name%>
@@ -52,7 +53,7 @@
           <div class="form-group">
             <%= text_input f, :address, class: "form-control", placeholder: gettext("Address") %>
           </div>
-          <div class="form-group">
+          <div  class="form-group">
             <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "form-control col-sm-12") %>
           </div>
           <div class="form-group">
@@ -115,11 +116,11 @@
       </div>
     </div>
     <div id="menuCommities" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>">
-      m2
+      
     </div>
     <div id="menuComments" class="container tab-pane  <%= if @tabnum == 4, do: "active" %>">
 
-      <a href="#" phx-click="add-comment"  class="btn btn-info"><%= gettext("Add new")%></a>
+      <a href="#" phx-click="add-comment"  class="btn btn-info mb-1"><%= gettext("Add new comment")%></a>
       <%= inputs_for f, :comments, fn sc -> %>
       <div class="mb-2 border-bottom">
         <div class="row mb-2">

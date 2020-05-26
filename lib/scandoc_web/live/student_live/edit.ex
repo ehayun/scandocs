@@ -18,7 +18,7 @@ defmodule ScandocWeb.StudentLive.Edit do
   def handle_params(%{"id" => id}, _, socket) do
     student = Students.get_student!(id)
 
-    tabnum = if socket.assigns[:tabnum], do: socket.assigns[:tabnum], else: 4
+    # tabnum = if socket.assigns[:tabnum], do: socket.assigns[:tabnum], else: 4
     cities = Tables.list_cities()
     genders = Tables.list_gender()
 
@@ -43,6 +43,7 @@ defmodule ScandocWeb.StudentLive.Edit do
      socket
      |> assign(:student, Students.get_student!(id))
      |> assign(:tabnum, 1)
+     |> assign(:school_id, school_id)
      |> assign(genders: genders)
      |> assign(schools: schools)
      |> assign(cities: cities)
@@ -58,32 +59,39 @@ defmodule ScandocWeb.StudentLive.Edit do
 
   @impl true
   def handle_event("validate", %{"student" => student_params}, socket) do
+    old_school_id = if socket.assigns.school_id, do: socket.assigns.school_id, else: -1
+
     school_id =
       case student_params do
-        %{"school_id" => school_id} -> school_id
+        %{"school_id" => school_id} -> String.to_integer(school_id)
         _ -> socket.assigns.school_id
       end
 
-    classroom_id =
-      case student_params do
-        %{"classroom_id" => classroom_id} -> classroom_id
-        _ -> socket.assigns.classroom_id
+    socket =
+      if old_school_id != school_id do
+        classroom_id =
+          case student_params do
+            %{"classroom_id" => classroom_id} -> classroom_id
+            _ -> socket.assigns.classroom_id
+          end
+
+        classrooms = Classrooms.list_classrooms(school_id)
+
+        classrooms =
+          List.insert_at(classrooms, 0, %{id: -1, classroom_name: gettext("Select classroom")})
+
+        assign(socket, school_id: school_id, classrooms: classrooms, classroom_id: classroom_id)
+
+        # changeset =
+        #   socket.assigns.student
+        #   |> Students.change_student(student_params)
+        #   |> Map.put(:action, :validate)
+      else
+        socket
       end
 
-    classrooms = Classrooms.list_classrooms(school_id)
-
-    classrooms =
-      List.insert_at(classrooms, 0, %{id: -1, classroom_name: gettext("Select classroom")})
-
-    socket =
-      assign(socket, school_id: school_id, classrooms: classrooms, classroom_id: classroom_id)
-
-    changeset =
-      socket.assigns.student
-      |> Students.change_student(student_params)
-      |> Map.put(:action, :validate)
-
-    {:noreply, assign(socket, :changeset, changeset)}
+    # {:noreply, assign(socket, :changeset, changeset)}
+    {:noreply, socket}
   end
 
   def handle_event("save", %{"student" => student_params}, socket) do
@@ -92,7 +100,6 @@ defmodule ScandocWeb.StudentLive.Edit do
 
   @impl true
   def handle_event("add-comment", _student_params, socket) do
-
     existing_comments =
       Map.get(socket.assigns.changeset.changes, :comments, socket.assigns.student.comments)
 
@@ -113,6 +120,7 @@ defmodule ScandocWeb.StudentLive.Edit do
     {:noreply, assign(socket, changeset: changeset)}
   end
 
+
   def handle_event("remove-comment", %{"remove" => remove_id}, socket) do
     comments =
       socket.assigns.changeset.changes.comments
@@ -130,10 +138,12 @@ defmodule ScandocWeb.StudentLive.Edit do
   defp get_temp_id, do: :crypto.strong_rand_bytes(5) |> Base.url_encode64() |> binary_part(0, 5)
 
   defp save_student(socket, :edit, student_params) do
+    {year, _} = Date.year_of_era(Date.utc_today())
+
     student_params =
       case student_params do
         %{"birthdate" => %{"day" => _dd, "month" => _mm, "year" => yy}} ->
-          if String.to_integer(yy) < 1995 do
+          if String.to_integer(yy) < year - 50 do
             Map.merge(student_params, %{
               "birthdate" => %{"day" => "0", "month" => "0", "year" => "0"}
             })

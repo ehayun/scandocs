@@ -140,7 +140,6 @@ defmodule Scandoc.Util.ImportStudents do
   end
 
   defp getStudent(path) do
-    IO.puts("Student #{path}")
     ll = String.split(path, "/")
 
     cc = Enum.count(ll)

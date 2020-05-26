@@ -21,9 +21,7 @@ defmodule Scandoc.Util.ImportTeachers do
   defp _process_csv_row(row) do
     {:ok, row} = row
     [row] = row
-    [zehut, dob, y, p, full_name, _, _] = String.split(row, ",")
-
-    IO.puts("#{zehut}, #{dob}, #{y}, #{p}, #{full_name}")
+    [zehut, dob, _y, p, full_name, _, _] = String.split(row, ",")
 
     [dd, mm, yyyy] = String.split(dob, "/")
 

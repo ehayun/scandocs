@@ -33,7 +33,6 @@ defmodule Scandoc.Students.Student do
 
   @doc false
   def changeset(student, attrs) do
-    # IO.inspect(attrs, label: "changeset")
     attrs = Map.merge(attrs, fullname(attrs))
 
     student
@@ -71,8 +70,7 @@ defmodule Scandoc.Students.Student do
     %{full_name: "#{last_name} #{first_name}"}
   end
 
-  defp fullname(params) do
-    IO.inspect(params)
+  defp fullname(_params) do
     %{}
   end
 end
