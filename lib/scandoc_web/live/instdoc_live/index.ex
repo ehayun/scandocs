@@ -1,14 +1,28 @@
 defmodule ScandocWeb.InstdocLive.Index do
   use ScandocWeb, :live_view
 
+  import Ecto.Query
+  alias Scandoc.Repo
+
   alias Scandoc.Institutes
+  alias Scandoc.Permissions
   # alias Scandoc.Institutes.Institute
   alias Scandoc.Categories
   alias Scandoc.Institutes
   alias Scandoc.Institutes.Instdoc
+  alias Scandoc.Accounts.UserToken
+  alias Scandoc.Accounts.User
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
+    %{"user_token" => user_token} = session
+    u = UserToken |> where(token: ^user_token) |> Repo.one()
+
+    user =
+      if u do
+        User |> where(id: ^u.user_id) |> Repo.one()
+      end
+
     changeset = Institutes.change_instdoc(%Instdoc{})
     current_page = if socket.assigns[:current_page], do: socket.assigns[:current_page], else: 1
 
@@ -21,6 +35,7 @@ defmodule ScandocWeb.InstdocLive.Index do
 
     socket =
       assign(socket,
+        current_user: user,
         filter: filter,
         current_page: current_page,
         by_category: "-1",
@@ -115,6 +130,9 @@ defmodule ScandocWeb.InstdocLive.Index do
 
   defp fetch_inst_docs(socket) do
     filter = socket.assigns.filter
+
+    instIDs = Permissions.getInstitutes(socket.assigns.current_user.id)
+    filter = Map.merge(filter, %{"instIDs" => instIDs})
 
     Institutes.list_inst_docs(17, socket.assigns.current_page, filter)
   end

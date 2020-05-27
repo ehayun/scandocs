@@ -1,6 +1,7 @@
 <nav class="rtl navbar navbar-expand-md navbar-dark bg-primary shadow-sm">
   <a class="navbar-brand" href="/"><img src="/images/logo.png"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+    aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -8,32 +9,38 @@
 
     <ul class="rtl navbar-nav ml-auto">
 
-      <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
+      <%= if ScandocWeb.UserAuth.can(@current_user, Scandoc.Permissions.getLevelToInt(:allow_institute)) do %>
       <li class="nav-item <%= active_menu(@conn, :instdoc) %>">
-        <a class="nav-link" href="<%= Routes.instdoc_index_path(@conn, :index) %>"><i class="fas fa-file-invoice"></i> <%= gettext("Documents") %></a>
+        <a class="nav-link" href="<%= Routes.instdoc_index_path(@conn, :index) %>"><i class="fas fa-file-invoice"></i>
+          <%= gettext("Documents") %></a>
       </li>
       <% end %>
 
 
       <li class="nav-item <%= active_menu(@conn, :school) %>">
-        <a class="nav-link" href="<%= Routes.school_path(@conn, :index) %>"> <i class="fas fa-school"></i> <%= gettext("Schools") %></a>
+        <a class="nav-link" href="<%= Routes.school_path(@conn, :index) %>"> <i class="fas fa-school"></i>
+          <%= gettext("Schools") %></a>
       </li>
 
       <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
       <li class="nav-item <%= active_menu(@conn, :manager) %>">
-        <a class="nav-link" href="<%= Routes.manager_path(@conn, :index) %>"><i class="fas fa-user-tie"></i> <%= gettext("Managers") %></a>
+        <a class="nav-link" href="<%= Routes.manager_path(@conn, :index) %>"><i class="fas fa-user-tie"></i>
+          <%= gettext("Managers") %></a>
       </li>
       <% end %>
       <li class="nav-item <%= active_menu(@conn, :classroom) %>">
-        <a class="nav-link" href="<%= Routes.classroom_path(@conn, :index) %>"><i class="fas fa-chalkboard"></i> <%= gettext("Classrooms") %></a>
+        <a class="nav-link" href="<%= Routes.classroom_path(@conn, :index) %>"><i class="fas fa-chalkboard"></i>
+          <%= gettext("Classrooms") %></a>
       </li>
       <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
       <li class="nav-item  <%= active_menu(@conn, :teacher) %>">
-        <a class="nav-link" href="<%= Routes.teacher_path(@conn, :index) %>"><i class="fas fa-chalkboard-teacher"></i> <%= gettext("Teachers") %></a>
+        <a class="nav-link" href="<%= Routes.teacher_path(@conn, :index) %>"><i class="fas fa-chalkboard-teacher"></i>
+          <%= gettext("Teachers") %></a>
       </li>
       <% end %>
       <li class="nav-item <%= active_menu(@conn, :student) %>">
-        <a class="nav-link" href="<%= Routes.student_index_path(@conn, :index) %>"><i class="fas fa-user-graduate"></i> <%= gettext("Students") %></a>
+        <a class="nav-link" href="<%= Routes.student_index_path(@conn, :index) %>"><i class="fas fa-user-graduate"></i>
+          <%= gettext("Students") %></a>
       </li>
       <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
       <li class="nav-item <%= active_menu(@conn, :permission) %>">
@@ -41,7 +48,8 @@
 
       <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
 
-      <li class="nav-item dropdown"><a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown"><a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= gettext("Admin") %>
           <span class="caret"></span></a>
         <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
@@ -68,7 +76,8 @@
 
       <%= if @current_user do %>
 
-      <li class="nav-item dropdown"><a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown"><a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= @current_user.full_name %>
           <span class="caret"></span></a>
         <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
@@ -81,7 +90,8 @@
 
 
       <% else %>
-      <li class="nav-item mr-4"><%= link gettext("Login"), to: Routes.user_session_path(@conn, :new), class: "nav-link" %></li>
+      <li class="nav-item mr-4">
+        <%= link gettext("Login"), to: Routes.user_session_path(@conn, :new), class: "nav-link" %></li>
       <li><%= link "Register", to: Routes.user_registration_path(@conn, :new), class: "hidden" %></li>
 
       <% end %>

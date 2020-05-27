@@ -155,6 +155,16 @@ defmodule Scandoc.Permissions do
     Permission.changeset(permission, attrs)
   end
 
+  def hasPermission(user_id, type) do
+    cp =
+      Permission
+      |> where(user_id: ^user_id)
+      |> where(permission_type: ^type)
+      |> Repo.aggregate(:count)
+
+    cp > 0
+  end
+
   def isAdmin(nil), do: false
 
   def isAdmin(%User{} = user) do

@@ -120,12 +120,14 @@ defmodule Scandoc.Institutes do
           "category" => "-1",
           "institute" => "-1",
           "outcome_category" => "-1",
+          "instIDs" => [],
           "vendor_name" => ""
         }
       ) do
     %{
       "category" => category_id,
       "institute" => institute_id,
+      "instIDs" => instIds,
       "outcome_category" => outcome_category_id,
       "vendor_name" => vendor_name
     } = filter
@@ -133,6 +135,7 @@ defmodule Scandoc.Institutes do
     filter = [
       %{category: category_id},
       %{institute: institute_id},
+      %{instIDs: instIds},
       %{outcome_category: outcome_category_id},
       %{vendor_name: vendor_name}
     ]
@@ -149,6 +152,12 @@ defmodule Scandoc.Institutes do
 
         %{institute: "-1"}, query ->
           query
+
+        %{instIDs: []}, query ->
+          query
+
+        %{instIDs: instIDs}, query ->
+          from q in query, where: q.institute_id in ^instIDs
 
         %{institute: institute_id}, query ->
           from q in query, where: q.institute_id == ^institute_id

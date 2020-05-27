@@ -171,6 +171,26 @@ defmodule ScandocWeb.UserAuth do
 
   def isAdmin(user), do: Permissions.isAdmin(user)
 
+  def can(%Phoenix.LiveView.Socket{} = socket, type) do
+    can(socket.assigns.current_user, type)
+  end
+
+  def can(%Plug.Conn{} = conn, type) do
+    can(conn.assigns.current_user, type)
+  end
+
+  def can(user, type) do
+    if isAdmin(user) do
+      true
+    else
+      if user do
+        Permissions.hasPermission(user.id, type)
+      else
+        false
+      end
+    end
+  end
+
   defp getScools(user), do: Permissions.getSchools(user.id)
   defp geClassrooms(user), do: Permissions.getClassrooms(user.id)
   defp geStudents(user), do: Permissions.getStudents(user.id)
