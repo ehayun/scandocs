@@ -29,10 +29,10 @@ defmodule Scandoc.Tables do
 
   def list_contact_types do
     [
-      %{code: "", title: "טל. נייד"},
-      %{code: "", title: "טל. קווי"},
-      %{code: "", title: "אימייל"},
-      %{code: "", title: "פקס"}
+      %{code: "mobile", title: "טל. נייד"},
+      %{code: "phone", title: "טל. קווי"},
+      %{code: "email", title: "אימייל"},
+      %{code: "fax", title: "פקס"}
     ]
   end
 
