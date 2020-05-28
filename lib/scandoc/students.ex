@@ -46,6 +46,7 @@ defmodule Scandoc.Students do
     from(s in Student,
       where: s.id == ^"#{id}",
       preload: [:city],
+      preload: [:contacts],
       preload: [:classroom],
       preload: [comments: ^cc]
     )
@@ -59,6 +60,7 @@ defmodule Scandoc.Students do
       where: s.student_zehut == ^"#{id}",
       preload: [:city],
       preload: [:classroom],
+      preload: [:contacts],
       preload: [comments: ^cc]
     )
     |> Repo.one()
@@ -348,5 +350,101 @@ defmodule Scandoc.Students do
   """
   def change_student_comment(%StudentComment{} = student_comment, attrs \\ %{}) do
     StudentComment.changeset(student_comment, attrs)
+  end
+
+  alias Scandoc.Students.StudentContact
+
+  @doc """
+  Returns the list of student_contacts.
+
+  ## Examples
+
+      iex> list_student_contacts()
+      [%StudentContact{}, ...]
+
+  """
+  def list_student_contacts do
+    Repo.all(StudentContact)
+  end
+
+  @doc """
+  Gets a single student_contact.
+
+  Raises `Ecto.NoResultsError` if the Student contact does not exist.
+
+  ## Examples
+
+      iex> get_student_contact!(123)
+      %StudentContact{}
+
+      iex> get_student_contact!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_student_contact!(id), do: Repo.get!(StudentContact, id)
+
+  @doc """
+  Creates a student_contact.
+
+  ## Examples
+
+      iex> create_student_contact(%{field: value})
+      {:ok, %StudentContact{}}
+
+      iex> create_student_contact(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_student_contact(attrs \\ %{}) do
+    %StudentContact{}
+    |> StudentContact.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a student_contact.
+
+  ## Examples
+
+      iex> update_student_contact(student_contact, %{field: new_value})
+      {:ok, %StudentContact{}}
+
+      iex> update_student_contact(student_contact, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_student_contact(%StudentContact{} = student_contact, attrs) do
+    student_contact
+    |> StudentContact.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a student_contact.
+
+  ## Examples
+
+      iex> delete_student_contact(student_contact)
+      {:ok, %StudentContact{}}
+
+      iex> delete_student_contact(student_contact)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_student_contact(%StudentContact{} = student_contact) do
+    Repo.delete(student_contact)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking student_contact changes.
+
+  ## Examples
+
+      iex> change_student_contact(student_contact)
+      %Ecto.Changeset{data: %StudentContact{}}
+
+  """
+  def change_student_contact(%StudentContact{} = student_contact, attrs \\ %{}) do
+    StudentContact.changeset(student_contact, attrs)
   end
 end

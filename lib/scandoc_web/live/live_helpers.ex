@@ -18,6 +18,7 @@ defmodule ScandocWeb.LiveHelpers do
   def numOfDocs(id) do
     from(s in Stddoc, where: s.ref_id == ^id) |> Repo.aggregate(:count)
   end
+
   def getDocGroup(id) do
     case Docgroup |> where(id: ^id) |> Repo.one() do
       nil -> ""

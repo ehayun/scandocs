@@ -2,7 +2,7 @@ defmodule ScandocWeb.StudentLive.Edit do
   use ScandocWeb, :live_view
 
   alias Scandoc.Students
-  alias Scandoc.Students.StudentComment
+  alias Scandoc.Students.{StudentComment, StudentContact}
   alias Scandoc.Classrooms
   alias Scandoc.Schools
   alias Scandoc.Tables
@@ -21,6 +21,7 @@ defmodule ScandocWeb.StudentLive.Edit do
     # tabnum = if socket.assigns[:tabnum], do: socket.assigns[:tabnum], else: 4
     cities = Tables.list_cities()
     genders = Tables.list_gender()
+    contact_types = Tables.list_contact_types()
 
     healthcares = Tables.list_healthcare()
 
@@ -44,6 +45,7 @@ defmodule ScandocWeb.StudentLive.Edit do
      |> assign(:student, Students.get_student!(id))
      |> assign(:tabnum, 1)
      |> assign(:school_id, school_id)
+     |> assign(:contact_types, contact_types)
      |> assign(genders: genders)
      |> assign(schools: schools)
      |> assign(cities: cities)
@@ -134,8 +136,42 @@ defmodule ScandocWeb.StudentLive.Edit do
     {:noreply, assign(socket, changeset: changeset)}
   end
 
-  def handle_event("add-contact", _params, socket) do
-    {:noreply, socket}
+  @impl true
+  def handle_event("add-contact", _student_params, socket) do
+    existing_contacts =
+      Map.get(socket.assigns.changeset.changes, :contacts, socket.assigns.student.contacts)
+
+    IO.inspect(existing_contacts)
+
+    contacts =
+      existing_contacts
+      |> Enum.concat([
+        # NOTE temp_id
+        Students.change_student_contact(%StudentContact{
+          student_id: socket.assigns.student.id,
+          temp_id: get_temp_id()
+        })
+      ])
+
+    changeset =
+      socket.assigns.changeset
+      |> Ecto.Changeset.put_assoc(:contacts, contacts)
+
+    {:noreply, assign(socket, changeset: changeset)}
+  end
+
+  def handle_event("remove-contact", %{"remove" => remove_id}, socket) do
+    contacts =
+      socket.assigns.changeset.changes.contacts
+      |> Enum.reject(fn %{data: contact} ->
+        contact.temp_id == remove_id
+      end)
+
+    changeset =
+      socket.assigns.changeset
+      |> Ecto.Changeset.put_assoc(:contacts, contacts)
+
+    {:noreply, assign(socket, changeset: changeset)}
   end
 
   def handle_event("add-commity", _params, socket) do
@@ -173,7 +209,7 @@ defmodule ScandocWeb.StudentLive.Edit do
          |> push_redirect(to: Routes.student_index_path(socket, :index))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        # IO.inspect(changeset, label: "error")
+        IO.inspect(changeset, label: "error")
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end

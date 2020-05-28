@@ -27,6 +27,15 @@ defmodule Scandoc.Tables do
     ]
   end
 
+  def list_contact_types do
+    [
+      %{code: "", title: "טל. נייד"},
+      %{code: "", title: "טל. קווי"},
+      %{code: "", title: "אימייל"},
+      %{code: "", title: "פקס"}
+    ]
+  end
+
   @doc """
   Returns the list of cities.
 

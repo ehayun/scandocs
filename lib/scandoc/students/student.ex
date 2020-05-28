@@ -3,7 +3,7 @@ defmodule Scandoc.Students.Student do
   import Ecto.Changeset
   alias Scandoc.Classrooms.Classroom
   alias Scandoc.Tables.City
-  alias Scandoc.Students.StudentComment
+  alias Scandoc.Students.{StudentContact, StudentComment}
 
   schema "students" do
     belongs_to :classroom, Classroom, references: :id
@@ -27,6 +27,7 @@ defmodule Scandoc.Students.Student do
     field :father_zehut, :string
     field :mother_zehut, :string
     has_many :comments, StudentComment, references: :id
+    has_many :contacts, StudentContact, references: :id
 
     timestamps()
   end
@@ -60,6 +61,7 @@ defmodule Scandoc.Students.Student do
     |> validate_required([:student_zehut, :first_name, :last_name, :classroom_id])
     |> unique_constraint(:student_zehut)
     |> cast_assoc(:comments)
+    |> cast_assoc(:contacts)
   end
 
   defp fullname(%{"last_name" => last_name, "first_name" => first_name}) do
