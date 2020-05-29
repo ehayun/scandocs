@@ -2,35 +2,56 @@ defmodule ScandocWeb.TeacherController do
   use ScandocWeb, :controller
 
   alias Scandoc.Schools
-  alias Scandoc.Schools.Teacher
+  alias Scandoc.Schools.{School, Teacher}
   alias Scandoc.Classrooms.Classroom
   import Ecto.Query
 
   alias Scandoc.Repo
 
-  def index(conn, %{"page" => current_page, "school" => schoolId}) do
+  def index(conn, %{"page" => current_page, "search" => search, "school" => schoolId}) do
     schoolId = String.to_integer(schoolId)
 
-    teachers_order_query = from(t in Teacher, where: t.role == "030", order_by: t.full_name)
+    teachers = Schools.list_teachers()
 
     # r = teachers_order_query |> Repo.all()
     # IO.inspect(r)
 
-    q =
+    tq =
       if schoolId > 0 do
-        Classroom |> where(school_id: ^schoolId)
+        from t in Teacher,
+          where: t.role == ^"030",
+          order_by: t.full_name,
+          join: c in Classroom,
+          on: c.teacher_id == t.id,
+          join: s in School,
+          on: s.id == c.school_id,
+          where: s.id == ^schoolId,
+          where: ilike(t.full_name, ^"%#{search}%"),
+          select: {t.id, t.zehut, t.full_name, c.id, c.classroom_name, s.id, s.school_name}
       else
-        Classroom
+        from t in Teacher,
+          where: t.role == ^"030",
+          order_by: t.full_name,
+          join: c in Classroom,
+          on: c.teacher_id == t.id,
+          join: s in School,
+          on: s.id == c.school_id,
+          where: ilike(t.full_name, ^"%#{search}%"),
+          select: {t.id, t.zehut, t.full_name, c.id, c.classroom_name, s.id, s.school_name}
       end
 
-    q = q |> preload(teacher: ^teachers_order_query) |> preload(:school)
+    # q = q |> preload(teacher: ^teachers_order_query) |> preload(:school)
 
     classrooms =
-      q
-      |> Repo.paginate(page: current_page, page_size: 15)
+      tq
+      |> Repo.paginate(page: current_page, page_size: 12)
+
+    changeset = Schools.change_teacher(%Teacher{})
 
     conn
+    |> assign(:teachers, teachers)
     |> assign(:classrooms, classrooms)
+    |> assign(:changeset, changeset)
     |> render("index.html")
   end
 
@@ -41,13 +62,19 @@ defmodule ScandocWeb.TeacherController do
         _ -> "-1"
       end
 
+    search =
+      case params do
+        %{"search" => search} -> search
+        _ -> ""
+      end
+
     p =
       case params do
         %{"page" => p} -> p
         _ -> 1
       end
 
-    index(conn, %{"page" => "#{p}", "school" => schoolId})
+    index(conn, %{"page" => "#{p}", "search" => search, "school" => schoolId})
   end
 
   def new(conn, _params) do

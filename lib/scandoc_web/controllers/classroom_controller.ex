@@ -153,4 +153,11 @@ defmodule ScandocWeb.ClassroomController do
     |> put_flash(:info, "Classroom deleted successfully.")
     |> redirect(to: Routes.classroom_path(conn, :index))
   end
+
+  def update_teacher(conn, %{"id" => id, "teacher_id" => t_id}) do
+    # IO.puts("Update: [#{id}] [#{t_id}]")
+    c = Classrooms.get_classroom!(id)
+    Classrooms.update_classroom(c, %{teacher_id: t_id})
+    send_resp(conn, 200, "updated")
+  end
 end

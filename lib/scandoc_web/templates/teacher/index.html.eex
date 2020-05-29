@@ -1,5 +1,15 @@
 <h2><i class="fas fa-chalkboard-teacher"></i>
   <%= gettext("Listing Teachers") %>
+  <span id="demo"></span>
+  <form class="float-left">
+
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <input type="text" class="form-control" name="search">
+      </div>
+      <button type="submit" class="col-sm-2  btn btn-primary"><i class="fas fa-search"></i></button>
+    </div>
+  </form>
 </h2>
 
 <table class="table table-striped">
@@ -13,22 +23,36 @@
     </tr>
   </thead>
   <tbody>
-    <%= for classroom <- @classrooms, classroom.teacher do %>
+    <%= for {t_id, t_zehut, t_full_name, c_id, c_classroom_name, s_id, s_school_name} <- @classrooms do %>
     <tr>
-      <td><%= classroom.teacher.zehut %></td>
-      <td><%= classroom.teacher.full_name %></td>
+      <td><%= t_zehut %></td>
+      <td class="hidden"><%= link t_full_name, to: Routes.teacher_path(@conn, :edit, t_id) %></td>
       <td>
-        <%= link classroom.school.school_name, to:  Routes.school_path(@conn, :show, classroom.school) %>
+
+        <form></form>
+        <select class="float-right form-control small-form-control col-md-6" id='classroom-<%= c_id %>'
+          name="teacher[teacher_id]">
+          <%= for t <- @teachers do %>
+          <option <%= if t.id == t_id, do: "selected" %> value="<%= t.id %>"> <%= t.full_name %> </option>
+          <% end %>
+        </select>
+        <button onclick='changeTeacher("<%= c_id %>")' class="btn btn-info float-right ml-2 btn-sm">Change</button>
+        </form>
+
+      </td>
+      <td>
+        <%= link s_school_name, to:  Routes.school_path(@conn, :show, s_id) %>
         /
-        <%= link classroom.classroom_name , to:  Routes.classroom_path(@conn, :show, classroom)%>
+        <%= link c_classroom_name , to:  Routes.classroom_path(@conn, :show, c_id)%>
       </td>
 
       <td>
-        <span class="hidden"><%= link "Show", to: Routes.teacher_path(@conn, :show, classroom.teacher) %></span>
-        <span class="hidden"><%= link "Edit", to: Routes.teacher_path(@conn, :edit, classroom.teacher) %></span>
-        <span class="hidden"><%= link "Delete", to: Routes.teacher_path(@conn, :delete, classroom.teacher), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span class="hidden"><%= link "Show", to: Routes.teacher_path(@conn, :show, t_id) %></span>
+        <span class="hidden"><%= link "Edit", to: Routes.teacher_path(@conn, :edit, t_id) %></span>
+        <span
+          class="hidden"><%= link "Delete", to: Routes.teacher_path(@conn, :delete, t_id), method: :delete, data: [confirm: "Are you sure?"] %></span>
         <%= if ScandocWeb.UserAuth.isAdmin(@current_user) do %>
-        <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@conn, :loginas, classroom.teacher) %>
+        <%= link raw("<i class='fas fa-sign-in-alt'></i>"), to: Routes.user_session_path(@conn, :loginas, t_id) %>
         <% end %>
 
       </td>
@@ -39,3 +63,16 @@
 
 
 <%= paginate @conn, @classrooms, &ScandocWeb.Router.Helpers.teacher_path/3, [:index] %>
+
+<script>
+  function changeTeacher(class_id) {
+    id = "classroom-" + class_id
+    console.log(id)
+    sel = document.getElementById(id)
+    teacher = sel.value
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () { };
+    xhr.open('GET', 'classroom/set_teacher/' + class_id + '/' + teacher);
+    xhr.send()
+  }
+</script>

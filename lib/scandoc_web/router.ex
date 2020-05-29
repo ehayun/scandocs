@@ -190,5 +190,6 @@ defmodule ScandocWeb.Router do
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
+    get "/classroom/set_teacher/:id/:teacher_id", ClassroomController, :update_teacher
   end
 end

@@ -8,6 +8,7 @@
 </header>
 
 
+
 <ul class="nav nav-tabs">
   <li class="nav-item m-1 p-1">
     <a phx-click="setTab" phx-value-tabid="1" class='nav-link <%= if @tabnum == 1, do: "active" %>' data-toggle="tab"
@@ -29,7 +30,8 @@
     <a phx-click="setTab" phx-value-tabid="5" class='nav-link <%= if @tabnum == 5, do: "active" %>' data-toggle="tab"
       href="#menuComments"><%= gettext("Comments") %></a>
   </li>
-  <span class="float-left ml-4"><%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary float-left mr-4" %></span>
+  <span
+    class="float-left ml-4"><%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary float-left mr-4" %></span>
 </ul>
 <!-- Tab panes -->
 <div class="tab-content blueBorder p-2">
@@ -160,7 +162,7 @@
         <div class="checkbox">
           <label>
             <%= if is_nil(scnt.data.temp_id) do %>
-            <%= checkbox scnt, :delete %> 
+            <%= checkbox scnt, :delete %>
             <%= hidden_input scnt, :student_id %>
             <% else %>
             <%= hidden_input scnt, :temp_id %>
@@ -195,15 +197,17 @@
     </div>
 
   </div>
+
   <div id="menuCommities" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>">
-    <a href="#" phx-click="add-commity" class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
+    <%= Phoenix.View.render(ScandocWeb.PageLiveView, "student_commities.html", assigns) %>
   </div>
+
+
   <div id="menuWellfareCommities" class="container tab-pane  <%= if @tabnum == 4, do: "active" %>">
     <a href="#" phx-click="add-wellfare" class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
   </div>
 
   <div id="menuComments" class="container tab-pane  <%= if @tabnum == 5, do: "active" %>">
-
     <a href="#" phx-click="add-comment" class="btn btn-info mb-1"><%= gettext("Add new comment")%></a>
     <%= inputs_for f, :comments, fn sc -> %>
     <div class="mb-2 border-bottom">
@@ -243,6 +247,7 @@
     </div>
     <% end %>
   </div>
+
 </div>
 </div>
 

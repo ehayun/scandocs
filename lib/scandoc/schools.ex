@@ -226,7 +226,7 @@ defmodule Scandoc.Schools do
 
   """
   def list_teachers do
-    Repo.all(Teacher |> where(role: "030"))
+    Repo.all(Teacher |> where(role: "030") |> order_by(:full_name))
   end
 
   @doc """

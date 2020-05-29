@@ -9,7 +9,7 @@
       </div>
       <button type="submit" class="col-sm-2  btn btn-primary"><i class="fas fa-search"></i></button>
     </div>
-
+    </form>
 </h2>
 
 <table class="table table-striped">
