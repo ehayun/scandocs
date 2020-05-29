@@ -41,13 +41,13 @@
         </td>
         
         <td>
-          <span class="hidden">
+          <span class="x hidden">
             <%= live_redirect "Show" , to: Routes.city_show_path(@socket, :show, city) %>
           </span>
-          <span class="hidden">
+          <span class="xhidden">
             <%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.city_index_path(@socket, :edit, city) %>
           </span>
-          <span class="hidden">
+          <span class="xhidden">
             <%= link "Delete" , to: "#" , phx_click: "delete" , phx_value_id: city.id, data: [confirm: gettext("Are you sure?")] %>
           </span>
         </td>
