@@ -1,0 +1,32 @@
+<h1>Show Transportation</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.TransportationLive.FormComponent,
+    id: @transportation.id,
+    title: @page_title,
+    action: @live_action,
+    transportation: @transportation,
+    return_to: Routes.transportation_show_path(@socket, :show, @transportation) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Company name:</strong>
+    <%= @transportation.company_name %>
+  </li>
+
+  <li>
+    <strong>Company address:</strong>
+    <%= @transportation.company_address %>
+  </li>
+
+  <li>
+    <strong>Remarks:</strong>
+    <%= @transportation.remarks %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.transportation_show_path(@socket, :edit, @transportation), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.transportation_index_path(@socket, :index) %></span>

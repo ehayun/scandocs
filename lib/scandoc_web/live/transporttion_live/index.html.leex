@@ -1,0 +1,76 @@
+<h2>
+  <%= gettext("Listing Tansportations") %>
+    <span class="float-left">
+      <%= live_patch gettext("Add New"), to: Routes.transportation_index_path(@socket, :new), class: "btn btn-primary" %>
+    </span>
+    <span class="float-left mr-2 m-2">
+      <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
+        <input class="form-control" type="text" value='<%= @search %>' name="search" placeholder='<%= gettext("Search")%>'>
+      </form>
+    </span>
+</h2>
+
+
+
+
+<%= if @live_action in [:new, :edit] do %>
+<%= live_modal @socket, ScandocWeb.TransportationLive.FormComponent, id: @transportation.id || :new, title: @page_title, action: @live_action, transportation: @transportation, return_to: Routes.transportation_index_path(@socket, :index) %>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+       <th>
+        <%= gettext("Company name") %>
+      </th>
+       <th>
+        <%= gettext("Company address") %>
+      </th>
+       <th>
+        <%= gettext("Remarks") %>
+      </th>
+      
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="transportations">
+    <%= for transportation <- @transportations do %>
+      <tr id="transportation-<%= transportation.id %>">
+         <td>
+          <%= transportation.company_name %>
+        </td>
+         <td>
+          <%= transportation.company_address %>
+        </td>
+         <td>
+          <%= transportation.remarks %>
+        </td>
+        
+        <td>
+          <span class="hidden">
+            <%= live_redirect "Show" , to: Routes.transportation_show_path(@socket, :show, transportation) %>
+          </span>
+          <span class="xhidden">
+            <%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.transportation_index_path(@socket, :edit, transportation) %>
+          </span>
+          <span class="xhidden">
+            <%= link "Delete" , to: "#" , phx_click: "delete" , phx_value_id: transportation.id, data: [confirm: gettext("Are you sure?")] %>
+          </span>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
+
+<nav class="p-2" aria-label="Pagination">
+  <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
+    <li phx-click="nav" phx-value-page="<%= (@transportations.page_number - 1)  %>" class="page-item "><a class="page-link" href="#"><%= gettext("Previous") %></a></li>
+    <li class="m-1"><%= gettext("Page") %></li>
+    <li class="m-1"><%= @transportations.page_number %></li>
+    <li class="m-1"><%= gettext("Out of") %></li>
+    <li class="m-1"><%= @transportations.total_pages %></li>
+    <li phx-click="nav" phx-value-page="<%= (@transportations.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
+  </ul>
+</nav>
+

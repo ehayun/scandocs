@@ -182,6 +182,20 @@ defmodule ScandocWeb.Router do
 
     live "/cities/:id", CityLive.Show, :show
     live "/cities/:id/show/edit", CityLive.Show, :edit
+
+    live "/districts", DistrictLive.Index, :index
+    live "/districts/new", DistrictLive.Index, :new
+    live "/districts/:id/edit", DistrictLive.Index, :edit
+
+    live "/districts/:id", DistrictLive.Show, :show
+    live "/districts/:id/show/edit", DistrictLive.Show, :edit
+
+    live "/transportations", TransportationLive.Index, :index
+    live "/transportations/new", TransportationLive.Index, :new
+    live "/transportations/:id/edit", TransportationLive.Index, :edit
+
+    live "/transportations/:id", TransportationLive.Show, :show
+    live "/transportations/:id/show/edit", TransportationLive.Show, :edit
   end
 
   scope "/", ScandocWeb do

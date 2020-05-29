@@ -41,6 +41,6 @@ defmodule ScandocWeb.CityLive.Index do
   end
 
   defp fetch_cities do
-    Tables.list_cities(17)
+    Tables.list_cities(15)
   end
 end

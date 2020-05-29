@@ -1,0 +1,64 @@
+<h2>
+  <%= gettext("Listing Districts") %>
+    <span class="float-left">
+      <%= live_patch gettext("Add New"), to: Routes.district_index_path(@socket, :new), class: "btn btn-primary" %>
+    </span>
+    <span class="float-left mr-2 m-2">
+      <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
+        <input class="form-control" type="text" value='<%= @search %>' name="search" placeholder='<%= gettext("Search")%>'>
+      </form>
+    </span>
+</h2>
+
+
+
+
+<%= if @live_action in [:new, :edit] do %>
+<%= live_modal @socket, ScandocWeb.DistrictLive.FormComponent, id: @district.id || :new, title: @page_title, action: @live_action, district: @district, return_to: Routes.district_index_path(@socket, :index) %>
+<% end %>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+       <th>
+        <%= gettext("District name") %>
+      </th>
+      
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="districts">
+    <%= for district <- @districts do %>
+      <tr id="district-<%= district.id %>">
+         <td>
+          <%= district.district_name %>
+        </td>
+        
+        <td>
+          <span class="hidden">
+            <%= live_redirect "Show" , to: Routes.district_show_path(@socket, :show, district) %>
+          </span>
+          <span class="xhidden">
+            <%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.district_index_path(@socket, :edit, district) %>
+          </span>
+          <span class="hidden">
+            <%= link "Delete" , to: "#" , phx_click: "delete" , phx_value_id: district.id, data: [confirm: gettext("Are you sure?")] %>
+          </span>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
+
+<nav class="p-2" aria-label="Pagination">
+  <ul class="pagination mb-0 flex-wrap" data-config-id="pagination">
+    <li phx-click="nav" phx-value-page="<%= (@districts.page_number - 1)  %>" class="page-item "><a class="page-link" href="#"><%= gettext("Previous") %></a></li>
+    <li class="m-1"><%= gettext("Page") %></li>
+    <li class="m-1"><%= @districts.page_number %></li>
+    <li class="m-1"><%= gettext("Out of") %></li>
+    <li class="m-1"><%= @districts.total_pages %></li>
+    <li phx-click="nav" phx-value-page="<%= (@districts.page_number + 1) %>" class="page-item"><a class="page-link" href="#"><%= gettext("Next") %></a></li>
+  </ul>
+</nav>
+

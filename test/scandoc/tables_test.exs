@@ -63,4 +63,140 @@ defmodule Scandoc.TablesTest do
       assert %Ecto.Changeset{} = Tables.change_city(city)
     end
   end
+
+  describe "districts" do
+    alias Scandoc.Tables.District
+
+    @valid_attrs %{district_name: "some district_name"}
+    @update_attrs %{district_name: "some updated district_name"}
+    @invalid_attrs %{district_name: nil}
+
+    def district_fixture(attrs \\ %{}) do
+      {:ok, district} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Tables.create_district()
+
+      district
+    end
+
+    test "list_districts/0 returns all districts" do
+      district = district_fixture()
+      assert Tables.list_districts() == [district]
+    end
+
+    test "get_district!/1 returns the district with given id" do
+      district = district_fixture()
+      assert Tables.get_district!(district.id) == district
+    end
+
+    test "create_district/1 with valid data creates a district" do
+      assert {:ok, %District{} = district} = Tables.create_district(@valid_attrs)
+      assert district.district_name == "some district_name"
+    end
+
+    test "create_district/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Tables.create_district(@invalid_attrs)
+    end
+
+    test "update_district/2 with valid data updates the district" do
+      district = district_fixture()
+      assert {:ok, %District{} = district} = Tables.update_district(district, @update_attrs)
+      assert district.district_name == "some updated district_name"
+    end
+
+    test "update_district/2 with invalid data returns error changeset" do
+      district = district_fixture()
+      assert {:error, %Ecto.Changeset{}} = Tables.update_district(district, @invalid_attrs)
+      assert district == Tables.get_district!(district.id)
+    end
+
+    test "delete_district/1 deletes the district" do
+      district = district_fixture()
+      assert {:ok, %District{}} = Tables.delete_district(district)
+      assert_raise Ecto.NoResultsError, fn -> Tables.get_district!(district.id) end
+    end
+
+    test "change_district/1 returns a district changeset" do
+      district = district_fixture()
+      assert %Ecto.Changeset{} = Tables.change_district(district)
+    end
+  end
+
+  describe "stransportations" do
+    alias Scandoc.Tables.Transporttion
+
+    @valid_attrs %{
+      company_address: "some company_address",
+      company_name: "some company_name",
+      remarks: "some remarks"
+    }
+    @update_attrs %{
+      company_address: "some updated company_address",
+      company_name: "some updated company_name",
+      remarks: "some updated remarks"
+    }
+    @invalid_attrs %{company_address: nil, company_name: nil, remarks: nil}
+
+    def transporttion_fixture(attrs \\ %{}) do
+      {:ok, transporttion} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Tables.create_transporttion()
+
+      transporttion
+    end
+
+    test "list_stransportations/0 returns all stransportations" do
+      transporttion = transporttion_fixture()
+      assert Tables.list_stransportations() == [transporttion]
+    end
+
+    test "get_transporttion!/1 returns the transporttion with given id" do
+      transporttion = transporttion_fixture()
+      assert Tables.get_transporttion!(transporttion.id) == transporttion
+    end
+
+    test "create_transporttion/1 with valid data creates a transporttion" do
+      assert {:ok, %Transporttion{} = transporttion} = Tables.create_transporttion(@valid_attrs)
+      assert transporttion.company_address == "some company_address"
+      assert transporttion.company_name == "some company_name"
+      assert transporttion.remarks == "some remarks"
+    end
+
+    test "create_transporttion/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Tables.create_transporttion(@invalid_attrs)
+    end
+
+    test "update_transporttion/2 with valid data updates the transporttion" do
+      transporttion = transporttion_fixture()
+
+      assert {:ok, %Transporttion{} = transporttion} =
+               Tables.update_transporttion(transporttion, @update_attrs)
+
+      assert transporttion.company_address == "some updated company_address"
+      assert transporttion.company_name == "some updated company_name"
+      assert transporttion.remarks == "some updated remarks"
+    end
+
+    test "update_transporttion/2 with invalid data returns error changeset" do
+      transporttion = transporttion_fixture()
+
+      assert {:error, %Ecto.Changeset{}} =
+               Tables.update_transporttion(transporttion, @invalid_attrs)
+
+      assert transporttion == Tables.get_transporttion!(transporttion.id)
+    end
+
+    test "delete_transporttion/1 deletes the transporttion" do
+      transporttion = transporttion_fixture()
+      assert {:ok, %Transporttion{}} = Tables.delete_transporttion(transporttion)
+      assert_raise Ecto.NoResultsError, fn -> Tables.get_transporttion!(transporttion.id) end
+    end
+
+    test "change_transporttion/1 returns a transporttion changeset" do
+      transporttion = transporttion_fixture()
+      assert %Ecto.Changeset{} = Tables.change_transporttion(transporttion)
+    end
+  end
 end

@@ -1,0 +1,22 @@
+<h1>Show District</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ScandocWeb.DistrictLive.FormComponent,
+    id: @district.id,
+    title: @page_title,
+    action: @live_action,
+    district: @district,
+    return_to: Routes.district_show_path(@socket, :show, @district) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>District name:</strong>
+    <%= @district.district_name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.district_show_path(@socket, :edit, @district), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.district_index_path(@socket, :index) %></span>
