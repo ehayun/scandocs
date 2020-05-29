@@ -36,7 +36,7 @@
           <option <%= if t.id == t_id, do: "selected" %> value="<%= t.id %>"> <%= t.full_name %> </option>
           <% end %>
         </select>
-        <button onclick='changeTeacher("<%= c_id %>")' class="btn btn-info float-right ml-2 btn-sm">Change</button>
+        <button onclick='changeTeacher("<%= c_id %>")' class="btn btn-info float-right ml-2 btn-sm"><%= gettext("Change") %></button>
         </form>
 
       </td>
