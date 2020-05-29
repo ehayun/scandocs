@@ -16,31 +16,29 @@ defmodule ScandocWeb.TeacherController do
     # r = teachers_order_query |> Repo.all()
     # IO.inspect(r)
 
+    q =
+      from t in Teacher,
+        where: t.role == ^"030",
+        order_by: t.full_name,
+        where: ilike(t.full_name, ^"%#{search}%")
+
     tq =
       if schoolId > 0 do
-        from t in Teacher,
-          where: t.role == ^"030",
-          order_by: t.full_name,
+        from t in q,
           join: c in Classroom,
           on: c.teacher_id == t.id,
           join: s in School,
           on: s.id == c.school_id,
           where: s.id == ^schoolId,
-          where: ilike(t.full_name, ^"%#{search}%"),
           select: {t.id, t.zehut, t.full_name, c.id, c.classroom_name, s.id, s.school_name}
       else
-        from t in Teacher,
-          where: t.role == ^"030",
-          order_by: t.full_name,
+        from t in q,
           join: c in Classroom,
           on: c.teacher_id == t.id,
           join: s in School,
           on: s.id == c.school_id,
-          where: ilike(t.full_name, ^"%#{search}%"),
           select: {t.id, t.zehut, t.full_name, c.id, c.classroom_name, s.id, s.school_name}
       end
-
-    # q = q |> preload(teacher: ^teachers_order_query) |> preload(:school)
 
     classrooms =
       tq
