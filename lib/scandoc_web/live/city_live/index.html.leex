@@ -48,7 +48,7 @@
             <%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.city_index_path(@socket, :edit, city) %>
           </span>
           <span class="xhidden">
-            <%= link "Delete" , to: "#" , phx_click: "delete" , phx_value_id: city.id, data: [confirm: gettext("Are you sure?")] %>
+            <%= link raw("<i class='fas fa-trash-alt'></i>") , to: "#" , phx_click: "delete" , phx_value_id: city.id, data: [confirm: gettext("Are you sure?")] %>
           </span>
         </td>
       </tr>

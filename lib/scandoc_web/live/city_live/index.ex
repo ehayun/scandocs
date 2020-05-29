@@ -6,7 +6,7 @@ defmodule ScandocWeb.CityLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, search: "", cities: fetch_cities())}
+    {:ok, assign(socket, search: "", cities: fetch_cities(socket))}
   end
 
   @impl true
@@ -37,10 +37,23 @@ defmodule ScandocWeb.CityLive.Index do
     city = Tables.get_city!(id)
     {:ok, _} = Tables.delete_city(city)
 
-    {:noreply, assign(socket, :cities, fetch_cities())}
+    {:noreply, assign(socket, :cities, fetch_cities(socket))}
+  end
+  @impl true
+  def handle_event("search", %{"search" => search}, socket) do
+    socket = assign(socket, search: search)
+    {:noreply, assign(socket, search: search, cities: fetch_cities(socket))}
   end
 
-  defp fetch_cities do
-    Tables.list_cities(15)
+  @impl true
+  def handle_event("nav", %{"page" => page}, socket) do
+    socket = assign(socket, current_page: String.to_integer(page))
+    {:noreply, assign(socket, :cities, fetch_cities(socket))}
+  end
+
+  defp fetch_cities(socket) do
+    current_page = if socket.assigns[:current_page], do: socket.assigns[:current_page] ,else: 1
+    search = if socket.assigns[:search], do: socket.assigns[:search] ,else: ""
+    Tables.list_cities(15, current_page, search)
   end
 end

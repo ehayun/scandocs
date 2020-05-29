@@ -45,8 +45,11 @@ defmodule Scandoc.Tables do
       [%City{}, ...]
 
   """
-  def list_cities(limit \\ 10000) do
-    City |> order_by(:title) |> Repo.paginate(page_size: limit)
+  def list_cities(limit \\ 10000, page \\ 1, search \\ "") do
+    cq = from(c in City, where: ilike(c.title, ^"%#{search}%"), order_by: :title)
+
+    cq
+    |> Repo.paginate(page: page, page_size: limit)
   end
 
   @doc """
@@ -142,7 +145,9 @@ defmodule Scandoc.Tables do
 
   """
   def list_districts(limit \\ 10000) do
-    District |> order_by(:district_name) |> Repo.paginate(page_size: limit)
+    District
+    |> order_by(:district_name)
+    |> Repo.paginate(page_size: limit)
   end
 
   @doc """
@@ -238,7 +243,9 @@ defmodule Scandoc.Tables do
 
   """
   def list_transportations(limit \\ 15) do
-    Transportation |> order_by(:company_name) |> Repo.paginate(page_size: limit)
+    Transportation
+    |> order_by(:company_name)
+    |> Repo.paginate(page_size: limit)
   end
 
   @doc """
