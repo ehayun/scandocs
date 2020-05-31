@@ -34,8 +34,6 @@ defmodule Scandoc.Students.Student do
 
   @doc false
   def changeset(student, attrs) do
-    attrs = Map.merge(attrs, fullname(attrs))
-
     student
     |> cast(attrs, [
       :student_zehut,
@@ -58,21 +56,17 @@ defmodule Scandoc.Students.Student do
       :father_zehut,
       :mother_zehut
     ])
-    |> validate_required([:student_zehut, :first_name, :last_name, :classroom_id])
+    |> validate_required([:student_zehut, :first_name, :last_name, :classroom_id, :full_name])
     |> unique_constraint(:student_zehut)
     |> cast_assoc(:comments)
+    |> set_fullname()
     |> cast_assoc(:contacts)
   end
 
-  defp fullname(%{"last_name" => last_name, "first_name" => first_name}) do
-    %{"full_name" => "#{last_name} #{first_name}"}
-  end
-
-  defp fullname(%{last_name: last_name, first_name: first_name}) do
-    %{full_name: "#{last_name} #{first_name}"}
-  end
-
-  defp fullname(_params) do
-    %{}
+  def set_fullname(changeset) do
+    first_name = get_field(changeset, :first_name)
+    last_name = get_field(changeset, :last_name)
+    fullname = "#{last_name} #{first_name}"
+    put_change(changeset, :full_name, fullname)
   end
 end
