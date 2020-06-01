@@ -1,7 +1,10 @@
-<h1>Show Transportation</h1>
+<header>
+  <i class="fas fa-bus"></i>
+  <%= gettext("Transportation") %> : <%= @transportation.company_name %>
+</header>
 
 <%= if @live_action in [:edit] do %>
-  <%= live_modal @socket, ScandocWeb.TransportationLive.FormComponent,
+<%= live_modal @socket, ScandocWeb.TransportationLive.FormComponent,
     id: @transportation.id,
     title: @page_title,
     action: @live_action,
@@ -9,24 +12,57 @@
     return_to: Routes.transportation_show_path(@socket, :show, @transportation) %>
 <% end %>
 
-<ul>
+<ul style="list-style: none;">
 
   <li>
-    <strong>Company name:</strong>
+    <strong><%= gettext("Company name") %>:</strong>
     <%= @transportation.company_name %>
   </li>
 
   <li>
-    <strong>Company address:</strong>
+    <strong><%= gettext("Company address") %>:</strong>
     <%= @transportation.company_address %>
   </li>
 
   <li>
-    <strong>Remarks:</strong>
+    <strong><%= gettext("Remarks") %>:</strong>
     <%= @transportation.remarks %>
   </li>
 
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.transportation_show_path(@socket, :edit, @transportation), class: "button" %></span>
-<span><%= live_redirect "Back", to: Routes.transportation_index_path(@socket, :index) %></span>
+
+<table class="table table-striped">
+  <thead class="thead-dark">
+    <tr>
+      <th>
+        <%= gettext("Contact name") %>
+      </th>
+      <th>
+        <%= gettext("Contact value") %>
+      </th>
+
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for c <- @transportation.contacts do %>
+    <tr>
+      <td>
+        <%= c.contact_name %>
+      </td>
+      <td>
+        <%= c.contact_value %>
+      </td>
+      <td>
+        <%= c.remark %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<span><%= live_patch gettext("Edit"), to: Routes.transportation_show_path(@socket, :edit, @transportation), class: "btn btn-primary" %></span>
+<span><%= live_redirect gettext("Back"), to: Routes.transportation_index_path(@socket, :index), class: "btn btn-link" %></span>

@@ -1,4 +1,5 @@
 <h2>
+  <i class="fas fa-city"></i>
   <%= gettext("Listing Cities") %>
     <span class="float-left">
       <%= live_patch gettext("Add New"), to: Routes.city_index_path(@socket, :new), class: "btn btn-primary" %>
@@ -26,7 +27,9 @@
        <th>
         <%= gettext("Title") %>
       </th>
-      
+      <th>
+        <%= gettext("District") %>
+      </th>
       <th></th>
     </tr>
   </thead>
@@ -38,6 +41,11 @@
         </td>
          <td>
           <%= city.title %>
+        </td>
+        <td> 
+          <%= if city.district do %>
+          <%= city.district.district_name %>
+          <% end %>
         </td>
         
         <td>

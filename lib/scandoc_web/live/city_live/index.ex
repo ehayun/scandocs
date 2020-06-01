@@ -39,6 +39,7 @@ defmodule ScandocWeb.CityLive.Index do
 
     {:noreply, assign(socket, :cities, fetch_cities(socket))}
   end
+
   @impl true
   def handle_event("search", %{"search" => search}, socket) do
     socket = assign(socket, search: search)
@@ -52,8 +53,8 @@ defmodule ScandocWeb.CityLive.Index do
   end
 
   defp fetch_cities(socket) do
-    current_page = if socket.assigns[:current_page], do: socket.assigns[:current_page] ,else: 1
-    search = if socket.assigns[:search], do: socket.assigns[:search] ,else: ""
+    current_page = if socket.assigns[:current_page], do: socket.assigns[:current_page], else: 1
+    search = if socket.assigns[:search], do: socket.assigns[:search], else: ""
     Tables.list_cities(15, current_page, search)
   end
 end

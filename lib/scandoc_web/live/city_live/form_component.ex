@@ -5,11 +5,15 @@ defmodule ScandocWeb.CityLive.FormComponent do
 
   @impl true
   def update(%{city: city} = assigns, socket) do
+    districts = Tables.list_districts()
+    districts = List.insert_at(districts, 0, %{id: -1, district_name: gettext("Select district")})
+
     changeset = Tables.change_city(city)
 
     {:ok,
      socket
      |> assign(assigns)
+     |> assign(districts: districts)
      |> assign(:changeset, changeset)}
   end
 
@@ -32,7 +36,7 @@ defmodule ScandocWeb.CityLive.FormComponent do
       {:ok, _city} ->
         {:noreply,
          socket
-         |> put_flash(:info, gettext("City updated successfully"))
+         #  |> put_flash(:info, gettext("City updated successfully"))
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -45,7 +49,7 @@ defmodule ScandocWeb.CityLive.FormComponent do
       {:ok, _city} ->
         {:noreply,
          socket
-         |> put_flash(:info, gettext("City created successfully"))
+         #  |> put_flash(:info, gettext("City created successfully"))
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

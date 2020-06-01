@@ -26,6 +26,7 @@
     <a phx-click="setTab" phx-value-tabid="4" class='nav-link <%= if @tabnum == 4, do: "active" %>' data-toggle="tab"
       href="#menuWellfareCommities"><%= gettext("Welfare committees") %></a>
   </li>
+
   <li class="nav-item m-1 p-1">
     <a phx-click="setTab" phx-value-tabid="5" class='nav-link <%= if @tabnum == 5, do: "active" %>' data-toggle="tab"
       href="#menuComments"><%= gettext("Comments") %></a>
@@ -43,11 +44,11 @@
           <%= error_tag f, :first_name %>
         </div>
         <div class="form-group">
-          <%= text_input f, :student_zehut, class: "form-control col-md-6", placeholder: gettext("Zehut") %>
-          <%= error_tag f, :student_zehut %>
-        </div>
-        <div class="form-group">
           <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+              <%= text_input f, :student_zehut, class: "form-control col-md-8", placeholder: gettext("Zehut") %>
+              <%= error_tag f, :student_zehut %>
+            </li>
             <li class="list-group-item">
               <%= Phoenix.HTML.Form.select(f, :gender, Enum.map(@genders, &{&1.title, &1.code}), class: "form-control col-sm-10") %>
             </li>
@@ -55,15 +56,34 @@
           </ul>
         </div>
         <div class="form-group">
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item col-sm-4">
+              <label><%= gettext("Transportation name")%></label>
+            </li>
+            <li class="list-group-item  col-sm-9">
+              <%= Phoenix.HTML.Form.select(f, :transportation_id, Enum.map(@transportations, &{&1.company_name, &1.id}), class: "form-control") %>
+            </li>
+          </ul>
+        </div>
+
+        <div class="form-group">
           <%= text_input f, :address, class: "form-control", placeholder: gettext("Address") %>
         </div>
         <div class="form-group">
           <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "form-control col-sm-12") %>
         </div>
+
         <div class="form-group">
-          <label><%= gettext("Healthcare name")%></label>
-          <%= Phoenix.HTML.Form.select(f, :healthcare, Enum.map(@healthcares, &{&1.name, &1.name}), class: "form-control col-sm-12") %>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item col-sm-4">
+              <label><%= gettext("Healthcare name")%></label>
+            </li>
+            <li class="list-group-item  col-sm-9">
+              <%= Phoenix.HTML.Form.select(f, :healthcare, Enum.map(@healthcares, &{&1.name, &1.name}), class: "form-control col-sm-12") %>
+            </li>
+          </ul>
         </div>
+
         <div class="checkbox">
           <label>
             <%= checkbox f, :has_picture %> <%= gettext("Has picture?") %>
@@ -89,8 +109,14 @@
           <%= Phoenix.HTML.Form.select(f, :classroom_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "form-control col-sm-12") %>
         </div>
         <div class="form-group">
-          <label><%= gettext("Sending Authority")%></label>
-          <%= Phoenix.HTML.Form.select(f, :sending_authority_id, Enum.map(@cities, &{&1.title, &1.id}), class: "form-control col-sm-12") %>
+          <ul class="list-group list-group-horizontal">
+            <li class="list-group-item col-sm-4">
+              <label><%= gettext("Sending Authority")%></label>
+            </li>
+            <li class="list-group-item  col-sm-9">
+              <%= Phoenix.HTML.Form.select(f, :sending_authority_id, Enum.map(@cities, &{&1.title, &1.id}), class: "form-control") %>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -206,6 +232,7 @@
   <div id="menuWellfareCommities" class="container tab-pane  <%= if @tabnum == 4, do: "active" %>">
     <a href="#" phx-click="add-wellfare" class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
   </div>
+
 
   <div id="menuComments" class="container tab-pane  <%= if @tabnum == 5, do: "active" %>">
     <a href="#" phx-click="add-comment" class="btn btn-info mb-1"><%= gettext("Add new comment")%></a>

@@ -1,4 +1,6 @@
 <h2>
+  <i class="fas fa-bus"></i> 
+
   <%= gettext("Listing Tansportations") %>
     <span class="float-left">
       <%= live_patch gettext("Add New"), to: Routes.transportation_index_path(@socket, :new), class: "btn btn-primary" %>
@@ -26,9 +28,7 @@
        <th>
         <%= gettext("Company address") %>
       </th>
-       <th>
-        <%= gettext("Remarks") %>
-      </th>
+       
       
       <th></th>
     </tr>
@@ -42,19 +42,17 @@
          <td>
           <%= transportation.company_address %>
         </td>
-         <td>
-          <%= transportation.remarks %>
-        </td>
+         
         
         <td>
-          <span class="hidden">
-            <%= live_redirect "Show" , to: Routes.transportation_show_path(@socket, :show, transportation) %>
+          <span class="hiddenx">
+            <%= live_redirect raw("<i class='far fa-eye'></i>") , to: Routes.transportation_show_path(@socket, :show, transportation) %>
           </span>
           <span class="xhidden">
             <%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.transportation_index_path(@socket, :edit, transportation) %>
           </span>
           <span class="xhidden">
-            <%= link "Delete" , to: "#" , phx_click: "delete" , phx_value_id: transportation.id, data: [confirm: gettext("Are you sure?")] %>
+            <%= link raw("<i class='fas fa-trash'></i>") , to: "#" , phx_click: "delete" , phx_value_id: transportation.id, data: [confirm: gettext("Are you sure?")] %>
           </span>
         </td>
       </tr>

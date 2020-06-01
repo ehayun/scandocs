@@ -70,7 +70,7 @@
         <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
 
           <%= link gettext("Districts"), to: Routes.district_index_path(@conn, :index), class: "dropdown-item" %>
-          <%= link gettext("Cities"), to: Routes.city_index_path(@conn, :index), class: "dropdown-item" %>
+          <%= link gettext("Cities") , to: Routes.city_index_path(@conn, :index), class: "dropdown-item" %>
           <%= link gettext("Transportations"), to: Routes.transportation_index_path(@conn, :index), class: "dropdown-item" %>
         </div>
         

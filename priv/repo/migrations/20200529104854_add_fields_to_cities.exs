@@ -3,10 +3,8 @@ defmodule Scandoc.Repo.Migrations.AddFieldsToCities do
   alias Scandoc.Tables
 
   def change do
-    Tables.create_district(%{district_name: "לא מוגדר"})
-
     alter table(:cities) do
-      add :district, references(:districts, on_delete: :nothing), null: false, default: 1
+      add :district_id, references(:districts, on_delete: :nothing)
     end
   end
 end

@@ -6,7 +6,7 @@ defmodule ScandocWeb.TransportationLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, search: "", transportations: fetch_transportations())}
+    {:ok, assign(socket, tabnum: 1, search: "", transportations: fetch_transportations())}
   end
 
   @impl true
@@ -30,6 +30,13 @@ defmodule ScandocWeb.TransportationLive.Index do
     socket
     |> assign(:page_title, gettext("Listing Tansportations"))
     |> assign(:transportation, nil)
+  end
+
+  @impl true
+
+  def handle_event("search", %{"search" => search}, socket) do
+    socket = assign(socket, search: search)
+    {:noreply, socket}
   end
 
   @impl true

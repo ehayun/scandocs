@@ -49,6 +49,7 @@ defmodule Scandoc.Tables do
     cq = from(c in City, where: ilike(c.title, ^"%#{search}%"), order_by: :title)
 
     cq
+    |> preload(:district)
     |> Repo.paginate(page: page, page_size: limit)
   end
 
@@ -144,10 +145,10 @@ defmodule Scandoc.Tables do
       [%District{}, ...]
 
   """
-  def list_districts(limit \\ 10000) do
+  def list_districts() do
     District
     |> order_by(:district_name)
-    |> Repo.paginate(page_size: limit)
+    |> Repo.all()
   end
 
   @doc """
@@ -248,6 +249,10 @@ defmodule Scandoc.Tables do
     |> Repo.paginate(page_size: limit)
   end
 
+  def list_all_transportations() do
+    Transportation |> order_by(:company_name) |> Repo.all()
+  end
+
   @doc """
   Gets a single transportation.
 
@@ -262,7 +267,8 @@ defmodule Scandoc.Tables do
       ** (Ecto.NoResultsError)
 
   """
-  def get_transportation!(id), do: Repo.get!(Transportation, id)
+  def get_transportation!(id),
+    do: Transportation |> where(id: ^id) |> preload(:contacts) |> Repo.one()
 
   @doc """
   Creates a transportation.
@@ -327,5 +333,11 @@ defmodule Scandoc.Tables do
   """
   def change_transportation(%Transportation{} = transportation, attrs \\ %{}) do
     Transportation.changeset(transportation, attrs)
+  end
+
+  alias Scandoc.Transportation.TransportationContact
+
+  def change_transportation_contact(%TransportationContact{} = transportation, attrs \\ %{}) do
+    TransportationContact.changeset(transportation, attrs)
   end
 end

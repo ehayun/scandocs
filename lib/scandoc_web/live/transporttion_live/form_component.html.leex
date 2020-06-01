@@ -2,19 +2,105 @@
   <%= @title %>
 </h2>
 
-<%= f=form_for @changeset, "#" , id: "transportation-form" , phx_target: @myself, phx_change: "validate" , phx_submit: "save" %>
+<%= f=form_for @changeset, "#" , phx_target: @myself, id: "transportation-form" , phx_target: @myself, phx_change: "validate" , phx_submit: "save" %>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="1" phx-target=<%= @myself %>
+      class='nav-link <%= if @tabnum == 1, do: "active" %>' data-toggle="tab"
+      href="#menuDetails"><%= gettext("General details") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="2" phx-target=<%= @myself %>
+      class='nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab"
+      href="#menuContacts"><%= gettext("Contacts") %></a>
+  </li>
+
+  <span
+    class="float-left ml-4"><%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary float-left mr-4" %></span>
+</ul>
+<div class="tab-content blueBorder p-2">
+  <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>"><br>
+    <div class="row">
+      <div class="col-md-12">
+        <%= PBF.text_input f, :company_name, input: [class: "col-md-6"], label: [text: gettext("company_name")] %>
+        <%= PBF.text_input f, :company_address, input: [class: "col-md-10"], label: [text: gettext("company_address")] %>
+        <%= PBF.text_input f, :remarks, input: [class: "col-md-10"], label: [text: gettext("remarks")] %>
+      </div>
+
+    </div>
+  </div>
+  <div id="menuContacts" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
 
 
-<%= PBF.text_input f, :company_name, input: [class: "col-md-6"], label: [text: gettext("company_name")] %>
+    <a href="#" phx-click="add-contact" phx-target=<%= @myself %>
+      class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
+    <div class="row">
+      <div class="col-md-1">
+        <%= gettext("Delete") %>
+      </div>
+      <div class="col-md-4">
+        <%= gettext("Contact name") %>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-4">
+        <%= gettext("Contact value") %>
+      </div>
+
+    </div>
+    <div class="row">
+      <%= inputs_for f, :contacts, fn scnt -> %>
+      <div class="col-md-1">
+        <div class="checkbox">
+          <label>
+            <%= if is_nil(scnt.data.temp_id) do %>
+            <%= checkbox scnt, :delete %>
+            <%= hidden_input scnt, :transportation_id %>
+            <% else %>
+            <%= hidden_input scnt, :temp_id %>
+            <%= hidden_input scnt, :transportation_id %>
+            <a class="m-2" href="#" phx-click="remove-contact" phx-value-remove="<%= scnt.data.temp_id %>"
+              phx-target=<%= @myself %>><i class="fas fa-times"></i></a>
+            <% end %>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group mr-1">
+          <%= text_input scnt, :contact_name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= Phoenix.HTML.Form.select(scnt, :contact_type, Enum.map(@contact_types, &{&1.title, &1.code}), class: "form-control col-sm-10") %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= text_input scnt, :contact_value, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-3">
+          <%= gettext("Remarks") %>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= text_input scnt, :remark, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
 
 
 
-<%= PBF.text_input f, :company_address, input: [class: "col-md-10"], label: [text: gettext("company_address")] %>
 
 
 
-<%= PBF.text_input f, :remarks, input: [class: "col-md-10"], label: [text: gettext("remarks")] %>
-
-
-<%= submit gettext("Save") , phx_disable_with: "Saving..." , class: "btn btn-primary" %>
 </form>

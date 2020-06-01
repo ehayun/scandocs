@@ -5,10 +5,18 @@
 <%= f=form_for @changeset, "#" , id: "city-form" , phx_target: @myself, phx_change: "validate" , phx_submit: "save" %>
 
 
-  <%= PBF.text_input f, :code, input: [class: "col-md-3"], label: [text: gettext("Code")] %>
+<%= PBF.text_input f, :code, input: [class: "col-md-3"], label: [text: gettext("Code")] %>
 
-  <%= PBF.text_input f, :title, input: [class: "col-md-3"], label: [text: gettext("City Name")] %>
+<%= PBF.text_input f, :title, input: [class: "col-md-3"], label: [text: gettext("City Name")] %>
 
 
-  <%= submit "Save" , phx_disable_with: "Saving..." , class: "btn btn-primary" %>
-    </form>
+
+<div class="form-group row"><label class="col-form-label text-sm-right col-sm-2" for="city_code"><%= gettext("District") %></label>
+  <%= Phoenix.HTML.Form.select(f, :district_id, Enum.map(@districts, &{&1.district_name, &1.id}), class: "form-control col-sm-3") %>
+  
+</div>
+
+
+
+<%= submit gettext("Save") , phx_disable_with: "Saving..." , class: "btn btn-primary" %>
+</form>

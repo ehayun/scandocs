@@ -22,6 +22,10 @@ defmodule ScandocWeb.StudentLive.Edit do
     cities = Tables.list_cities()
     genders = Tables.list_gender()
     contact_types = Tables.list_contact_types()
+    transportations = Tables.list_all_transportations()
+
+    transportations =
+      List.insert_at(transportations, 0, %{id: -1, company_name: gettext("Select transportation")})
 
     healthcares = Tables.list_healthcare()
 
@@ -47,6 +51,7 @@ defmodule ScandocWeb.StudentLive.Edit do
      |> assign(:school_id, school_id)
      |> assign(:contact_types, contact_types)
      |> assign(genders: genders)
+     |> assign(transportations: transportations)
      |> assign(schools: schools)
      |> assign(cities: cities)
      |> assign(healthcares: healthcares)
