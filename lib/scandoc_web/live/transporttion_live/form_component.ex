@@ -4,6 +4,7 @@ defmodule ScandocWeb.TransportationLive.FormComponent do
   alias Scandoc.Tables
   alias Scandoc.Transportation.TransportationContact
 
+
   @impl true
   def update(%{transportation: transportation} = assigns, socket) do
     changeset = Tables.change_transportation(transportation)
@@ -83,7 +84,6 @@ defmodule ScandocWeb.TransportationLive.FormComponent do
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset, label: "error")
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end

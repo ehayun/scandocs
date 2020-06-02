@@ -741,17 +741,15 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/index.html.leex:75
-#: lib/scandoc_web/live/district_live/index.html.leex:61 lib/scandoc_web/live/employee_live/index.html.leex:65
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:116 lib/scandoc_web/live/student_live/index.html.leex:63
-#: lib/scandoc_web/live/transporttion_live/index.html.leex:71
+#: lib/scandoc_web/live/employee_live/index.html.leex:65 lib/scandoc_web/live/instdoc_live/index.html.leex:116
+#: lib/scandoc_web/live/student_live/index.html.leex:63 lib/scandoc_web/live/transporttion_live/index.html.leex:71
 msgid "Next"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/index.html.leex:70
-#: lib/scandoc_web/live/district_live/index.html.leex:56 lib/scandoc_web/live/employee_live/index.html.leex:60
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:110 lib/scandoc_web/live/student_live/index.html.leex:57
-#: lib/scandoc_web/live/transporttion_live/index.html.leex:66
+#: lib/scandoc_web/live/employee_live/index.html.leex:60 lib/scandoc_web/live/instdoc_live/index.html.leex:110
+#: lib/scandoc_web/live/student_live/index.html.leex:57 lib/scandoc_web/live/transporttion_live/index.html.leex:66
 msgid "Previous"
 msgstr ""
 
@@ -768,17 +766,15 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/index.html.leex:73
-#: lib/scandoc_web/live/district_live/index.html.leex:59 lib/scandoc_web/live/employee_live/index.html.leex:63
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:113 lib/scandoc_web/live/student_live/index.html.leex:60
-#: lib/scandoc_web/live/transporttion_live/index.html.leex:69
+#: lib/scandoc_web/live/employee_live/index.html.leex:63 lib/scandoc_web/live/instdoc_live/index.html.leex:113
+#: lib/scandoc_web/live/student_live/index.html.leex:60 lib/scandoc_web/live/transporttion_live/index.html.leex:69
 msgid "Out of"
 msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/index.html.leex:71
-#: lib/scandoc_web/live/district_live/index.html.leex:57 lib/scandoc_web/live/employee_live/index.html.leex:61
-#: lib/scandoc_web/live/instdoc_live/index.html.leex:111 lib/scandoc_web/live/student_live/index.html.leex:58
-#: lib/scandoc_web/live/transporttion_live/index.html.leex:67
+#: lib/scandoc_web/live/employee_live/index.html.leex:61 lib/scandoc_web/live/instdoc_live/index.html.leex:111
+#: lib/scandoc_web/live/student_live/index.html.leex:58 lib/scandoc_web/live/transporttion_live/index.html.leex:67
 msgid "Page"
 msgstr ""
 

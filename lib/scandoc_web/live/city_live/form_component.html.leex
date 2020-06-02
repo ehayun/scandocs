@@ -1,22 +1,121 @@
-<h2>
+<header>
   <%= @title %>
-</h2>
+</header>
 
-<%= f=form_for @changeset, "#" , id: "city-form" , phx_target: @myself, phx_change: "validate" , phx_submit: "save" %>
+<%= f=form_for @changeset, "#" , id: "city-form" , phx_target: @myself , phx_change: "validate", phx_submit: "save" %>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="1" phx-target=<%= @myself %>
+      class='nav-link <%= if @tabnum == 1, do: "active" %>' data-toggle="tab"
+      href="#menuDetails"><%= gettext("General details") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="2" phx-target=<%= @myself %>
+      class='nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab"
+      href="#menuContacts"><%= gettext("Contacts") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="3" phx-target=<%= @myself %>
+      class='nav-link <%= if @tabnum == 3, do: "active" %>' data-toggle="tab"
+      href="#menuAddresses"><%= gettext("Addresses") %></a>
+  </li>
+  <span
+    class="float-left ml-4"><%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary float-left mr-4" %></span>
+</ul>
 
 
-<%= PBF.text_input f, :code, input: [class: "col-md-3"], label: [text: gettext("Code")] %>
+<div class="tab-content blueBorder p-2">
+  <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>"><br>
+    <div class="row">
+      <div class="col-md-12">
 
-<%= PBF.text_input f, :title, input: [class: "col-md-3"], label: [text: gettext("City Name")] %>
 
+        <%= PBF.text_input f, :code, input: [class: "col-md-3"], label: [text: gettext("Code")] %>
+        <%= PBF.text_input f, :title, input: [class: "col-md-3"], label: [text: gettext("City Name")] %>
 
+        <div class="form-group row"><label class="col-form-label text-sm-right col-sm-2"
+            for="city_code"><%= gettext("District") %></label>
+          <%= Phoenix.HTML.Form.select(f, :district_id, Enum.map(@districts, &{&1.district_name, &1.id}), class: "form-control col-sm-3") %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="form-group row"><label class="col-form-label text-sm-right col-sm-2" for="city_code"><%= gettext("District") %></label>
-  <%= Phoenix.HTML.Form.select(f, :district_id, Enum.map(@districts, &{&1.district_name, &1.id}), class: "form-control col-sm-3") %>
-  
+  <div id="menuContacts" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
+
+    <a href="#" phx-click="add-contact" phx-target=<%= @myself %>
+      class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
+    <div class="row">
+      <div class="col-md-1">
+        <%= gettext("Delete") %>
+      </div>
+      <div class="col-md-4">
+        <%= gettext("Contact name") %>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-4">
+        <%= gettext("Contact value") %>
+      </div>
+
+    </div>
+    <div class="row">
+      <%= inputs_for f, :contacts, fn scnt -> %>
+      <div class="col-md-1">
+        <div class="checkbox">
+          <label>
+            <%= if is_nil(scnt.data.temp_id) do %>
+            <%= checkbox scnt, :delete %>
+            <%= hidden_input scnt, :city_id %>
+            <% else %>
+            <%= hidden_input scnt, :temp_id %>
+            <%= hidden_input scnt, :city_id %>
+            <a class="m-2" href="#" phx-click="remove-contact" phx-value-remove="<%= scnt.data.temp_id %>"
+              phx-target=<%= @myself %>><i class="fas fa-times"></i></a>
+            <% end %>
+          </label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group mr-1">
+          <%= text_input scnt, :contact_name, placeholder: gettext("Contact name"), class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= Phoenix.HTML.Form.select(scnt, :contact_type, Enum.map(@contact_types, &{&1.title, &1.code}), class: "form-control col-sm-10") %>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <%= text_input scnt, :contact_value, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="col-md-3">
+          <%= gettext("Remarks") %>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= text_input scnt, :remark, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 mb-2 border-bottom">&nbsp;</div>
+      <% end %>
+    </div>
+  </div>
+
+  <div id="menuAddresses" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>"><br>
+    <div class="row">
+      <div class="col-md-12">
+      </div>
+    </div>
+  </div>
+
 </div>
 
 
 
-<%= submit gettext("Save") , phx_disable_with: "Saving..." , class: "btn btn-primary" %>
 </form>

@@ -7,6 +7,7 @@ defmodule Scandoc.Tables do
   alias Scandoc.Repo
 
   alias Scandoc.Tables.City
+  alias Scandoc.City.{CityAddress, CityContact}
 
   def list_healthcare do
     [
@@ -67,7 +68,12 @@ defmodule Scandoc.Tables do
       ** (Ecto.NoResultsError)
 
   """
-  def get_city!(id), do: Repo.get!(City, id)
+  def get_city!(id),
+      do: City
+          |> where(id: ^id)
+          |> preload(:contacts)
+          |> preload(:addresses)
+          |> Repo.one()
 
   @doc """
   Creates a city.
@@ -132,6 +138,14 @@ defmodule Scandoc.Tables do
   """
   def change_city(%City{} = city, attrs \\ %{}) do
     City.changeset(city, attrs)
+  end
+
+  def change_city_contact(%CityContact{} = city, attrs \\ %{}) do
+    CityContact.changeset(city, attrs)
+  end
+
+  def change_city_address(%CityAddress{} = city, attrs \\ %{}) do
+    CityAddress.changeset(city, attrs)
   end
 
   alias Scandoc.Tables.District
@@ -250,7 +264,9 @@ defmodule Scandoc.Tables do
   end
 
   def list_all_transportations() do
-    Transportation |> order_by(:company_name) |> Repo.all()
+    Transportation
+    |> order_by(:company_name)
+    |> Repo.all()
   end
 
   @doc """
@@ -268,7 +284,10 @@ defmodule Scandoc.Tables do
 
   """
   def get_transportation!(id),
-    do: Transportation |> where(id: ^id) |> preload(:contacts) |> Repo.one()
+      do: Transportation
+          |> where(id: ^id)
+          |> preload(:contacts)
+          |> Repo.one()
 
   @doc """
   Creates a transportation.

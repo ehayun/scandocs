@@ -1,6 +1,6 @@
-<h2>
+<header>
   <%= @title %>
-</h2>
+</header>
 
 <%= f=form_for @changeset, "#" , phx_target: @myself, id: "transportation-form" , phx_target: @myself, phx_change: "validate" , phx_submit: "save" %>
 
@@ -91,6 +91,7 @@
           </div>
         </div>
       </div>
+      <div class="col-md-12 mb-2 border-bottom">&nbsp;</div>
       <% end %>
     </div>
 
