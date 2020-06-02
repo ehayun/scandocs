@@ -23,13 +23,15 @@ defmodule Scandoc.City.CityContact do
     |> validate_required([:city_id, :contact_name, :contact_type, :contact_value])
     |> maybe_mark_for_deletion()
   end
+
   defp maybe_mark_for_deletion(
          %{
            data: %{
              id: nil
            }
          } = changeset
-       ), do: changeset
+       ),
+       do: changeset
 
   defp maybe_mark_for_deletion(changeset) do
     if get_change(changeset, :delete) do

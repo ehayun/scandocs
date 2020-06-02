@@ -4,7 +4,6 @@ defmodule ScandocWeb.CityLive.FormComponent do
   alias Scandoc.Tables
   alias Scandoc.City.{CityAddress, CityContact}
 
-
   @impl true
   def update(%{city: city} = assigns, socket) do
     districts = Tables.list_districts()
@@ -36,17 +35,13 @@ defmodule ScandocWeb.CityLive.FormComponent do
 
     contacts =
       existing_contacts
-      |> Enum.concat(
-           [
-             # NOTE temp_id
-             Tables.change_city_contact(
-               %CityContact{
-                 city_id: socket.assigns.city.id,
-                 temp_id: get_temp_id()
-               }
-             )
-           ]
-         )
+      |> Enum.concat([
+        # NOTE temp_id
+        Tables.change_city_contact(%CityContact{
+          city_id: socket.assigns.city.id,
+          temp_id: get_temp_id()
+        })
+      ])
 
     changeset =
       socket.assigns.changeset
@@ -58,11 +53,9 @@ defmodule ScandocWeb.CityLive.FormComponent do
   def handle_event("remove-contact", %{"remove" => remove_id}, socket) do
     contacts =
       socket.assigns.changeset.changes.contacts
-      |> Enum.reject(
-           fn %{data: contact} ->
-             contact.temp_id == remove_id
-           end
-         )
+      |> Enum.reject(fn %{data: contact} ->
+        contact.temp_id == remove_id
+      end)
 
     changeset =
       socket.assigns.changeset
@@ -70,6 +63,7 @@ defmodule ScandocWeb.CityLive.FormComponent do
 
     {:noreply, assign(socket, changeset: changeset)}
   end
+
   @impl true
   def handle_event("validate", %{"city" => city_params}, socket) do
     changeset =
@@ -116,9 +110,10 @@ defmodule ScandocWeb.CityLive.FormComponent do
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
-  defp get_temp_id,
-       do: :crypto.strong_rand_bytes(5)
-           |> Base.url_encode64()
-           |> binary_part(0, 5)
 
+  defp get_temp_id,
+    do:
+      :crypto.strong_rand_bytes(5)
+      |> Base.url_encode64()
+      |> binary_part(0, 5)
 end

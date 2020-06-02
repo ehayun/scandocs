@@ -69,11 +69,12 @@ defmodule Scandoc.Tables do
 
   """
   def get_city!(id),
-      do: City
-          |> where(id: ^id)
-          |> preload(:contacts)
-          |> preload(:addresses)
-          |> Repo.one()
+    do:
+      City
+      |> where(id: ^id)
+      |> preload(:contacts)
+      |> preload(:addresses)
+      |> Repo.one()
 
   @doc """
   Creates a city.
@@ -284,10 +285,11 @@ defmodule Scandoc.Tables do
 
   """
   def get_transportation!(id),
-      do: Transportation
-          |> where(id: ^id)
-          |> preload(:contacts)
-          |> Repo.one()
+    do:
+      Transportation
+      |> where(id: ^id)
+      |> preload(:contacts)
+      |> Repo.one()
 
   @doc """
   Creates a transportation.

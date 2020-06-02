@@ -19,7 +19,14 @@ defmodule Scandoc.Transportation.TransportationContact do
   @doc false
   def changeset(contact, attrs) do
     contact
-    |> cast(attrs, [:transportation_id, :contact_name, :contact_type, :contact_value, :remark, :delete])
+    |> cast(attrs, [
+      :transportation_id,
+      :contact_name,
+      :contact_type,
+      :contact_value,
+      :remark,
+      :delete
+    ])
     |> validate_required([
       :transportation_id,
       :contact_name,

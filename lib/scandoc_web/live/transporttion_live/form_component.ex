@@ -4,7 +4,6 @@ defmodule ScandocWeb.TransportationLive.FormComponent do
   alias Scandoc.Tables
   alias Scandoc.Transportation.TransportationContact
 
-
   @impl true
   def update(%{transportation: transportation} = assigns, socket) do
     changeset = Tables.change_transportation(transportation)
