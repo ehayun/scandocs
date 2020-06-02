@@ -18,8 +18,8 @@ defmodule Scandoc.City.CityAddress do
   @doc false
   def changeset(address, attrs) do
     address
-    |> cast(attrs, [:city_id, :address_name, :address, :remarks])
-    |> validate_required([:city_id, :address_name, :address, :remarks])
+    |> cast(attrs, [:city_id, :address_name, :address, :remarks, :delete])
+    |> validate_required([:city_id, :address_name, :address])
     |> maybe_mark_for_deletion()
   end
 

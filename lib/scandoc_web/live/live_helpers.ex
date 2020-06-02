@@ -15,12 +15,18 @@ defmodule ScandocWeb.LiveHelpers do
 
   alias Scandoc.Documents.Docgroup
 
+  def tr(txt) do
+    Gettext.dgettext(ScandocWeb.Gettext, "default", txt)
+  end
   def numOfDocs(id) do
-    from(s in Stddoc, where: s.ref_id == ^id) |> Repo.aggregate(:count)
+    from(s in Stddoc, where: s.ref_id == ^id)
+    |> Repo.aggregate(:count)
   end
 
   def getDocGroup(id) do
-    case Docgroup |> where(id: ^id) |> Repo.one() do
+    case Docgroup
+         |> where(id: ^id)
+         |> Repo.one() do
       nil -> ""
       g -> g.grp_name
     end
@@ -43,8 +49,10 @@ defmodule ScandocWeb.LiveHelpers do
 
   def getAge(dob) do
     if dob do
-      {:ok, y} = dob |> Calendar.Strftime.strftime("%Y")
-      {:ok, cy} = Calendar.Date.today_utc() |> Calendar.Strftime.strftime("%Y")
+      {:ok, y} = dob
+                 |> Calendar.Strftime.strftime("%Y")
+      {:ok, cy} = Calendar.Date.today_utc()
+                  |> Calendar.Strftime.strftime("%Y")
 
       String.to_integer(cy) - String.to_integer(y)
     else
@@ -90,8 +98,8 @@ defmodule ScandocWeb.LiveHelpers do
 
   def getDocumentPath(path) do
     if File.exists?("#{path}"),
-      do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
-      else: "#"
+       do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
+       else: "#"
   end
 
   def isTeacher(role) do
@@ -107,14 +115,17 @@ defmodule ScandocWeb.LiveHelpers do
   end
 
   def displayDate(dt, dmy \\ "%d/%m/%Y") do
-    case dt |> Calendar.Strftime.strftime(dmy) do
+    case dt
+         |> Calendar.Strftime.strftime(dmy) do
       {:ok, d} -> d
       _ -> dt
     end
   end
 
   def displayRole(role) do
-    case Role |> where(code: ^role) |> Repo.one() do
+    case Role
+         |> where(code: ^role)
+         |> Repo.one() do
       nil -> "???"
       role -> role.title
     end
@@ -159,29 +170,39 @@ defmodule ScandocWeb.LiveHelpers do
         ""
 
       :allow_school ->
-        case School |> where(id: ^ref_id) |> Repo.one() do
+        case School
+             |> where(id: ^ref_id)
+             |> Repo.one() do
           nil -> "???"
           school -> school.school_name
         end
 
       :allow_classroom ->
-        case Classroom |> where(id: ^ref_id) |> Repo.one() do
+        case Classroom
+             |> where(id: ^ref_id)
+             |> Repo.one() do
           nil ->
             "???"
 
           classroom ->
-            school = School |> where(id: ^classroom.school_id) |> Repo.one()
+            school = School
+                     |> where(id: ^classroom.school_id)
+                     |> Repo.one()
             "#{school.school_name} / #{classroom.classroom_name} "
         end
 
       :allow_student ->
-        case Student |> where(id: ^ref_id) |> Repo.one() do
+        case Student
+             |> where(id: ^ref_id)
+             |> Repo.one() do
           nil -> "???"
           student -> "#{student.full_name}(#{student.student_zehut})"
         end
 
       :allow_institute ->
-        case Institute |> where(id: ^ref_id) |> Repo.one() do
+        case Institute
+             |> where(id: ^ref_id)
+             |> Repo.one() do
           nil -> "???"
           institute -> "#{institute.title} (#{institute.code})"
         end

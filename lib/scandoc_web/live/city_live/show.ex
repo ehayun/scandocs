@@ -16,6 +16,6 @@ defmodule ScandocWeb.CityLive.Show do
      |> assign(:city, Tables.get_city!(id))}
   end
 
-  defp page_title(:show), do: "Show City"
-  defp page_title(:edit), do: "Edit City"
+  defp page_title(:show), do: gettext("Show City")
+  defp page_title(:edit), do: gettext("Edit City")
 end

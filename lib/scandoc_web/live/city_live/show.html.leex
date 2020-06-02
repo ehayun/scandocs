@@ -1,4 +1,4 @@
-<h1>Show City</h1>
+<header><%= gettext("City") %> : <%= @city.title %> (<%= @city.code %>)</header>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, ScandocWeb.CityLive.FormComponent,
@@ -9,19 +9,28 @@
     return_to: Routes.city_show_path(@socket, :show, @city) %>
 <% end %>
 
-<ul>
+<% gettext("mobile") %>
+<% gettext("email") %>
+<% gettext("fax") %>
+<% gettext("phone") %>
 
-  <li>
-    <strong>Code:</strong>
-    <%= @city.code %>
-  </li>
+<h4 class="p-2"><%= gettext("Contacts") %></h4>
+<%= for c <- @city.contacts do %>
+    <div class="row">
+        <div class="col-md-3"><%= c.contact_name %></div>
+        <div class="col-md-2"><%= tr(c.contact_type) %></div>
+        <div class="col-md-4"><%= c.contact_value %></div>
+    </div>
+ <% end %>
+<h4 class="p-2"><%= gettext("Address list") %></h4>
+<%= for a <- @city.addresses do %>
+    <div class="row">
+        <div class="col-md-3"><%= a.address_name %></div>
+        <div class="col-md-2"><%= a.address %></div>
+        <div class="col-md-4"><%= a.remarks %></div>
+    </div>
+ <% end %>
+<br>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @city.title %>
-  </li>
-
-</ul>
-
-<span><%= live_patch "Edit", to: Routes.city_show_path(@socket, :edit, @city), class: "button" %></span>
-<span><%= live_redirect "Back", to: Routes.city_index_path(@socket, :index) %></span>
+<span><%= live_patch gettext("Edit"), to: Routes.city_show_path(@socket, :edit, @city), class: "btn btn-primary" %></span>
+<span><%= live_redirect gettext("Back"), to: Routes.city_index_path(@socket, :index), class: "btn btn-link" %></span>

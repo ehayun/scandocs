@@ -49,8 +49,8 @@
         </td>
         
         <td>
-          <span class="x hidden">
-            <%= live_redirect "Show" , to: Routes.city_show_path(@socket, :show, city) %>
+          <span class="xhidden">
+            <%= live_redirect raw("<i class='far fa-eye'></i>") , to: Routes.city_show_path(@socket, :show, city) %>
           </span>
           <span class="xhidden">
             <%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.city_index_path(@socket, :edit, city) %>

@@ -105,7 +105,7 @@ msgstr "קישור זה אינו תקין או פג תוקף"
 
 #, elixir-format
 #: lib/scandoc_web/live/category_live/form_component.html.leex:25
-#: lib/scandoc_web/live/city_live/form_component.html.leex:21 lib/scandoc_web/live/district_live/form_component.html.leex:10
+#: lib/scandoc_web/live/city_live/form_component.html.leex:24 lib/scandoc_web/live/district_live/form_component.html.leex:10
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/employee_live/form_component.html.leex:48
 #: lib/scandoc_web/live/institute_live/form_component.html.leex:26 lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37
 #: lib/scandoc_web/live/permission_live/form_component.html.leex:37 lib/scandoc_web/live/student_live/edit.html.leex:35
@@ -212,7 +212,7 @@ msgstr "מורים"
 
 #, elixir-format
 #: lib/scandoc_web/live/category_live/form_component.html.leex:11
-#: lib/scandoc_web/live/category_live/index.html.leex:18 lib/scandoc_web/live/city_live/form_component.html.leex:8
+#: lib/scandoc_web/live/category_live/index.html.leex:18 lib/scandoc_web/live/city_live/form_component.html.leex:34
 #: lib/scandoc_web/live/city_live/index.html.leex:25 lib/scandoc_web/live/docgroup_live/form_component.html.leex:12
 #: lib/scandoc_web/live/institute_live/form_component.html.leex:12 lib/scandoc_web/live/institute_live/index.html.leex:20
 #: lib/scandoc_web/templates/classroom/form.html.eex:10 lib/scandoc_web/templates/classroom/index.html.eex:18
@@ -547,7 +547,8 @@ msgid "Outcome description"
 msgstr "תיאור הוצאה"
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/edit.html.leex:174
+#: lib/scandoc_web/live/city_live/form_component.html.leex:54
+#: lib/scandoc_web/live/city_live/form_component.html.leex:82 lib/scandoc_web/live/student_live/edit.html.leex:174
 #: lib/scandoc_web/live/transporttion_live/form_component.html.leex:43 lib/scandoc_web/live/transporttion_live/show.html.leex:39
 #: lib/scandoc_web/live/vendor_live/index.html.leex:19
 msgid "Contact name"
@@ -754,8 +755,8 @@ msgid "Previous"
 msgstr "< הקודם"
 
 #, elixir-format
-#: lib/scandoc_web/live/transporttion_live/show.html.leex:68
-#: lib/scandoc_web/templates/classroom/edit.html.eex:2
+#: lib/scandoc_web/live/city_live/show.html.leex:30
+#: lib/scandoc_web/live/transporttion_live/show.html.leex:68 lib/scandoc_web/templates/classroom/edit.html.eex:2
 msgid "Back"
 msgstr "חזרה"
 
@@ -793,14 +794,16 @@ msgid "Select school"
 msgstr "<<בחירת בית ספר>>"
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/edit.html.leex:19
+#: lib/scandoc_web/live/city_live/form_component.html.leex:16
+#: lib/scandoc_web/live/city_live/show.html.leex:17 lib/scandoc_web/live/student_live/edit.html.leex:19
 #: lib/scandoc_web/live/student_live/form_component.html.leex:19 lib/scandoc_web/live/transporttion_live/form_component.html.leex:16
 msgid "Contacts"
 msgstr "אנשי קשר"
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/edit.html.leex:15
-#: lib/scandoc_web/live/student_live/form_component.html.leex:14 lib/scandoc_web/live/transporttion_live/form_component.html.leex:11
+#: lib/scandoc_web/live/city_live/form_component.html.leex:11
+#: lib/scandoc_web/live/student_live/edit.html.leex:15 lib/scandoc_web/live/student_live/form_component.html.leex:14
+#: lib/scandoc_web/live/transporttion_live/form_component.html.leex:11
 msgid "General details"
 msgstr "פרטים כללייים"
 
@@ -822,12 +825,13 @@ msgid "Placement Committees"
 msgstr "וועדות השמה"
 
 #, elixir-format
-#: lib/scandoc_web/live/city_live/form_component.html.leex:10
+#: lib/scandoc_web/live/city_live/form_component.html.leex:35
 msgid "City Name"
 msgstr "עיר"
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/index.ex:19
+#: lib/scandoc_web/live/city_live/show.ex:20
 msgid "Edit City"
 msgstr "עדכון עיר"
 
@@ -920,7 +924,8 @@ msgid "Add new"
 msgstr "הוספה"
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/edit.html.leex:171
+#: lib/scandoc_web/live/city_live/form_component.html.leex:51
+#: lib/scandoc_web/live/city_live/form_component.html.leex:115 lib/scandoc_web/live/student_live/edit.html.leex:171
 #: lib/scandoc_web/live/student_live/edit.html.leex:246 lib/scandoc_web/live/student_live/edit.html.leex:252
 #: lib/scandoc_web/live/transporttion_live/form_component.html.leex:40
 msgid "Delete"
@@ -942,7 +947,8 @@ msgid "# docs"
 msgstr "מספר מסמכים"
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/edit.html.leex:168
+#: lib/scandoc_web/live/city_live/form_component.html.leex:48
+#: lib/scandoc_web/live/city_live/form_component.html.leex:112 lib/scandoc_web/live/student_live/edit.html.leex:168
 #: lib/scandoc_web/live/student_live/edit.html.leex:233 lib/scandoc_web/live/transporttion_live/form_component.html.leex:37
 #: lib/scandoc_web/templates/page_live/student_commities.html.leex:1
 msgid "Add new "
@@ -954,13 +960,15 @@ msgid "ID"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/edit.html.leex:179
-#: lib/scandoc_web/live/transporttion_live/form_component.html.leex:48 lib/scandoc_web/live/transporttion_live/show.html.leex:42
+#: lib/scandoc_web/live/city_live/form_component.html.leex:59
+#: lib/scandoc_web/live/student_live/edit.html.leex:179 lib/scandoc_web/live/transporttion_live/form_component.html.leex:48
+#: lib/scandoc_web/live/transporttion_live/show.html.leex:42
 msgid "Contact value"
 msgstr "טלפון או מייל "
 
 #, elixir-format
-#: lib/scandoc_web/live/student_live/edit.html.leex:182
+#: lib/scandoc_web/live/city_live/form_component.html.leex:97
+#: lib/scandoc_web/live/city_live/form_component.html.leex:155 lib/scandoc_web/live/student_live/edit.html.leex:182
 #: lib/scandoc_web/live/transporttion_live/form_component.html.leex:86 lib/scandoc_web/live/transporttion_live/show.html.leex:28
 msgid "Remarks"
 msgstr "הערות"
@@ -1046,7 +1054,7 @@ msgid "New Transportation"
 msgstr "חברת הסעות חדשה"
 
 #, elixir-format
-#: lib/scandoc_web/live/transporttion_live/form_component.ex:96
+#: lib/scandoc_web/live/transporttion_live/form_component.ex:95
 msgid "Transportation created successfully"
 msgstr "נוצר בהצלחה"
 
@@ -1076,12 +1084,13 @@ msgid "remarks"
 msgstr "הערות"
 
 #, elixir-format
-#: lib/scandoc_web/live/city_live/form_component.html.leex:14
+#: lib/scandoc_web/live/city_live/form_component.html.leex:38
 #: lib/scandoc_web/live/city_live/index.html.leex:31
 msgid "District"
 msgstr "מחוז"
 
 #, elixir-format
+#: lib/scandoc_web/live/city_live/show.html.leex:29
 #: lib/scandoc_web/live/transporttion_live/show.html.leex:67
 msgid "Edit"
 msgstr "עדכון "
@@ -1102,6 +1111,56 @@ msgid "Transportation name"
 msgstr "חברת הסעות"
 
 #, elixir-format
-#: lib/scandoc_web/live/city_live/form_component.ex:9
+#: lib/scandoc_web/live/city_live/form_component.ex:10
 msgid "Select district"
 msgstr "<< מחוז >>"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/form_component.html.leex:21
+msgid "Addresses"
+msgstr "כתובות"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/form_component.html.leex:118
+msgid "Address name"
+msgstr "נמען"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/form_component.html.leex:121
+msgid "Full Address "
+msgstr "כתובת מלאה"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/show.html.leex:25
+msgid "Address list"
+msgstr "רשימת כתובות"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/show.html.leex:1
+msgid "City"
+msgstr "עיר"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/show.ex:19
+msgid "Show City"
+msgstr "הוספת עיר"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/show.html.leex:13
+msgid "email"
+msgstr "אימייל"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/show.html.leex:14
+msgid "fax"
+msgstr "פקס"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/show.html.leex:12
+msgid "mobile"
+msgstr "טל. נייד"
+
+#, elixir-format
+#: lib/scandoc_web/live/city_live/show.html.leex:15
+msgid "phone"
+msgstr "טל. קווי"

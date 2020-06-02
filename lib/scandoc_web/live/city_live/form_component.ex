@@ -65,6 +65,44 @@ defmodule ScandocWeb.CityLive.FormComponent do
   end
 
   @impl true
+  def handle_event("add-address", _city_params, socket) do
+    existing_addresses =
+      Map.get(socket.assigns.changeset.changes, :addresses, socket.assigns.city.addresses)
+
+    addresses =
+      existing_addresses
+      |> Enum.concat([
+        # NOTE temp_id
+        Tables.change_city_address(%CityAddress{
+          city_id: socket.assigns.city.id,
+          temp_id: get_temp_id()
+        })
+      ])
+
+    changeset =
+      socket.assigns.changeset
+      |> Ecto.Changeset.put_assoc(:addresses, addresses)
+
+    {:noreply, assign(socket, changeset: changeset)}
+  end
+
+  def handle_event("remove-address", %{"remove" => remove_id}, socket) do
+    addresses =
+      socket.assigns.changeset.changes.addresses
+      |> Enum.reject(fn %{data: contact} ->
+        contact.temp_id == remove_id
+      end)
+
+    changeset =
+      socket.assigns.changeset
+      |> Ecto.Changeset.put_assoc(:addresses, addresses)
+
+    {:noreply, assign(socket, changeset: changeset)}
+  end
+
+
+
+  @impl true
   def handle_event("validate", %{"city" => city_params}, socket) do
     changeset =
       socket.assigns.city

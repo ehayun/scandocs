@@ -26,7 +26,7 @@
 
 
 <div class="tab-content blueBorder p-2">
-  <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>"><br>
+  <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>">
     <div class="row">
       <div class="col-md-12">
 
@@ -107,9 +107,59 @@
     </div>
   </div>
 
-  <div id="menuAddresses" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>"><br>
-    <div class="row">
-      <div class="col-md-12">
+  <div id="menuAddresses" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>">
+        <a href="#" phx-click="add-address" phx-target=<%= @myself %>
+        class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
+      <div class="row">
+        <div class="col-md-1">
+          <%= gettext("Delete") %>
+        </div>
+        <div class="col-md-4">
+          <%= gettext("Address name") %>
+        </div>
+        <div class="col-md-3">
+          <%= gettext("Full Address ") %>
+        </div>
+
+
+
+      </div>
+      <div class="row">
+        <%= inputs_for f, :addresses, fn adrs -> %>
+        <div class="col-md-1">
+          <div class="checkbox">
+            <label>
+              <%= if is_nil(adrs.data.temp_id) do %>
+              <%= checkbox adrs, :delete %>
+              <%= hidden_input adrs, :city_id %>
+              <% else %>
+              <%= hidden_input adrs, :temp_id %>
+              <%= hidden_input adrs, :city_id %>
+              <a class="m-2" href="#" phx-click="remove-address" phx-value-remove="<%= adrs.data.temp_id %>"
+                phx-target=<%= @myself %>><i class="fas fa-times"></i></a>
+              <% end %>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+              <%= text_input adrs, :address_name, class: "form-control" %>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+              <%= text_input adrs, :address, class: "form-control" %>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <label><%= gettext("Remarks") %></label>
+            <div class="form-group">
+              <%= text_input adrs, :remarks, class: "form-control" %>
+            </div>
+        </div>
+              <div class="col-md-12 mb-2 border-bottom">&nbsp;</div>
+
+        <% end %>
       </div>
     </div>
   </div>
