@@ -11,7 +11,6 @@
   <i class="fas fa-user-graduate"></i>
   <%= @student.full_name %>
   <span class="btn btn-primary btn-md float-left"><%= live_redirect gettext("Listing Classrooms"), to: Routes.student_index_path(@socket, :index) %></span>
-
 </h2>
 
 
@@ -19,76 +18,12 @@
   <ul class="nav nav-pills mb-4 d-flex flex-column flex-md-row" data-config-id="tabs">
     <li phx-click="sort_by" phx-value-id="<%= nil %>" class="nav-item"><a class='nav-link p-2 ml-2 <%= if @sort_by == nil , do: "active", else: "badge badge-info" %>' href="#"><%= gettext("show all") %></a></li>
     <%= for d <- @docgroups do %>
-    <li phx-click="sort_by" phx-value-id="<%= d.id %>" class="nav-item"><a class='nav-link p-2 ml-2 <%= if @sort_by == d.id, do: "active", else: "badge badge-info" %>' href="#"><%= d.grp_name %></a></li>
+        <li phx-click="sort_by" phx-value-id="<%= d.id %>" class="nav-item"><a class='nav-link p-2 ml-2 <%= if @sort_by == d.id, do: "active", else: "badge badge-info" %>' href="#"><%= d.grp_name %></a></li>
     <% end %>
   </ul>
 </div>
 
-
-<%= if @display do %>
-
-<div class="container" id="content">
-
-  <section data-section-id="1" data-category="gallery" data-component-id="2c0d_17_01_awz" class="py-5">
-    <div class="container text-center">
-      <h2 class="mb-5" data-config-id="header">
-        <button phx-click="close-modal" type="button" class="btn btn-primary"><%= gettext("close")%></button>
-
-      </h2>
-      <div class="row" data-config-id="gallery_01">
-        <div class="col-md-12 mb-12">
-
-          <%= if File.exists?("./priv/static/uploads/#{@doc_path}.png") do %>
-          <img src="/uploads/<%= @doc_path %>.png">
-          <% end %>
-          <%= for f <- 0..20 do %>
-          <%= if File.exists?("./priv/static/uploads/#{@doc_path}-#{f}.png") do %>
-          <img src="/uploads/<%= @doc_path %>-<%= f %>.png">
-          <% end %>
-          <% end %>
-
-
-        </div>
-      </div>
-      <h2 class="mb-5" data-config-id="header">
-        <button phx-click="close-modal" type="button" class="btn btn-primary"><%= gettext("close")%></button>
-
-      </h2>
-    </div>
-  </section>
-</div>
-
-
-
-<% end %>
-
-<button type="button" id="pdfBtn" class="hidden btn btn-primary" data-toggle="modal" data-target="#pdfModal">Large modal</button>
-
-<div id="pdfModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <%= if File.exists?("./priv/static/uploads/#{@doc_path}.png") do %>
-      <img src="/uploads/<%= @doc_path %>.png">
-      <% end %>
-
-      <%= for f <- 0..20 do %>
-      <%= if File.exists?("./priv/static/uploads/#{@doc_path}-#{f}.png") do %>
-      <img src="/uploads/<%= @doc_path %>-<%= f %>.png">
-      <% end %>
-      <% end %>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
 <table class="table table-striped">
-
   <tbody>
     <%= for document <- @documents do %>
     <tr>
