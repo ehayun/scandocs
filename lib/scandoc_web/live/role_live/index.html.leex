@@ -1,4 +1,7 @@
-<h1>Listing Roles</h1>
+<header><%= gettext("Listing Roles") %>
+  <%= live_patch  gettext("Add New"), to: Routes.role_index_path(@socket, :new), class: "float-left btn btn-primary" %>
+
+</header>
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, ScandocWeb.RoleLive.FormComponent,
@@ -12,8 +15,8 @@
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
-      <th>Code</th>
-      <th>Title</th>
+      <th><%= gettext("Code") %></th>
+      <th><%= gettext("Title") %></th>
 
       <th></th>
     </tr>
@@ -25,13 +28,12 @@
         <td><%= role.title %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.role_show_path(@socket, :show, role) %></span>
-          <span><%= live_patch "Edit", to: Routes.role_index_path(@socket, :edit, role) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: role.id, data: [confirm: "Are you sure?"] %></span>
+          <span class="hidden"><%= live_redirect "Show", to: Routes.role_show_path(@socket, :show, role) %></span>
+          <span><%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.role_index_path(@socket, :edit, role) %></span>
+          <span><%= link raw("<i class='fas fa-trash'></i>"), to: "#", phx_click: "delete", phx_value_id: role.id, data: [confirm: "Are you sure?"] %></span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Role", to: Routes.role_index_path(@socket, :new) %></span>

@@ -20,7 +20,7 @@ defmodule Scandoc.MixProject do
   def application do
     [
       mod: {Scandoc.Application, []},
-      extra_applications: [:logger, :runtime_tools, :scrivener, :scrivener_ecto]
+      extra_applications: [:logger, :runtime_tools, :scrivener, :plasm, :scrivener_ecto]
     ]
   end
 
@@ -58,6 +58,7 @@ defmodule Scandoc.MixProject do
       {:scrivener_phoenix, "~> 0.1.0"},
       {:money, "~> 1.7"},
       {:mogrify, "~> 0.7.3"},
+      {:plasm, "~> 2.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
   end
