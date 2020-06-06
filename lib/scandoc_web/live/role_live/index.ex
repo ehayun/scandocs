@@ -18,12 +18,16 @@ defmodule ScandocWeb.RoleLive.Index do
     socket
     |> assign(:page_title, gettext("Edit Role"))
     |> assign(:role, Employees.get_role!(id))
+
+
   end
 
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, gettext("New Role"))
     |> assign(:role, %Role{})
+
+
   end
 
   defp apply_action(socket, :index, _params) do
