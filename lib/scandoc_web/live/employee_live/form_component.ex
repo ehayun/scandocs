@@ -20,16 +20,19 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
 
     role = employee.role
 
-    {:ok,
-     socket
-     |> assign(assigns)
-     |> assign(roles: roles)
-     |> assign(role: role)
-     |> assign(school_id: school_id)
-     |> assign(classroom_id: classroom_id)
-     |> assign(schools: schools)
-     |> assign(classrooms: classrooms)
-     |> assign(:changeset, changeset)}
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(roles: roles)
+      |> assign(id: employee.id)
+      |> assign(role: role)
+      |> assign(school_id: school_id)
+      |> assign(classroom_id: classroom_id)
+      |> assign(schools: schools)
+      |> assign(classrooms: classrooms)
+      |> assign(:changeset, changeset)
+    }
   end
 
   @impl true
@@ -81,13 +84,17 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       end
 
     if isTeacher(role) do
-      classroom = Classrooms.get_classroom!(classroom_id)
-      Classrooms.update_classroom(classroom, %{teacher_id: socket.assigns.employee.id})
+      if classroom_id > 0 do
+        classroom = Classrooms.get_classroom!(classroom_id)
+        Classrooms.update_classroom(classroom, %{teacher_id: socket.assigns.employee.id})
+      end
     end
 
     if isSchoolManager(role) do
-      school = Schools.get_school!(school_id)
-      Schools.update_school(school, %{manager_id: socket.assigns.employee.id})
+      if school_id > 0 do
+        school = Schools.get_school!(school_id)
+        Schools.update_school(school, %{manager_id: socket.assigns.employee.id})
+      end
     end
 
     employee_params =
@@ -103,11 +110,14 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   defp save_employee(socket, :edit, employee_params) do
     case Employees.update_employee(socket.assigns.employee, employee_params) do
       {:ok, _employee} ->
-        {:noreply,
-         socket
-         |> push_redirect(to: socket.assigns.return_to)}
+        {
+          :noreply,
+          socket
+          |> push_redirect(to: socket.assigns.return_to)
+        }
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect(changeset, label: "error")
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end
@@ -115,11 +125,14 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   defp save_employee(socket, :new, employee_params) do
     case Employees.create_employee(employee_params) do
       {:ok, _employee} ->
-        {:noreply,
-         socket
-         |> push_redirect(to: socket.assigns.return_to)}
+        {
+          :noreply,
+          socket
+          |> push_redirect(to: socket.assigns.return_to)
+        }
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect(changeset, label: "error")
         {:noreply, assign(socket, changeset: changeset)}
     end
   end

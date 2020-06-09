@@ -134,7 +134,7 @@ defmodule ScandocWeb.InstdocLive.Index do
     instIDs = Permissions.getInstitutes(socket.assigns.current_user.id)
     filter = Map.merge(filter, %{"instIDs" => instIDs})
 
-    Institutes.list_inst_docs(17, socket.assigns.current_page, filter)
+    Institutes.list_inst_docs(16, socket.assigns.current_page, filter)
   end
 
   defp fetch_categories do

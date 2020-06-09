@@ -18,7 +18,9 @@ defmodule Scandoc.Institutes do
 
   """
   def list_institutes do
-    Institute |> order_by(:title) |> Repo.all()
+    Institute
+    |> order_by(:title)
+    |> Repo.all()
   end
 
   @doc """
@@ -140,41 +142,47 @@ defmodule Scandoc.Institutes do
       %{vendor_name: vendor_name}
     ]
 
-    query = from(b in Instdoc)
-
     query =
-      Enum.reduce(filter, query, fn
-        %{category: "-1"}, query ->
-          query
+      Enum.reduce(
+        filter,
+        Instdoc,
+        fn
+          %{category: "-1"}, query ->
+            query
 
-        %{category: category_id}, query ->
-          from q in query, where: q.category_id == ^category_id
+          %{category: category_id}, query ->
+            from q in query, where: q.category_id == ^category_id
 
-        %{institute: "-1"}, query ->
-          query
+          %{institute: "-1"}, query ->
+            query
 
-        %{instIDs: []}, query ->
-          query
+          %{institute: institute_id}, query ->
+            from q in query, where: q.institute_id == ^institute_id
 
-        %{instIDs: instIDs}, query ->
-          from q in query, where: q.institute_id in ^instIDs
 
-        %{institute: institute_id}, query ->
-          from q in query, where: q.institute_id == ^institute_id
+          %{instIDs: []}, query ->
+            query
 
-        %{outcome_category: "-1"}, query ->
-          query
+          %{instIDs: instIDs}, query ->
+            from q in query, where: q.institute_id in ^instIDs
 
-        %{outcome_category: outcome_category_id}, query ->
-          from q in query, where: q.outcome_category_id == ^outcome_category_id
+          %{outcome_category: "-1"}, query ->
+            query
 
-        %{vendor_name: vendor_name}, query ->
-          from q in query,
-            where:
-              ilike(q.vendor_name, ^"%#{vendor_name}%") or
-                ilike(q.payment_code, ^"%#{vendor_name}%") or
-                ilike(q.asmachta, ^"%#{vendor_name}%")
-      end)
+          %{outcome_category: outcome_category_id}, query ->
+            from q in query, where: q.outcome_category_id == ^outcome_category_id
+
+          %{vendor_name: ""}, query -> query
+          %{vendor_name: nil}, query -> query
+
+          %{vendor_name: vendor_name}, query ->
+            from q in query,
+                 where:
+                   ilike(q.vendor_name, ^"%#{vendor_name}%") or
+                   ilike(q.payment_code, ^"%#{vendor_name}%") or
+                   ilike(q.asmachta, ^"%#{vendor_name}%")
+        end
+      )
 
     query
     |> preload(:institute)
@@ -183,8 +191,6 @@ defmodule Scandoc.Institutes do
     |> order_by(desc: :doc_date)
     |> Repo.paginate(page: current_page, page_size: limit)
 
-    # |> limit(^limit)
-    # |> Repo.all()
   end
 
   @doc """

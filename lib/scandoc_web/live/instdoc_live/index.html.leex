@@ -14,7 +14,7 @@
       <%= gettext("Filter by") %>:
     </div>
     <div class="col-md-2 mb-2">
-      <select name="filter[institute]" class="custom-select d-block w-100" id="input8-ecommerce-03">
+      <select name="filter[institute]" class="custom-select d-block w-100">
         <option value="-1" <%= if @by_institute == "-1", do: "selected" %>>
           &lt;&lt;<%= gettext("By All Institute")%>&gt;&gt;</option>
         <%= for i <- @institutes do %>
@@ -48,14 +48,6 @@
 
   </form>
 </div>
-
-
-
-
-
-
-
-
 
 <%= if @live_action in [:new, :edit] do %>
 <%= live_modal @socket, ScandocWeb.InstdocLive.FormComponent,

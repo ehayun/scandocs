@@ -18,3 +18,4 @@ alias Scandoc.Permissions
 alias Scandoc.Permissions.Permission
 alias Scandoc.Institutes
 alias Scandoc.Institutes.Instdoc
+alias Scandoc.Tables.City

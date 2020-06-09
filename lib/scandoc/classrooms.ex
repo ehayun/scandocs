@@ -47,8 +47,10 @@ defmodule Scandoc.Classrooms do
       ** (Ecto.NoResultsError)
 
   """
-  def get_classroom!(id),
-    do: Classroom |> where(id: ^id) |> preload(:school) |> preload(:teacher) |> Repo.one()
+  def get_classroom!(id) do
+    IO.inspect(id, label: "get classroom")
+    Classroom |> where(id: ^id) |> preload(:school) |> preload(:teacher) |> Repo.one()
+    end
 
   def get_classroom_by_teacher(id) do
     Classroom
