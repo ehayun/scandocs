@@ -80,6 +80,6 @@ defmodule ScandocWeb.EmployeeLive.Index do
   defp fetch_employees(socket) do
     search = socket.assigns.search
 
-    Employees.list_employees(17, socket.assigns.current_page, search)
+    Employees.list_employees(15, socket.assigns.current_page, search)
   end
 end

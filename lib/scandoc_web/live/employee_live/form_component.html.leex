@@ -1,49 +1,120 @@
-<header><%= @title %> - <%= @id %> </header>
 <%= f = form_for @changeset, "#",
   id: "employee-form",
   phx_target: @myself,
   phx_change: "validate",
   phx_submit: "save" %>
 
-<%= PBF.text_input f, :zehut, input: [class: "col-md-3"], label: [text: gettext("Zehut")] %>
-<%= PBF.text_input f, :full_name, input: [class: "col-md-5"], label: [text: gettext("Full name")] %>
-<small><%= gettext("Leave empty for not change") %></small>
+<header>
+<%= @title %> - <small><%= @id %> <%= @full_name %> </small>
+    <span class="float-left ml-4"><%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary float-left mr-4" %></span>
+</header>
 
-<%= PBF.text_input f, :password, input: [class: "col-md-5"], label: [text: gettext("Password")] %>
-
-
-<div class="form-group row">
-  <%= label f, gettext("Role"), class: "col-form-label text-sm-right col-sm-2" %>
-  <%= Phoenix.HTML.Form.select(f, :role, Enum.map(@roles, &{&1.title, &1.code}), class: "col-sm-3") %>
-
-  <%= error_tag f, :hashed_password %>
-
-  <%= if isSchoolManager(@role) || isTeacher(@role) do %>
-  <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "col-sm-3") %>
-  <% end %>
-
-  <%= if isTeacher(@role) && @school_id  do %>
-  <%= Phoenix.HTML.Form.select(f, :classroom_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "col-sm-3") %>
-  <% end %>
+<ul class="header nav nav-tabs">
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="1" phx-target=<%= @myself %>
+      class='nav-link <%= if @tabnum == 1, do: "active" %>' data-toggle="tab"
+      href="#menuDetails"><%= gettext("General details") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="2" phx-target=<%= @myself %>
+      class='hidden nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab"
+      href="#menuRoles"><%= gettext("Permissions") %></a>
+  </li>
 
 
+</ul>
+
+<div class="tab-content blueBorder p-2">
+  <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>">
+
+    <%= PBF.text_input f, :zehut, input: [class: "col-md-3"], label: [text: gettext("Zehut")] %>
+    <%= PBF.text_input f, :full_name, input: [class: "col-md-5"], label: [text: gettext("Full name")] %>
+    <small><%= gettext("Leave empty for not change") %></small>
+
+    <%= PBF.text_input f, :password, input: [class: "col-md-5"], label: [text: gettext("Password")] %>
+
+
+    <div class="form-group row">
+      <%= label f, gettext("Role"), class: "col-form-label text-sm-right col-sm-2" %>
+      <%= Phoenix.HTML.Form.select(f, :role, Enum.map(@roles, &{&1.title, &1.code}), class: "col-sm-3") %>
+
+      <%= error_tag f, :hashed_password %>
+
+      <%= if isSchoolManager(@role) || isTeacher(@role) do %>
+      <%= Phoenix.HTML.Form.select(f, :school_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: "col-sm-3") %>
+      <% end %>
+
+      <%= if isTeacher(@role) && @school_id  do %>
+      <%= Phoenix.HTML.Form.select(f, :classroom_id, Enum.map(@classrooms, &{&1.classroom_name, &1.id}), class: "col-sm-3") %>
+      <% end %>
+    </div>
+
+    <div class="form-group row">
+      <%= label f, gettext("birth date"), class: "col-form-label text-sm-left col-sm-2" %>
+      <%= date_select f, :date_of_birth, year: [options: 1900..2100], class: "col-sm-10" %>
+      <%= error_tag f, :date_of_birth %>
+    </div>
+
+    <div class="form-group row">
+      <% label f, :is_freezed %>
+      <% checkbox f, :is_freezed %>
+      <% error_tag f, :is_freezed %>
+
+      <%= label f, gettext("Admin?"), class: "col-form-label text-sm-left col-sm-3" %>
+      <%= checkbox f, :is_admin %>
+      <%= error_tag f, :is_admin %>
+    </div>
+  </div>
+  <div id="menuRoles" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
+  <a href="#" phx-click="add-permission" phx-target=<%= @myself %> class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
+    <div class="row">
+        <div class="col-md-1">
+          <%= gettext("Delete") %>
+        </div>
+        <div class="col-md-4">
+          <%= gettext("Permission level") %>
+        </div>
+        <div class="col-md-3">
+          <%= gettext("Permission Ref") %>
+        </div>
+        <div class="col-md-3">
+           <%= gettext("") %>
+        </div>
+    </div>
+
+    <%= inputs_for f, :permissions, fn prms -> %>
+        <div class="row">
+            <div class="col-md-1">
+              <div class="checkbox">
+                <label>
+                  <%= if is_nil(prms.data.temp_id) do %>
+                    <%= checkbox prms, :delete %>
+                    <%= hidden_input prms, :permission_id %>
+                  <% else %>
+                    <%= hidden_input prms, :temp_id %>
+                    <%= hidden_input prms, :permission_id %>
+                    <a class="m-2" href="#" phx-click="remove-permission" phx-value-remove="<%= prms.data.temp_id %>"
+                        phx-target=<%= @myself %>><i class="fas fa-times"></i>
+                    </a>
+                  <% end %>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-4">
+                <div  class="form-group">
+                  <%= Phoenix.HTML.Form.select(prms, :permission_type, Enum.map(@p_types, &{&1.type, &1.id}), class: "form-control") %>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                <%= @permission_type %>
+                <%= if @permission_type in [1] do %>
+                  <%= Phoenix.HTML.Form.select(f, :ref_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: " form-control") %>
+                  <% end %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+  </div>
 </div>
-
-<div class="form-group row">
-  <%= label f, gettext("birth date"), class: "col-form-label text-sm-left col-sm-2" %>
-  <%= date_select f, :date_of_birth, year: [options: 1900..2100], class: "col-sm-10" %>
-  <%= error_tag f, :date_of_birth %>
-</div>
-
-<div class="form-group row">
-  <% label f, :is_freezed %>
-  <% checkbox f, :is_freezed %>
-  <% error_tag f, :is_freezed %>
-
-  <%= label f, gettext("Admin?"), class: "col-form-label text-sm-left col-sm-3" %>
-  <%= checkbox f, :is_admin %>
-  <%= error_tag f, :is_admin %>
-</div>
-
-<%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary" %>
 </form>

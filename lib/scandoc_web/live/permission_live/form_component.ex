@@ -44,7 +44,7 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
     vendQ = from u in Vendor, select: [:id, :vendor_name, :contact_name]
     vendors = vendQ |> Repo.all()
 
-    s = schools |> Enum.at(0)
+    s = schools |> hd
 
     sid =
       case s do

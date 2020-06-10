@@ -2,6 +2,8 @@ defmodule Scandoc.Employees.Employee do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Scandoc.Permissions.Permission
+
   schema "users" do
     field :date_of_birth, :date
     field :full_name, :string
@@ -14,21 +16,27 @@ defmodule Scandoc.Employees.Employee do
     field :classroom_id, :integer, virtual: true
     field :zehut, :string
 
+    has_many :permissions, Permission, foreign_key: :user_id
+
     timestamps()
   end
 
   @doc false
   def changeset(employee, attrs) do
     employee
-    |> cast(attrs, [
-      :zehut,
-      :hashed_password,
-      :full_name,
-      :role,
-      :date_of_birth,
-      :is_freezed,
-      :is_admin
-    ])
+    |> cast(
+         attrs,
+         [
+           :zehut,
+           :hashed_password,
+           :full_name,
+           :role,
+           :date_of_birth,
+           :is_freezed,
+           :is_admin
+         ]
+       )
     |> validate_required([:zehut, :hashed_password, :full_name, :role, :date_of_birth])
+    |> cast_assoc(:permissions)
   end
 end

@@ -14,13 +14,19 @@ defmodule Scandoc.Permissions.Permission do
     field :institute_id, :integer, virtual: true
 
     belongs_to :user, User, references: :id
+
+    field :temp_id, :string, virtual: true
+    field :delete, :boolean, virtual: true, default: false
+
+
+
     timestamps()
   end
 
   @doc false
   def changeset(permission, attrs) do
     permission
-    |> cast(attrs, [:user_id, :permission_type, :ref_id])
+    |> cast(attrs, [:user_id, :permission_type, :ref_id, :delete])
     |> validate_required([:user_id, :permission_type, :ref_id])
   end
 end

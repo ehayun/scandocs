@@ -170,7 +170,7 @@ msgstr "אין לכם הרשאות מתאימות"
 #: lib/scandoc_web/templates/teacher/index.html.eex:18 lib/scandoc_web/templates/user_reset_password/new.html.eex:9
 #: lib/scandoc_web/templates/user_session/new.html.eex:15
 msgid "Zehut"
-msgstr "מספר זהות"
+msgstr " זהות"
 
 #, elixir-format
 #: lib/scandoc_web/templates/layout/translations.html.eex:6

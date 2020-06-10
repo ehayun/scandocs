@@ -25,7 +25,8 @@ defmodule Scandoc.Employees do
 
     q =
       if query > "" do
-        from(s in q,
+        from(
+          s in q,
           where: ilike(s.full_name, ^"%#{query}%"),
           or_where: like(s.zehut, ^"%#{query}%")
         )
@@ -33,7 +34,9 @@ defmodule Scandoc.Employees do
         q
       end
 
-    q |> order_by(:full_name) |> Repo.paginate(page: current_page, page_size: limit)
+    q
+    |> order_by(:full_name)
+    |> Repo.paginate(page: current_page, page_size: limit)
   end
 
   @doc """
@@ -50,7 +53,12 @@ defmodule Scandoc.Employees do
       ** (Ecto.NoResultsError)
 
   """
-  def get_employee!(id), do: Repo.get!(Employee, id)
+  def get_employee!(id) do
+    Employee
+    |> where(id: ^id)
+    |> preload(:permissions)
+    |> Repo.one
+  end
 
   @doc """
   get classroom where this worker is a teacher
@@ -59,13 +67,22 @@ defmodule Scandoc.Employees do
   """
   def get_classroom(id) do
     if id do
-      s = School |> where(manager_id: ^id) |> Repo.all() |> Enum.at(0)
+      s = School
+          |> where(manager_id: ^id)
+          |> Repo.all()
+          |> Enum.at(0)
 
       c =
         if s do
-          Classroom |> where(school_id: ^s.id) |> Repo.all() |> Enum.at(0)
+          Classroom
+          |> where(school_id: ^s.id)
+          |> Repo.all()
+          |> Enum.at(0)
         else
-          Classroom |> where(teacher_id: ^id) |> Repo.all() |> Enum.at(0)
+          Classroom
+          |> where(teacher_id: ^id)
+          |> Repo.all()
+          |> Enum.at(0)
         end
 
       if s && c do
@@ -99,9 +116,18 @@ defmodule Scandoc.Employees do
 
   """
   def create_employee(attrs \\ %{}) do
-    %Employee{}
-    |> Employee.changeset(attrs)
-    |> Repo.insert()
+    res = %Employee{}
+          |> Employee.changeset(attrs)
+          |> Repo.insert()
+
+    {:ok, %Employee{id: id, zehut: zehut}} = res
+
+    sql = "update users set id = #{zehut} where id = #{id}"
+    Ecto.Adapters.SQL.query!(
+      Scandoc.Repo,
+      sql
+    )
+    res
   end
 
   @doc """
@@ -117,9 +143,18 @@ defmodule Scandoc.Employees do
 
   """
   def update_employee(%Employee{} = employee, attrs) do
-    employee
-    |> Employee.changeset(attrs)
-    |> Repo.update()
+    res = employee
+          |> Employee.changeset(attrs)
+          |> Repo.update()
+
+    {:ok, %Employee{id: id, zehut: zehut}} = res
+
+    sql = "update users set id = #{zehut} where id = #{id}"
+    Ecto.Adapters.SQL.query!(
+      Scandoc.Repo,
+      sql
+    )
+    res
   end
 
   @doc """

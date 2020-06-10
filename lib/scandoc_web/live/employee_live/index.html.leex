@@ -23,7 +23,6 @@
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
-      <th><%= gettext("ID") %></th>
       <th><%= gettext("Zehut") %></th>
       <th><%= gettext("Full name") %></th>
       <th><%= gettext("Role") %></th>
@@ -35,7 +34,6 @@
   <tbody id="employees">
     <%= for employee <- @employees do %>
     <tr id="employee-<%= employee.id %>">
-      <td><%= employee.id %></td>
       <td><%= employee.zehut %></td>
       <td>
         <%= live_patch employee.full_name, to: Routes.employee_index_path(@socket, :edit, employee) %>

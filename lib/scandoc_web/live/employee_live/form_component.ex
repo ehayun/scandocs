@@ -1,13 +1,72 @@
 defmodule ScandocWeb.EmployeeLive.FormComponent do
   use ScandocWeb, :live_component
 
+  import Ecto.Query
+  alias Scandoc.Repo
+
+  alias Scandoc.Accounts.User
+  alias Scandoc.Schools.School
+  alias Scandoc.Classrooms
+  alias Scandoc.Students.Student
+  alias Scandoc.Institutes.Institute
+  alias Scandoc.Vendors.Vendor
+
   alias Scandoc.Employees
   alias Scandoc.Schools
-  alias Scandoc.Classrooms
+  alias Scandoc.Classrooms.Classroom
+
+
+  alias Scandoc.Permissions
 
   @impl true
   def update(%{employee: employee} = assigns, socket) do
+    p_types = [
+      %{id: Permissions.getLevelToInt(:allow_all), type: "ללא הגבלה"},
+      %{id: Permissions.getLevelToInt(:allow_school), type: " הרשאת בית ספר"},
+      %{id: Permissions.getLevelToInt(:allow_classroom), type: " הרשאת כיתה"},
+      %{id: Permissions.getLevelToInt(:allow_student), type: " הרשאת תלמיד"},
+      %{id: Permissions.getLevelToInt(:allow_institute), type: " הרשאת מוסד"},
+      %{id: Permissions.getLevelToInt(:allow_vendor), type: " הרשאת ספק"}
+    ]
+
+
+    uQ = from u in User, where: u.role != "000", select: [:id, :full_name], order_by: u.full_name
+    users = uQ
+            |> Repo.all()
+
+    sQ = from u in School, select: [:id, :school_name]
+    schools = sQ
+              |> Repo.all()
+
+    stdQ = from u in Student, select: [:id, :full_name, :student_zehut]
+    students = stdQ
+               |> Repo.all()
+
+    instQ = from u in Institute, select: [:id, :code, :title]
+    institutes = instQ
+                 |> Repo.all()
+
+    vendQ = from u in Vendor, select: [:id, :vendor_name, :contact_name]
+    vendors = vendQ
+              |> Repo.all()
+
+    s = schools
+        |> hd
+
+    sid =
+      case s do
+        nil -> -1
+        _ -> s.id
+      end
+
+    cQ = Classroom
+         |> where(school_id: ^sid)
+
+    classrooms = cQ
+                 |> Repo.all()
+
     {school_id, classroom_id} = Employees.get_classroom(employee.id)
+
     employee = Map.merge(employee, %{school_id: school_id, classroom_id: classroom_id})
     changeset = Employees.change_employee(employee)
     roles = Employees.list_roles()
@@ -25,18 +84,23 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       socket
       |> assign(assigns)
       |> assign(roles: roles)
+      |> assign(tabnum: 1)
+      |> assign(permission_type: -1)
       |> assign(id: employee.id)
+      |> assign(full_name: employee.full_name)
       |> assign(role: role)
       |> assign(school_id: school_id)
       |> assign(classroom_id: classroom_id)
       |> assign(schools: schools)
+      |> assign(p_types: p_types)
       |> assign(classrooms: classrooms)
       |> assign(:changeset, changeset)
     }
   end
 
   @impl true
-  def handle_event("validate", %{"employee" => employee_params}, socket) do
+  def handle_event("validate", params, socket) do
+    %{"employee" => employee_params} = params
     %{
       "role" => role
     } = employee_params
@@ -53,13 +117,46 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       List.insert_at(classrooms, 0, %{id: -1, classroom_name: gettext("Select classroom")})
 
     socket = assign(socket, role: role, school_id: school_id, classrooms: classrooms)
+    #    socket = assign(socket, )
 
     changeset =
       socket.assigns.employee
       |> Employees.change_employee(employee_params)
       |> Map.put(:action, :validate)
 
-    {:noreply, assign(socket, :changeset, changeset)}
+    IO.inspect(changeset.changes, label: "xxx")
+    cs = case changeset.changes do
+      %{
+        permissions: permissions
+      } -> permissions
+           IO.inspect("perm")
+           permissions
+           |> hd
+      res -> IO.inspect(res, label: "res")
+             nil
+    end
+
+    pt = if cs do
+      IO.inspect(cs.changes, label: "ggg")
+      case cs.changes do
+        %{permission_type: pt} -> pt
+        _ -> 1
+      end
+    else
+      -1
+    end
+
+    {:noreply, assign(socket, changeset: changeset, permission_type: pt)}
+  end
+
+  @impl true
+  def handle_event("setTab", %{"tabid" => tabnum}, socket) do
+    {:noreply, assign(socket, tabnum: String.to_integer(tabnum))}
+  end
+
+  @impl true
+  def handle_event("add-permission", _params, socket) do
+    {:noreply, socket}
   end
 
   def handle_event("save", %{"employee" => employee_params}, socket) do
@@ -117,7 +214,6 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset, label: "error")
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end
@@ -132,7 +228,6 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset, label: "error")
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
