@@ -120,13 +120,15 @@ defmodule Scandoc.Employees do
           |> Employee.changeset(attrs)
           |> Repo.insert()
 
-    {:ok, %Employee{id: id, zehut: zehut}} = res
-
-    sql = "update users set id = #{zehut} where id = #{id}"
-    Ecto.Adapters.SQL.query!(
-      Scandoc.Repo,
-      sql
-    )
+    case res do
+      {:ok, %Employee{id: id, zehut: zehut}} ->
+        sql = "update users set id = #{zehut} where id = #{id}"
+        Ecto.Adapters.SQL.query!(
+          Scandoc.Repo,
+          sql
+        )
+      res -> res
+    end
     res
   end
 
@@ -147,13 +149,17 @@ defmodule Scandoc.Employees do
           |> Employee.changeset(attrs)
           |> Repo.update()
 
-    {:ok, %Employee{id: id, zehut: zehut}} = res
+    case res do
+      {:ok, %Employee{id: id, zehut: zehut}} ->
 
-    sql = "update users set id = #{zehut} where id = #{id}"
-    Ecto.Adapters.SQL.query!(
-      Scandoc.Repo,
-      sql
-    )
+
+        sql = "update users set id = #{zehut} where id = #{id}"
+        Ecto.Adapters.SQL.query!(
+          Scandoc.Repo,
+          sql
+        )
+      res -> res
+    end
     res
   end
 

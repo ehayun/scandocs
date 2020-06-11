@@ -27,8 +27,6 @@ defmodule ScandocWeb.TransportationLive.FormComponent do
     existing_contacts =
       Map.get(socket.assigns.changeset.changes, :contacts, socket.assigns.transportation.contacts)
 
-    IO.inspect(existing_contacts)
-
     contacts =
       existing_contacts
       |> Enum.concat([

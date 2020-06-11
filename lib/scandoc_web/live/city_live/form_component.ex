@@ -127,8 +127,6 @@ defmodule ScandocWeb.CityLive.FormComponent do
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset)
-
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end
@@ -144,7 +142,6 @@ defmodule ScandocWeb.CityLive.FormComponent do
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset)
         {:noreply, assign(socket, changeset: changeset)}
     end
   end

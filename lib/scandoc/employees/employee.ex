@@ -14,7 +14,7 @@ defmodule Scandoc.Employees.Employee do
     field :role, :string, default: "030"
     field :school_id, :integer, virtual: true
     field :classroom_id, :integer, virtual: true
-    field :zehut, :string
+    field :zehut, :string, unique: true
 
     has_many :permissions, Permission, foreign_key: :user_id
 
@@ -38,5 +38,6 @@ defmodule Scandoc.Employees.Employee do
        )
     |> validate_required([:zehut, :hashed_password, :full_name, :role, :date_of_birth])
     |> cast_assoc(:permissions)
+    |> unique_constraint(:zehut)
   end
 end

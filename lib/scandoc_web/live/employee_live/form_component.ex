@@ -124,20 +124,17 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       |> Employees.change_employee(employee_params)
       |> Map.put(:action, :validate)
 
-    IO.inspect(changeset.changes, label: "xxx")
     cs = case changeset.changes do
       %{
         permissions: permissions
       } -> permissions
-           IO.inspect("perm")
            permissions
            |> hd
-      res -> IO.inspect(res, label: "res")
+      res ->
              nil
     end
 
     pt = if cs do
-      IO.inspect(cs.changes, label: "ggg")
       case cs.changes do
         %{permission_type: pt} -> pt
         _ -> 1
@@ -206,7 +203,8 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
 
   defp save_employee(socket, :edit, employee_params) do
     case Employees.update_employee(socket.assigns.employee, employee_params) do
-      {:ok, _employee} ->
+      {:ok, employee} ->
+        %{id: id, zehut: zehut} = employee
         {
           :noreply,
           socket
@@ -220,7 +218,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
 
   defp save_employee(socket, :new, employee_params) do
     case Employees.create_employee(employee_params) do
-      {:ok, _employee} ->
+      {:ok, employee} ->
         {
           :noreply,
           socket

@@ -146,8 +146,6 @@ defmodule ScandocWeb.StudentLive.Edit do
     existing_contacts =
       Map.get(socket.assigns.changeset.changes, :contacts, socket.assigns.student.contacts)
 
-    IO.inspect(existing_contacts)
-
     contacts =
       existing_contacts
       |> Enum.concat([
@@ -214,7 +212,6 @@ defmodule ScandocWeb.StudentLive.Edit do
          |> push_redirect(to: Routes.student_index_path(socket, :index))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset, label: "error")
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end
