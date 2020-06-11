@@ -3,6 +3,12 @@
   <%= gettext("Listing permissions") %>
 
   <%= live_patch  gettext("Add New"), to: Routes.permission_index_path(@socket, :new), class: "float-left btn btn-primary" %>
+  <span class="float-left">
+      <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
+        <input class="form-control" type="text" value='<%= @search %>' name="search"
+          placeholder='<%= gettext("Search by zehut or name")%>'>
+      </form>
+    </span>
 </h2>
 
 <%= if @live_action in [:new, :edit] do %>
@@ -17,6 +23,7 @@
 <table class="table table-striped">
   <thead class="thead-dark">
     <tr>
+      <th><%= gettext("Zehut") %></th>
       <th><%= gettext("User name") %></th>
       <th><%= gettext("Permission level") %></th>
       <th><%= gettext("Permission Ref") %></th>
@@ -27,6 +34,7 @@
   <tbody id="permissions">
     <%= for permission <- @permissions, permission.user  do %>
     <tr id="permission-<%= permission.id %>">
+      <td><%= permission.user.zehut %></td>
       <td><%= permission.user.full_name %></td>
       <td><%= getPermissionType(permission.permission_type) %></td>
       <td><%= getPermissionRef(permission.permission_type, permission.ref_id) %></td>

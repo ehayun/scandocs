@@ -41,10 +41,10 @@
 <%= for p <- @permissions do %>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <%= getPermissionType(p.permission_type) %>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <%= getPermissionRef(p.permission_type, p.ref_id) %>
         </div>
     </div>
