@@ -7,6 +7,8 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   alias Scandoc.Accounts.User
   alias Scandoc.Schools.School
   alias Scandoc.Classrooms
+  alias Scandoc.Permissions
+  alias Scandoc.Permissions.Permission
   alias Scandoc.Students.Student
   alias Scandoc.Institutes.Institute
   alias Scandoc.Vendors.Vendor
@@ -131,7 +133,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
            permissions
            |> hd
       res ->
-             nil
+        nil
     end
 
     pt = if cs do
@@ -153,7 +155,29 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
 
   @impl true
   def handle_event("add-permission", _params, socket) do
-    {:noreply, socket}
+    existing_permissions =
+      Map.get(socket.assigns.changeset.changes, :permissions, socket.assigns.employee.permissions)
+    IO.inspect(existing_permissions)
+    permissions =
+      existing_permissions
+      |> Enum.concat(
+           [
+             # NOTE temp_id
+             Permissions.change_permission(
+               %Permission{
+                 user_id: socket.assigns.employee.id,
+                 temp_id: get_temp_id()
+               }
+             )
+           ]
+         )
+
+    changeset =
+      socket.assigns.changeset
+      |> Ecto.Changeset.put_assoc(:permissions, permissions)
+    IO.inspect(changeset, label: "add permission")
+    {:noreply, assign(socket, changeset: changeset)}
+
   end
 
   def handle_event("save", %{"employee" => employee_params}, socket) do
@@ -229,4 +253,11 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
         {:noreply, assign(socket, changeset: changeset)}
     end
   end
+
+  defp get_temp_id,
+       do:
+         :crypto.strong_rand_bytes(5)
+         |> Base.url_encode64()
+         |> binary_part(0, 5)
+
 end

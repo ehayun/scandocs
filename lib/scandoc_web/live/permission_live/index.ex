@@ -9,10 +9,12 @@ defmodule ScandocWeb.PermissionLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok,
-     socket
-     |> assign(:startEdit, 0)
-     |> assign(:permissions, fetch_permissions())}
+    {
+      :ok,
+      socket
+      |> assign(:startEdit, 0)
+      |> assign(:permissions, fetch_permissions())
+    }
   end
 
   @impl true
@@ -26,10 +28,15 @@ defmodule ScandocWeb.PermissionLive.Index do
     |> assign(:permission, Permissions.get_permission!(id))
   end
 
-  defp apply_action(socket, :new, _params) do
+  defp apply_action(socket, :new, params) do
+    permission_cs = case params do
+      %{"user_id" => user_id} -> %Permission{user_id: String.to_integer(user_id)}
+      _ -> %Permission{}
+    end
+
     socket
     |> assign(:page_title, gettext("New Permission"))
-    |> assign(:permission, %Permission{})
+    |> assign(:permission, permission_cs)
   end
 
   defp apply_action(socket, :index, _params) do

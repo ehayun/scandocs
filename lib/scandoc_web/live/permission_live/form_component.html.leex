@@ -36,4 +36,17 @@
 <div class="form-group mt-2">
   <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary" %>
 </div>
+
+<hr>
+<%= for p <- @permissions do %>
+
+    <div class="row">
+        <div class="col-md-4">
+            <%= getPermissionType(p.permission_type) %>
+        </div>
+        <div class="col-md-6">
+            <%= getPermissionRef(p.permission_type, p.ref_id) %>
+        </div>
+    </div>
+ <% end %>
 </form>

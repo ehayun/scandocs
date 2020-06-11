@@ -17,6 +17,12 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
   def update(%{permission: permission} = assigns, socket) do
     changeset = Permissions.change_permission(permission)
 
+    permissions = if permission.user_id do
+      Permissions.list_permissions(permission.user_id)
+    else
+      []
+    end
+
     p_types = [
       %{id: Permissions.getLevelToInt(:allow_all), type: "ללא הגבלה"},
       %{id: Permissions.getLevelToInt(:allow_school), type: " הרשאת בית ספר"},
@@ -30,21 +36,27 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
     ref_id = permission.ref_id
 
     uQ = from u in User, where: u.role != "000", select: [:id, :full_name], order_by: u.full_name
-    users = uQ |> Repo.all()
+    users = uQ
+            |> Repo.all()
 
     sQ = from u in School, select: [:id, :school_name]
-    schools = sQ |> Repo.all()
+    schools = sQ
+              |> Repo.all()
 
     stdQ = from u in Student, select: [:id, :full_name, :student_zehut]
-    students = stdQ |> Repo.all()
+    students = stdQ
+               |> Repo.all()
 
     instQ = from u in Institute, select: [:id, :code, :title]
-    institutes = instQ |> Repo.all()
+    institutes = instQ
+                 |> Repo.all()
 
     vendQ = from u in Vendor, select: [:id, :vendor_name, :contact_name]
-    vendors = vendQ |> Repo.all()
+    vendors = vendQ
+              |> Repo.all()
 
-    s = schools |> hd
+    s = schools
+        |> hd
 
     sid =
       case s do
@@ -52,22 +64,27 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
         _ -> s.id
       end
 
-    cQ = Classroom |> where(school_id: ^sid)
-    classrooms = cQ |> Repo.all()
+    cQ = Classroom
+         |> where(school_id: ^sid)
+    classrooms = cQ
+                 |> Repo.all()
 
     socket = assign(socket, users: users, schools: schools, students: students)
 
-    {:ok,
-     socket
-     |> assign(assigns)
-     |> assign(:user_id, permission.user_id)
-     |> assign(p_types: p_types)
-     |> assign(permission_type: permission_type)
-     |> assign(classrooms: classrooms)
-     |> assign(institutes: institutes)
-     |> assign(vendors: vendors)
-     |> assign(ref_id: ref_id)
-     |> assign(:changeset, changeset)}
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:user_id, permission.user_id)
+      |> assign(p_types: p_types)
+      |> assign(permissions: permissions)
+      |> assign(permission_type: permission_type)
+      |> assign(classrooms: classrooms)
+      |> assign(institutes: institutes)
+      |> assign(vendors: vendors)
+      |> assign(ref_id: ref_id)
+      |> assign(:changeset, changeset)
+    }
   end
 
   @impl true
@@ -95,8 +112,10 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
 
     classrooms =
       if school_id > 0 do
-        cQ = Classroom |> where(school_id: ^school_id)
-        cQ |> Repo.all()
+        cQ = Classroom
+             |> where(school_id: ^school_id)
+        cQ
+        |> Repo.all()
       else
         socket.assigns.classrooms
       end
@@ -106,12 +125,18 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
       |> Permissions.change_permission(permission_params)
       |> Map.put(:action, :validate)
 
-    {:noreply,
-     socket
-     |> assign(:changeset, changeset)
-     |> assign(permission_type: permission_type)
-     |> assign(classrooms: classrooms)
-     |> assign(ref_id: ref_id)}
+    {
+      :noreply,
+      socket
+      |> assign(:changeset, changeset)
+      |> assign(permission_type: permission_type)
+      |> assign(classrooms: classrooms)
+      |> assign(ref_id: ref_id)
+    }
+  end
+
+  def handle_event("save", %{"permission" => permission_params}, socket) do
+    save_permission(socket, socket.assigns.action, permission_params)
   end
 
   def handle_event("save", %{"permission" => permission_params}, socket) do
@@ -124,11 +149,12 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
 
   defp save_permission(socket, :edit, permission_params) do
     case Permissions.update_permission(socket.assigns.permission, permission_params) do
-      {:ok, _permission} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, gettext("Permission updated successfully"))
-         |> push_redirect(to: socket.assigns.return_to)}
+      {:ok, permission} ->
+        {
+          :noreply,
+          socket
+          |> push_redirect(to: Routes.permission_index_path(socket, :new, user_id: permission.user_id))
+        }
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
@@ -137,11 +163,13 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
 
   defp save_permission(socket, :new, permission_params) do
     case Permissions.create_permission(permission_params) do
-      {:ok, _permission} ->
-        {:noreply,
-         socket
-         |> put_flash(:info, gettext("Permission created successfully"))
-         |> push_redirect(to: socket.assigns.return_to)}
+      {:ok, permission} ->
+        {
+          :noreply,
+          socket
+          |> push_redirect(to: Routes.permission_index_path(socket, :new, user_id: permission.user_id))
+
+        }
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

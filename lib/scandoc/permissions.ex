@@ -22,6 +22,10 @@ defmodule Scandoc.Permissions do
       [%Permission{}, ...]
 
   """
+  def list_permissions(user_id) do
+    Permission |> where(user_id: ^user_id) |> Repo.all()
+  end
+
   def list_permissions do
     Repo.all(Permission)
   end

@@ -17,7 +17,7 @@
   </li>
   <li class="nav-item m-1 p-1">
     <a phx-click="setTab" phx-value-tabid="2" phx-target=<%= @myself %>
-      class='hidden nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab"
+      class='nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab"
       href="#menuRoles"><%= gettext("Permissions") %></a>
   </li>
 
@@ -65,53 +65,25 @@
       <%= error_tag f, :is_admin %>
     </div>
   </div>
+    <!-- Roles -->
   <div id="menuRoles" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
-  <a href="#" phx-click="add-permission" phx-target=<%= @myself %> class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
     <div class="row">
-        <div class="col-md-1">
-          <%= gettext("Delete") %>
-        </div>
         <div class="col-md-4">
-          <%= gettext("Permission level") %>
+          <span class="border-bottom"><%= gettext("Permission level") %></span>
         </div>
         <div class="col-md-3">
-          <%= gettext("Permission Ref") %>
-        </div>
-        <div class="col-md-3">
-           <%= gettext("") %>
+          <span class="border-bottom"><%= gettext("Permission Ref") %></span>
         </div>
     </div>
 
     <%= inputs_for f, :permissions, fn prms -> %>
         <div class="row">
-            <div class="col-md-1">
-              <div class="checkbox">
-                <label>
-                  <%= if is_nil(prms.data.temp_id) do %>
-                    <%= checkbox prms, :delete %>
-                    <%= hidden_input prms, :permission_id %>
-                  <% else %>
-                    <%= hidden_input prms, :temp_id %>
-                    <%= hidden_input prms, :permission_id %>
-                    <a class="m-2" href="#" phx-click="remove-permission" phx-value-remove="<%= prms.data.temp_id %>"
-                        phx-target=<%= @myself %>><i class="fas fa-times"></i>
-                    </a>
-                  <% end %>
-                </label>
-              </div>
-            </div>
+
             <div class="col-md-4">
-                <div  class="form-group">
-                  <%= Phoenix.HTML.Form.select(prms, :permission_type, Enum.map(@p_types, &{&1.type, &1.id}), class: "form-control") %>
-                </div>
+                <%= getPermissionType(prms.data.permission_type) %>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                <%= @permission_type %>
-                <%= if @permission_type in [1] do %>
-                  <%= Phoenix.HTML.Form.select(f, :ref_id, Enum.map(@schools, &{&1.school_name, &1.id}), class: " form-control") %>
-                  <% end %>
-                </div>
+            <div class="col-md-6">
+                <%= getPermissionRef(prms.data.permission_type, prms.data.ref_id) %>
             </div>
         </div>
     <% end %>
