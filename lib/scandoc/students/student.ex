@@ -61,7 +61,6 @@ defmodule Scandoc.Students.Student do
       :mother_zehut
     ])
     |> validate_required([:student_zehut, :first_name, :last_name, :classroom_id, :full_name])
-    |> unique_constraint(:student_zehut)
     |> cast_assoc(:comments)
     |> set_fullname()
     |> cast_assoc(:contacts)

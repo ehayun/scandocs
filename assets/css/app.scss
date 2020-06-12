@@ -64,7 +64,10 @@ label {
 }
 
 .border-bottom {
-  border-bottom: 2px solid $primary !important;
+  border-bottom: 2px solid $app-blue !important;
+}
+.border-top {
+  border-top: 2px solid $app-blue !important;
 }
 
 .nav-tabs .nav-link.active,

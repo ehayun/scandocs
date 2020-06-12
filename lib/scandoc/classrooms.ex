@@ -48,7 +48,6 @@ defmodule Scandoc.Classrooms do
 
   """
   def get_classroom!(id) do
-    IO.inspect(id, label: "get classroom")
     Classroom |> where(id: ^id) |> preload(:school) |> preload(:teacher) |> Repo.one()
     end
 

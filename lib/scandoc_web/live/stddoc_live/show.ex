@@ -4,12 +4,13 @@ defmodule ScandocWeb.StddocLive.Show do
   alias Scandoc.Students
 
   alias Scandoc.Documents
+  alias Scandoc.Student.Show.{Contacts, Comments, Details}
 
   @impl true
   def mount(_params, _session, socket) do
     docgroups = Documents.list_student_docgroups()
 
-    {:ok, assign(socket, docgroups: docgroups, filter_by: nil, search: "")}
+    {:ok, assign(socket, docgroups: docgroups, tabnum: 1, filter_by: nil, search: "")}
   end
 
   @impl true
@@ -61,24 +62,33 @@ defmodule ScandocWeb.StddocLive.Show do
           end
         end
 
-      {:noreply,
-       socket
-       |> assign(:page_title, page_title(socket.assigns.live_action))
-       |> assign(:student, student)
-       |> assign(:stam, "show student")
-       |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
-       |> assign(:document_name, png)
-       |> assign(:stddoc, stddoc)}
+      {
+        :noreply,
+        socket
+        |> assign(:page_title, page_title(socket.assigns.live_action))
+        |> assign(:student, student)
+        |> assign(:stam, "show student")
+        |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
+        |> assign(:document_name, png)
+        |> assign(:stddoc, stddoc)
+      }
     else
-      {:noreply,
-       socket
-       |> assign(:page_title, page_title(socket.assigns.live_action))
-       |> assign(:student, student)
-       |> assign(:stam, "show student")
-       |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
-       |> assign(:document_name, "")
-       |> assign(:stddoc, stddoc)}
+      {
+        :noreply,
+        socket
+        |> assign(:page_title, page_title(socket.assigns.live_action))
+        |> assign(:student, student)
+        |> assign(:stam, "show student")
+        |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
+        |> assign(:document_name, "")
+        |> assign(:stddoc, stddoc)
+      }
     end
+  end
+
+  @impl true
+  def handle_event("setTab", %{"tabid" => tabnum}, socket) do
+    {:noreply, assign(socket, tabnum: String.to_integer(tabnum))}
   end
 
   @impl true

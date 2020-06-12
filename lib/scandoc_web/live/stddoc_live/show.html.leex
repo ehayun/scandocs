@@ -1,6 +1,6 @@
 <header>
   <i class="fas fa-user-graduate"></i>
-  <%= @student.full_name %>
+  <%= link @student.full_name, to: Routes.student_edit_path(@socket, :edit, @student) %>
   &nbsp;<small>
     <%= gettext("Classroom") %>: <%= link @student.classroom.classroom_name, to: Routes.classroom_path(@socket, :show, @student.classroom) %>
     &nbsp; <%= gettext("School") %>: <%= link getSchoolName(@student.classroom.school_id), to: Routes.classroom_path(@socket, :show, @student.classroom) %>
@@ -8,7 +8,49 @@
   <span class="btn btn-primary float-left"><%= live_redirect gettext("Listing Students"), to: Routes.student_index_path(@socket, :index) %></span>
 </header>
 
+<ul class="nav nav-tabs">
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="1" class='nav-link <%= if @tabnum == 1, do: "active" %>' data-toggle="tab"
+      href="#menuDetails"><%= gettext("General details") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+      <a phx-click="setTab" phx-value-tabid="2" class='nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab"
+        href="#menuDocuments"><%= gettext("Documents") %></a>
+    </li>
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="3" class='nav-link <%= if @tabnum == 3, do: "active" %>' data-toggle="tab"
+      href="#menuContacts"><%= gettext("Contacts") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="4" class='nav-link <%= if @tabnum == 4, do: "active" %>' data-toggle="tab"
+      href="#menuCommities"><%= gettext("Placement Committees") %></a>
+  </li>
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="5" class='nav-link <%= if @tabnum == 5, do: "active" %>' data-toggle="tab"
+      href="#menuWellfareCommities"><%= gettext("Welfare committees") %></a>
+  </li>
 
+  <li class="nav-item m-1 p-1">
+    <a phx-click="setTab" phx-value-tabid="6" class='nav-link <%= if @tabnum == 6, do: "active" %>' data-toggle="tab"
+      href="#menuComments"><%= gettext("Comments") %></a>
+  </li>
+</ul>
+
+
+<div class="tab-content border-top p-2">
+  <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>">
+    <%= live_component @socket, Details, student: @student %>
+  </div>
+
+<div id="menuContacts" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>">
+    <%= live_component @socket, Contacts, student: @student %>
+  </div>
+
+<div id="menuContacts" class="container tab-pane  <%= if @tabnum == 6, do: "active" %>">
+    <%= live_component @socket, Comments, student: @student %>
+  </div>
+
+<div id="menuDocuments" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
 <div class="row">
   <ul class="nav nav-pills mb-4 d-flex flex-column flex-md-row" data-config-id="tabs">
     <li phx-click="filter_by" phx-value-id="<%= nil %>" class="nav-item"><a class='nav-link p-2 ml-2 badge badge-info <%= if @filter_by == nil , do: "list-active " %>' href="#"><%= gettext("show all") %></a></li>
@@ -48,3 +90,8 @@
     </tr>
     <% end %>
   </tbody>
+</table>
+
+</div>
+</div>
+

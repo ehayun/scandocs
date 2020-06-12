@@ -1,22 +1,12 @@
 defmodule ScandocWeb.EmployeeLive.FormComponent do
   use ScandocWeb, :live_component
 
-  import Ecto.Query
-  alias Scandoc.Repo
-
-  alias Scandoc.Accounts.User
-  alias Scandoc.Schools.School
+  alias Scandoc.Schools
   alias Scandoc.Classrooms
   alias Scandoc.Permissions
   alias Scandoc.Permissions.Permission
-  alias Scandoc.Students.Student
-  alias Scandoc.Institutes.Institute
-  alias Scandoc.Vendors.Vendor
 
   alias Scandoc.Employees
-  alias Scandoc.Schools
-  alias Scandoc.Classrooms.Classroom
-
 
   alias Scandoc.Permissions
 
@@ -32,40 +22,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
     ]
 
 
-    uQ = from u in User, where: u.role != "000", select: [:id, :full_name], order_by: u.full_name
-    users = uQ
-            |> Repo.all()
 
-    sQ = from u in School, select: [:id, :school_name]
-    schools = sQ
-              |> Repo.all()
-
-    stdQ = from u in Student, select: [:id, :full_name, :student_zehut]
-    students = stdQ
-               |> Repo.all()
-
-    instQ = from u in Institute, select: [:id, :code, :title]
-    institutes = instQ
-                 |> Repo.all()
-
-    vendQ = from u in Vendor, select: [:id, :vendor_name, :contact_name]
-    vendors = vendQ
-              |> Repo.all()
-
-    s = schools
-        |> hd
-
-    sid =
-      case s do
-        nil -> -1
-        _ -> s.id
-      end
-
-    cQ = Classroom
-         |> where(school_id: ^sid)
-
-    classrooms = cQ
-                 |> Repo.all()
 
     {school_id, classroom_id} = Employees.get_classroom(employee.id)
 
@@ -126,26 +83,8 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       |> Employees.change_employee(employee_params)
       |> Map.put(:action, :validate)
 
-    cs = case changeset.changes do
-      %{
-        permissions: permissions
-      } -> permissions
-           permissions
-           |> hd
-      res ->
-        nil
-    end
 
-    pt = if cs do
-      case cs.changes do
-        %{permission_type: pt} -> pt
-        _ -> 1
-      end
-    else
-      -1
-    end
-
-    {:noreply, assign(socket, changeset: changeset, permission_type: pt)}
+    {:noreply, assign(socket, changeset: changeset)}
   end
 
   @impl true
@@ -228,7 +167,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   defp save_employee(socket, :edit, employee_params) do
     case Employees.update_employee(socket.assigns.employee, employee_params) do
       {:ok, employee} ->
-        %{id: id, zehut: zehut} = employee
+        %{id: _id, zehut: _zehut} = employee
         {
           :noreply,
           socket
@@ -242,7 +181,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
 
   defp save_employee(socket, :new, employee_params) do
     case Employees.create_employee(employee_params) do
-      {:ok, employee} ->
+      {:ok, _employee} ->
         {
           :noreply,
           socket

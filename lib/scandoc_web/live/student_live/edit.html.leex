@@ -3,7 +3,7 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-<header><%=  @student.full_name%>
+<header><%= live_redirect @student.full_name, to: Routes.stddoc_show_path(@socket, :show, @student) %>
   <%= live_redirect gettext("Listing Students"), to: Routes.student_index_path(@socket, :index), class: "btn btn-primary float-left" %>
 </header>
 

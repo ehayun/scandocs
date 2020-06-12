@@ -16,13 +16,15 @@ defmodule ScandocWeb.StudentLive.Show do
     documents = Documents.list_student_documents(id)
     docgroups = Documents.list_student_docgroups()
 
-    {:noreply,
-     socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:student, Students.get_student!(id))
-     |> assign(:display, false)
-     |> assign(:documents, documents)
-     |> assign(:docgroups, docgroups)}
+    {
+      :noreply,
+      socket
+      |> assign(:page_title, page_title(socket.assigns.live_action))
+      |> assign(:student, Students.get_student!(id))
+      |> assign(:display, false)
+      |> assign(:documents, documents)
+      |> assign(:docgroups, docgroups)
+    }
   end
 
   @impl true

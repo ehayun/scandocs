@@ -212,6 +212,7 @@ defmodule ScandocWeb.StudentLive.Edit do
          |> push_redirect(to: Routes.student_index_path(socket, :index))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
+        IO.inspect(changeset)
         {:noreply, assign(socket, :changeset, changeset)}
     end
   end
