@@ -107,11 +107,12 @@ msgstr ""
 #: lib/scandoc_web/live/category_live/form_component.html.leex:25
 #: lib/scandoc_web/live/city_live/form_component.html.leex:24 lib/scandoc_web/live/district_live/form_component.html.leex:10
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/employee_live/form_component.html.leex:9
-#: lib/scandoc_web/live/institute_live/form_component.html.leex:26 lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:37 lib/scandoc_web/live/role_live/form_component.html.leex:26
-#: lib/scandoc_web/live/student_live/edit.html.leex:35 lib/scandoc_web/live/student_live/form_component.html.leex:8
-#: lib/scandoc_web/live/student_live/form_component.html.leex:153 lib/scandoc_web/live/transporttion_live/form_component.html.leex:20
-#: lib/scandoc_web/live/vendor_live/form_component.html.leex:48 lib/scandoc_web/templates/classroom/form.html.eex:25
+#: lib/scandoc_web/live/instdoc_live/form_component.html.leex:23 lib/scandoc_web/live/institute_live/form_component.html.leex:26
+#: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37 lib/scandoc_web/live/permission_live/form_component.html.leex:37
+#: lib/scandoc_web/live/role_live/form_component.html.leex:26 lib/scandoc_web/live/student_live/edit.html.leex:35
+#: lib/scandoc_web/live/student_live/form_component.html.leex:8 lib/scandoc_web/live/student_live/form_component.html.leex:153
+#: lib/scandoc_web/live/transporttion_live/form_component.html.leex:20 lib/scandoc_web/live/vendor_live/form_component.html.leex:48
+#: lib/scandoc_web/templates/classroom/form.html.eex:25
 msgid "Save"
 msgstr ""
 
@@ -796,9 +797,9 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/form_component.html.leex:11
-#: lib/scandoc_web/live/employee_live/form_component.html.leex:16 lib/scandoc_web/live/stddoc_live/show.html.leex:14
-#: lib/scandoc_web/live/student_live/edit.html.leex:15 lib/scandoc_web/live/student_live/form_component.html.leex:14
-#: lib/scandoc_web/live/transporttion_live/form_component.html.leex:11
+#: lib/scandoc_web/live/employee_live/form_component.html.leex:16 lib/scandoc_web/live/instdoc_live/form_component.html.leex:15
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:14 lib/scandoc_web/live/student_live/edit.html.leex:15
+#: lib/scandoc_web/live/student_live/form_component.html.leex:14 lib/scandoc_web/live/transporttion_live/form_component.html.leex:11
 msgid "General details"
 msgstr ""
 
@@ -1175,4 +1176,9 @@ msgstr ""
 #, elixir-format
 #: lib/scandoc_web/live/stddoc_live/components/details.ex:20
 msgid "Birthday"
+msgstr ""
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/form_component.html.leex:19
+msgid "Document Comments"
 msgstr ""

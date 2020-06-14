@@ -10,7 +10,7 @@ defmodule ScandocWeb.StddocLive.Show do
   def mount(_params, _session, socket) do
     docgroups = Documents.list_student_docgroups()
 
-    {:ok, assign(socket, docgroups: docgroups, tabnum: 1, filter_by: nil, search: "")}
+    {:ok, assign(socket, docgroups: docgroups, tabnum: 2, filter_by: nil, search: "")}
   end
 
   @impl true

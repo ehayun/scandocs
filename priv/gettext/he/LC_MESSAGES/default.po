@@ -107,11 +107,12 @@ msgstr "קישור זה אינו תקין או פג תוקף"
 #: lib/scandoc_web/live/category_live/form_component.html.leex:25
 #: lib/scandoc_web/live/city_live/form_component.html.leex:24 lib/scandoc_web/live/district_live/form_component.html.leex:10
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/employee_live/form_component.html.leex:9
-#: lib/scandoc_web/live/institute_live/form_component.html.leex:26 lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37
-#: lib/scandoc_web/live/permission_live/form_component.html.leex:37 lib/scandoc_web/live/role_live/form_component.html.leex:26
-#: lib/scandoc_web/live/student_live/edit.html.leex:35 lib/scandoc_web/live/student_live/form_component.html.leex:8
-#: lib/scandoc_web/live/student_live/form_component.html.leex:153 lib/scandoc_web/live/transporttion_live/form_component.html.leex:20
-#: lib/scandoc_web/live/vendor_live/form_component.html.leex:48 lib/scandoc_web/templates/classroom/form.html.eex:25
+#: lib/scandoc_web/live/instdoc_live/form_component.html.leex:23 lib/scandoc_web/live/institute_live/form_component.html.leex:26
+#: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37 lib/scandoc_web/live/permission_live/form_component.html.leex:37
+#: lib/scandoc_web/live/role_live/form_component.html.leex:26 lib/scandoc_web/live/student_live/edit.html.leex:35
+#: lib/scandoc_web/live/student_live/form_component.html.leex:8 lib/scandoc_web/live/student_live/form_component.html.leex:153
+#: lib/scandoc_web/live/transporttion_live/form_component.html.leex:20 lib/scandoc_web/live/vendor_live/form_component.html.leex:48
+#: lib/scandoc_web/templates/classroom/form.html.eex:25
 msgid "Save"
 msgstr "שמירה"
 
@@ -623,7 +624,7 @@ msgstr "מסמכים"
 #, elixir-format
 #: lib/scandoc_web/live/instdoc_live/index.html.leex:64
 msgid "Institute"
-msgstr "מוסדות"
+msgstr "מוסד"
 
 #, elixir-format
 #: lib/scandoc_web/live/instdoc_live/index.html.leex:67
@@ -726,12 +727,12 @@ msgstr "אסמכתא"
 #, elixir-format
 #: lib/scandoc_web/live/instdoc_live/index.ex:77
 msgid "Edit Instdoc"
-msgstr ""
+msgstr "עדכון מסמך"
 
 #, elixir-format
 #: lib/scandoc_web/live/instdoc_live/index.ex:83
 msgid "New Instdoc"
-msgstr ""
+msgstr "הוספת מסמך"
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/index.html.leex:75
@@ -796,9 +797,9 @@ msgstr "אנשי קשר"
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/form_component.html.leex:11
-#: lib/scandoc_web/live/employee_live/form_component.html.leex:16 lib/scandoc_web/live/stddoc_live/show.html.leex:14
-#: lib/scandoc_web/live/student_live/edit.html.leex:15 lib/scandoc_web/live/student_live/form_component.html.leex:14
-#: lib/scandoc_web/live/transporttion_live/form_component.html.leex:11
+#: lib/scandoc_web/live/employee_live/form_component.html.leex:16 lib/scandoc_web/live/instdoc_live/form_component.html.leex:15
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:14 lib/scandoc_web/live/student_live/edit.html.leex:15
+#: lib/scandoc_web/live/student_live/form_component.html.leex:14 lib/scandoc_web/live/transporttion_live/form_component.html.leex:11
 msgid "General details"
 msgstr "פרטים כללייים"
 
@@ -1176,3 +1177,8 @@ msgstr "הוספת תפקיד"
 #: lib/scandoc_web/live/stddoc_live/components/details.ex:20
 msgid "Birthday"
 msgstr "ת. לידה"
+
+#, elixir-format
+#: lib/scandoc_web/live/instdoc_live/form_component.html.leex:19
+msgid "Document Comments"
+msgstr "הערות למסמך"

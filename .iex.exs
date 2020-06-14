@@ -7,7 +7,7 @@ alias Scandoc.Accounts.User
 alias Scandoc.Classrooms
 alias Scandoc.Classrooms.Classroom
 alias Scandoc.Documents
-alias Scandoc.Documents.{Docgroup, Doctype, Document}
+alias Scandoc.Documents.{Docgroup, Doctype, Document, DocComments}
 alias Scandoc.Employees
 alias Scandoc.Employees.Employee
 alias Scandoc.Institutes

@@ -207,7 +207,7 @@ defmodule Scandoc.Institutes do
       ** (Ecto.NoResultsError)
 
   """
-  def get_instdoc!(id), do: Repo.get!(Instdoc, id)
+  def get_instdoc!(id), do: Instdoc |> where(id: ^id) |> preload(:comments) |> preload(:institute) |> preload(:category) |> preload(:outcome_category) |> preload(:outcome_category) |>  Repo.one
 
   @doc """
   Creates a instdoc.

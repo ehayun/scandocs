@@ -5,6 +5,7 @@ defmodule Scandoc.Institutes.Instdoc do
   alias Scandoc.Institutes.Institute
   alias Scandoc.Categories.Category
   alias Scandoc.Categories.OutcomeCategory
+  alias Scandoc.Documents.DocComments
 
   schema "inst_docs" do
     field :amount, :decimal
@@ -19,6 +20,9 @@ defmodule Scandoc.Institutes.Instdoc do
     field :asmachta, :string
     field :payment_code, :string
     field :vendor_name, :string
+
+    has_many :comments, DocComments, references: :doc_name
+
 
     timestamps()
   end

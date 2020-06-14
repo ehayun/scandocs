@@ -86,10 +86,10 @@
       <td><%= displayDate(instdoc.doc_date) %></td>
       <td><%= displayAmount(instdoc.amount) %></td>
 
-      <td class="hidden">
-        <span><%= live_redirect "Show", to: Routes.instdoc_show_path(@socket, :show, instdoc) %></span>
-        <span><%= live_patch "Edit", to: Routes.instdoc_index_path(@socket, :edit, instdoc) %></span>
-        <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: instdoc.id, data: [confirm: "Are you sure?"] %></span>
+      <td >
+        <span class="hidden"><%= live_redirect "Show", to: Routes.instdoc_show_path(@socket, :show, instdoc) %></span>
+        <span class="hidden"><%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.instdoc_index_path(@socket, :edit, instdoc) %></span>
+        <span class="hidden"><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: instdoc.id, data: [confirm: "Are you sure?"] %></span>
       </td>
     </tr>
     <% end %>

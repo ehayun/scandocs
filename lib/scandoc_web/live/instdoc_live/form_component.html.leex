@@ -1,4 +1,6 @@
-<h2><%= @title %></h2>
+<header>
+<%= @title %>
+</header>
 
 <%= f = form_for @changeset, "#",
   id: "instdoc-form",
@@ -6,45 +8,143 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <%= label f, :institute_id %>
-  <%= text_input f, :institute_id %>
-  <%= error_tag f, :institute_id %>
 
-  <%= label f, :category_id %>
-  <%= number_input f, :category_id %>
-  <%= error_tag f, :category_id %>
+  <ul class="nav nav-tabs">
+    <li class="nav-item m-1 p-1">
+      <a phx-click="setTab" phx-value-tabid="1" class='nav-link <%= if @tabnum == 1, do: "active" %>' data-toggle="tab" phx-target=<%= @myself %>
+        href="#menuDetails"><%= gettext("General details") %></a>
+    </li>
+    <li class="nav-item m-1 p-1">
+      <a phx-click="setTab" phx-value-tabid="2" class='nav-link <%= if @tabnum == 2, do: "active" %>' data-toggle="tab" phx-target=<%= @myself %>
+        href="#menuComments"><%= gettext("Document Comments") %></a>
+    </li>
 
-  <%= label f, :payment_code %>
-  <%= text_input f, :payment_code %>
-  <%= error_tag f, :payment_code %>
+    <span
+      class="float-left ml-4"><%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary float-left mr-4" %></span>
+  </ul>
 
-  <%= label f, :line_code %>
-  <%= text_input f, :line_code %>
-  <%= error_tag f, :line_code %>
+<div class="tab-content border-top p-2">
+  <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>">
+  <%= hidden_input f, :institute_id %>
+  <%= hidden_input f, :category_id %>
+  <%= hidden_input f, :payment_code %>
+  <%= hidden_input f, :line_code %>
+  <%= hidden_input f, :vendor_name %>
+  <%= hidden_input f, :outcome_category_id %>
+  <%= hidden_input f, :doc_date %>
+  <%= hidden_input f, :amount, step: "any" %>
+  <%= hidden_input f, :doc_name %>
+  <%= hidden_input f, :doc_path %>
 
-  <%= label f, :vendor_name %>
-  <%= number_input f, :vendor_name %>
-  <%= error_tag f, :vendor_name %>
+  <ul class="list-group mb-1">
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+        <div>
+          <%= gettext("Institute") %>
+        </div>
+        <span ><%= @instdoc.institute.title %> </span>
+      </li>
 
-  <%= label f, :outcome_category_id %>
-  <%= number_input f, :outcome_category_id %>
-  <%= error_tag f, :outcome_category_id %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <%= gettext("Category") %>
+          </div>
+          <span > <%= @instdoc.category.category_name %>/<%= @instdoc.outcome_category.outcome_description %> </span>
+      </li>
 
-  <%= label f, :doc_date %>
-  <%= date_select f, :doc_date %>
-  <%= error_tag f, :doc_date %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <%= gettext("Payment code") %>
+          </div>
+          <span > <%= @instdoc.payment_code %> </span>
+      </li>
 
-  <%= label f, :amount %>
-  <%= number_input f, :amount, step: "any" %>
-  <%= error_tag f, :amount %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <%= gettext("Line code") %>
+          </div>
+          <span > <%= @instdoc.line_code %> </span>
+      </li>
 
-  <%= label f, :doc_name %>
-  <%= text_input f, :doc_name %>
-  <%= error_tag f, :doc_name %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <%= gettext("Asmachta") %>
+          </div>
+          <span > <%= @instdoc.asmachta %> </span>
+      </li>
 
-  <%= label f, :doc_path %>
-  <%= text_input f, :doc_path %>
-  <%= error_tag f, :doc_path %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <%= gettext("Vendor") %>
+          </div>
+          <span > <%= @instdoc.vendor_name %> </span>
+      </li>
 
-  <%= submit "Save", phx_disable_with: "Saving..." %>
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <%= gettext("Doc date") %>
+          </div>
+          <span > <%= displayDate(@instdoc.doc_date) %> </span>
+      </li>
+
+      <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <%= gettext("Amount") %>
+          </div>
+          <span > <%= displayAmount(@instdoc.amount) %> </span>
+      </li>
+
+  </ul>
+
+
+
+  </div>
+
+    <div id="menuComments" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
+            <a href="#" phx-click="add-address" phx-target=<%= @myself %>
+            class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
+          <div class="row">
+            <div class="col-md-1">
+              <%= gettext("Delete") %>
+            </div>
+            <div class="col-md-4">
+              <%= gettext("Address name") %>
+            </div>
+            <div class="col-md-3">
+              <%= gettext("Full Address ") %>
+            </div>
+          </div>
+    
+          <div class="row">
+            <%= inputs_for f, :comments, fn cmnts -> %>
+            <div class="col-md-1">
+              <div class="checkbox">
+                <label>
+                  <%= if is_nil(cmnts.data.temp_id) do %>
+                  <%= checkbox cmnts, :delete %>
+                  <%= hidden_input cmnts, :document_doc_name %>
+                  <% else %>
+                  <%= hidden_input cmnts, :temp_id %>
+                  <%= hidden_input cmnts, :document_doc_name %>
+                  <a class="m-2" href="#" phx-click="remove-address" phx-value-remove="<%= cmnts.data.temp_id %>"
+                    phx-target=<%= @myself %>><i class="fas fa-times"></i></a>
+                  <% end %>
+                </label>
+              </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                  <%= text_input cmnts, :doc_note, class: "form-control" %>
+                </div>
+            </div>
+
+                  <div class="col-md-12 mb-2 border-bottom">&nbsp;</div>
+    
+            <% end %>
+          </div>
+          
+    </div>
+
+</div>
+
+
 </form>

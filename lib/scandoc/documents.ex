@@ -6,8 +6,7 @@ defmodule Scandoc.Documents do
   import Ecto.Query, warn: false
   alias Scandoc.Repo
 
-  alias Scandoc.Documents.Document
-  alias Scandoc.Documents.Doctype
+  alias Scandoc.Documents.{Document, DocComments, Doctype}
 
   @doc """
   Returns the list of documents.
@@ -319,4 +318,10 @@ defmodule Scandoc.Documents do
   def change_docgroup(%Docgroup{} = docgroup, attrs \\ %{}) do
     Docgroup.changeset(docgroup, attrs)
   end
+
+
+  def change_stddoc_comment(%DocComments{} = doccomment, attrs \\ %{}) do
+    DocComments.changeset(doccomment, attrs)
+  end
+
 end

@@ -1,7 +1,7 @@
 defmodule Scandoc.Students.Stddoc do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Scandoc.Documents.Doctype
+  alias Scandoc.Documents.{Doctype, DocComments}
 
   schema "documents" do
     field :doc_name, :string
@@ -14,6 +14,11 @@ defmodule Scandoc.Students.Stddoc do
     field :ref_date, :date
     field :ref_month, :string
     field :ref_year, :string
+
+    field :temp_id, :string, virtual: true
+    field :delete, :boolean, virtual: true, default: false
+
+    has_many :comments, DocComments, references: :doc_name, foreign_key: :document_doc_name
 
     timestamps()
   end
@@ -44,5 +49,6 @@ defmodule Scandoc.Students.Stddoc do
       :doctype_id,
       :has_picture
     ])
+    |> cast_assoc(:comments)
   end
 end

@@ -189,7 +189,7 @@ defmodule Scandoc.Students do
       ** (Ecto.NoResultsError)
 
   """
-  def get_stddoc!(id), do: Stddoc |> where(id: ^id) |> preload(:doctype) |> Repo.one()
+  def get_stddoc!(id), do: Stddoc |> where(id: ^id) |> preload(:comments) |> preload(:doctype) |> Repo.one()
 
   @doc """
   Creates a stddoc.

@@ -4,31 +4,27 @@
   phx_target: @myself,
   phx_submit: "close-doc" %>
 
-<% doc_path =  @doc_path %>
-<%= text_input f, :ref_id, class: "hidden" %>
-
-<% upload_path = Application.get_env(:scandoc, :full_upload_path) %>
+<a href="#" phx-click="add-comment" phx-target=<%= @myself %>
+        class="btn btn-info mb-1"><%= gettext("Add new ")%></a>
 
 
-<%= if doc_path do %>
-<span class="xhidden">
-  <embed src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://scantzlev.com/uploads/#{doc_path}.pdf" width="90%" height="700">
-</span>
+
+<%= inputs_for f, :comments, fn cmnts -> %>
+<div class="row">
+<div class="col-md-1">
+    <div class="form-group">
+      <%= checkbox cmnts, :done, class: "form-control" %>
+    </div>
+</div>
+<div class="col-md-8">
+    <div class="form-group">
+      <%= text_input cmnts, :doc_note, class: "form-control" %>
+    </div>
+</div>
+</div>
 <% end %>
 
+<hr>
 
-<% "#{upload_path}/#{doc_path}.png" %>
-<br>
-<%= if File.exists?("#{upload_path}/#{doc_path}.png") do %>
-<img src="/uploads/<%= doc_path %>.png">
-<% end %>
-<%= for f <- 0..20 do %>
-<%= if File.exists?("#{upload_path}/#{doc_path}-#{f}.png") do %>
-<img src="/uploads/<%= doc_path %>-<%= f %>.png">
-<% end %>
-<% end %>
-
-
-
-<%= submit gettext("Close"), phx_disable_with: "Closing...", class: "btn btn-primary" %>
+<%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary" %>
 </form>

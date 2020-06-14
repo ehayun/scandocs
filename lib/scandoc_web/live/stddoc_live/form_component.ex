@@ -2,16 +2,20 @@ defmodule ScandocWeb.StddocLive.FormComponent do
   use ScandocWeb, :live_component
 
   alias Scandoc.Students
+  alias Scandoc.Documents
+  alias Scandoc.Documents.DocComments
 
   @impl true
   def update(assigns, socket) do
     %{stddoc: stddoc} = assigns
     changeset = Students.change_stddoc(stddoc)
 
-    {:ok,
-     socket
-     |> assign(assigns)
-     |> assign(:changeset, changeset)}
+    {
+      :ok,
+      socket
+      |> assign(assigns)
+      |> assign(:changeset, changeset)
+    }
   end
 
   # def notupdate(%{stddoc: stddoc} = assigns, socket) do
@@ -27,19 +31,56 @@ defmodule ScandocWeb.StddocLive.FormComponent do
     {:noreply, assign(socket, :changeset, changeset)}
   end
 
-  # =================================================================================
-  def handle_event("close-doc", params, socket) do
-    # =================================================================================
-    student =
-      case params do
-        %{"stddoc" => %{"ref_id" => student}} -> Students.get_student!(student)
-        _ -> 290
-      end
+  @impl true
+  def handle_event("add-comment", _, socket) do
+    existing_comments =
+      Map.get(socket.assigns.changeset.changes, :comments, socket.assigns.stddoc.comments)
 
-    {:noreply,
-     push_patch(socket,
-       student: student,
-       to: Routes.stddoc_show_path(socket, :show, student)
-     )}
+    comments =
+      existing_comments
+      |> Enum.concat(
+           [
+             # NOTE temp_id
+             Documents.change_stddoc_comment(
+               %DocComments{
+                 document_doc_name: socket.assigns.stddoc.doc_name,
+                 temp_id: get_temp_id()
+               }
+             )
+           ]
+         )
+
+
+    changeset =
+      socket.assigns.changeset
+      |> Ecto.Changeset.put_assoc(:comments, comments)
+
+    IO.inspect(changeset)
+
+    {:noreply, assign(socket, changeset: changeset)}
   end
+  # =================================================================================
+  def handle_event("close-doc", stddoc_params, socket) do
+    # =================================================================================
+    IO.inspect(stddoc_params, label: "save")
+    case Students.update_stddoc(socket.assigns.stddoc, stddoc_params) do
+      {:ok, stddoc} ->
+        student = Students.get_student!(stddoc.ref_id)
+        {
+          :noreply,
+          socket
+          |> push_redirect(to: Routes.stddoc_show_path(socket, :show, student, filter: "1"))
+        }
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, :changeset, changeset)}
+    end
+  end
+
+  defp get_temp_id,
+       do:
+         :crypto.strong_rand_bytes(5)
+         |> Base.url_encode64()
+         |> binary_part(0, 5)
+
 end
