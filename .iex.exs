@@ -17,6 +17,6 @@ alias Scandoc.Permissions.Permission
 alias Scandoc.Schools
 alias Scandoc.Schools.{School, Manager, Teacher}
 alias Scandoc.Students
-alias Scandoc.Students.{Student, StudentComment}
+alias Scandoc.Students.{Student, StudentComment, Stddoc}
 alias Scandoc.Tables.City
 

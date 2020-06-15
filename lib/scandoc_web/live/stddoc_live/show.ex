@@ -40,50 +40,16 @@ defmodule ScandocWeb.StddocLive.Show do
         end
       end
 
-    if stddoc do
-      path = stddoc.doc_path
-      path = String.replace(path, "/home/eli", "/downloads")
 
-      png =
-        if File.exists?(".#{path}") do
-          doc_name = Path.basename(path)
-
-          just_name = Path.rootname(doc_name)
-
-          upload_path = Application.get_env(:scandoc, :full_upload_path)
-
-          case pdf_thumbnail(".#{path}", "#{upload_path}/#{just_name}.png") do
-            {:ok, png} ->
-              doc_name = Path.basename(png)
-              Path.rootname(doc_name)
-
-            _ ->
-              nil
-          end
-        end
-
-      {
-        :noreply,
-        socket
-        |> assign(:page_title, page_title(socket.assigns.live_action))
-        |> assign(:student, student)
-        |> assign(:stam, "show student")
-        |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
-        |> assign(:document_name, png)
-        |> assign(:stddoc, stddoc)
-      }
-    else
-      {
-        :noreply,
-        socket
-        |> assign(:page_title, page_title(socket.assigns.live_action))
-        |> assign(:student, student)
-        |> assign(:stam, "show student")
-        |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
-        |> assign(:document_name, "")
-        |> assign(:stddoc, stddoc)
-      }
-    end
+    {
+      :noreply,
+      socket
+      |> assign(:page_title, page_title(socket.assigns.live_action))
+      |> assign(:student, student)
+      |> assign(:stddocs, Students.list_stddocs(id, filter_by, search))
+      |> assign(:document_name, "")
+      |> assign(:stddoc, stddoc)
+    }
   end
 
   @impl true
@@ -112,25 +78,6 @@ defmodule ScandocWeb.StddocLive.Show do
     stddocs = Students.list_stddocs(socket.assigns.student.id, filter_by, search)
 
     {:noreply, assign(socket, stddocs: stddocs, search: search)}
-  end
-
-  defp pdf_thumbnail(pdf_path, thumb_path) do
-    args = ["#{pdf_path}", thumb_path]
-    name = Path.rootname(thumb_path)
-    File.copy!("#{pdf_path}", "#{name}.pdf")
-
-    if File.exists?("#{name}.png") || File.exists?("#{name}-0.png") do
-      {:ok, thumb_path}
-    else
-      result =
-        case System.cmd("convert", args, stderr_to_stdout: true) do
-          {_, 0} -> {:ok, thumb_path}
-          {reason, _} -> {:error, reason}
-        end
-
-      # :timer.sleep(300)
-      result
-    end
   end
 
   defp page_title(:show), do: "Show Stddoc"

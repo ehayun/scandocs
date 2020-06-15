@@ -59,6 +59,7 @@ defmodule Scandoc.MixProject do
       {:money, "~> 1.7"},
       {:mogrify, "~> 0.7.3"},
       {:plasm, "~> 2.0"},
+      {:crudry, "~> 2.2.0"},
       {:plug_cowboy, "~> 2.0"}
     ]
   end

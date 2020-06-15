@@ -7,6 +7,7 @@ defmodule Scandoc.Students do
   alias Scandoc.Repo
 
   alias Scandoc.Students.{Student, StudentComment}
+  alias Scandoc.Documents
   alias Scandoc.Documents.Doctype
 
   @doc """
@@ -19,11 +20,17 @@ defmodule Scandoc.Students do
 
   """
   def list_students do
-    Student |> preload(:classroom) |> preload(:comments) |> Repo.all()
+    Student
+    |> preload(:classroom)
+    |> preload(:comments)
+    |> Repo.all()
   end
 
   def list_students_in_classroom(classroom_id) do
-    Student |> where(classroom_id: ^classroom_id) |> preload(:classroom) |> Repo.all()
+    Student
+    |> where(classroom_id: ^classroom_id)
+    |> preload(:classroom)
+    |> Repo.all()
   end
 
   @doc """
@@ -41,27 +48,43 @@ defmodule Scandoc.Students do
 
   """
   def get_student!(id) do
-    cc = from(sc in StudentComment, order_by: [desc: sc.comment_date])
+    cc = from(
+      sc in StudentComment,
+      order_by: [
+        desc: sc.comment_date
+      ]
+    )
 
-    from(s in Student,
+    from(
+      s in Student,
       where: s.id == ^"#{id}",
       preload: [:city],
       preload: [:contacts],
       preload: [:classroom],
-      preload: [comments: ^cc]
+      preload: [
+        comments: ^cc
+      ]
     )
     |> Repo.one()
   end
 
   def get_student_by_zehut(id) do
-    cc = from(sc in StudentComment, order_by: [desc: sc.comment_date])
+    cc = from(
+      sc in StudentComment,
+      order_by: [
+        desc: sc.comment_date
+      ]
+    )
 
-    from(s in Student,
+    from(
+      s in Student,
       where: s.student_zehut == ^"#{id}",
       preload: [:city],
       preload: [:classroom],
       preload: [:contacts],
-      preload: [comments: ^cc]
+      preload: [
+        comments: ^cc
+      ]
     )
     |> Repo.one()
   end
@@ -143,27 +166,34 @@ defmodule Scandoc.Students do
 
   """
   def list_stddocs(student_id, filter_by \\ nil, search \\ "") do
-    q = Stddoc |> where(ref_id: ^student_id)
+    q = Stddoc
+        |> where(ref_id: ^student_id)
 
     q =
       if filter_by do
         tmp =
-          from(dt in Doctype,
+          from(
+            dt in Doctype,
             where: dt.doc_group_id == ^filter_by,
             where: ilike(dt.doc_name, ^"%#{search}%")
           )
 
-        tmp = tmp |> Repo.all()
-        dgIds = tmp |> Enum.map(fn u -> u.id end)
+        tmp = tmp
+              |> Repo.all()
+        dgIds = tmp
+                |> Enum.map(fn u -> u.id end)
         from(d in q, where: d.doctype_id in ^dgIds)
       else
         tmp =
-          from(dt in Doctype,
+          from(
+            dt in Doctype,
             where: ilike(dt.doc_name, ^"%#{search}%")
           )
 
-        tmp = tmp |> Repo.all()
-        dgIds = tmp |> Enum.map(fn u -> u.id end)
+        tmp = tmp
+              |> Repo.all()
+        dgIds = tmp
+                |> Enum.map(fn u -> u.id end)
         from(d in q, where: d.doctype_id in ^dgIds)
       end
 
@@ -189,7 +219,12 @@ defmodule Scandoc.Students do
       ** (Ecto.NoResultsError)
 
   """
-  def get_stddoc!(id), do: Stddoc |> where(id: ^id) |> preload(:comments) |> preload(:doctype) |> Repo.one()
+  def get_stddoc!(id),
+      do: Stddoc
+          |> where(id: ^id)
+          |> preload(:comments)
+          |> preload(:doctype)
+          |> Repo.one()
 
   @doc """
   Creates a stddoc.
@@ -222,6 +257,44 @@ defmodule Scandoc.Students do
 
   """
   def update_stddoc(%Stddoc{} = stddoc, attrs) do
+
+    %{
+      "stddoc" => %{
+        "comments" => comments
+      }
+    } = attrs
+
+    for {_, c} <- comments do
+      case c do
+        %{"id" => id} ->
+          id = String.to_integer(id)
+          comment = Documents.get_stddoc_comment!(id)
+          case c do
+            %{"doc_note" => ""} -> Documents.delete_stddoc_comment(comment)
+            c ->
+              case c do
+                %{"delete" => "true"} -> Documents.delete_stddoc_comment(comment)
+                c ->
+                  Documents.update_stddoc_comment(comment, c)
+              end
+          end
+        c ->
+          case c do
+            %{"doc_note" => ""} -> nil
+            c ->
+              case c do
+                %{"delete" => "true"} -> nil
+                c ->
+                  Documents.create_stddoc_comment(c)
+              end
+
+          end
+
+      end
+    end
+
+
+    #    attrs = Map.merge(attrs, %{doc_name: stddoc.doc_name})
     stddoc
     |> Stddoc.changeset(attrs)
     |> Repo.update()

@@ -57,7 +57,6 @@ defmodule Scandoc.Util.ImportStudents do
   end
 
   defp addDocument(f, file) do
-    IO.puts("Document #{f} as: #{file}")
     doc_path = Path.rootname(file)
     doc_name = Path.basename(file)
 

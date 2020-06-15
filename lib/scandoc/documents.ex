@@ -320,8 +320,26 @@ defmodule Scandoc.Documents do
   end
 
 
+  def get_stddoc_comment!(id), do: Repo.get!(DocComments, id)
+
   def change_stddoc_comment(%DocComments{} = doccomment, attrs \\ %{}) do
     DocComments.changeset(doccomment, attrs)
+  end
+
+  def create_stddoc_comment(attrs \\ %{}) do
+    %DocComments{}
+    |> DocComments.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_stddoc_comment(%DocComments{} = doccomment, attrs) do
+    doccomment
+    |> DocComments.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_stddoc_comment(%DocComments{} = doccomment) do
+    Repo.delete(doccomment)
   end
 
 end

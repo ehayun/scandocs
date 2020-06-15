@@ -121,10 +121,10 @@
                 <label>
                   <%= if is_nil(cmnts.data.temp_id) do %>
                   <%= checkbox cmnts, :delete %>
-                  <%= hidden_input cmnts, :document_doc_name %>
+                  <%= hidden_input cmnts, :doc_name %>
                   <% else %>
                   <%= hidden_input cmnts, :temp_id %>
-                  <%= hidden_input cmnts, :document_doc_name %>
+                  <%= hidden_input cmnts, :doc_name %>
                   <a class="m-2" href="#" phx-click="remove-address" phx-value-remove="<%= cmnts.data.temp_id %>"
                     phx-target=<%= @myself %>><i class="fas fa-times"></i></a>
                   <% end %>

@@ -18,9 +18,6 @@ defmodule ScandocWeb.StddocLive.FormComponent do
     }
   end
 
-  # def notupdate(%{stddoc: stddoc} = assigns, socket) do
-  # end
-
   @impl true
   def handle_event("validate", %{"stddoc" => stddoc_params}, socket) do
     changeset =
@@ -43,7 +40,7 @@ defmodule ScandocWeb.StddocLive.FormComponent do
              # NOTE temp_id
              Documents.change_stddoc_comment(
                %DocComments{
-                 document_doc_name: socket.assigns.stddoc.doc_name,
+                 doc_name: socket.assigns.stddoc.doc_name,
                  temp_id: get_temp_id()
                }
              )
@@ -55,14 +52,28 @@ defmodule ScandocWeb.StddocLive.FormComponent do
       socket.assigns.changeset
       |> Ecto.Changeset.put_assoc(:comments, comments)
 
-    IO.inspect(changeset)
 
     {:noreply, assign(socket, changeset: changeset)}
   end
+
+  def handle_event("remove-comment", %{"remove" => remove_id}, socket) do
+
+    comments =
+      socket.assigns.changeset.changes.comments
+      |> Enum.reject(fn %{data: comment} ->
+        comment.temp_id == remove_id
+      end)
+
+    changeset =
+      socket.assigns.changeset
+      |> Ecto.Changeset.put_assoc(:comments, comments)
+
+    {:noreply, assign(socket, changeset: changeset)}
+  end
+
   # =================================================================================
   def handle_event("close-doc", stddoc_params, socket) do
     # =================================================================================
-    IO.inspect(stddoc_params, label: "save")
     case Students.update_stddoc(socket.assigns.stddoc, stddoc_params) do
       {:ok, stddoc} ->
         student = Students.get_student!(stddoc.ref_id)

@@ -96,7 +96,6 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   def handle_event("add-permission", _params, socket) do
     existing_permissions =
       Map.get(socket.assigns.changeset.changes, :permissions, socket.assigns.employee.permissions)
-    IO.inspect(existing_permissions)
     permissions =
       existing_permissions
       |> Enum.concat(
@@ -114,7 +113,6 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
     changeset =
       socket.assigns.changeset
       |> Ecto.Changeset.put_assoc(:permissions, permissions)
-    IO.inspect(changeset, label: "add permission")
     {:noreply, assign(socket, changeset: changeset)}
 
   end
