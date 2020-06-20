@@ -26,12 +26,12 @@ defmodule ScandocWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js uploads downloads png favicon.ico robots.txt)
 
-  plug Plug.Static,
-    at: "/uploads",
-    ## "./uploads", #Application.get_env(:scandoc, :full_upload_path),
-    from: :scandoc,
-    headers: %{"secret_header" => "1980"},
-    gzip: false
+#  plug Plug.Static,
+#    at: "/uploads",
+#    ## "./uploads", #Application.get_env(:scandoc, :full_upload_path),
+#    from: :scandoc,
+#    headers: %{"secret_header" => "1980"},
+#    gzip: false
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.

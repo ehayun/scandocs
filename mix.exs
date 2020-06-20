@@ -38,7 +38,7 @@ defmodule Scandoc.MixProject do
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_view, "~> 0.12.1"},
+      {:phoenix_live_view, "~> 0.13.0"},
       {:phx_gen_auth, "~> 0.1.0", only: [:dev], runtime: false},
       {:turbo_ecto, "~> 0.5.1"},
       {:floki, ">= 0.0.0", only: :test},
@@ -57,7 +57,6 @@ defmodule Scandoc.MixProject do
       {:scrivener_ecto, "~> 2.0"},
       {:scrivener_phoenix, "~> 0.1.0"},
       {:money, "~> 1.7"},
-      {:mogrify, "~> 0.7.3"},
       {:plasm, "~> 2.0"},
       {:crudry, "~> 2.2.0"},
       {:plug_cowboy, "~> 2.0"}

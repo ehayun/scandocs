@@ -37,7 +37,6 @@ defmodule ScandocWeb.StddocLive.FormComponent do
       existing_comments
       |> Enum.concat(
            [
-             # NOTE temp_id
              Documents.change_stddoc_comment(
                %DocComments{
                  doc_name: socket.assigns.stddoc.doc_name,
@@ -46,7 +45,6 @@ defmodule ScandocWeb.StddocLive.FormComponent do
              )
            ]
          )
-
 
     changeset =
       socket.assigns.changeset

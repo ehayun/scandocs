@@ -14,18 +14,18 @@
 <div class="col-md-8"><%= gettext("Note") %></div>
 <div class="col-md-1"><%= gettext("Done") %></div>
 </div>
-<%= inputs_for f, :comments, fn cmnts -> %>
+<%= inputs_for f, :comments, fn cmnt -> %>
 <div class="row">
 <div class="col-md-1">
           <div class="checkbox">
             <label>
-              <%= if is_nil(cmnts.data.temp_id) do %>
-              <%= checkbox cmnts, :delete %>
-              <%= hidden_input cmnts, :doc_name %>
+              <%= if is_nil(cmnt.data.temp_id) do %>
+              <%= checkbox cmnt, :delete %>
+              <%= hidden_input cmnt, :doc_name %>
               <% else %>
-              <%= hidden_input cmnts, :temp_id %>
-              <%= hidden_input cmnts, :doc_name %>
-              <a class="m-2" href="#" phx-click="remove-comment" phx-value-remove="<%= cmnts.data.temp_id %>"
+              <%= hidden_input cmnt, :temp_id %>
+              <%= hidden_input cmnt, :doc_name %>
+              <a class="m-2" href="#" phx-click="remove-comment" phx-value-remove="<%= cmnt.data.temp_id %>"
                 phx-target=<%= @myself %>><i class="fas fa-times"></i></a>
               <% end %>
             </label>
@@ -34,12 +34,12 @@
 
 <div class="col-md-8">
     <div class="form-group">
-      <%= textarea cmnts, :doc_note, class: "form-control" %>
+      <%= textarea cmnt, :doc_note, class: "form-control" %>
     </div>
 </div>
 <div class="col-md-1">
     <div class="form-group">
-      <%= checkbox cmnts, :done, class: "form-control" %>
+      <%= checkbox cmnt, :done, class: "form-control" %>
     </div>
 </div>
 </div>
