@@ -8,10 +8,10 @@ defmodule ScandocWeb.PermissionLive.Index do
   alias Scandoc.Permissions.Permission
   alias Scandoc.Accounts.User
 
-
   @impl true
   def mount(_params, _session, socket) do
     socket = assign(socket, search: "")
+
     {
       :ok,
       socket
@@ -32,10 +32,11 @@ defmodule ScandocWeb.PermissionLive.Index do
   end
 
   defp apply_action(socket, :new, params) do
-    permission_cs = case params do
-      %{"user_id" => user_id} -> %Permission{user_id: String.to_integer(user_id)}
-      _ -> %Permission{}
-    end
+    permission_cs =
+      case params do
+        %{"user_id" => user_id} -> %Permission{user_id: String.to_integer(user_id)}
+        _ -> %Permission{}
+      end
 
     socket
     |> assign(:page_title, gettext("New Permission"))
@@ -68,15 +69,17 @@ defmodule ScandocWeb.PermissionLive.Index do
 
   defp fetch_permissions(socket) do
     search = socket.assigns.search
-    users = from(
-              u in User,
-              where: ilike(u.full_name, ^"%#{search}%"),
-              or_where: like(u.zehut, ^"%#{search}%"),
-              select: u.id
-            )
-            |> Repo.all
 
-    q = from(p in Permission, where: (p.user_id in ^users))
+    users =
+      from(
+        u in User,
+        where: ilike(u.full_name, ^"%#{search}%"),
+        or_where: like(u.zehut, ^"%#{search}%"),
+        select: u.id
+      )
+      |> Repo.all()
+
+    q = from(p in Permission, where: p.user_id in ^users)
 
     q
     |> preload(:user)

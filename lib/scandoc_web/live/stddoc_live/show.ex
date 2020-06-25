@@ -40,7 +40,6 @@ defmodule ScandocWeb.StddocLive.Show do
         end
       end
 
-
     {
       :noreply,
       socket

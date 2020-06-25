@@ -23,7 +23,7 @@
   <% end %>
 
   <%= if @permission_type && @permission_type in [3] do %>
-  <%= Phoenix.HTML.Form.select(f, :ref_id, Enum.map(@students, &{&1.student_zehut <> " " <> &1.full_name, &1.id}), class: "form-control") %>
+  <%= Phoenix.HTML.Form.select(f, :ref_id, Enum.map(@students, &{&1.full_name, &1.id}), class: "form-control") %>
   <% end %>
 
   <%= if @permission_type && @permission_type in [4] do %>

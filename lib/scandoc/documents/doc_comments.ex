@@ -11,7 +11,6 @@ defmodule Scandoc.Documents.DocComments do
 
     belongs_to :stddoc, Stddoc, references: :doc_name, foreign_key: :doc_name, type: :string
 
-
     field :temp_id, :string, virtual: true
     field :delete, :boolean, virtual: true, default: false
 

@@ -19,4 +19,3 @@ alias Scandoc.Schools.{School, Manager, Teacher}
 alias Scandoc.Students
 alias Scandoc.Students.{Student, StudentComment, Stddoc}
 alias Scandoc.Tables.City
-

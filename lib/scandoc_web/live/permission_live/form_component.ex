@@ -17,11 +17,12 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
   def update(%{permission: permission} = assigns, socket) do
     changeset = Permissions.change_permission(permission)
 
-    permissions = if permission.user_id do
-      Permissions.list_permissions(permission.user_id)
-    else
-      []
-    end
+    permissions =
+      if permission.user_id do
+        Permissions.list_permissions(permission.user_id)
+      else
+        []
+      end
 
     p_types = [
       %{id: Permissions.getLevelToInt(:allow_all), type: "ללא הגבלה"},
@@ -36,27 +37,38 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
     ref_id = permission.ref_id
 
     uQ = from u in User, where: u.role != "000", select: [:id, :full_name], order_by: u.full_name
-    users = uQ
-            |> Repo.all()
+
+    users =
+      uQ
+      |> Repo.all()
 
     sQ = from u in School, select: [:id, :school_name]
-    schools = sQ
-              |> Repo.all()
 
-    stdQ = from u in Student, select: [:id, :full_name, :student_zehut]
-    students = stdQ
-               |> Repo.all()
+    schools =
+      sQ
+      |> Repo.all()
+
+    stdQ = from u in Student, order_by: [u.last_name, u.first_name] #, select: [:id, :full_name, :student_zehut]
+
+    students =
+      stdQ
+      |> Repo.all()
 
     instQ = from u in Institute, select: [:id, :code, :title]
-    institutes = instQ
-                 |> Repo.all()
+
+    institutes =
+      instQ
+      |> Repo.all()
 
     vendQ = from u in Vendor, select: [:id, :vendor_name, :contact_name]
-    vendors = vendQ
-              |> Repo.all()
 
-    s = schools
-        |> hd
+    vendors =
+      vendQ
+      |> Repo.all()
+
+    s =
+      schools
+      |> hd
 
     sid =
       case s do
@@ -64,10 +76,13 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
         _ -> s.id
       end
 
-    cQ = Classroom
-         |> where(school_id: ^sid)
-    classrooms = cQ
-                 |> Repo.all()
+    cQ =
+      Classroom
+      |> where(school_id: ^sid)
+
+    classrooms =
+      cQ
+      |> Repo.all()
 
     socket = assign(socket, users: users, schools: schools, students: students)
 
@@ -112,8 +127,10 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
 
     classrooms =
       if school_id > 0 do
-        cQ = Classroom
-             |> where(school_id: ^school_id)
+        cQ =
+          Classroom
+          |> where(school_id: ^school_id)
+
         cQ
         |> Repo.all()
       else
@@ -153,7 +170,9 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
         {
           :noreply,
           socket
-          |> push_redirect(to: Routes.permission_index_path(socket, :new, user_id: permission.user_id))
+          |> push_redirect(
+            to: Routes.permission_index_path(socket, :new, user_id: permission.user_id)
+          )
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -167,8 +186,9 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
         {
           :noreply,
           socket
-          |> push_redirect(to: Routes.permission_index_path(socket, :new, user_id: permission.user_id))
-
+          |> push_redirect(
+            to: Routes.permission_index_path(socket, :new, user_id: permission.user_id)
+          )
         }
 
       {:error, %Ecto.Changeset{} = changeset} ->

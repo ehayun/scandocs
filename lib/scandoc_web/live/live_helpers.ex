@@ -18,6 +18,7 @@ defmodule ScandocWeb.LiveHelpers do
   def tr(txt) do
     Gettext.dgettext(ScandocWeb.Gettext, "default", txt)
   end
+
   def numOfDocs(id) do
     from(s in Stddoc, where: s.ref_id == ^id)
     |> Repo.aggregate(:count)
@@ -49,10 +50,13 @@ defmodule ScandocWeb.LiveHelpers do
 
   def getAge(dob) do
     if dob do
-      {:ok, y} = dob
-                 |> Calendar.Strftime.strftime("%Y")
-      {:ok, cy} = Calendar.Date.today_utc()
-                  |> Calendar.Strftime.strftime("%Y")
+      {:ok, y} =
+        dob
+        |> Calendar.Strftime.strftime("%Y")
+
+      {:ok, cy} =
+        Calendar.Date.today_utc()
+        |> Calendar.Strftime.strftime("%Y")
 
       String.to_integer(cy) - String.to_integer(y)
     else
@@ -98,8 +102,8 @@ defmodule ScandocWeb.LiveHelpers do
 
   def getDocumentPath(path) do
     if File.exists?("#{path}"),
-       do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
-       else: "#"
+      do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
+      else: "#"
   end
 
   def isTeacher(role) do
@@ -185,9 +189,11 @@ defmodule ScandocWeb.LiveHelpers do
             "???"
 
           classroom ->
-            school = School
-                     |> where(id: ^classroom.school_id)
-                     |> Repo.one()
+            school =
+              School
+              |> where(id: ^classroom.school_id)
+              |> Repo.one()
+
             "#{school.school_name} / #{classroom.classroom_name} "
         end
 

@@ -21,8 +21,7 @@ defmodule Scandoc.Institutes.Instdoc do
     field :payment_code, :string
     field :vendor_name, :string
 
-    has_many :comments, DocComments, references: :doc_name
-
+    has_many :comments, DocComments, references: :doc_name, foreign_key: :doc_name
 
     timestamps()
   end

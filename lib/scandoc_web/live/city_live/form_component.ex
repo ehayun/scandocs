@@ -100,8 +100,6 @@ defmodule ScandocWeb.CityLive.FormComponent do
     {:noreply, assign(socket, changeset: changeset)}
   end
 
-
-
   @impl true
   def handle_event("validate", %{"city" => city_params}, socket) do
     changeset =

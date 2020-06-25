@@ -32,7 +32,7 @@ defmodule ScandocWeb.RoleLive.FormComponent do
       {:ok, _role} ->
         {:noreply,
          socket
-#         |> put_flash(:info, "Role updated successfully")
+         #         |> put_flash(:info, "Role updated successfully")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -45,7 +45,7 @@ defmodule ScandocWeb.RoleLive.FormComponent do
       {:ok, _role} ->
         {:noreply,
          socket
-#         |> put_flash(:info, "Role created successfully")
+         #         |> put_flash(:info, "Role created successfully")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->

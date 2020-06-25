@@ -48,12 +48,13 @@ defmodule Scandoc.Students do
 
   """
   def get_student!(id) do
-    cc = from(
-      sc in StudentComment,
-      order_by: [
-        desc: sc.comment_date
-      ]
-    )
+    cc =
+      from(
+        sc in StudentComment,
+        order_by: [
+          desc: sc.comment_date
+        ]
+      )
 
     from(
       s in Student,
@@ -69,12 +70,13 @@ defmodule Scandoc.Students do
   end
 
   def get_student_by_zehut(id) do
-    cc = from(
-      sc in StudentComment,
-      order_by: [
-        desc: sc.comment_date
-      ]
-    )
+    cc =
+      from(
+        sc in StudentComment,
+        order_by: [
+          desc: sc.comment_date
+        ]
+      )
 
     from(
       s in Student,
@@ -166,8 +168,9 @@ defmodule Scandoc.Students do
 
   """
   def list_stddocs(student_id, filter_by \\ nil, search \\ "") do
-    q = Stddoc
-        |> where(ref_id: ^student_id)
+    q =
+      Stddoc
+      |> where(ref_id: ^student_id)
 
     q =
       if filter_by do
@@ -178,10 +181,14 @@ defmodule Scandoc.Students do
             where: ilike(dt.doc_name, ^"%#{search}%")
           )
 
-        tmp = tmp
-              |> Repo.all()
-        dgIds = tmp
-                |> Enum.map(fn u -> u.id end)
+        tmp =
+          tmp
+          |> Repo.all()
+
+        dgIds =
+          tmp
+          |> Enum.map(fn u -> u.id end)
+
         from(d in q, where: d.doctype_id in ^dgIds)
       else
         tmp =
@@ -190,10 +197,14 @@ defmodule Scandoc.Students do
             where: ilike(dt.doc_name, ^"%#{search}%")
           )
 
-        tmp = tmp
-              |> Repo.all()
-        dgIds = tmp
-                |> Enum.map(fn u -> u.id end)
+        tmp =
+          tmp
+          |> Repo.all()
+
+        dgIds =
+          tmp
+          |> Enum.map(fn u -> u.id end)
+
         from(d in q, where: d.doctype_id in ^dgIds)
       end
 
@@ -220,11 +231,12 @@ defmodule Scandoc.Students do
 
   """
   def get_stddoc!(id),
-      do: Stddoc
-          |> where(id: ^id)
-          |> preload(:comments)
-          |> preload(:doctype)
-          |> Repo.one()
+    do:
+      Stddoc
+      |> where(id: ^id)
+      |> preload(:comments)
+      |> preload(:doctype)
+      |> Repo.one()
 
   @doc """
   Creates a stddoc.
@@ -257,7 +269,6 @@ defmodule Scandoc.Students do
 
   """
   def update_stddoc(%Stddoc{} = stddoc, attrs) do
-
     %{
       "stddoc" => %{
         "comments" => comments
@@ -269,30 +280,37 @@ defmodule Scandoc.Students do
         %{"id" => id} ->
           id = String.to_integer(id)
           comment = Documents.get_stddoc_comment!(id)
+
           case c do
-            %{"doc_note" => ""} -> Documents.delete_stddoc_comment(comment)
+            %{"doc_note" => ""} ->
+              Documents.delete_stddoc_comment(comment)
+
             c ->
               case c do
-                %{"delete" => "true"} -> Documents.delete_stddoc_comment(comment)
+                %{"delete" => "true"} ->
+                  Documents.delete_stddoc_comment(comment)
+
                 c ->
                   Documents.update_stddoc_comment(comment, c)
               end
           end
+
         c ->
           case c do
-            %{"doc_note" => ""} -> nil
+            %{"doc_note" => ""} ->
+              nil
+
             c ->
               case c do
-                %{"delete" => "true"} -> nil
+                %{"delete" => "true"} ->
+                  nil
+
                 c ->
                   Documents.create_stddoc_comment(c)
               end
-
           end
-
       end
     end
-
 
     #    attrs = Map.merge(attrs, %{doc_name: stddoc.doc_name})
     stddoc

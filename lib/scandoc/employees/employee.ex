@@ -25,17 +25,17 @@ defmodule Scandoc.Employees.Employee do
   def changeset(employee, attrs) do
     employee
     |> cast(
-         attrs,
-         [
-           :zehut,
-           :hashed_password,
-           :full_name,
-           :role,
-           :date_of_birth,
-           :is_freezed,
-           :is_admin
-         ]
-       )
+      attrs,
+      [
+        :zehut,
+        :hashed_password,
+        :full_name,
+        :role,
+        :date_of_birth,
+        :is_freezed,
+        :is_admin
+      ]
+    )
     |> validate_required([:zehut, :hashed_password, :full_name, :role, :date_of_birth])
     |> cast_assoc(:permissions)
     |> unique_constraint(:zehut)

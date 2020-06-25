@@ -159,7 +159,6 @@ defmodule Scandoc.Institutes do
           %{institute: institute_id}, query ->
             from q in query, where: q.institute_id == ^institute_id
 
-
           %{instIDs: []}, query ->
             query
 
@@ -172,15 +171,18 @@ defmodule Scandoc.Institutes do
           %{outcome_category: outcome_category_id}, query ->
             from q in query, where: q.outcome_category_id == ^outcome_category_id
 
-          %{vendor_name: ""}, query -> query
-          %{vendor_name: nil}, query -> query
+          %{vendor_name: ""}, query ->
+            query
+
+          %{vendor_name: nil}, query ->
+            query
 
           %{vendor_name: vendor_name}, query ->
             from q in query,
-                 where:
-                   ilike(q.vendor_name, ^"%#{vendor_name}%") or
-                   ilike(q.payment_code, ^"%#{vendor_name}%") or
-                   ilike(q.asmachta, ^"%#{vendor_name}%")
+              where:
+                ilike(q.vendor_name, ^"%#{vendor_name}%") or
+                  ilike(q.payment_code, ^"%#{vendor_name}%") or
+                  ilike(q.asmachta, ^"%#{vendor_name}%")
         end
       )
 
@@ -190,7 +192,6 @@ defmodule Scandoc.Institutes do
     |> preload(:outcome_category)
     |> order_by(desc: :doc_date)
     |> Repo.paginate(page: current_page, page_size: limit)
-
   end
 
   @doc """
@@ -207,7 +208,16 @@ defmodule Scandoc.Institutes do
       ** (Ecto.NoResultsError)
 
   """
-  def get_instdoc!(id), do: Instdoc |> where(id: ^id) |> preload(:comments) |> preload(:institute) |> preload(:category) |> preload(:outcome_category) |> preload(:outcome_category) |>  Repo.one
+  def get_instdoc!(id),
+    do:
+      Instdoc
+      |> where(id: ^id)
+      |> preload(:comments)
+      |> preload(:institute)
+      |> preload(:category)
+      |> preload(:outcome_category)
+      |> preload(:outcome_category)
+      |> Repo.one()
 
   @doc """
   Creates a instdoc.

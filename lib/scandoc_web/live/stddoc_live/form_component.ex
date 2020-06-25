@@ -35,27 +35,21 @@ defmodule ScandocWeb.StddocLive.FormComponent do
 
     comments =
       existing_comments
-      |> Enum.concat(
-           [
-             Documents.change_stddoc_comment(
-               %DocComments{
-                 doc_name: socket.assigns.stddoc.doc_name,
-                 temp_id: get_temp_id()
-               }
-             )
-           ]
-         )
+      |> Enum.concat([
+        Documents.change_stddoc_comment(%DocComments{
+          doc_name: socket.assigns.stddoc.doc_name,
+          temp_id: get_temp_id()
+        })
+      ])
 
     changeset =
       socket.assigns.changeset
       |> Ecto.Changeset.put_assoc(:comments, comments)
 
-
     {:noreply, assign(socket, changeset: changeset)}
   end
 
   def handle_event("remove-comment", %{"remove" => remove_id}, socket) do
-
     comments =
       socket.assigns.changeset.changes.comments
       |> Enum.reject(fn %{data: comment} ->
@@ -75,6 +69,7 @@ defmodule ScandocWeb.StddocLive.FormComponent do
     case Students.update_stddoc(socket.assigns.stddoc, stddoc_params) do
       {:ok, stddoc} ->
         student = Students.get_student!(stddoc.ref_id)
+
         {
           :noreply,
           socket
@@ -87,9 +82,8 @@ defmodule ScandocWeb.StddocLive.FormComponent do
   end
 
   defp get_temp_id,
-       do:
-         :crypto.strong_rand_bytes(5)
-         |> Base.url_encode64()
-         |> binary_part(0, 5)
-
+    do:
+      :crypto.strong_rand_bytes(5)
+      |> Base.url_encode64()
+      |> binary_part(0, 5)
 end

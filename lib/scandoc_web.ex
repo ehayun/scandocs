@@ -34,8 +34,8 @@ defmodule ScandocWeb do
   def view do
     quote do
       use Phoenix.View,
-          root: "lib/scandoc_web/templates",
-          namespace: ScandocWeb
+        root: "lib/scandoc_web/templates",
+        namespace: ScandocWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -49,7 +49,7 @@ defmodule ScandocWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-          layout: {ScandocWeb.LayoutView, "live.html"}
+        layout: {ScandocWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end

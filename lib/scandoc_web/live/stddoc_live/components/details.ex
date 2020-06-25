@@ -41,6 +41,7 @@ defmodule Scandoc.Student.Show.Details do
 
     """
   end
+
   def displayDate(dt, dmy \\ "%d/%m/%Y") do
     case dt
          |> Calendar.Strftime.strftime(dmy) do
@@ -51,15 +52,17 @@ defmodule Scandoc.Student.Show.Details do
 
   def getAge(dob) do
     if dob do
-      {:ok, y} = dob
-                 |> Calendar.Strftime.strftime("%Y")
-      {:ok, cy} = Calendar.Date.today_utc()
-                  |> Calendar.Strftime.strftime("%Y")
+      {:ok, y} =
+        dob
+        |> Calendar.Strftime.strftime("%Y")
+
+      {:ok, cy} =
+        Calendar.Date.today_utc()
+        |> Calendar.Strftime.strftime("%Y")
 
       String.to_integer(cy) - String.to_integer(y)
     else
       ""
     end
   end
-
 end

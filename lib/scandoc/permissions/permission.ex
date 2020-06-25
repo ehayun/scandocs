@@ -18,8 +18,6 @@ defmodule Scandoc.Permissions.Permission do
     field :temp_id, :string, virtual: true
     field :delete, :boolean, virtual: true, default: false
 
-
-
     timestamps()
   end
 

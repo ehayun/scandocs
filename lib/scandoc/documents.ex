@@ -319,7 +319,6 @@ defmodule Scandoc.Documents do
     Docgroup.changeset(docgroup, attrs)
   end
 
-
   def get_stddoc_comment!(id), do: Repo.get!(DocComments, id)
 
   def change_stddoc_comment(%DocComments{} = doccomment, attrs \\ %{}) do
@@ -341,5 +340,4 @@ defmodule Scandoc.Documents do
   def delete_stddoc_comment(%DocComments{} = doccomment) do
     Repo.delete(doccomment)
   end
-
 end

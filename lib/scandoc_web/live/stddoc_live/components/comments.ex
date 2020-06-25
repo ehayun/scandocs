@@ -31,7 +31,4 @@ defmodule Scandoc.Student.Show.Comments do
       _ -> dt
     end
   end
-
-
-
 end

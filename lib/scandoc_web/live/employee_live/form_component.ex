@@ -21,9 +21,6 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       %{id: Permissions.getLevelToInt(:allow_vendor), type: " הרשאת ספק"}
     ]
 
-
-
-
     {school_id, classroom_id} = Employees.get_classroom(employee.id)
 
     employee = Map.merge(employee, %{school_id: school_id, classroom_id: classroom_id})
@@ -60,6 +57,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   @impl true
   def handle_event("validate", params, socket) do
     %{"employee" => employee_params} = params
+
     %{
       "role" => role
     } = employee_params
@@ -76,13 +74,13 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
       List.insert_at(classrooms, 0, %{id: -1, classroom_name: gettext("Select classroom")})
 
     socket = assign(socket, role: role, school_id: school_id, classrooms: classrooms)
+
     #    socket = assign(socket, )
 
     changeset =
       socket.assigns.employee
       |> Employees.change_employee(employee_params)
       |> Map.put(:action, :validate)
-
 
     {:noreply, assign(socket, changeset: changeset)}
   end
@@ -96,25 +94,22 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   def handle_event("add-permission", _params, socket) do
     existing_permissions =
       Map.get(socket.assigns.changeset.changes, :permissions, socket.assigns.employee.permissions)
+
     permissions =
       existing_permissions
-      |> Enum.concat(
-           [
-             # NOTE temp_id
-             Permissions.change_permission(
-               %Permission{
-                 user_id: socket.assigns.employee.id,
-                 temp_id: get_temp_id()
-               }
-             )
-           ]
-         )
+      |> Enum.concat([
+        # NOTE temp_id
+        Permissions.change_permission(%Permission{
+          user_id: socket.assigns.employee.id,
+          temp_id: get_temp_id()
+        })
+      ])
 
     changeset =
       socket.assigns.changeset
       |> Ecto.Changeset.put_assoc(:permissions, permissions)
-    {:noreply, assign(socket, changeset: changeset)}
 
+    {:noreply, assign(socket, changeset: changeset)}
   end
 
   def handle_event("save", %{"employee" => employee_params}, socket) do
@@ -166,6 +161,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
     case Employees.update_employee(socket.assigns.employee, employee_params) do
       {:ok, employee} ->
         %{id: _id, zehut: _zehut} = employee
+
         {
           :noreply,
           socket
@@ -192,9 +188,8 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   end
 
   defp get_temp_id,
-       do:
-         :crypto.strong_rand_bytes(5)
-         |> Base.url_encode64()
-         |> binary_part(0, 5)
-
+    do:
+      :crypto.strong_rand_bytes(5)
+      |> Base.url_encode64()
+      |> binary_part(0, 5)
 end

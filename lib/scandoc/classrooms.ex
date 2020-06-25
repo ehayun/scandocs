@@ -49,7 +49,7 @@ defmodule Scandoc.Classrooms do
   """
   def get_classroom!(id) do
     Classroom |> where(id: ^id) |> preload(:school) |> preload(:teacher) |> Repo.one()
-    end
+  end
 
   def get_classroom_by_teacher(id) do
     Classroom

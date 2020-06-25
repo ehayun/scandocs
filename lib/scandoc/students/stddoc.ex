@@ -15,7 +15,7 @@ defmodule Scandoc.Students.Stddoc do
     field :ref_month, :string
     field :ref_year, :string
 
-    has_many :comments, DocComments, references: :doc_name , foreign_key: :doc_name
+    has_many :comments, DocComments, references: :doc_name, foreign_key: :doc_name
 
     timestamps()
   end
