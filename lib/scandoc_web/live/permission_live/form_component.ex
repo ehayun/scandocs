@@ -145,7 +145,7 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
       stdQ
       |> Repo.all()
 
-    socket = assign(socket, users: users, schools: schools, students: students)
+    socket = assign(socket, students: students)
 
     changeset =
       socket.assigns.permission
