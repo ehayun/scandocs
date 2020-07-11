@@ -42,13 +42,14 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
       uQ
       |> Repo.all()
 
-    sQ = from u in School, select: [:id, :school_name]
+    sQ = from u in School, select: [:id, :school_name], order_by: :school_name
 
     schools =
       sQ
       |> Repo.all()
 
-    stdQ = from u in Student, order_by: [u.last_name, u.first_name] #, select: [:id, :full_name, :student_zehut]
+    # , select: [:id, :full_name, :student_zehut]
+    stdQ = from u in Student, order_by: [u.last_name, u.first_name]
 
     students =
       stdQ
@@ -137,6 +138,13 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
         socket.assigns.classrooms
       end
 
+    # , select: [:id, :full_name, :student_zehut]
+    stdQ = from u in Student, order_by: [u.last_name, u.first_name]
+
+    students =
+      stdQ
+      |> Repo.all()
+
     changeset =
       socket.assigns.permission
       |> Permissions.change_permission(permission_params)
@@ -148,6 +156,7 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
       |> assign(:changeset, changeset)
       |> assign(permission_type: permission_type)
       |> assign(classrooms: classrooms)
+      |> assign(students: students)
       |> assign(ref_id: ref_id)
     }
   end
