@@ -55,8 +55,6 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
       stdQ
       |> Repo.all()
 
-      IO.inspect(students, label: "std")
-
     instQ = from u in Institute, select: [:id, :code, :title]
 
     institutes =
