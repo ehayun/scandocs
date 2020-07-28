@@ -10,7 +10,7 @@ defmodule ScandocWeb.StddocLive.Show do
   def mount(_params, _session, socket) do
     docgroups = Documents.list_student_docgroups()
 
-    {:ok, assign(socket, docgroups: docgroups, tabnum: 2, filter_by: nil, search: "")}
+    {:ok, assign(socket, editId: 0, docgroups: docgroups, tabnum: 2, filter_by: nil, search: "")}
   end
 
   @impl true
@@ -49,6 +49,41 @@ defmodule ScandocWeb.StddocLive.Show do
       |> assign(:document_name, "")
       |> assign(:stddoc, stddoc)
     }
+  end
+
+  @impl true
+  def handle_event("setEditRemark", %{"id" => docid}, socket) do
+    changeset = Students.get_stddoc!(docid) |> Students.change_stddoc()
+    {:noreply, assign(socket, changeset: changeset, editId: String.to_integer(docid))}
+  end
+
+  def handle_event("close-remark", _, socket) do
+    {:noreply, assign(socket, editId: 0)}
+  end
+
+  def handle_event("save-remark", %{"stddoc" => stddoc}, socket) do
+    socket =
+      case stddoc do
+        %{"id" => id, "remarks" => remarks, "done" => done} ->
+          sdoc = Students.get_stddoc!(id)
+          attrs = %{remarks: remarks, done: done}
+          Students.update_stddoc(sdoc, attrs)
+
+          assign(
+            socket,
+            :stddocs,
+            Students.list_stddocs(sdoc.ref_id, socket.assigns.filter_by, socket.assigns.search)
+          )
+
+        _ ->
+          socket
+      end
+
+    {:noreply, assign(socket, editId: 0)}
+  end
+
+  def handle_event("save-remark", _params, socket) do
+    {:noreply, assign(socket, editId: 0)}
   end
 
   @impl true

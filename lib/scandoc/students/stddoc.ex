@@ -14,6 +14,8 @@ defmodule Scandoc.Students.Stddoc do
     field :ref_date, :date
     field :ref_month, :string
     field :ref_year, :string
+    field :remarks, :string
+    field :done, :boolean, default: false
 
     has_many :comments, DocComments, references: :doc_name, foreign_key: :doc_name
 
@@ -33,6 +35,8 @@ defmodule Scandoc.Students.Stddoc do
       :ref_month,
       :ref_date,
       :doctype_id,
+      :remarks,
+      :done,
       :has_picture
     ])
     |> validate_required([

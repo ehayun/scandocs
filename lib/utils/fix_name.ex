@@ -1,4 +1,8 @@
 defmodule Scandoc.Util.Fix do
+  @moduledoc """
+  Small utility to modify first and last name from full name
+  assume that the last word is the last name and the rest is the first name
+  """
   import Ecto.Query, warn: false
   alias Scandoc.Repo
 
@@ -12,12 +16,15 @@ defmodule Scandoc.Util.Fix do
       names = String.split(s.full_name)
       last = names |> List.last()
       first = Enum.join(names -- [last], " ")
+
       attrs = %{
         first_name: first,
         last_name: last
       }
+
       Students.update_student(s, attrs)
     end
+
     nil
   end
 end

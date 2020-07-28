@@ -269,48 +269,6 @@ defmodule Scandoc.Students do
 
   """
   def update_stddoc(%Stddoc{} = stddoc, attrs) do
-    %{
-      "stddoc" => %{
-        "comments" => comments
-      }
-    } = attrs
-
-    for {_, c} <- comments do
-      case c do
-        %{"id" => id} ->
-          id = String.to_integer(id)
-          comment = Documents.get_stddoc_comment!(id)
-
-          case c do
-            %{"doc_note" => ""} ->
-              Documents.delete_stddoc_comment(comment)
-
-            c ->
-              case c do
-                %{"delete" => "true"} ->
-                  Documents.delete_stddoc_comment(comment)
-
-                c ->
-                  Documents.update_stddoc_comment(comment, c)
-              end
-          end
-
-        c ->
-          case c do
-            %{"doc_note" => ""} ->
-              nil
-
-            c ->
-              case c do
-                %{"delete" => "true"} ->
-                  nil
-
-                c ->
-                  Documents.create_stddoc_comment(c)
-              end
-          end
-      end
-    end
 
     #    attrs = Map.merge(attrs, %{doc_name: stddoc.doc_name})
     stddoc

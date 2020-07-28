@@ -8618,6 +8618,9 @@ header {
   padding-left: 0.6em;
   padding-right: 0.6em; }
 
+.pointer {
+  cursor: pointer; }
+
 .bg-dark {
   background-color: #fff !important; }
 

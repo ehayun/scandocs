@@ -2,7 +2,7 @@ defmodule Scandoc.Documents.Document do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias Scandoc.Documents.{Doctype, DocComments}
+  alias Scandoc.Documents.{Doctype}
 
   schema "documents" do
     field :doc_name, :string
@@ -14,8 +14,8 @@ defmodule Scandoc.Documents.Document do
     field :ref_id, :integer
     field :ref_month, :string
     field :ref_year, :string
-
-    has_many :comments, DocComments, references: :doc_name
+    field :remarks, :string
+    field :done, :boolean, default: false
 
     timestamps()
   end
@@ -32,6 +32,8 @@ defmodule Scandoc.Documents.Document do
       :ref_year,
       :ref_month,
       :doctype_id,
+      :remarks,
+      :done,
       :has_picture
     ])
     |> validate_required([
