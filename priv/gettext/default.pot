@@ -120,7 +120,8 @@ msgstr ""
 #: lib/scandoc_web/live/category_live/form_component.html.leex:25
 #: lib/scandoc_web/live/docgroup_live/form_component.html.leex:26 lib/scandoc_web/live/institute_live/form_component.html.leex:26
 #: lib/scandoc_web/live/outcome_category_live/form_component.html.leex:37 lib/scandoc_web/live/permission_live/form_component.html.leex:37
-#: lib/scandoc_web/live/role_live/form_component.html.leex:26 lib/scandoc_web/live/vendor_live/form_component.html.leex:48
+#: lib/scandoc_web/live/role_live/form_component.html.leex:26 lib/scandoc_web/live/stddoc_live/show.html.leex:107
+#: lib/scandoc_web/live/vendor_live/form_component.html.leex:48
 msgid "Saving..."
 msgstr ""
 
@@ -965,7 +966,7 @@ msgstr ""
 
 #, elixir-format
 #: lib/scandoc_web/live/city_live/form_component.html.leex:97
-#: lib/scandoc_web/live/city_live/form_component.html.leex:153 lib/scandoc_web/live/stddoc_live/show.html.leex:98
+#: lib/scandoc_web/live/city_live/form_component.html.leex:153 lib/scandoc_web/live/stddoc_live/show.html.leex:99
 #: lib/scandoc_web/live/student_live/edit.html.leex:182 lib/scandoc_web/live/transporttion_live/form_component.html.leex:86
 #: lib/scandoc_web/live/transporttion_live/show.html.leex:28
 msgid "Remarks"
@@ -1202,7 +1203,7 @@ msgid "Note"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/stddoc_live/show.html.leex:113
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:112
 msgid "Add remarks"
 msgstr ""
 
@@ -1212,6 +1213,6 @@ msgid "Cancel"
 msgstr ""
 
 #, elixir-format
-#: lib/scandoc_web/live/stddoc_live/show.html.leex:101
+#: lib/scandoc_web/live/stddoc_live/show.html.leex:104
 msgid "Done?"
 msgstr ""

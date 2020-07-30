@@ -92,7 +92,7 @@
           <td><%= getDocGroup(d.doctype.doc_group_id) %></td>
           <td><a target="_scandocs"
               href="https://docs.scantzlev.com<%= raw getDocumentPath(d.doc_path) %>"><%= d.doctype.doc_name %></a></td>
-          <td phx-click="setEditRemark" phx-value-id="<%= d.id %>" class="text-left btn-link pointer">
+          <td phx-click="setEditRemark" phx-value-id="<%= d.id %>">
             <%= if @editId == d.id do %>
             <%= f = form_for @changeset, "#", phx_submit: "save-remark" %>
             <%= text_input f, :id, class: "hidden" %>
@@ -101,26 +101,23 @@
 
               <div class="checkbox">
                 <%= checkbox f, :done %>
-              </div>
-              <label class="checkbox">
                 <%= gettext("Done?") %>
-              </label>
+              </div>
             </div>
-            <%= submit gettext("Save"), phx_disable_with: "Saving...", class: "btn btn-primary" %>
+            <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary mt-2" %>
             <button phx-click="close-remark" class="btn btn-info mt-2"><%= gettext("Cancel")%></button>
-
             </form>
-  </div>
-  <% else %>
-  <%= if d.remarks, do: d.remarks, else: gettext("Add remarks") %>
-  <% end %>
-  </td>
-  <td class="hiddenx"><%= if d.done, do: raw("<i class='fas fa-clipboard-check'></i>") %></td>
-  <td>
-    <%= displayDate(d.ref_date) %>
-  </td>
-  </tr>
-  <% end %>
+        </div>
+        <% else %>
+        <%= if d.done, do: raw("<i class='fas fa-clipboard-check'></i>"), else: raw("<i class='far fa-clipboard'></i>") %>
+        <span class="text-left btn-link pointer"><%= if d.remarks, do: d.remarks, else: gettext("Add remarks") %></span>
+        <% end %>
+        </td>
+        <td>
+          <%= displayDate(d.ref_date) %>
+        </td>
+        </tr>
+        <% end %>
   </tbody>
   </table>
 
