@@ -269,7 +269,6 @@ defmodule Scandoc.Students do
 
   """
   def update_stddoc(%Stddoc{} = stddoc, attrs) do
-
     #    attrs = Map.merge(attrs, %{doc_name: stddoc.doc_name})
     stddoc
     |> Stddoc.changeset(attrs)
