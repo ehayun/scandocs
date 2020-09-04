@@ -110,6 +110,14 @@ defmodule ScandocWeb.StudentLive.FormComponent do
   defp get_temp_id, do: :crypto.strong_rand_bytes(5) |> Base.url_encode64() |> binary_part(0, 5)
 
   defp save_student(socket, :edit, student_params) do
+    %{
+      "first_name" => first,
+      "last_name" => last
+    } = student_params
+
+    Map.merge(student_params, %{"full_name" => "#{last} #{first}"})
+
+
     student_params =
       case student_params do
         %{"birthdate" => %{"day" => _dd, "month" => _mm, "year" => yy}} ->
@@ -125,6 +133,7 @@ defmodule ScandocWeb.StudentLive.FormComponent do
           student_params
       end
 
+
     case Students.update_student(socket.assigns.student, student_params) do
       {:ok, _student} ->
         {:noreply,
@@ -137,6 +146,7 @@ defmodule ScandocWeb.StudentLive.FormComponent do
   end
 
   defp save_student(socket, :new, student_params) do
+
     case Students.create_student(student_params) do
       {:ok, _student} ->
         {:noreply,

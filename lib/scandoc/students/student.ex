@@ -60,9 +60,10 @@ defmodule Scandoc.Students.Student do
       :father_zehut,
       :mother_zehut
     ])
-    |> validate_required([:student_zehut, :first_name, :last_name, :classroom_id, :full_name])
-    |> cast_assoc(:comments)
+    |> validate_required([:student_zehut, :first_name, :last_name, :classroom_id])
     |> set_fullname()
+    |> validate_number(:classroom_id, greater_than: 0)
+    |> cast_assoc(:comments)
     |> cast_assoc(:contacts)
   end
 

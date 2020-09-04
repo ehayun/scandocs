@@ -10,7 +10,7 @@ use Mix.Config
 #   pool_size: 10
 
 database_url =
-  System.get_env("DATABASE_URL") || "postgres://scandoc:EliScandoc68@localhost:5432/scandoc_dev"
+  System.get_env("DATABASE_URL") || "postgres://postgres:postgres@localhost:5432/scandoc_dev"
 
 config :scandoc, Scandoc.Repo,
   # ssl: true,
