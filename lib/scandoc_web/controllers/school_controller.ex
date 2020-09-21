@@ -24,7 +24,7 @@ defmodule ScandocWeb.SchoolController do
       q
       |> order_by(:school_name)
       |> preload(:manager)
-      |> Repo.paginate(page: current_page, page_size: 17)
+      |> Repo.paginate(page: current_page, page_size: 14)
 
     # schools = Schools.list_schools()
     render(conn, "index.html", schools: schools)

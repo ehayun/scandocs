@@ -1,5 +1,5 @@
 <h2><%= gettext("Listing Institute Categories") %>
-  <%= live_patch  gettext("Add New"), to: Routes.category_index_path(@socket, :new), class: "float-left btn btn-primary" %>
+    <%= live_patch  gettext("Add New"), to: Routes.category_index_path(@socket, :new), class: "float-left btn btn-primary" %>
 
 </h2>
 
@@ -13,28 +13,28 @@
 <% end %>
 
 <table class="table table-striped">
-  <thead class="thead-dark">
+    <thead class="thead-dark">
     <tr>
-      <th><%= gettext("Code") %></th>
-      <th><%= gettext("Title") %></th>
+        <th><%= gettext("Code") %></th>
+        <th><%= gettext("Title") %></th>
 
-      <th></th>
+        <th></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody id="categories">
+    <tbody id="categories">
     <%= for category <- @categories do %>
     <tr id="category-<%= category.id %>">
-      <td><%= category.code %></td>
-      <td><%= category.category_name %></td>
+        <td><%= category.code %></td>
+        <td><%= category.category_name %></td>
 
-      <td>
-        <span class="hidden"><%= live_redirect "Show", to: Routes.category_show_path(@socket, :show, category) %></span>
-        <span><%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.category_index_path(@socket, :edit, category) %></span>
-        <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: category.id, data: [confirm: gettext("Are you sure?")] %></span>
+        <td>
+            <span class="hidden"><%= live_redirect "Show", to: Routes.category_show_path(@socket, :show, category) %></span>
+            <span><%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.category_index_path(@socket, :edit, category) %></span>
+            <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: category.id, data: [confirm: gettext("Are you sure?")] %></span>
 
-      </td>
+        </td>
     </tr>
     <% end %>
-  </tbody>
+    </tbody>
 </table>

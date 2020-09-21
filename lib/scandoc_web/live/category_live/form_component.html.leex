@@ -7,21 +7,20 @@
   phx_submit: "save" %>
 
 <div class="form-row">
-  <div class="form-group col-md-6">
-    <label for="inputEmail4"><%= gettext("Code")%></label>
-    <%= text_input f, :code , class: "form-control col-md-2" %>
-  <%= error_tag f, :code %>
-  </div>
-  <div class="form-group col-md-6">
-    <label for="inputPassword4"><%= gettext("Cetegory name")%></label>
-    <%= text_input f, :category_name , class: "form-control" %>
-  <%= error_tag f, :category_name %>
-  </div>
+    <div class="form-group col-md-6">
+        <label for="inputEmail4"><%= gettext("Code")%></label>
+        <%= text_input f, :code , class: "form-control col-md-2" %>
+        <%= error_tag f, :code %>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="inputPassword4"><%= gettext("Cetegory name")%></label>
+        <%= text_input f, :category_name , class: "form-control" %>
+        <%= error_tag f, :category_name %>
+    </div>
 </div>
 
 
-
 <div class="form-group mt-2">
-  <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary" %>
+    <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary" %>
 </div>
 </form>
