@@ -1,13 +1,28 @@
 defmodule ScandocWeb.ManagerController do
   use ScandocWeb, :controller
 
+  import Ecto.Query
+  alias Scandoc.Repo
+
   alias Scandoc.Schools
+  alias Scandoc.Schools.School
+
   alias Scandoc.Schools.Manager
 
-  def index(conn, _params) do
-    schools = Schools.list_managers()
+  def index(conn, %{"page" => current_page}) do
+    # School |> preload(:manager)
+    # schools = Schools.list_managers()
+
+    schools =
+      School
+      |> order_by(:school_name)
+      |> preload(:manager)
+      |> Repo.paginate(page: current_page, page_size: 14)
+
     render(conn, "index.html", schools: schools)
   end
+
+  def index(conn, _params), do: index(conn, %{"page" => "1"})
 
   def new(conn, _params) do
     changeset = Schools.change_manager(%Manager{})
