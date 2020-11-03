@@ -1,14 +1,23 @@
 defmodule ScandocWeb.DocumentController do
   use ScandocWeb, :controller
 
+  import Ecto.Query
+  alias Scandoc.Repo
+
   alias Scandoc.Documents
   alias Scandoc.Documents.Document
   alias Scandoc.Students
 
-  def index(conn, _params) do
-    documents = Documents.list_documents()
+  def index(conn, %{"page" => current_page}) do
+    documents =
+      Document
+      |> order_by(:ref_id)
+      |> Repo.paginate(page: current_page, page_size: 14)
+
     render(conn, "index.html", documents: documents)
   end
+
+  def index(conn, _params), do: index(conn, %{"page" => "1"})
 
   def new(conn, _params) do
     changeset = Documents.change_document(%Document{})
@@ -34,8 +43,8 @@ defmodule ScandocWeb.DocumentController do
 
     path =
       if File.exists?("#{path}"),
-        do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
-        else: "#"
+         do: String.replace(path, "/home/eli/pCloudDrive", "/uploads"),
+         else: "#"
 
     # render(conn, "show.html", document: document)
     url = "https://docs.scantzlev.com#{path}"

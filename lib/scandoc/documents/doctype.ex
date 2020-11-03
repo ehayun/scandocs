@@ -17,6 +17,6 @@ defmodule Scandoc.Documents.Doctype do
   def changeset(doctype, attrs) do
     doctype
     |> cast(attrs, [:code, :doc_group_id, :doc_name, :doc_notes])
-    |> validate_required([:code, :doc_name])
+    |> validate_required([:code, :doc_name, :doc_group_id])
   end
 end
