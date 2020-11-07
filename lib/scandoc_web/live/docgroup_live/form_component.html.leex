@@ -18,6 +18,11 @@
     <%= text_input f, :grp_name , class: "form-control" %>
     <%= error_tag f, :grp_name %>
   </div>
+
+  <div class="hidden form-group row">
+    <%= label f, gettext("is link?"), class: "col-form-label text-sm-left col-sm-8" %>
+    <%= checkbox f, :is_link %>
+  </div>
 </div>
 
 

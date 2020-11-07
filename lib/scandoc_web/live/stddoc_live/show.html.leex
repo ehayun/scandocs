@@ -12,76 +12,77 @@
 </header>
 
 <ul class="nav nav-tabs">
-    <li class="nav-item m-1 p-1">
-        <a phx-click="setTab" phx-value-tabid="1" class='nav-link <%= if @tabnum == 1, do: "active" %>'
-           data-toggle="tab"
-           href="#menuDetails"><%= gettext("General details") %></a>
-    </li>
-    <li class="nav-item m-1 p-1">
-        <a phx-click="setTab" phx-value-tabid="2" class='nav-link <%= if @tabnum == 2, do: "active" %>'
-           data-toggle="tab"
-           href="#menuDocuments"><%= gettext("Documents") %></a>
-    </li>
-    <li class="nav-item m-1 p-1">
-        <a phx-click="setTab" phx-value-tabid="3" class='nav-link <%= if @tabnum == 3, do: "active" %>'
-           data-toggle="tab"
-           href="#menuContacts"><%= gettext("Contacts") %></a>
-    </li>
-    <li class="nav-item m-1 p-1">
-        <a phx-click="setTab" phx-value-tabid="4" class='nav-link <%= if @tabnum == 4, do: "active" %>'
-           data-toggle="tab"
-           href="#menuCommities"><%= gettext("Placement Committees") %></a>
-    </li>
-    <li class="nav-item m-1 p-1">
-        <a phx-click="setTab" phx-value-tabid="5" class='nav-link <%= if @tabnum == 5, do: "active" %>'
-           data-toggle="tab"
-           href="#menuWellfareCommities"><%= gettext("Welfare committees") %></a>
-    </li>
+    <ul class="nav nav-tabs">
+        <li class="nav-item m-1 p-1">
+            <a phx-click="setTab" phx-value-tabid="1" class='nav-link <%= if @tabnum == 1, do: "active" %>'
+               data-toggle="tab"
+               href="#menuDetails"><%= gettext("General details") %></a>
+        </li>
+        <li class="nav-item m-1 p-1">
+            <a phx-click="setTab" phx-value-tabid="2" class='nav-link <%= if @tabnum == 2, do: "active" %>'
+               data-toggle="tab"
+               href="#menuDocuments"><%= gettext("Documents") %></a>
+        </li>
+        <li class="nav-item m-1 p-1">
+            <a phx-click="setTab" phx-value-tabid="3" class='nav-link <%= if @tabnum == 3, do: "active" %>'
+               data-toggle="tab"
+               href="#menuContacts"><%= gettext("Contacts") %></a>
+        </li>
+        <li class="nav-item m-1 p-1">
+            <a phx-click="setTab" phx-value-tabid="4" class='nav-link <%= if @tabnum == 4, do: "active" %>'
+               data-toggle="tab"
+               href="#menuCommities"><%= gettext("Placement Committees") %></a>
+        </li>
+        <li class="nav-item m-1 p-1">
+            <a phx-click="setTab" phx-value-tabid="5" class='nav-link <%= if @tabnum == 5, do: "active" %>'
+               data-toggle="tab"
+               href="#menuWellfareCommities"><%= gettext("Welfare committees") %></a>
+        </li>
 
-    <li class="nav-item m-1 p-1">
-        <a phx-click="setTab" phx-value-tabid="6" class='nav-link <%= if @tabnum == 6, do: "active" %>'
-           data-toggle="tab"
-           href="#menuComments"><%= gettext("Comments") %></a>
-    </li>
-</ul>
+        <li class="nav-item m-1 p-1">
+            <a phx-click="setTab" phx-value-tabid="6" class='nav-link <%= if @tabnum == 6, do: "active" %>'
+               data-toggle="tab"
+               href="#menuComments"><%= gettext("Comments") %></a>
+        </li>
+    </ul>
 
 
-<div class="tab-content border-top p-2">
-    <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>">
-        <%= live_component @socket, Details, student: @student %>
-    </div>
+    <div class="tab-content border-top p-2">
+        <div id="menuDetails" class="container tab-pane  <%= if @tabnum == 1, do: "active" %>">
+            <%= live_component @socket, Details, student: @student %>
+        </div>
 
-    <div id="menuContacts" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>">
-        <%= live_component @socket, Contacts, student: @student %>
-    </div>
+        <div id="menuContacts" class="container tab-pane  <%= if @tabnum == 3, do: "active" %>">
+            <%= live_component @socket, Contacts, student: @student %>
+        </div>
 
-    <div id="menuContacts" class="container tab-pane  <%= if @tabnum == 6, do: "active" %>">
-        <%= live_component @socket, Comments, student: @student %>
-    </div>
+        <div id="menuContacts" class="container tab-pane  <%= if @tabnum == 6, do: "active" %>">
+            <%= live_component @socket, Comments, student: @student %>
+        </div>
 
-    <div id="menuDocuments" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
-        <div class="row">
-            <ul class="nav nav-pills mb-4 d-flex flex-column flex-md-row" data-config-id="tabs">
-                <li phx-click="filter_by" phx-value-id="<%= nil %>" class="nav-item"><a
-                        class='nav-link p-2 ml-2 badge badge-info <%= if @filter_by == nil , do: "list-active " %>'
-                        href="#"><%= gettext("show all") %></a></li>
-                <%= for d <- @docgroups do %>
-                <li phx-click="filter_by" phx-value-id="<%= d.id %>" class="nav-item"><a
-                        class='nav-link p-2 ml-2 badge badge-info <%= if @filter_by == d.id, do: "list-active " %>'
-                        href="#"><%= d.grp_name %></a>
-                </li>
-                <% end %>
-            </ul>
-            <span class="float-left ml-2">
+        <div id="menuDocuments" class="container tab-pane  <%= if @tabnum == 2, do: "active" %>">
+            <div class="row">
+                <ul class="nav nav-pills mb-4 d-flex flex-column flex-md-row" data-config-id="tabs">
+                    <li phx-click="filter_by" phx-value-id="<%= nil %>" class="nav-item"><a
+                            class='nav-link p-2 ml-2 badge badge-info <%= if @filter_by == nil , do: "list-active " %>'
+                            href="#"><%= gettext("show all") %></a></li>
+                    <%= for d <- @docgroups do %>
+                    <li phx-click="filter_by" phx-value-id="<%= d.id %>" class="nav-item"><a
+                            class='nav-link p-2 ml-2 badge badge-info <%= if @filter_by == d.id, do: "list-active " %>'
+                            href="#"><%= d.grp_name %></a>
+                    </li>
+                    <% end %>
+                </ul>
+                <span class="float-left ml-2">
         <form class="form-inline my-2 my-md-0" phx-change="search" phx-submit="search">
           <input class="form-control" type="text" value='<%= @search %>' name="search"
                  placeholder='<%= gettext("Search")%>'>
         </form>
       </span>
-        </div>
+            </div>
 
-        <%= if @live_action in [:edit] do %>
-        <%= live_modal @socket, ScandocWeb.StddocLive.FormComponent,
+            <%= if @live_action in [:edit] do %>
+            <%= live_modal @socket, ScandocWeb.StddocLive.FormComponent,
     id: @stddoc.id,
     title: @page_title,
     action: @live_action,
@@ -90,44 +91,90 @@
     return_to: "/stddocs/#{@student.id}",
     return_to: Routes.stddoc_show_path(@socket, :show, @stddoc) %>
     <% end %>
+            <%= if @filter_by == 999 do %>
+            <button phx-click="add_link" class="btn btn-link m-0"><%= gettext("Add link") %> </button>
+            <%= if @add_link do %>
+            <div class="border border-primary mb-2 p-2 col-6">
+                <%= f = form_for @changeset, "#", phx_submit: "save-link" %>
+                <%= text_input f, :id, class: "hidden" %>
+                <%= text_input f, :doc_name, class: "form-control", placeholder: gettext("Link title") %>
+                <%= text_input f, :doc_path, class: "form-control", placeholder: gettext("Link path") %>
 
-        <table class="table table-striped">
+                <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary mt-2" %>
+                <button phx-click="close-link" class="btn btn-info mt-2"><%= gettext("Cancel")%></button>
+                </form>
+            </div>
+            <% end %>
+        <% end %>
 
-            <tbody id="stddocs">
-            <%= for d <- @stddocs do %>
-            <tr>
-                <td><%= getDocGroup(d.doctype.doc_group_id) %></td>
-                <td><a target="_scandocs"
-                       href="https://docs.scantzlev.com<%= raw getDocumentPath(d.doc_path) %>"><%= d.doctype.doc_name %></a>
-                </td>
-                <td phx-click="setEditRemark" phx-value-id="<%= d.id %>">
-                    <%= if @editId == d.id do %>
-                    <%= f = form_for @changeset, "#", phx_submit: "save-remark" %>
-                    <%= text_input f, :id, class: "hidden" %>
-                    <%= text_input f, :remarks, class: "form-control bold", placeholder: gettext("Remarks") %>
-                    <div class="col-md-12 mt-2">
+            <table class="table table-striped">
 
-                        <div class="checkbox">
-                            <%= checkbox f, :done %>
-                            <%= gettext("Done?") %>
+                <tbody id="stddocs">
+                <%= for d <- @stddocs do %>
+                <tr>
+                    <td><%= getDocGroup(d.doctype.doc_group_id) %></td>
+                    <td>
+                        <%= if d.doctype.doc_group_id == 999 do %>
+
+                        <%= if @edit_link and @edit_doc_id == d.id do %>
+                        <div class="border border-primary m-2 p-2 col-12">
+                            <%= f = form_for @changeset, "#", phx_submit: "save-link" %>
+                            <%= text_input f, :id, class: "hidden" %>
+                            <%= text_input f, :doc_name, class: "form-control", placeholder: gettext("Link title") %>
+                            <%= text_input f, :doc_path, class: "form-control", placeholder: gettext("Link path") %>
+                            <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary mt-2" %>
+                            <button phx-click="close-link" class="btn btn-info mt-2"><%= gettext("Cancel")%></button>
+                            <%= if f.data.id do %>
+                            <button phx-click="delete-link" phx-value-id="<%= f.data.id %>"
+                                    class="float-left btn btn-danger mt-2"><%= gettext("Delete")%></button>
+                            <% end %>
+                            </form>
                         </div>
-                    </div>
-                    <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary mt-2" %>
-                    <button phx-click="close-remark" class="btn btn-info mt-2"><%= gettext("Cancel")%></button>
-                    </form>
-    </div>
-    <% else %>
-    <%= if d.done, do: raw("<i class='fas fa-clipboard-check'></i>"), else: raw("<i class='far fa-clipboard'></i>") %>
-    <span class="text-left btn-link pointer"><%= if d.remarks, do: d.remarks, else: gettext("Add remarks") %></span>
-    <% end %>
-    </td>
-    <td>
-        <%= displayDate(d.ref_date) %>
-    </td>
-    </tr>
-    <% end %>
-    </tbody>
-    </table>
+                        <% end %>
 
-</div>
-</div>
+
+                        <button phx-click="edit-link" phx-value-id="<%= d.id %>" class="btn btn-link"><i
+                                class='far fa-edit'></i></button>
+                        <a target="_scandocs" href="<%= d.doc_path %>"><%= d.doc_name %></a>
+                        <% else %>
+                        <a target="_scandocs"
+                           href="https://docs.scantzlev.com<%= raw getDocumentPath(d.doc_path) %>"><%= d.doctype.doc_name %></a>
+                        <% end %>
+
+                    </td>
+                    <td phx-click="setEditRemark" phx-value-id="<%= d.id %>">
+                        <%= if @editId == d.id do %>
+                        <div class="border border-primary m-2 p-2 col-12">
+
+                            <%= f = form_for @changeset, "#", phx_submit: "save-remark" %>
+                            <%= text_input f, :id, class: "hidden" %>
+                            <%= text_input f, :remarks, class: "form-control bold", placeholder: gettext("Remarks") %>
+                            <div class="col-md-12 mt-2">
+
+                                <div class="checkbox">
+                                    <%= checkbox f, :done %>
+                                    <%= gettext("Done?") %>
+                                </div>
+                            </div>
+                            <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary mt-2" %>
+                            <button phx-click="close-remark" class="btn btn-info mt-2"><%= gettext("Cancel")%></button>
+                            </form>
+                        </div>
+        </div>
+        <% else %>
+        <%= if d.done, do: raw("<i class='fas fa-clipboard-check'></i>"), else: raw("<i class='far fa-clipboard'></i>") %>
+        <span class="text-left btn-link pointer"><%= if d.remarks, do: d.remarks, else: gettext("Add remarks") %></span>
+        <% end %>
+        </td>
+        <td>
+            <%= displayDate(d.ref_date) %>
+        </td>
+        </tr>
+        <% end %>
+
+
+        </tbody>
+        </table>
+
+    </div>
+    </div>

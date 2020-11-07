@@ -61,6 +61,7 @@ defmodule Scandoc.Students do
       where: s.id == ^"#{id}",
       preload: [:city],
       preload: [:contacts],
+      preload: [:documents],
       preload: [:classroom],
       preload: [
         comments: ^cc
@@ -171,6 +172,7 @@ defmodule Scandoc.Students do
     q =
       Stddoc
       |> where(ref_id: ^student_id)
+      |> order_by(asc: :doctype_id, asc: :doc_name)
 
     q =
       if filter_by do
@@ -494,5 +496,9 @@ defmodule Scandoc.Students do
   """
   def change_student_contact(%StudentContact{} = student_contact, attrs \\ %{}) do
     StudentContact.changeset(student_contact, attrs)
+  end
+
+  def change_student_document(%Stddoc{} = student_document, attrs \\ %{}) do
+    Stddoc.changeset(student_document, attrs)
   end
 end

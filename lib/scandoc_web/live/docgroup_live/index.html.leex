@@ -17,6 +17,7 @@
     <tr>
       <th><%= gettext("code")%></th>
       <th><%= gettext("category")%></th>
+      <th><%= gettext("is link?")%></th>
 
       <th></th>
     </tr>
@@ -26,12 +27,14 @@
     <tr id="docgroup-<%= docgroup.id %>">
       <td><%= docgroup.id %></td>
       <td><%= docgroup.grp_name %></td>
+      <td><%= if docgroup.is_link, do: gettext("Yes") %></td>
 
       <td>
         <span class="hidden"><%= live_redirect "Show", to: Routes.docgroup_show_path(@socket, :show, docgroup) %></span>
+        <%= if !docgroup.is_link do %>
         <span><%= live_patch raw("<i class='far fa-edit'></i>"), to: Routes.docgroup_index_path(@socket, :edit, docgroup) %></span>
         <span><%= link raw("<i class='far fa-trash-alt'></i>"), to: "#", phx_click: "delete", phx_value_id: docgroup.id, data: [confirm: gettext("Are you sure?")] %></span>
-
+        <% end %>
       </td>
     </tr>
     <% end %>

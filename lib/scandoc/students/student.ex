@@ -3,7 +3,7 @@ defmodule Scandoc.Students.Student do
   import Ecto.Changeset
   alias Scandoc.Classrooms.Classroom
   alias Scandoc.Tables.{City, Transportation}
-  alias Scandoc.Students.{StudentContact, StudentComment}
+  alias Scandoc.Students.{StudentContact, StudentComment, Stddoc }
 
   schema "students" do
     belongs_to :classroom, Classroom, references: :id
@@ -31,6 +31,7 @@ defmodule Scandoc.Students.Student do
 
     has_many :comments, StudentComment, references: :id
     has_many :contacts, StudentContact, references: :id
+    has_many :documents, Stddoc, references: :id, foreign_key: :ref_id
 
     timestamps()
   end
@@ -61,16 +62,17 @@ defmodule Scandoc.Students.Student do
       :mother_zehut
     ])
     |> validate_required([:student_zehut, :first_name, :last_name, :classroom_id])
-    |> set_fullname()
+    |> set_full_name()
     |> validate_number(:classroom_id, greater_than: 0)
     |> cast_assoc(:comments)
     |> cast_assoc(:contacts)
+    |> cast_assoc(:documents)
   end
 
-  def set_fullname(changeset) do
+  def set_full_name(changeset) do
     first_name = get_field(changeset, :first_name)
     last_name = get_field(changeset, :last_name)
-    fullname = "#{last_name} #{first_name}"
-    put_change(changeset, :full_name, fullname)
+    full_name = "#{last_name} #{first_name}"
+    put_change(changeset, :full_name, full_name)
   end
 end

@@ -88,6 +88,7 @@ defmodule ScandocWeb.StudentLive.Show do
     {:noreply, assign(socket, display: false)}
   end
 
+
   defp pdf_thumbnail(pdf_path, thumb_path) do
     args = ["#{pdf_path}", thumb_path]
     name = Path.rootname(thumb_path)

@@ -3,14 +3,29 @@ defmodule ScandocWeb.StddocLive.Show do
 
   alias Scandoc.Students
 
-  alias Scandoc.Documents
+  alias Scandoc.{Documents, Students}
   alias Scandoc.Student.Show.{Contacts, Comments, Details}
+  alias Scandoc.Students.Stddoc
+
 
   @impl true
   def mount(_params, _session, socket) do
     docgroups = Documents.list_student_docgroups()
 
-    {:ok, assign(socket, editId: 0, docgroups: docgroups, tabnum: 2, filter_by: nil, search: "")}
+    {
+      :ok,
+      assign(
+        socket,
+        edit_doc_id: 0,
+        editId: 0,
+        docgroups: docgroups,
+        tabnum: 2,
+        filter_by: nil,
+        search: "",
+        add_link: false,
+        edit_link: false
+      )
+    }
   end
 
   @impl true
@@ -53,12 +68,75 @@ defmodule ScandocWeb.StddocLive.Show do
 
   @impl true
   def handle_event("setEditRemark", %{"id" => docid}, socket) do
-    changeset = Students.get_stddoc!(docid) |> Students.change_stddoc()
+    changeset = Students.get_stddoc!(docid)
+                |> Students.change_stddoc()
     {:noreply, assign(socket, changeset: changeset, editId: String.to_integer(docid))}
   end
 
   def handle_event("close-remark", _, socket) do
     {:noreply, assign(socket, editId: 0)}
+  end
+
+  @impl true
+  def handle_event("add_link", _params, socket) do
+    changeset = Students.change_stddoc(%Stddoc{})
+    {:noreply, assign(socket, add_link: true, changeset: changeset)}
+  end
+
+  @impl true
+  def handle_event("close-link", _params, socket) do
+    {:noreply, assign(socket, add_link: false)}
+  end
+
+  @impl true
+  def handle_event("edit-link", %{"id" => id}, socket) do
+    sdoc = Students.get_stddoc!(id)
+    changeset = Students.change_stddoc(sdoc)
+    {:noreply, assign(socket, edit_link: true, edit_doc_id: String.to_integer(id), changeset: changeset)}
+  end
+
+  @impl true
+  def handle_event("save-link", %{"stddoc" => stddoc}, socket) do
+    student = socket.assigns.student
+    %{"doc_name" => doc_name, "doc_path" => doc_path, "id" => id} = stddoc
+    result = if id > "" do
+      doc = Students.get_stddoc!(id)
+      Students.update_stddoc(doc, stddoc)
+    else
+      doctype_id = 775
+      Students.create_stddoc(
+        %{ref_id: student.id, doc_name: doc_name, doc_path: doc_path, doctype_id: doctype_id}
+      )
+    end
+
+    socket = case result do
+      {:ok, _} ->
+        assign(
+          socket,
+          add_link: false,
+          edit_doc_id: false,
+          stddocs:
+            Students.list_stddocs(student.id, socket.assigns.filter_by, socket.assigns.search)
+        )
+      {:error, cs} -> assign(socket, changeset: cs)
+    end
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("delete-link", %{"id" => id}, socket) do
+    student = socket.assigns.student
+
+    doc = Students.get_stddoc!(id)
+    Students.delete_stddoc(doc)
+    socket = assign(
+      socket,
+      add_link: false,
+      edit_doc_id: false,
+      stddocs:
+        Students.list_stddocs(student.id, socket.assigns.filter_by, socket.assigns.search)
+    )
+    {:noreply, socket}
   end
 
   def handle_event("save-remark", %{"stddoc" => stddoc}, socket) do
