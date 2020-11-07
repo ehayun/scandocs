@@ -4,7 +4,7 @@ defmodule Scandoc.Repo.Migrations.AddIsLinkToDocgroups do
   alias Scandoc.Documents
 
   def change do
-    alter table(:docgroups) do
+      alter table(:docgroups) do
       add :is_link, :boolean, default: false
     end
   end
