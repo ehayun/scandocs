@@ -172,7 +172,7 @@ defmodule Scandoc.Students do
     q =
       Stddoc
       |> where(ref_id: ^student_id)
-      |> order_by(asc: :doctype_id, asc: :doc_name)
+      |> order_by([asc: :doc_name])
 
     q =
       if filter_by do
@@ -180,7 +180,7 @@ defmodule Scandoc.Students do
           from(
             dt in Doctype,
             where: dt.doc_group_id == ^filter_by,
-            where: ilike(dt.doc_name, ^"%#{search}%")
+            where: ilike(dt.doc_name, ^"%#{search}%"),
           )
 
         tmp =
@@ -233,12 +233,12 @@ defmodule Scandoc.Students do
 
   """
   def get_stddoc!(id),
-    do:
-      Stddoc
-      |> where(id: ^id)
-      |> preload(:comments)
-      |> preload(:doctype)
-      |> Repo.one()
+      do:
+        Stddoc
+        |> where(id: ^id)
+        |> preload(:comments)
+        |> preload(:doctype)
+        |> Repo.one()
 
   @doc """
   Creates a stddoc.

@@ -133,8 +133,8 @@
                         <% end %>
 
 
-                        <button phx-click="edit-link" phx-value-id="<%= d.id %>" class="btn btn-link"><i
-                                class='far fa-edit'></i></button>
+                        <span phx-click="edit-link" phx-value-id="<%= d.id %>" class="pointer"><i
+                                class='far fa-edit'></i></span>
                         <a target="_scandocs" href="<%= d.doc_path %>"><%= d.doc_name %></a>
                         <% else %>
                         <a target="_scandocs"
