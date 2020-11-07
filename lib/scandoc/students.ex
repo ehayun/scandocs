@@ -172,7 +172,7 @@ defmodule Scandoc.Students do
     q =
       Stddoc
       |> where(ref_id: ^student_id)
-      |> order_by([asc: :doc_name])
+      |> order_by([desc: :ref_date])
 
     q =
       if filter_by do
