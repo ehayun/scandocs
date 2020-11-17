@@ -98,6 +98,8 @@
                 <%= f = form_for @changeset, "#", phx_submit: "save-link" %>
                 <%= text_input f, :id, class: "hidden" %>
                 <%= text_input f, :doc_name, class: "form-control", placeholder: gettext("Link title") %>
+                <%= error_tag f, :doc_name %>
+
                 <%= text_input f, :doc_path, class: "form-control", placeholder: gettext("Link path") %>
 
                 <%= submit gettext("Save"), phx_disable_with: gettext("Saving..."), class: "btn btn-primary mt-2" %>

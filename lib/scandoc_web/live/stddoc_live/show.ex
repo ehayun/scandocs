@@ -1,6 +1,9 @@
 defmodule ScandocWeb.StddocLive.Show do
   use ScandocWeb, :live_view
 
+  import Ecto.Query, warn: false
+  alias Scandoc.Repo
+
   alias Scandoc.Students
 
   alias Scandoc.{Documents, Students}
@@ -103,7 +106,9 @@ defmodule ScandocWeb.StddocLive.Show do
       doc = Students.get_stddoc!(id)
       Students.update_stddoc(doc, stddoc)
     else
-      doctype_id = 775
+      d = Scandoc.Documents.Doctype |> where(doc_group_id: 999) |> Repo.all |> hd
+#      select * from doctypes where doc_group_id = 999
+      doctype_id = d.id
       Students.create_stddoc(
         %{ref_id: student.id, doc_name: doc_name, doc_path: doc_path, doctype_id: doctype_id}
       )
