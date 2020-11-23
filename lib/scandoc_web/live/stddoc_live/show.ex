@@ -101,6 +101,8 @@ defmodule ScandocWeb.StddocLive.Show do
   @impl true
   def handle_event("save-link", %{"stddoc" => stddoc}, socket) do
     student = socket.assigns.student
+    student = socket.assigns.student
+    student = socket.assigns.student
     %{"doc_name" => doc_name, "doc_path" => doc_path, "id" => id} = stddoc
     result = if id > "" do
       doc = Students.get_stddoc!(id)
