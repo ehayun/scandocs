@@ -20,8 +20,11 @@ defmodule ScandocWeb.LiveHelpers do
   end
 
   def numOfDocs(id) do
-    from(s in Stddoc, where: s.ref_id == ^id)
+    IO.puts("Num of docs #{id}")
+    count = from(s in Stddoc, where: s.ref_id == ^id)
     |> Repo.aggregate(:count)
+
+    IO.inspect(count, label: "===============================")
   end
 
   def getDocGroup(id) do

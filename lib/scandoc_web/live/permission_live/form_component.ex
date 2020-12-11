@@ -48,11 +48,9 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
       sQ
       |> Repo.all()
 
-    # , select: [:id, :full_name, :student_zehut]
-    stdQ = from u in Student, order_by: [u.last_name, u.first_name]
-
     students =
-      stdQ
+      Student
+      |> order_by(asc: :full_name)
       |> Repo.all()
 
     instQ = from u in Institute, select: [:id, :code, :title]
@@ -138,11 +136,9 @@ defmodule ScandocWeb.PermissionLive.FormComponent do
         socket.assigns.classrooms
       end
 
-    # , select: [:id, :full_name, :student_zehut]
-    stdQ = from u in Student, order_by: [u.last_name, u.first_name]
-
     students =
-      stdQ
+      Student
+      |> order_by(asc: :full_name)
       |> Repo.all()
 
     socket = assign(socket, students: students)
