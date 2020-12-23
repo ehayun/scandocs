@@ -97,13 +97,17 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
 
     permissions =
       existing_permissions
-      |> Enum.concat([
-        # NOTE temp_id
-        Permissions.change_permission(%Permission{
-          user_id: socket.assigns.employee.id,
-          temp_id: get_temp_id()
-        })
-      ])
+      |> Enum.concat(
+           [
+             # NOTE temp_id
+             Permissions.change_permission(
+               %Permission{
+                 user_id: socket.assigns.employee.id,
+                 temp_id: get_temp_id()
+               }
+             )
+           ]
+         )
 
     changeset =
       socket.assigns.changeset
@@ -114,6 +118,7 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
 
   def handle_event("save", %{"employee" => employee_params}, socket) do
     %{"password" => password} = employee_params
+    %{"zehut" => zehut} = employee_params
 
     classroom_id =
       case employee_params do
@@ -154,6 +159,8 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
         employee_params
       end
 
+    employee_params = Map.merge(employee_params, %{"zehut" => String.trim(zehut)})
+
     save_employee(socket, socket.assigns.action, employee_params)
   end
 
@@ -188,8 +195,8 @@ defmodule ScandocWeb.EmployeeLive.FormComponent do
   end
 
   defp get_temp_id,
-    do:
-      :crypto.strong_rand_bytes(5)
-      |> Base.url_encode64()
-      |> binary_part(0, 5)
+       do:
+         :crypto.strong_rand_bytes(5)
+         |> Base.url_encode64()
+         |> binary_part(0, 5)
 end
