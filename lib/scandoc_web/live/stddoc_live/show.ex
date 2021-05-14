@@ -101,15 +101,22 @@ defmodule ScandocWeb.StddocLive.Show do
   @impl true
   def handle_event("save-link", %{"stddoc" => stddoc}, socket) do
     student = socket.assigns.student
-    student = socket.assigns.student
-    student = socket.assigns.student
+
     %{"doc_name" => doc_name, "doc_path" => doc_path, "id" => id} = stddoc
     result = if id > "" do
       doc = Students.get_stddoc!(id)
       Students.update_stddoc(doc, stddoc)
     else
-      d = Scandoc.Documents.Doctype |> where(doc_group_id: 999) |> Repo.all |> hd
-#      select * from doctypes where doc_group_id = 999
+      d = Scandoc.Documents.Doctype
+          |> where(doc_group_id: 999)
+          |> limit(1)
+          |> Repo.one
+      d = if d do
+        d
+      else
+        {:ok, d} = Scandoc.Documents.create_doctype(%{code: "999", doc_name: "links", doc_group_id: 999})
+      end
+      #      select * from doctypes where doc_group_id = 999
       doctype_id = d.id
       Students.create_stddoc(
         %{ref_id: student.id, doc_name: doc_name, doc_path: doc_path, doctype_id: doctype_id}

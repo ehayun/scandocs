@@ -38,6 +38,7 @@ defmodule ScandocWeb.StddocLive.Index do
   defp apply_action(socket, :edit, %{"id" => id}) do
     document = Students.get_stddoc!(id)
 
+
     path = document.doc_path
     path = String.replace(path, "/home/eli", "/downloads")
 
